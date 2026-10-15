@@ -27,13 +27,13 @@ python -m scripts.update_data                  # collect, validate, integrate, p
 python -m scripts.update_data --reuse-current  # integrate saved data, no source requests
 ```
 
-`config/collection.json` selects the current term, departments/courses, historical requests, and optional teammate inputs. It currently selects Fall 2026, with a review deadline of December 31, 2026. Available terms are discovered from official indexes. Historical assignments are reused until explicitly refreshed.
+`config/collection.json` selects the current term, departments/courses, historical requests, and optional teammate inputs. It currently selects Fall 2026, with a review deadline of December 31, 2026. Available terms are discovered from official indexes. Complete archived semesters are reused until explicitly refreshed. HTTP 401/403 or an HTTP 202 automated-access challenge stops collection immediately; failed refreshes keep the last good publication.
 
-For smaller development collections, use `--subjects CS ECE STAT IS` or `--courses "CS 374" "ECE 374"`. These deliberately narrow the published coverage. Run `python -m scripts.update_data --help` for all options. Collection-only commands, cache behavior, publication safety, deployment, restoration, and the DI iframe snippet are in [operations](docs/operations.md).
+The production update always collects every department. `--start-year 2023` selects the archive’s first calendar year; `--term 2026-fall` selects the current/end term. Every available winter, spring, summer, and fall term within that range is included. Isolated collectors accept explicit courses for investigation without narrowing production coverage. Run `python -m scripts.update_data --help` for all options. Collection-only commands, cache behavior, publication safety, deployment, restoration, and the DI iframe snippet are in [operations](docs/operations.md).
 
 ## Data and team ownership
 
-The shared entry point is **`public/data/integration.json`**. Its `files` entries resolve to immutable JSON objects for the current schedule, teaching history, aliases, coverage, and optional teammate outputs. All consumers should use this manifest. The placeholder frontend uses the same loader and displays only a few listings.
+The shared entry point is **`public/data/integration.json`**. Its `files` entries resolve to immutable JSON objects for the current schedule, teaching history, aliases, coverage, and optional teammate outputs. All consumers should use this manifest. The data page shows real coverage, source dates, and per-term downloads. It loads only the small archive index; schedules load when requested.
 
 | Owner | Work |
 | --- | --- |
@@ -44,9 +44,9 @@ The shared entry point is **`public/data/integration.json`**. Its `files` entrie
 
 [Team handoffs](docs/team-handoffs.md) provide input/output instructions and a Python reading example. [Data contract](docs/data-contract.md) defines fields and joins. Original instructor names remain available; source professor IDs stay unresolved. Missing grades/ratings are unavailable, never fabricated zeros. Synthetic development fixtures live only in `data/examples/` and are rejected by production publication.
 
-[Current coverage](docs/current-coverage.md): 186 Fall 2026 departments, 4,452 listings, and 12,839 registration sections. [History coverage](docs/integration-history-coverage.md): the initial Fall 2026 / Spring 2025 pilot for CS/ECE 374 and CS/STAT/IS 107. See [verified API observations](docs/course-explorer-api.md) for source behavior and verification limits.
+[Current coverage](docs/current-coverage.md): 186 Fall 2026 departments, 4,452 listings, and 12,839 registration sections. [History coverage](docs/integration-history-coverage.md) records the archive’s actual collected and unavailable terms. The configured range is 2023 through Fall 2026; discovery alone is not a claim that collection succeeded. See [verified API observations](docs/course-explorer-api.md) for source behavior and verification limits.
 
-The original `public/data/course-explorer.json` and `teaching-history.json` URLs remain unchanged for existing teammate consumers. They are compatibility snapshots; new work uses the manifest. The site retains objects for the current and previous publication; Git preserves older versions.
+New work uses the manifest and per-term archive files. Historical records keep the original v1 course/section format; the public history envelope is now a version 2 index so several years do not become one giant download. See the contract’s migration notes. The site retains objects for the current and previous publication; Git preserves older versions.
 
 ## Checks and preview
 
@@ -66,7 +66,7 @@ Preview: **http://localhost:4173/professor-guide/**. Iframe test: **http://local
 GitHub Pages uses the single workflow in `.github/workflows/pages.yml`. Main pushes check and deploy; PRs check only. Weekly Monday 10:20 UTC and manual refreshes collect, run checks, commit validated data, and deploy the tested artifact.
 
 ```sh
-gh workflow run pages.yml -f refresh=true -f scope=campus
+gh workflow run pages.yml -f refresh=true
 gh run list --workflow pages.yml
 ```
 

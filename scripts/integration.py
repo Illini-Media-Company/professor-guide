@@ -20,6 +20,28 @@ def read(path):
     return json.loads(Path(path).read_text(encoding="utf-8"))
 
 
+def read_object(directory, item):
+    require(item["status"] == "available" and bool(re.fullmatch(r"objects/[a-f0-9]{64}\.json", item["path"])), "Unsafe object path")
+    body = (Path(directory) / item["path"]).read_bytes()
+    require(hashlib.sha256(body).hexdigest() == item["sha256"] and len(body) == item["bytes"], "Published file hash/size mismatch")
+    require(item["path"] == f'objects/{item["sha256"]}.json', "Hash path mismatch")
+    return json.loads(body)
+
+
+def load_term(directory, term_id):
+    """Read one semester with hash/schema validation; no network or full-archive download."""
+    manifest = read(Path(directory) / 'integration.json')
+    require(manifest['schema_version'] == 1 and manifest['dataset'] == 'professor_guide', 'Invalid manifest')
+    history = read_object(directory, manifest['files']['history'])
+    require(history['schema_version'] == 2, 'Per-term access requires the campus archive')
+    row = next((row for row in history['coverage']['terms'] if row['term_id'] == term_id), None)
+    require(row is not None, 'Term is outside the published archive')
+    require(row['status'] == 'collected', f'Term is unavailable: {row["reason"]}')
+    snapshot = validate_document(read_object(directory, row['snapshot']))
+    require(snapshot['term']['id'] == term_id, 'Archive term reference mismatch')
+    return snapshot
+
+
 def provenance(data):
     require(data["schema_version"] == 1, "Unsupported teammate schema")
     require(data["data_kind"] in ("live", "development_fixture"), "Invalid data kind")
@@ -88,10 +110,10 @@ def snapshots_of(schedule, history):
     return [schedule] + [snapshot for snapshot in history["snapshots"] if snapshot["term"]["id"] != schedule["term"]["id"]]
 
 
-def preview(schedule, history, inputs):
-    sections = {section["id"]: section for snapshot in snapshots_of(schedule, history) for section in snapshot["sections"]}
+def attribute_grades(schedule, history, inputs):
     people = {record["professor_id"] for record in inputs.get("professors", {}).get("records", [])}
     verified = inputs.get("verified_occurrences", {}).get("records", [])
+    sections = {section["id"]: section for snapshot in snapshots_of(schedule, history) for section in snapshot["sections"]} if verified else {}
     for record in verified:
         require(record["professor_id"] in people, "Verified link references an unknown professor")
         section = sections.get(record["section_id"])
@@ -113,7 +135,7 @@ def preview(schedule, history, inputs):
                              "section_id": grade.get("section_id") if grade["grain"] == "section" else None,
                              "grain": grade["grain"], "professor_id": next(iter(ids)) if len(ids) == 1 else None,
                              "status": "verified" if len(ids) == 1 else "unresolved"})
-    return {"schema_version": 1, "dataset": "integration_preview", "data_kind": schedule["data_kind"],
+    return {"schema_version": 1, "dataset": "grade_attributions", "data_kind": schedule["data_kind"],
             "collected_at": max((data["collected_at"] for data in [schedule, history, *inputs.values()]), key=timestamp), "grade_attributions": attributions,
             "pending_inputs": [name for name in ("gpa", "professors", "verified_occurrences") if name not in inputs],
             "coverage": counts(schedule["sections"])}
@@ -151,13 +173,21 @@ def _stage_bundle(directory, schedule, history, inputs=None, coverage=None, allo
     inputs = inputs or {}
     validate_document(schedule)
     validate_document(history)
+    if history['schema_version'] == 2:
+        require(history['through_term'] == schedule['term']['id'], 'Archive end term and current schedule disagree')
+        archived_current = next((snapshot for snapshot in history['snapshots'] if snapshot['term']['id'] == schedule['term']['id']), None)
+        require(archived_current == schedule, 'Current schedule differs from its archived term')
+        if not allow_fixtures:
+            from scripts.archive import validate_department_coverage
+            require(coverage is not None, 'Production publication requires complete current department coverage')
+            validate_department_coverage(schedule, coverage)
     for name, data in inputs.items():
         validate_input(data, name)
     require(allow_fixtures or all(data["data_kind"] == "live" for data in [schedule, history, *inputs.values()]), "Synthetic inputs are forbidden in production")
     documents = {"schedule": schedule, "history": history, "aliases": aliases(schedule, history, reviewed_aliases), **inputs}
     if reviewed_aliases is not None:
         documents["reviewed_aliases"] = validate_reviewed_aliases(reviewed_aliases)
-    documents["preview"] = preview(schedule, history, inputs)
+    documents["attributions"] = attribute_grades(schedule, history, inputs)
     if coverage is not None:
         require([row["subject"] for row in coverage["departments"]] == coverage["requested_subjects"], "Incomplete department coverage")
         require(all(row["status"] in ("collected", "no_listings") for row in coverage["departments"]), "Failed department coverage cannot be published")
@@ -166,26 +196,30 @@ def _stage_bundle(directory, schedule, history, inputs=None, coverage=None, allo
         documents["department_coverage"] = coverage
     directory = Path(directory)
     files = {}
-    staged = []
-    for name, data in documents.items():
+
+    def write_object(data, source_time=None):
         body = encoded(data)
+        require(len(body) < 95 * 1024 * 1024, "JSON object exceeds the GitHub file budget; split this dataset")
         digest = hashlib.sha256(body).hexdigest()
         relative = f"objects/{digest}.json"
-        files[name] = {"status": "available", "path": relative, "sha256": digest, "bytes": len(body), "collected_at": data.get("collected_at", schedule["collected_at"])}
-        staged.append((relative, body))
+        target = directory / relative
+        if target.exists():
+            require(target.read_bytes() == body, "Immutable object hash collision/corruption")
+        else:
+            atomic_write_text(target, body.decode())
+        return {"status": "available", "path": relative, "sha256": digest, "bytes": len(body), "collected_at": data.get("collected_at", source_time or schedule["collected_at"])}
+
+    if history["schema_version"] == 2:
+        from scripts.archive import stage_archive
+        documents["history"] = stage_archive(history, write_object)
+    for name, data in documents.items():
+        files[name] = write_object(data)
     for name in ("gpa", "professors", "verified_occurrences"):
         if name not in files:
             files[name] = {"status": "pending", "path": None, "sha256": None, "bytes": None, "collected_at": None}
     manifest = {"schema_version": 1, "dataset": "professor_guide", "data_kind": schedule["data_kind"],
                 "collected_at": max((item["collected_at"] for item in files.values() if item["collected_at"]), key=timestamp),
                 "current_term": schedule["term"], "coverage": counts(schedule["sections"]), "files": files}
-    # All validation/join work above completes before any published object is written.
-    for relative, body in staged:
-        target = directory / relative
-        if target.exists():
-            require(target.read_bytes() == body, "Immutable object hash collision/corruption")
-        else:
-            atomic_write_text(target, body.decode())
     atomic_write_text(directory / "integration.json", encoded(manifest).decode())
     return manifest
 
@@ -198,16 +232,18 @@ def publish_bundle(directory, schedule, history, inputs=None, coverage=None, all
         stage = Path(temporary)
         manifest = _stage_bundle(stage, schedule, history, inputs, coverage, allow_fixtures, reviewed_aliases)
         validate_bundle(stage)
-        for item in manifest["files"].values():
-            if item["status"] == "available":
-                source, target = stage / item["path"], directory / item["path"]
-                if target.exists():
-                    require(source.read_bytes() == target.read_bytes(), "Immutable object corrupted")
-                else:
-                    atomic_write_text(target, source.read_text(encoding="utf-8"))
+        for source in (stage / "objects").glob("*.json"):
+            target = directory / "objects" / source.name
+            if target.exists():
+                require(source.read_bytes() == target.read_bytes(), "Immutable object corrupted")
+            else:
+                atomic_write_text(target, source.read_text(encoding="utf-8"))
         atomic_write_text(directory / "integration.json", encoded(manifest).decode())
     if manifest != previous:
-        prune_objects(directory, [manifest, previous] if previous else [manifest])
+        try:
+            prune_objects(directory, [manifest, previous] if previous else [manifest])
+        except (OSError, DataError, ValueError, KeyError) as error:
+            warnings.warn(f'Published successfully; retention cleanup skipped: {error}')
     return manifest
 
 
@@ -218,8 +254,12 @@ def prune_objects(directory, manifests):
     the previous generation too. Cleanup failures must not report a committed
     publication as failed or trigger report rollback.
     """
-    keep = {item["path"] for manifest in manifests for item in manifest["files"].values()
-            if item["status"] == "available"}
+    keep = {item["path"] for manifest in manifests for item in manifest["files"].values() if item["status"] == "available"}
+    for manifest in manifests:
+        history = read(Path(directory) / manifest["files"]["history"]["path"])
+        if history["schema_version"] == 2:
+            keep.update(item['path'] for row in history['coverage']['terms'] if row['status'] == 'collected'
+                        for item in (row['snapshot'], row['department_coverage']))
     for target in (Path(directory) / "objects").glob("*.json"):
         if re.fullmatch(r"[a-f0-9]{64}\.json", target.name) and f"objects/{target.name}" not in keep:
             try:
@@ -233,19 +273,30 @@ def validate_bundle(directory):
     manifest = read(directory / "integration.json")
     require(manifest["schema_version"] == 1 and manifest["dataset"] == "professor_guide", "Invalid integration manifest")
     documents = {}
+
     for name, item in manifest["files"].items():
         if item["status"] == "pending":
             require(name in ("gpa", "professors", "verified_occurrences") and all(item[key] is None for key in ("path", "sha256", "bytes", "collected_at")), "Pending data must not look like zero data")
             continue
-        require(item["status"] == "available" and bool(re.fullmatch(r"objects/[a-f0-9]{64}\.json", item["path"])), "Unsafe object path")
-        body = (directory / item["path"]).read_bytes()
-        require(hashlib.sha256(body).hexdigest() == item["sha256"] and len(body) == item["bytes"], "Published file hash/size mismatch")
-        require(item["path"] == f'objects/{item["sha256"]}.json', "Hash path mismatch")
-        documents[name] = json.loads(body)
+        documents[name] = read_object(directory, item)
+    if documents["history"]["schema_version"] == 2:
+        from scripts.archive import load_archive
+        documents["history"] = load_archive(documents["history"], lambda item: read_object(directory, item))
+        require(documents['history']['through_term'] == manifest['current_term']['id'], 'Archive end term and current schedule disagree')
+        archived_current = next((snapshot for snapshot in documents['history']['snapshots'] if snapshot['term']['id'] == manifest['current_term']['id']), None)
+        require(archived_current == documents['schedule'], 'Current schedule differs from its archived term')
+        if manifest['data_kind'] == 'live':
+            from scripts.archive import validate_department_coverage
+            validate_department_coverage(documents['schedule'], documents['department_coverage'])
     for name in ("schedule", "history"):
         validate_document(documents[name])
     inputs = {name: validate_input(documents[name], name) for name in ("gpa", "professors", "verified_occurrences") if name in documents}
-    require(documents["preview"] == preview(documents["schedule"], documents["history"], inputs), "Inconsistent integration preview")
+    attribution = attribute_grades(documents["schedule"], documents["history"], inputs)
+    if "attributions" in documents:
+        require(documents["attributions"] == attribution, "Inconsistent grade attributions")
+    else:
+        # Read older publications for safe migration/rollback; new writes use attributions.
+        require(documents["preview"] == {**attribution, "dataset": "integration_preview"}, "Inconsistent legacy attributions")
     expected_aliases = aliases(documents["schedule"], documents["history"], documents.get("reviewed_aliases"))
     if "reviewed_records" not in documents["aliases"]:
         expected_aliases.pop("reviewed_records")  # Earlier additive integration preview.

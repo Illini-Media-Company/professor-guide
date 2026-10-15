@@ -10,7 +10,7 @@ Input: the current manifest at `public/data/integration.json`, its `schedule` ob
 
 Records specify `grain: "section"`, `"course_term"`, or `"instructor_course_term"`; `term_id`, `course_code`, `gpa` (0–4 or null), `student_count` (nonnegative integer or null), and `section_id` (term + CRN only at section grain). For instructor/course/term grades, provide the source's `primary_instructor_name_raw`. Keep section ID null when CRNs are absent. Never spread course-level grades over every section or co-instructor. Unknown values are null; a genuine zero stays zero.
 
-The update command derives history requirements from your course/term records. Professor attribution is added separately only when the source-listed primary name agrees with a verified occurrence link whose primary designation has evidence. A source instructor appearing first is insufficient. Course/term aggregate grades remain unassigned to professors. Cross-listings are separate registration records; define and document your aggregation policy without multiplying samples across aliases.
+The campus archive already covers every listed course in its configured 2023–2026 range. If your grade source covers older terms, coordinate an explicit archive range extension. A course absent from a term’s official index remains unavailable rather than borrowing another listing’s sections. Professor attribution is added separately only when the source-listed primary name agrees with a verified occurrence link whose primary designation has evidence. A source instructor appearing first is insufficient. Course/term aggregate grades remain unassigned to professors. Cross-listings are separate registration records; define and document your aggregation policy without multiplying samples across aliases.
 
 Completion criteria: real-source normalized output; your grade calculation checks; explicit grain and missing-value rules; source provenance; no fabricated CRNs/identities; `python -m scripts.update_data --reuse-current` and published-data validation pass once required history is available. Do not edit the collector to supply your output.
 
@@ -24,17 +24,17 @@ Implement source-name identity review, numerical RMP collection, and official fa
 
 Leave uncertain identities out of verified links. Original schedule `professor_id` fields stay null; verified links are separate. Preserve initials/source spelling and do not merge people based on shared schedules, cross-listings, or names alone. `data/mappings/professor-identities.json` can remain your review workspace; publication consumes your normalized outputs, not guesses from that file.
 
-Completion criteria: evidence-backed identity review and links; professor-wide numerical summaries with counts/provenance; independently verified faculty URLs; unresolved cases documented; input validation and integration preview pass; no changes to Jon's collector.
+Completion criteria: evidence-backed identity review and links; professor-wide numerical summaries with counts/provenance; independently verified faculty URLs; unresolved cases documented; input validation and attribution checks pass; no changes to Jon's collector.
 
 ## Frontend owner task
 
-Implement search, filters, results table, professor/course profiles, GPA/rating displays, and charts in `src/`. Replace the placeholder UI while preserving the Vite base path and embed behavior.
+Implement search, filters, results table, professor/course profiles, GPA/rating displays, and charts in `src/`. Extend the data page while preserving the Vite base path and embed behavior.
 
-Entry point: fetch `${import.meta.env.BASE_URL}data/integration.json`. Resolve each `files.NAME.path` relative to `${import.meta.env.BASE_URL}data/`. Available objects include `schedule`, `history`, `aliases`, `department_coverage`, and `preview`; `gpa`, `professors`, and `verified_occurrences` are explicitly pending until supplied. Keep one manifest's object set together. File SHA-256/byte-size/source timestamps are provided; paths are immutable.
+Entry point: fetch `${import.meta.env.BASE_URL}data/integration.json`. Resolve each `files.NAME.path` relative to `${import.meta.env.BASE_URL}data/`. Available objects include `schedule`, `history`, `aliases`, `department_coverage`, and `attributions`; `gpa`, `professors`, and `verified_occurrences` are explicitly pending until supplied. Keep one manifest's object set together. File SHA-256/byte-size/source timestamps are provided; paths are immutable.
 
-Use term + CRN for section keys and term + course code for listing keys. Keep multiple/missing instructors on individual meetings. Use the separate verified links for real professor profiles; raw source names are unresolved. Use only verified GPA attribution from `preview.grade_attributions` (or the same documented join policy), preserve the supplied grade grain, and show unavailable data differently from numeric zero. Professor-wide RMP values are not course-specific grades. Alias evidence supports related searchable listings, not duplicate grade samples or merged registration records.
+Use term + CRN for section keys and term + course code for listing keys. Keep multiple/missing instructors on individual meetings. Use the separate verified links for real professor profiles; raw source names are unresolved. Use only verified GPA attribution from `attributions.grade_attributions` (or the same documented join policy), preserve the supplied grade grain, and show unavailable data differently from numeric zero. Professor-wide RMP values are not course-specific grades. Alias evidence supports related searchable listings, not duplicate grade samples or merged registration records.
 
-The starter’s `src/data.js` exports `loadGuide(signal)`, returning `{manifest, schedule}` from one manifest and its schedule object. `App.jsx` displays coverage/pending states and a few sample listings; replace that placeholder as needed. Original fixed-name JSON URLs are retained for compatibility, but new work uses the manifest. Synthetic examples live in `data/examples/` and are exercised by the offline checks; do not publish them as production data.
+The starter’s `src/data.js` exports `loadGuide(signal)`, returning `{manifest, history}` from one manifest and its small v2 archive index. `App.jsx` displays actual coverage, collection dates, and per-term downloads. Resolve a term’s `snapshot.path` only when its data is needed; do not preload every year into the browser. New work uses the manifest; fixed-name sample exports are retired. Synthetic examples live in `data/examples/` and are exercised by the offline checks; do not publish them as production data.
 
 Use query strings or hash navigation; GitHub Pages has no history-route fallback. Preserve iframe access, keyboard controls, narrow widths, and the external full-page link. Fixed 800px iframe height is the current handoff. Dynamic resize is unnecessary for this shell; any future resize protocol must validate origin, source window, finite bounded height, and parent-side origin allowlist.
 
@@ -42,32 +42,33 @@ Completion criteria: the full requested interface, explicit loading/error/pendin
 
 ## Read the published data
 
-From the repository root, this loads and validates the same manifest/object set used by the frontend. The current schedule takes precedence over an archived copy of that term:
+Load one semester at a time from the repository root. The helper checks the manifest/index references, exact hash, and unchanged v1 schedule schema without network requests:
 
 ```python
-from scripts.integration import snapshots_of, validate_bundle
+from scripts.integration import load_term
 
-manifest, files = validate_bundle("public/data")
-for snapshot in snapshots_of(files["schedule"], files["history"]):
-    for section in snapshot["sections"]:
-        for meeting in section["meetings"]:
-            for index, instructor in enumerate(meeting["instructors"]):
-                occurrence = {
-                    "term_id": section["term_id"],
-                    "listing_id": section["listing_id"],
-                    "course_code": section["course_code"],
-                    "section_id": section["id"],
-                    "crn": section["crn"],
-                    "meeting_id": meeting["id"],
-                    "meeting_role": meeting["type"],
-                    "instructor_index": index,
-                    "instructor": instructor,  # original names; unresolved ID
-                    "source_url": section["source_url"],
-                    "collected_at": section["collected_at"],
-                }
-                # Pass occurrence to your own processing/review stage.
+snapshot = load_term("public/data", "2023-spring")
+for section in snapshot["sections"]:
+    for meeting in section["meetings"]:
+        for index, instructor in enumerate(meeting["instructors"]):
+            occurrence = {
+                "term_id": section["term_id"],
+                "listing_id": section["listing_id"],
+                "course_code": section["course_code"],
+                "section_id": section["id"],
+                "crn": section["crn"],
+                "meeting_id": meeting["id"],
+                "meeting_role": meeting["type"],
+                "instructor_index": index,
+                "instructor": instructor,
+                "source_url": section["source_url"],
+                "collected_at": section["collected_at"],
+            }
+            # Pass occurrence to your own processing/review stage.
 ```
+
+For a complete integrity check or existing all-term Python processing, `validate_bundle("public/data")` returns `(manifest, files)` with `files["history"]["snapshots"]` materialized. It reads all archived terms, so prefer `load_term` when processing individual semesters. The current `files.schedule` takes precedence over any archived copy of the same term.
 
 An empty instructor list produces no occurrence; use `instructor_list_status` and coverage when assessing missing assignments. Meeting IDs and instructor positions identify occurrences within a snapshot and may change after source edits. Preserve the collection context when retaining reviews.
 
-The initial fixed-name pilot contains ten course/term pairs and 308 registration sections. Its unchanged published JSON remains available; [history coverage](integration-history-coverage.md) describes the history currently integrated with the campus schedule. New processing should read the manifest so it sees later archival additions too.
+[History coverage](integration-history-coverage.md) records the actual archived terms and completeness. Configured dates or discovered availability alone do not establish successful collection.

@@ -65,3 +65,11 @@ Campus coverage: 4,452 listings, 12,839 registration sections, 13,640 meetings, 
 No rate-limit or access restriction was bypassed. HTTPS verification and 0.4-second minimum pacing were used. HTTP 401/403 causes an immediate stop. Missing section labels were inspected in actual CS 397/497/499/597 XML before adding explicit missing-label support. No zero-section courses or zero-meeting sections occurred in this campus snapshot.
 
 Salary Guide was inspected at `42a41bc09bf1cb2883ea044b6436fc34e13916d4`; its React/Vite, repository base path, and saved-JSON patterns informed the starter.
+
+## Campus history: 2023–2026
+
+Live discovery confirmed Winter, Spring, Summer, and Fall in every year from 2023 through 2026. The completed collection covers all 16 terms and every listed department: 40,699 course/term listings, 103,268 registration sections, 109,375 meetings, and 148,780 listed instructor occurrences. There are 6,391 meetings without listed instructors and 31,952 with multiple instructors. Every source identity remains unresolved. See [the generated report](integration-history-coverage.md) for exact per-term coverage and discovery provenance.
+
+The initial pass completed Winter/Spring/Summer 2023, then encountered an actual HTTP 202 response with `x-amzn-waf-action: challenge` and an empty body during Fall 2023. Collection was stopped. After a pause, ordinary requests succeeded again; collection resumed at one request per second using completed candidates and cached successful XML. No challenge was solved or bypassed. The resumed run completed the remaining terms with 3,286 source requests and 99 cache hits, while reusing the three completed terms and the existing successful current-term snapshot. Collection and initial archive publication remained separate; assembling the final index made zero source requests and preserved original timestamps.
+
+A term-level `?mode=cascade` probe returned only the ordinary subject list, so the collector continues to use the verified department-level cascade endpoint and a separate department index for course-set completeness. No undocumented whole-term batch mode is assumed. Rate-limit guarantees, archive immutability, and a current published API specification remain unverified.

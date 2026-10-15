@@ -10,7 +10,7 @@ from scripts.collect_campus import department_snapshot
 from scripts.collect_course_explorer import CourseExplorerClient
 from scripts.course_explorer_discovery import CourseExplorerDiscovery
 from scripts.data_contract import AccessDenied, DataError
-from scripts.integration import preview, publish_bundle, read, validate_bundle, validate_input
+from scripts.integration import attribute_grades, publish_bundle, read, validate_bundle, validate_input
 from tests.test_course_explorer import FixtureClient, FIXTURE_TIME, fixture_snapshot
 from tests.test_teaching_history import history_fixture
 
@@ -24,7 +24,7 @@ class IntegrationTests(unittest.TestCase):
     def test_zero_and_unavailable_remain_distinct_and_crnless_grades_stay_crnless(self):
         inputs = fixtures()
         validate_input(inputs['gpa'], 'gpa')
-        result = preview(fixture_snapshot(), history_fixture(), inputs)
+        result = attribute_grades(fixture_snapshot(), history_fixture(), inputs)
         self.assertEqual(inputs['gpa']['records'][0]['gpa'], 0)
         self.assertIsNone(inputs['gpa']['records'][1]['gpa'])
         self.assertEqual(result['grade_attributions'][0]['professor_id'], 'synthetic-alex')
@@ -34,7 +34,7 @@ class IntegrationTests(unittest.TestCase):
     def test_primary_order_is_not_identity_or_primary_evidence(self):
         inputs = fixtures()
         inputs['verified_occurrences']['records'][0]['is_primary'] = False
-        self.assertIsNone(preview(fixture_snapshot(), history_fixture(), inputs)['grade_attributions'][0]['professor_id'])
+        self.assertIsNone(attribute_grades(fixture_snapshot(), history_fixture(), inputs)['grade_attributions'][0]['professor_id'])
         inputs['verified_occurrences']['records'][0]['is_primary'] = True
         del inputs['verified_occurrences']['records'][0]['primary_evidence']
         with self.assertRaises(DataError): validate_input(inputs['verified_occurrences'], 'verified_occurrences')
@@ -49,7 +49,7 @@ class IntegrationTests(unittest.TestCase):
     def test_wrong_occurrence_cannot_receive_verified_identity(self):
         inputs = fixtures()
         inputs['verified_occurrences']['records'][0]['name_raw'] = 'Wrong, Person'
-        with self.assertRaises(DataError): preview(fixture_snapshot(), history_fixture(), inputs)
+        with self.assertRaises(DataError): attribute_grades(fixture_snapshot(), history_fixture(), inputs)
 
     def test_fixture_production_separation_pending_inputs_and_hashes(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -134,6 +134,19 @@ class IntegrationTests(unittest.TestCase):
                 with self.assertRaises(AccessDenied): CourseExplorerClient(directory).fetch('https://example.org')
                 self.assertEqual(request.call_count,1)
 
+    def test_http_202_access_challenge_stops_before_parsing_or_retrying(self):
+        from unittest.mock import MagicMock
+        response = MagicMock()
+        response.__enter__.return_value.status = 202
+        response.__enter__.return_value.headers = {'x-amzn-waf-action': 'challenge'}
+        with tempfile.TemporaryDirectory() as directory:
+            with patch('scripts.collect_course_explorer.urlopen', return_value=response) as request:
+                with self.assertRaisesRegex(AccessDenied, 'challenge'):
+                    CourseExplorerClient(directory).fetch('https://courses.illinois.edu/example')
+                request.assert_called_once()
+                response.__enter__.return_value.read.assert_not_called()
+                self.assertEqual(list(Path(directory).iterdir()), [])
+
     def test_cascade_batch_keeps_actual_response_provenance(self):
         import xml.etree.ElementTree as ET
         class BatchFixture(FixtureClient):
@@ -176,7 +189,7 @@ class IntegrationTests(unittest.TestCase):
     def test_source_times_are_compared_chronologically_across_offsets(self):
         inputs = fixtures()
         inputs['gpa']['collected_at'] = '2025-12-31T19:00:01-05:00'
-        result = preview(fixture_snapshot(),history_fixture(),inputs)
+        result = attribute_grades(fixture_snapshot(),history_fixture(),inputs)
         self.assertEqual(result['collected_at'],inputs['gpa']['collected_at'])
         with tempfile.TemporaryDirectory() as directory:
             manifest = publish_bundle(directory,fixture_snapshot(),history_fixture(),inputs,allow_fixtures=True)
@@ -197,7 +210,7 @@ class IntegrationTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             atomic_write_json(Path(directory)/'teaching-history.json',history_fixture())
             client = MagicMock()
-            config = {'current_term':'2026-fall','historical_requests':{'2024-fall':['CS 374']}}
+            config = {'current_term':'2026-fall','archive_start_year':2024}
             with self.assertRaisesRegex(DataError,'not archived'):
                 history_for(config,{},client,Path(directory),allow_collection=False)
             client.fetch.assert_not_called()
@@ -215,6 +228,7 @@ class IntegrationTests(unittest.TestCase):
             client = CourseExplorerClient(directory)
             client.minimum_fetch_times[url] = (now-timedelta(minutes=1)).isoformat()
             response = MagicMock()
+            response.__enter__.return_value.status = 200
             response.__enter__.return_value.read.return_value = (FIXTURES/'cs-index.xml').read_bytes()
             with patch('scripts.collect_course_explorer.urlopen',return_value=response) as request:
                 client.fetch(url)

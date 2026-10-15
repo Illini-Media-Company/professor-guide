@@ -1,21 +1,17 @@
 import { useEffect, useState } from 'react'
-import { loadGuide } from './data.js'
+import { DATA_BASE, loadGuide } from './data.js'
+
+const number = (value) => value.toLocaleString()
 
 export default function App() {
   const [guide, setGuide] = useState(null)
   const [error, setError] = useState(null)
-  const data = guide?.schedule
-  const manifest = guide?.manifest
-  const pilot = data?.courses.filter((course) => ['CS 374', 'ECE 374'].includes(course.course_code))
-  const courses = pilot?.length ? pilot : data?.courses.slice(0, 2)
 
   useEffect(() => {
     const controller = new AbortController()
-    loadGuide(controller.signal)
-      .then(setGuide)
-      .catch((failure) => {
-        if (failure.name !== 'AbortError') setError(failure.message)
-      })
+    loadGuide(controller.signal).then(setGuide).catch((failure) => {
+      if (failure.name !== 'AbortError') setError(failure.message)
+    })
     return () => controller.abort()
   }, [])
 
@@ -24,75 +20,40 @@ export default function App() {
       <header className="border-b border-slate-200 pb-6">
         <p className="text-sm font-semibold uppercase tracking-widest text-orange-800">The Daily Illini</p>
         <h1 className="mt-2 text-4xl font-bold">Professor Guide</h1>
-        <p className="mt-3 text-slate-600">A starting point for exploring UIUC courses and professors.</p>
+        <p className="mt-3 text-slate-600">Official UIUC course and teaching-assignment data.</p>
       </header>
 
-      {manifest && (
-        <section aria-labelledby="integration-title" className="mt-6 rounded border border-slate-200 p-4">
-          <h2 id="integration-title" className="text-xl font-semibold">Integration preview</h2>
-          <p className="mt-2">{manifest.current_term.label}: {manifest.coverage.section_count.toLocaleString()} registration sections collected.</p>
-          <ul className="mt-2 list-inside list-disc text-sm">
-            <li>Course Explorer: available; source identities remain unresolved</li>
-            <li>Grade data: {manifest.files.gpa.status === 'available' ? 'available' : 'awaiting grade-processing teammate'}</li>
-            <li>Professor data: {manifest.files.professors.status === 'available' ? 'available' : 'awaiting matching teammate'}</li>
+      {error && <p role="alert" className="mt-6 rounded border border-red-300 bg-red-50 p-4">{error}</p>}
+      {!guide && !error && <p role="status" className="mt-6">Loading course coverage…</p>}
+      {guide && <>
+        <section aria-labelledby="current-title" className="mt-6 rounded border border-slate-200 p-4">
+          <h2 id="current-title" className="text-xl font-semibold">{guide.manifest.current_term.label}</h2>
+          <p className="mt-2">{number(guide.manifest.coverage.section_count)} registration sections collected.</p>
+          <p className="mt-2 text-sm text-slate-600">Saved source data; assignments can change. Original instructor names are preserved and professor identities await verification.</p>
+          <a className="mt-3 inline-block text-blue-800 underline" href={`${DATA_BASE}${guide.manifest.files.schedule.path}`} download>Download current schedule JSON</a>
+        </section>
+
+        <section aria-labelledby="history-title" className="mt-8">
+          <h2 id="history-title" className="text-xl font-semibold">Teaching history</h2>
+          <p className="mt-2">{guide.history.start_year} through {guide.manifest.current_term.label}: {number(guide.history.coverage.totals.collected_terms)} terms, {number(guide.history.coverage.totals.course_count)} course listings, and {number(guide.history.coverage.totals.section_count)} registration sections.</p>
+          <p className="mt-2 text-sm text-slate-600">Each collected term covers every department listed by Course Explorer. Cross-listed registrations remain separate; these totals are not counts of unique professors or teaching groups.</p>
+          <ul className="mt-4 space-y-3">
+            {[...guide.history.coverage.terms].reverse().map((term) => <li key={term.term_id} className="rounded border border-slate-200 p-4">
+              <h3 className="font-semibold">{term.term?.label || term.term_id}</h3>
+              {term.status === 'collected' ? <>
+                <p className="mt-1 text-sm">{number(term.department_count)} departments · {number(term.course_count)} listings · {number(term.section_count)} sections</p>
+                <details className="mt-2 text-sm">
+                  <summary className="cursor-pointer font-medium">Assignment coverage and source date</summary>
+                  <p className="mt-2">{number(term.missing_instructor_meetings)} meetings without listed instructors; {number(term.multiple_instructor_meetings)} meetings with multiple instructors.</p>
+                  <p className="mt-1">Latest schedule fetch: <time dateTime={term.snapshot.collected_at}>{new Date(term.snapshot.collected_at).toLocaleString()}</time>.</p>
+                </details>
+                <a className="mt-2 inline-block text-sm text-blue-800 underline" href={`${DATA_BASE}${term.snapshot.path}`} download>Download {term.term.label} JSON</a>
+              </> : <p className="mt-1 text-sm">Unavailable in the official term index ({term.reason}).</p>}
+            </li>)}
           </ul>
         </section>
-      )}
-      <section className="mt-6" aria-labelledby="sample-title" aria-busy={!data && !error}>
-        <h2 id="sample-title" className="text-xl font-semibold">Course data preview</h2>
-        <p className="mt-2 text-sm text-slate-600">A small sample from the saved schedule. Search, profiles, GPA, and rating summaries are being built.</p>
-        {error && <p role="alert" className="mt-4 rounded border border-red-300 bg-red-50 p-4">{error}</p>}
-        {!data && !error && <p role="status" className="mt-4">Loading saved course data…</p>}
-        {data && (
-          <>
-            <p className="mt-4 rounded border border-slate-200 bg-slate-50 p-4 text-sm">
-              <strong>{data.data_kind === 'live' ? 'Collected from Course Explorer' : 'Development fixture — synthetic data'}</strong>
-              {' · '}{data.term.label}{' · '}{data.sections.length} registration sections
-              <br />
-              Source snapshot: <time dateTime={data.collected_at}>{new Date(data.collected_at).toLocaleString()}</time>.
-              {' '}This is a saved snapshot. Professor identities are unresolved.
-            </p>
-            <ul className="mt-4 space-y-4">
-              {courses.map((course) => {
-                const sections = data.sections.filter((section) => section.listing_id === course.listing_id)
-                const related = [...new Set(data.relationships
-                  .filter((relationship) => relationship.from_listing_id === course.listing_id)
-                  .map((relationship) => relationship.to_course_code))]
-                return (
-                  <li key={course.listing_id} className="rounded border border-slate-200 p-4">
-                    <h3 className="font-semibold">{course.course_code} · {course.title}</h3>
-                    <p className="mt-1 text-sm text-slate-600">
-                      {sections.length} separate registration sections
-                      {related.length > 0 && ` · Related listing: ${related.join(', ')}`}
-                    </p>
-                    <details className="mt-3 text-sm">
-                      <summary className="cursor-pointer font-medium">Inspect sections and listed instructors</summary>
-                      <ul className="mt-2 space-y-3">
-                        {sections.map((section) => (
-                          <li key={section.id}>
-                            <strong>{section.section_label || 'Unlabeled section'}</strong> · CRN {section.crn}
-                            <ul className="ml-4 list-disc">
-                              {section.meetings.map((meeting) => (
-                                <li key={meeting.id}>
-                                  {meeting.type.label} ({meeting.type.code})
-                                  {' · '}{meeting.instructors.length
-                                    ? meeting.instructors.map((person) => person.name_raw).join('; ')
-                                    : 'No instructor listed'}
-                                </li>
-                              ))}
-                            </ul>
-                          </li>
-                        ))}
-                      </ul>
-                    </details>
-                    <a className="mt-3 inline-block text-sm text-blue-800 underline" href={course.source_url} target="_blank" rel="noreferrer">Course Explorer source XML</a>
-                  </li>
-                )
-              })}
-            </ul>
-          </>
-        )}
-      </section>
+        <p className="mt-6 text-sm"><a className="text-blue-800 underline" href="https://courses.illinois.edu/" target="_blank" rel="noopener noreferrer">Source: UIUC Course Explorer</a></p>
+      </>}
     </main>
   )
 }

@@ -8,12 +8,8 @@ from scripts.collect_course_explorer import CourseExplorerClient, ROOT, add_clie
 from scripts.data_contract import DataError, atomic_write_json, atomic_write_text, require
 from scripts.teaching_history import build_history, parse_term_id, render_report, validate_history
 
-PILOT_TERMS = ["2026-fall", "2025-spring"]
-PILOT_COURSES = ["CS 374", "ECE 374", "CS 107", "STAT 107", "IS 107"]
-
-
 def collect_history_to_file(client, term_ids, course_codes, output, report_path=None, data_kind="live"):
-    require(not Path(output).resolve().is_relative_to((ROOT / "public").resolve()), "Collect outside public/; publish with scripts.publish_data")
+    require(not Path(output).resolve().is_relative_to((ROOT / "public").resolve()), "Collect outside public/; production publication uses scripts.update_data")
     if report_path is not None:
         require(Path(report_path).resolve() != Path(output).resolve(), "Report and candidate paths must differ")
         require(not Path(report_path).resolve().is_relative_to((ROOT / "public").resolve()), "Attempt reports must stay outside public/")
@@ -31,8 +27,8 @@ def collect_history_to_file(client, term_ids, course_codes, output, report_path=
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--terms", nargs="+", default=PILOT_TERMS, help="Term IDs such as 2026-fall 2025-spring; verified against indexes")
-    parser.add_argument("--courses", nargs="+", type=normalize_course, default=PILOT_COURSES)
+    parser.add_argument("--terms", nargs="+", required=True, help="Term IDs such as 2026-fall 2025-spring; verified against indexes")
+    parser.add_argument("--courses", nargs="+", type=normalize_course, required=True)
     parser.add_argument("--output", type=Path, default=ROOT / "data/snapshots/teaching-history.json")
     parser.add_argument("--report", type=Path, default=ROOT / "data/reports/teaching-history-latest-attempt.md")
     add_client_arguments(parser)

@@ -245,7 +245,7 @@ def render_report(data):
 
 def main():
     parser = argparse.ArgumentParser(description="Render coverage from a validated saved teaching-history bundle.")
-    parser.add_argument("--input", type=Path, default=Path("public/data/teaching-history.json"))
+    parser.add_argument("--input", type=Path, required=True)
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
     try:

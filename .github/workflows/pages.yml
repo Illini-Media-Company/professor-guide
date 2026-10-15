@@ -12,11 +12,6 @@ on:
         description: Collect current Course Explorer data before building
         type: boolean
         default: false
-      scope:
-        description: Collection coverage
-        type: choice
-        options: [campus, sample]
-        default: campus
       term:
         description: Optional discovered term override (YEAR-season)
         type: string
@@ -32,6 +27,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 120
     outputs:
       manifest_sha256: ${{ steps.manifest.outputs.sha256 }}
     permissions:
@@ -60,11 +56,10 @@ jobs:
       - name: Refresh data
         if: github.ref == 'refs/heads/main' && (github.event_name == 'schedule' || inputs.refresh == true)
         env:
-          REFRESH_SCOPE: ${{ inputs.scope || 'campus' }}
           REFRESH_TERM: ${{ inputs.term }}
         shell: bash
         run: |
-          args=(--scope "$REFRESH_SCOPE")
+          args=()
           if [[ -n "$REFRESH_TERM" ]]; then args+=(--term "$REFRESH_TERM"); fi
           python -m scripts.update_data "${args[@]}"
       - run: npm run test:data

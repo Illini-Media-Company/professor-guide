@@ -38,13 +38,28 @@ def verify(url, expected_manifest=None, expected_sha256=None):
     manifest = json.loads(manifest_body)
     if expected_manifest:
         assert manifest == json.loads(open(expected_manifest,encoding='utf-8').read()), 'Deployed manifest is not this revision yet'
-    count = 0
-    for item in manifest['files'].values():
+    checked = {}
+    def check(item):
+        if item['path'] in checked:
+            assert checked[item['path']] == (item['sha256'], item['bytes'])
+            return None
+        assert item['path'] == 'objects/' + item['sha256'] + '.json', 'Unsafe hash path'
+        body = get('data/' + item['path'])
+        assert hashlib.sha256(body).hexdigest() == item['sha256'], 'Deployed hash mismatch'
+        assert len(body) == item['bytes']
+        checked[item['path']] = item['sha256'], item['bytes']
+        return body
+    for name, item in manifest['files'].items():
         if item['status'] == 'available':
-            body = get('data/'+item['path'])
-            assert hashlib.sha256(body).hexdigest() == item['sha256'], 'Deployed hash mismatch'
-            assert len(body) == item['bytes']
-            count += 1
+            body = check(item)
+            if name == 'history':
+                history = json.loads(body)
+                if history['schema_version'] == 2:
+                    for row in history['coverage']['terms']:
+                        if row['status'] == 'collected':
+                            check(row['snapshot'])
+                            check(row['department_coverage'])
+    count = len(checked)
     assert get('embed-test.html')
     print(f'Verified {url}: HTML, {len(parser.paths)} assets, {count} JSON hashes, and embed test page.')
 

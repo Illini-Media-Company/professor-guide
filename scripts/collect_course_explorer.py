@@ -28,7 +28,7 @@ def utc_now():
 
 
 class CourseExplorerClient:
-    def __init__(self, cache_dir, timeout=20, retries=2, cache_ttl=21600, historical_cache_ttl=2592000, pace=0.4):
+    def __init__(self, cache_dir, timeout=20, retries=2, cache_ttl=21600, historical_cache_ttl=2592000, pace=1.0):
         require(math.isfinite(timeout) and 0 < timeout <= 120, "Timeout must be > 0 and <= 120 seconds")
         require(0 <= retries <= 5, "Retries must be between 0 and 5")
         require(math.isfinite(cache_ttl) and 0 <= cache_ttl <= 604800, "Cache TTL must be between 0 and 604800 seconds")
@@ -78,6 +78,9 @@ class CourseExplorerClient:
                 except ImportError:
                     context = ssl.create_default_context()
                 with urlopen(request, timeout=self.timeout, context=context) as response:
+                    if response.status == 202 or response.headers.get('x-amzn-waf-action') in ('challenge', 'captcha'):
+                        raise AccessDenied(f'Automated-access challenge for {url}; collection stopped without retry')
+                    require(response.status == 200, f'Unexpected HTTP status for {url}: {response.status}')
                     body = response.read().decode("utf-8")
                 parse_xml(body, expected_root)
                 result = {"url": url, "fetched_at": utc_now(), "body": body}
@@ -244,7 +247,7 @@ def build_snapshot(client, year, season, course_codes, data_kind="live"):
 
 def collect_to_file(client, year, season, course_codes, output):
     output = Path(output)
-    require(not output.resolve().is_relative_to((ROOT / "public").resolve()), "Collect outside public/; publish with scripts.publish_data")
+    require(not output.resolve().is_relative_to((ROOT / "public").resolve()), "Collect outside public/; production publication uses scripts.update_data")
     discovery = CourseExplorerDiscovery(client)
     term, evidence = discovery.term(year, season)
     require(term is not None, f"Unavailable term {year}-{season}: {evidence['reason']}")
@@ -277,9 +280,9 @@ def add_client_arguments(parser):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--year", type=int, default=2026)
-    parser.add_argument("--term", choices=TERMS, default="fall")
-    parser.add_argument("--courses", nargs="+", type=normalize_course, default=["CS 374", "ECE 374"])
+    parser.add_argument("--year", type=int, required=True)
+    parser.add_argument("--term", choices=TERMS, required=True)
+    parser.add_argument("--courses", nargs="+", type=normalize_course, required=True)
     parser.add_argument("--output", type=Path, help="Default: data/snapshots/course-explorer-YEAR-TERM.json")
     add_client_arguments(parser)
     args = parser.parse_args()

@@ -116,12 +116,12 @@ def collect(client, term_id, output, subjects=None, courses=None):
             atomic_write_json(report_path, {"term_id": term_id, "discovered_subjects": available, "requested_subjects": wanted, "departments": rows})
             raise
         except (DataError, OSError) as error:
-            row = {"subject": subject, "status": "error", "error": str(error)}
+            rows.append({"subject": subject, "status": "error", "error": str(error)})
+            atomic_write_json(report_path, {"term_id": term_id, "discovered_subjects": available, "requested_subjects": wanted, "departments": rows})
+            raise DataError(f'{subject} collection failed; previous snapshot preserved: {error}') from error
         rows.append(row)
         atomic_write_json(report_path, {"term_id": term_id, "discovered_subjects": available, "requested_subjects": wanted, "departments": rows})
         print(f'[{index}/{len(wanted)}] {subject}: {row["status"]} {row.get("course_count", "")} {row.get("error", "")}', flush=True)
-    errors = [row for row in rows if row["status"] == "error"]
-    require(not errors, f"{len(errors)} departments failed; previous snapshot preserved; see {report_path}")
     snapshot = merge_departments(parts)
     if courses:
         require(set(courses) == set(snapshot["requested_courses"]), "Some requested courses are unavailable; see department indexes")

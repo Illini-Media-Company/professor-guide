@@ -1,6 +1,6 @@
-# Data contract v1
+# Public data contract
 
-The executable contract is `scripts/data_contract.py`; the readable full example is [`data/examples/course-explorer.json`](../data/examples/course-explorer.json). The example is synthetic. Live datasets are resolved through [`public/data/integration.json`](../public/data/integration.json). Original fixed-name snapshot URLs remain available for compatibility.
+The executable contract is `scripts/data_contract.py`; the readable full example is [`data/examples/course-explorer.json`](../data/examples/course-explorer.json). The example is synthetic. Live datasets are resolved through [`public/data/integration.json`](../public/data/integration.json). Production consumers use the manifest. The v1 course/section record format is preserved; the historical envelope is now a v2 per-term index.
 
 ## Course Explorer snapshot (implemented)
 
@@ -70,35 +70,32 @@ The conservative extractor recognizes explicit punctuated sentence directives su
 
 ### Refresh and publication boundary
 
-Collection validates the complete requested set before replacing a candidate. Individual-course collection compares index/detail CRN sets; department collection compares index/batch course sets and validates nested sections. The integration publisher validates a complete bundle before switching one manifest atomically; the original single-file publisher remains for compatibility exports. Failures before the switch retain the previous published bytes and timestamps. Source professor matches remain unresolved; verified matching outputs join separately.
+Collection validates the complete requested set before replacing a candidate. Individual-course collection compares index/detail CRN sets; department collection compares index/batch course sets and validates nested sections. The integration publisher validates a complete bundle before switching one manifest atomically. Failures before the switch retain the previous published bytes and timestamps. Source professor matches remain unresolved; verified matching outputs join separately.
 
-## Teaching-history bundle v1 (additive, implemented)
+## Teaching-history archive v2
 
-The manifest’s `history` object provides multi-term assignments. `public/data/teaching-history.json` retains the initial pilot for compatibility. Nested snapshots use the original Course Explorer format, with no renamed fields or new professor identity assumptions. The standalone compatibility publisher selects filenames by `dataset` and prevents writing a history bundle over the course snapshot.
+`files.history` resolves to a small object with `schema_version: 2`, `dataset: "teaching_history"`, `data_kind: "live"`, `collected_at`, `start_year`, `through_term`, `requested_terms`, `discovery_sources`, and `coverage`.
 
-| Field | Meaning |
-| --- | --- |
-| `schema_version`, `dataset`, `data_kind` | `1`, `"teaching_history"`, and `"live"` or `"development_fixture"` |
-| `collected_at` | Latest successful fetch among discovery indexes and included course sources; publication does not update it |
-| `requested_terms` | Requested term IDs, e.g. `["2026-fall", "2025-spring"]`; presence here does not assert availability |
-| `requested_courses` | Requested listing codes applied to every requested term |
-| `discovery_sources` | Successful index `{url, fetched_at}` records for year, term, subject, and course availability checks |
-| `snapshots` | One original v1 Course Explorer snapshot per term with at least one successfully collected listing |
-| `coverage.terms` | Every requested term, availability, reason, index `source_url`, and `checked_at`; available rows also include discovered `term` metadata |
-| `coverage.courses` | Every requested term/course pair, availability evidence, and counts derived from its sections |
-| `coverage.totals` | Requested/available/collected terms, requested/collected/unavailable/error pairs, and aggregate section/meeting/instructor counts |
+Every winter, spring, summer, and fall from `start_year` through the configured end term has a row in `coverage.terms`, in calendar order. A row contains:
 
-Term status is `available` or `unavailable`; course status is `collected` or `unavailable`. Failed attempts additionally use `error` with `error_kind: "request"` or `"validation"` in the local Markdown attempt report, but are rejected by publication. Network/HTTP failures and malformed responses never become unavailable records. Absence must be established by a successfully parsed official parent index, with reasons `year_not_listed`, `term_not_listed`, `subject_not_listed`, or `course_not_listed`.
+- `term_id`, `status` (`collected` or confirmed `unavailable`), `reason`, official index `source_url`, and original `checked_at`.
+- `term` metadata for collected terms.
+- `department_count`, `course_count`, `section_count`, `meeting_count`, `missing_instructor_meetings`, `multiple_instructor_meetings`, `instructor_occurrences`, `unresolved_occurrences`, and `meeting_types`.
+- `snapshot` and `department_coverage` object references for collected terms; both are null for unavailable terms. References use the same `status`, `path`, `sha256`, `bytes`, and `collected_at` fields as manifest entries. Paths are relative to `data/`, not to the index file’s `objects/` directory.
 
-For collected rows, the reason is `course_listed`; term availability uses `term_listed`. `checked_at` is the index response's original timestamp, including on cache hits. Course availability is normally established from the subject index. If the whole term is unavailable, each affected course row carries that term's absence evidence.
+Each `snapshot` is a complete original v1 Course Explorer snapshot for one term. Each department-coverage object records `term_id`, all `discovered_subjects`, matching `requested_subjects`, and a `departments` array with status/counts for every department. All listed courses and their separate registration records must be represented. No whole-campus archive is constructed from only a few selected courses.
 
-Per-course metrics are `section_count`, `meeting_count`, `missing_instructor_meetings`, `multiple_instructor_meetings`, `instructor_occurrences`, `unresolved_occurrences`, and `meeting_types` (API role code → meeting count). Missing/multiple counts refer to meetings. Unresolved occurrences count each listed instructor on each meeting, not unique people. Counts include separate cross-listed registration records and must not be interpreted as unique teaching loads or grade samples. The validator recomputes metrics and checks every requested term/course pair.
+`coverage.totals` sums listing, section, meeting, instructor, and department counts, and reports requested/collected/unavailable term counts. Department totals are department/term occurrences, not distinct department names. Unresolved occurrences are listed names on meetings, not unique people. Missing and multiple instructor counts refer to meetings; no placeholder person is created for an empty list.
 
-Nested snapshot `requested_courses` means the subset actually collected for that term; the bundle's requested lists and coverage describe the full request, including confirmed absences. An unavailable pair produces no fake course/section record. If no courses in a term are available, it has coverage rows but no invalid empty v1 snapshot. A single request/parsing/validation failure prevents replacement of the entire history candidate. Publishing validates again and atomically replaces one self-contained bundle.
+Unavailable terms require a successfully parsed official year/root index and reasons `term_not_listed` or `year_not_listed`. A missing department or course is assessed against its successful term/department index. HTTP/network failures, access challenges, malformed XML, and incomplete department batches are errors; they cannot be published as unavailable. A failed term prevents the entire refresh from replacing the previous manifest and timestamps.
 
-The history-level timestamp can be newer than historical course data because discovery indexes have different cache ages. Audit `discovery_sources`, each snapshot's `sources`, and individual section timestamps for freshness. The prior-year cache defaults to 30 days; current-year responses and the top-level year list default to six hours. `--refresh` bypasses both.
+The archive’s timestamp is the latest successful discovery or schedule fetch. Term references retain actual schedule-source timestamps even when a newer archive index is assembled. Source URLs and timestamps remain on every schedule, course, and section. Historical data is reusable, not assumed immutable; `--refresh-history` explicitly recollects it.
 
-See [operations](operations.md) for commands and [team handoffs](team-handoffs.md) for a reading example and GPA/matching responsibilities. Normalized enrichment inputs are defined below; they do not change source schedule records.
+### Migration from the earlier milestone
+
+The old v1 history envelope embedded all `snapshots` and a selected-course × term coverage grid in one file. That remains supported for isolated investigation fixtures and reading earlier commits, but is not the production archive format. Several years of campus records are split to avoid a giant browser download and GitHub’s per-file limit.
+
+New consumers resolve `files.history`, then the requested term’s `snapshot` reference. Python `load_term("public/data", "2023-spring")` loads and validates one term. `validate_bundle()` still returns a materialized history with `snapshots` for existing Python processing code, while validating every nested hash. The old fixed-name sample exports are retired from production. `files.preview` is replaced by `files.attributions`, with `dataset: "grade_attributions"`; its actual attribution rules and source join keys are unchanged. The top-level manifest and all course/section records remain version 1.
 
 ## Ownership and reviewed mappings
 
@@ -108,7 +105,7 @@ Jon owns collection, validation, integration, and publication. The GPA owner sup
 
 ## Campus and integration publication (additive, implemented)
 
-The original v1 `course-explorer.json` and `teaching-history.json` remain intact for existing consumers. New consumers, including the placeholder frontend, resolve the current schedule and history through `integration.json`. The current campus schedule is another v1 Course Explorer snapshot.
+All current and historical production data is resolved through `integration.json`. The current campus schedule and each archived semester use the v1 Course Explorer format. The data page displays actual coverage and per-term downloads without hard-coded course samples.
 
 Department batches use the live-verified `SUBJECT.xml?mode=cascade` endpoint. Canonical course/section `source_url` and course `detail_source_url` still point to their individual XML resources; they do not claim those resources were separately fetched. Optional `index_response_url` and `detail_response_url` identify the actual department index/batch responses. `sources` contains those actual URLs and fetch times. Sections include `response_source_url` for their batch. Course collection time is the latest index/batch fetch; section collection time is the batch fetch. The validator follows actual response URLs when present and the original course URLs otherwise.
 
@@ -116,19 +113,19 @@ Live campus data includes independent-study sections with missing section labels
 
 `integration.json` uses `schema_version: 1`, `dataset: "professor_guide"`, `data_kind`, source-derived `collected_at`, `current_term`, `coverage`, and `files`. An available file entry has `status: "available"`, immutable `path: "objects/<sha256>.json"`, exact `sha256`, `bytes`, and source `collected_at`. Pending entries have `status: "pending"` and null path/hash/size/time. They are not zero observations. Resolve paths relative to `data/` using Vite's base URL.
 
-Objects: `schedule` (v1 snapshot), `history` (v1 teaching-history bundle), `aliases` (explicit source relationships with `applicable_terms`, plus separate reviewed records), `department_coverage`, `preview`, and the optional normalized `gpa`, `professors`, `verified_occurrences`, and `reviewed_aliases` inputs. Source data is not overwritten with verified IDs. The publisher assembles and validates a temporary complete set, promotes immutable files, and switches one manifest last. Consumers must use one manifest's object set together. Hashes, sizes, source timestamps, coverage, and joins are checked offline. After a changed successful publication, only the current and immediately preceding manifests’ objects are retained; older versions remain in Git. Identical republishes retain the previous generation. This retention policy changes no schema, filename, or join key; see [operations](operations.md#publication-and-retention).
+Objects: `schedule` (v1 snapshot), `history` (v2 archive index), `aliases` (explicit source relationships with `applicable_terms`, plus separate reviewed records), `department_coverage`, `attributions`, and the optional normalized `gpa`, `professors`, `verified_occurrences`, and `reviewed_aliases` inputs. Source data is not overwritten with verified IDs. The publisher assembles and validates a temporary complete set, promotes immutable files, and switches one manifest last. Consumers must use one manifest's object set together. Hashes, sizes, source timestamps, coverage, and joins are checked offline. After a changed successful publication, only the current and immediately preceding manifests’ objects are retained; older versions remain in Git. Identical republishes retain the previous generation. Nested term snapshot and coverage objects are protected by the same retention rule; see [operations](operations.md#publication-and-retention).
 
 ### Normalized teammate inputs
 
 Every normalized GPA/professor/link input has `{schema_version: 1, dataset, data_kind, collected_at, sources: [{url, fetched_at}], records}`. Sources require HTTPS and real collection timestamps. `data_kind` is `live` in production; synthetic examples are fixture-labeled and cannot be mixed into production.
 
-GPA records: unique `id`, `term_id`, `course_code`, `grain` (`section`, `course_term`, `instructor_course_term`), `gpa` (finite 0–4 or null), `student_count` (nonnegative integer or null), `section_id` (term + CRN only at section grain), and source `primary_instructor_name_raw` for instructor/course/term grain. Values of zero remain valid. Grades without CRNs cannot claim section-level attribution. The collector derives required historical course/term pairs from this file; the v1 history grid can include additional explicitly reported pairs.
+GPA records: unique `id`, `term_id`, `course_code`, `grain` (`section`, `course_term`, `instructor_course_term`), `gpa` (finite 0–4 or null), `student_count` (nonnegative integer or null), `section_id` (term + CRN only at section grain), and source `primary_instructor_name_raw` for instructor/course/term grain. Values of zero remain valid. Grades without CRNs cannot claim section-level attribution. The archive independently covers all listed courses in its configured date range. A grade outside that range needs a reviewed range extension; course/term or professor joins that cannot be established remain unresolved.
 
 Professor records: stable `professor_id`, `display_name`, `identity_evidence`, optional `faculty_links` with URL/evidence/`verified_at`, and optional `rmp` with `scope: "professor"`, `overall_quality` (0–5 or null), nonnegative `num_ratings`, `source_url`, and `collected_at`. RMP is a professor-wide summary, never a course grade.
 
 Verified occurrence records: unique `id`, `professor_id`, `listing_id`, `section_id`, `meeting_id`, `instructor_index`, exact source `name_raw`, `verified: true`, `verified_at`, evidence, explicit boolean `is_primary`, and `primary_evidence` when true. Referenced professors and source occurrences must exist. A source name mismatch fails publication. Unknown/uncertain matches are omitted, leaving source IDs unresolved. Primary designation is never inferred from instructor order.
 
-`preview.grade_attributions` contains grade ID, listing ID, original grain, professor ID or null, section ID only at actual section grain, and verified/unresolved status. A CRN-less grade can attach only at instructor/course/term grain through the source's named primary instructor and an explicit verified primary link to a listed occurrence in that course/term. Multiple differing professor IDs remain unresolved. Course-term aggregates are not attached to professors. All source records remain separate. See the [team task descriptions](team-handoffs.md) and [synthetic input examples](../data/examples/integration/).
+`attributions.grade_attributions` contains grade ID, listing ID, original grain, professor ID or null, section ID only at actual section grain, and verified/unresolved status. A CRN-less grade can attach only at instructor/course/term grain through the source's named primary instructor and an explicit verified primary link to a listed occurrence in that course/term. Multiple differing professor IDs remain unresolved. Course-term aggregates are not attached to professors. All source records remain separate. See the [team task descriptions](team-handoffs.md) and [synthetic input examples](../data/examples/integration/).
 
 ### Reviewed aliases
 

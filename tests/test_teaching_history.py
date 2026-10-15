@@ -14,7 +14,7 @@ from scripts.collect_course_explorer import CourseExplorerClient
 from scripts.collect_teaching_history import collect_history_to_file
 from scripts.course_explorer_discovery import CourseExplorerDiscovery
 from scripts.data_contract import API_BASE, DataError, RequestError, atomic_write_json
-from scripts.publish_data import publish
+from scripts.integration import publish_bundle
 from scripts.teaching_history import build_history, render_report, validate_history
 from tests.test_course_explorer import FIXTURES, FIXTURE_TIME, FixtureClient, fixture_snapshot
 
@@ -162,9 +162,9 @@ class HistoryTests(unittest.TestCase):
                     raise RequestError("Simulated exhausted network timeout")
                 return super().fetch(url, **kwargs)
         with tempfile.TemporaryDirectory() as directory:
-            candidate, public, report = [Path(directory) / filename for filename in ("candidate.json", "public.json", "attempt.md")]
+            candidate, public, report = [Path(directory) / filename for filename in ("candidate.json", "public/integration.json", "attempt.md")]
             atomic_write_json(candidate, history_fixture())
-            publish(candidate, public, allow_fixtures=True)
+            publish_bundle(public.parent, fixture_snapshot(), json.loads(candidate.read_text()), allow_fixtures=True)
             candidate_before, public_before = candidate.read_bytes(), public.read_bytes()
             with self.assertRaises(DataError):
                 collect_history_to_file(LateFailure(), TERMS, COURSES, candidate, report, "development_fixture")
@@ -188,31 +188,17 @@ class HistoryTests(unittest.TestCase):
             self.assertFalse(candidate.exists())
             self.assertIn("validation", report.read_text())
 
-    def test_publisher_routes_history_to_separate_public_file(self):
-        with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory)
-            candidate, legacy = root / "candidate.json", root / "public/data/course-explorer.json"
-            atomic_write_json(candidate, history_fixture())
-            atomic_write_json(legacy, fixture_snapshot())
-            original = legacy.read_bytes()
-            with patch("scripts.publish_data.ROOT", root):
-                publish(candidate, allow_fixtures=True)
-                self.assertTrue((root / "public/data/teaching-history.json").exists())
-                with self.assertRaisesRegex(DataError, "filename"):
-                    publish(candidate, legacy, allow_fixtures=True)
-            self.assertEqual(legacy.read_bytes(), original)
-
     def test_invalid_history_cannot_replace_previous_published_bundle(self):
         with tempfile.TemporaryDirectory() as directory:
-            candidate, public = Path(directory) / "candidate.json", Path(directory) / "published.json"
+            candidate, public = Path(directory) / "candidate.json", Path(directory) / "public/integration.json"
             history = history_fixture()
             atomic_write_json(candidate, history)
-            publish(candidate, public, allow_fixtures=True)
+            publish_bundle(public.parent, fixture_snapshot(), json.loads(candidate.read_text()), allow_fixtures=True)
             original = public.read_bytes()
             history["coverage"]["totals"]["unresolved_occurrences"] = 0
             atomic_write_json(candidate, history)
             with self.assertRaises(DataError):
-                publish(candidate, public, allow_fixtures=True)
+                publish_bundle(public.parent, fixture_snapshot(), json.loads(candidate.read_text()), allow_fixtures=True)
             self.assertEqual(public.read_bytes(), original)
 
 

@@ -7,24 +7,23 @@ Use the [README](../README.md) for installation and routine checks. Run commands
 `python -m scripts.update_data` is the normal entry point. It discovers available schedules, collects the configured current term, reuses archived history, validates teammate inputs, reports coverage, and publishes one coherent dataset.
 
 ```sh
-python -m scripts.update_data --subjects CS ECE STAT IS
-python -m scripts.update_data --courses "CS 374" "ECE 374"
+python -m scripts.update_data --start-year 2023
 python -m scripts.update_data --term 2026-fall
 python -m scripts.update_data --reuse-current
 python -m scripts.update_data --refresh-history
 ```
 
-Narrowed collections replace the current publication with that narrower scope; inspect coverage before committing. `--reuse-current` makes no source requests and prefers committed data over ignored local candidates. It fails if required history is not archived yet. `--refresh-history` explicitly recollects history and cannot be combined with offline reuse.
+Production collection covers every discovered department in each term. `--reuse-current` makes no source requests and prefers committed data over ignored local candidates. It fails if required history is not archived yet. `--refresh-history` explicitly recollects history and cannot be combined with offline reuse.
 
-`config/collection.json` selects the current term and review deadline. Expired configuration fails closed; review both fields at semester change. An explicit `--term` override must still appear in official indexes. Empty subject/course lists mean all discovered departments.
+`config/collection.json` selects the current term and review deadline. Expired configuration fails closed; review both fields at semester change. An explicit `--term` override must still appear in official indexes. `archive_start_year` sets the first calendar year; the current term is the archive end. Every winter/spring/summer/fall within that range is requested, and missing terms need official parent-index absence evidence.
 
-Normalized GPA inputs add required historical course/term pairs to the configured pilot. Archived normalized history is reused when it covers those pairs. Otherwise the v1 history collector collects the required terms × union of courses; extra pairs remain explicit in coverage, and `requested_history_pairs` identifies actual requirements.
+The archive covers every listed course in each term, independently of GPA inputs. Grades outside the configured date range require a reviewed range extension; a grade naming a course absent from an archived semester must remain unresolved rather than inventing a CRN or copying an alias’s sections.
 
 ## Source requests and cache
 
-Public XML uses verified HTTPS, a 20-second timeout, at most two retries by default (maximum five), and at least 0.4 seconds between requests. HTTP 401/403 stops immediately. `Retry-After` is honored up to 60 seconds; longer delays defer the refresh. Network/HTTP/parsing errors fail the attempt. Only absence from a successfully parsed official parent index means unavailable.
+Public XML uses verified HTTPS, a 20-second timeout, at most two retries by default (maximum five), and at least one second between requests. HTTP 401/403, HTTP 202, or an `x-amzn-waf-action: challenge/captcha` response stops immediately without retry. The initial backfill encountered an actual HTTP 202 challenge; this is an access failure, never evidence of an unavailable course/term. Do not solve/bypass challenges or switch origins to evade them. Resume normally only after access is available again. `Retry-After` is honored up to 60 seconds; longer delays defer the refresh. Network/HTTP/parsing errors fail the attempt. Only absence from a successfully parsed official parent index means unavailable.
 
-Prior-calendar-year XML caches for 30 days; current-year/discovery responses cache for six hours. `--refresh` bypasses raw caches; `--refresh-history` bypasses raw caches during history collection too. Expired or invalid data is never a request-failure fallback. A cache older than an already published source fetch cannot roll that source backward. Cache hits and reused normalized history preserve original source timestamps. `.cache/` is disposable; committed JSON is the durable last successful data store.
+Prior-calendar-year XML caches for 30 days; current-year/discovery responses cache for six hours. `--refresh` bypasses raw caches; `--refresh-history` bypasses raw caches and saved normalized candidates during history collection too. Expired or invalid data is never a request-failure fallback. A cache older than an already published source fetch cannot roll that source backward. Cache hits and reused normalized history preserve original source timestamps. `.cache/` is disposable; committed JSON is the durable last successful data store.
 
 ## Collection without publication
 
@@ -37,13 +36,15 @@ python -m scripts.collect_teaching_history --terms 2026-fall 2025-spring \
   --courses "CS 374" "ECE 374" "CS 107" "STAT 107" "IS 107"
 ```
 
-Candidates and attempt reports live in ignored `data/snapshots/` and `data/reports/`. The original individual-course collector and `scripts.publish_data` remain available for the two compatibility JSON files; they do not update the integration manifest. New integrations use `update_data`.
+Candidates and attempt reports live in ignored `data/snapshots/` and `data/reports/`. The individual-course collector requires explicit year, term, and course arguments. These investigation tools do not update the production manifest. Production publication uses `update_data`.
 
 ## Publication and retention
 
+The history v2 index references one v1 schedule and department-coverage object per collected semester. Historical objects are immutable and reused across refreshes. A cold checkout can reuse the committed archive without XML caches. Complete local backfill candidates under `data/snapshots/archive/` are resumable after validation; partial coverage files are never mistaken for completed semesters.
+
 The publisher validates a complete temporary bundle: schemas, coverage, source timestamps, teammate joins, exact byte sizes, and SHA-256 hashes. It promotes immutable `objects/<sha256>.json` files, then atomically replaces `integration.json` last. A failure before that switch leaves the previous manifest, referenced data, and collection timestamps intact. Reports are restored if publication fails. Production rejects synthetic inputs.
 
-After a successful changed publication, objects referenced by the new manifest and the immediately preceding manifest are retained; older unreferenced objects are removed. This gives in-flight readers one previous generation and bounds accumulation across refreshes. Identical republishes do not discard the retained generation. A cleanup error is reported without treating a completed publication as a failed refresh. Interrupted writes may leave extra objects until the next changed successful publication. The original compatibility JSON files are outside this pruning policy. Older complete datasets remain recoverable from Git history.
+After a successful changed publication, objects referenced by the new manifest and the immediately preceding manifest are retained; older unreferenced objects are removed. This gives in-flight readers one previous generation and bounds accumulation across refreshes. Identical republishes do not discard the retained generation. A cleanup error is reported without treating a completed publication as a failed refresh. Interrupted writes may leave extra objects until the next changed successful publication. Per-term schedules and coverage files referenced by an archive index are included in retention. Older complete datasets remain recoverable from Git history.
 
 Consumers must resolve all files from one manifest response. Do not guess filenames, mix generations, or edit hashes/timestamps by hand. See the [contract](data-contract.md) and [reading example](team-handoffs.md#read-the-published-data).
 
@@ -61,7 +62,7 @@ The single workflow runs on main pushes, PRs, weekly Monday 10:20 UTC, and manua
 A failed collection, check, build, or persistence step prevents deployment. Bot commits made with `GITHUB_TOKEN` do not normally trigger another push workflow; the same refresh run deploys its artifact. Tokens need contents write, Pages write/id-token, and pull-request/actions write for the protected-main fallback. If main rejects a push, the workflow attempts a data PR and dispatches branch checks, then stops before deployment. Repository policy must permit those bot actions.
 
 ```sh
-gh workflow run pages.yml -f refresh=true -f scope=campus
+gh workflow run pages.yml -f refresh=true
 gh run list --workflow pages.yml
 python -m scripts.verify_site https://illini-media-company.github.io/professor-guide/ \
   --expected-manifest public/data/integration.json
@@ -109,3 +110,7 @@ The frame has its own scrolling, an accessible title, and a full-page alternativ
 Run `npm run build`, `npm run preview`, and open **http://localhost:4173/professor-guide/embed-test.html**. The deployed equivalent is **https://illini-media-company.github.io/professor-guide/embed-test.html**. Chromium checks cover 320/375/768px widths, keyboard disclosures/links, overflow, query/hash loading, and 200% CSS shell zoom. CSS zoom does not certify every browser or assistive technology.
 
 **DI staging remains external:** no authenticated staging session was supplied and no CMS content has been edited. Before DI publication, check the snippet in the DI theme for mobile width, keyboard traversal, scrolling, the full-page link, and retention of iframe attributes.
+
+The validator caps each JSON object below 95 MiB and retained public data below 900 MiB, leaving room under GitHub’s file/site limits. Validation and deployed verification follow every nested archive hash, not just the top-level index.
+
+GitHub’s published-site size limit is documented in [GitHub Pages limits](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits). The per-object budget stays below GitHub’s [large-file limit](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github).

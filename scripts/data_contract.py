@@ -176,6 +176,9 @@ def atomic_write_text(path, body):
 
 
 def validate_document(data):
+    if isinstance(data, dict) and data.get("dataset") == "teaching_history" and data.get("schema_version") == 2:
+        from scripts.archive import validate_archive
+        return validate_archive(data)
     if isinstance(data, dict) and data.get("dataset") == "teaching_history":
         from scripts.teaching_history import validate_history
         return validate_history(data)

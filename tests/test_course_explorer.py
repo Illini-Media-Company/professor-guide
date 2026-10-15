@@ -11,7 +11,7 @@ from urllib.error import HTTPError, URLError
 
 from scripts.collect_course_explorer import CourseExplorerClient, build_snapshot, collect_to_file, extract_relationships
 from scripts.data_contract import API_BASE, DataError, atomic_write_json, validate_snapshot
-from scripts.publish_data import publish
+from scripts.integration import publish_bundle
 
 FIXTURES = Path(__file__).resolve().parents[1] / "data/examples/course-explorer-xml"
 FIXTURE_TIME = "2026-01-01T00:00:00Z"
@@ -112,6 +112,10 @@ class ParserTests(unittest.TestCase):
 
 
 class PreservationTests(unittest.TestCase):
+    def setUp(self):
+        from tests.test_teaching_history import history_fixture
+        self.history = history_fixture()
+
     def test_failed_refresh_preserves_candidate_and_published_bytes_and_timestamps(self):
         class FailingClient(FixtureClient):
             def fetch(self, url, **kwargs):
@@ -120,9 +124,9 @@ class PreservationTests(unittest.TestCase):
                 return super().fetch(url, **kwargs)
 
         with tempfile.TemporaryDirectory() as directory:
-            candidate, public = Path(directory) / "candidate.json", Path(directory) / "published.json"
+            candidate, public = Path(directory) / "candidate.json", Path(directory) / "public" / "integration.json"
             atomic_write_json(candidate, fixture_snapshot())
-            publish(candidate, public, allow_fixtures=True)
+            publish_bundle(public.parent, json.loads(candidate.read_text()), self.history, allow_fixtures=True)
             candidate_before, public_before = candidate.read_bytes(), public.read_bytes()
             with self.assertRaisesRegex(DataError, "exhausted timeout"):
                 collect_to_file(FailingClient(), 2026, "fall", ["CS 374", "ECE 374"], candidate)
@@ -132,21 +136,21 @@ class PreservationTests(unittest.TestCase):
 
     def test_invalid_candidate_cannot_replace_published_snapshot(self):
         with tempfile.TemporaryDirectory() as directory:
-            candidate, public = Path(directory) / "candidate.json", Path(directory) / "published.json"
+            candidate, public = Path(directory) / "candidate.json", Path(directory) / "public" / "integration.json"
             atomic_write_json(candidate, fixture_snapshot())
-            publish(candidate, public, allow_fixtures=True)
+            publish_bundle(public.parent, json.loads(candidate.read_text()), self.history, allow_fixtures=True)
             original = public.read_bytes()
             candidate.write_text('{"schema_version": 999}')
             with self.assertRaises(DataError):
-                publish(candidate, public, allow_fixtures=True)
+                publish_bundle(public.parent, json.loads(candidate.read_text()), self.history, allow_fixtures=True)
             self.assertEqual(public.read_bytes(), original)
 
     def test_fixture_publication_requires_explicit_opt_in(self):
         with tempfile.TemporaryDirectory() as directory:
-            candidate, public = Path(directory) / "candidate.json", Path(directory) / "published.json"
+            candidate, public = Path(directory) / "candidate.json", Path(directory) / "public" / "integration.json"
             atomic_write_json(candidate, fixture_snapshot())
-            with self.assertRaisesRegex(DataError, "allow-fixtures"):
-                publish(candidate, public)
+            with self.assertRaisesRegex(DataError, "Synthetic"):
+                publish_bundle(public.parent, json.loads(candidate.read_text()), self.history)
             self.assertFalse(public.exists())
 
     def test_replace_failure_leaves_old_file_and_removes_temporary_file(self):
@@ -182,6 +186,7 @@ class HttpClientTests(unittest.TestCase):
     def test_429_can_retry_and_succeed(self):
         with tempfile.TemporaryDirectory() as directory:
             response = MagicMock()
+            response.__enter__.return_value.status = 200
             response.__enter__.return_value.read.return_value = (FIXTURES / "cs-index.xml").read_bytes()
             limited = HTTPError(self.url, 429, "Rate limited", {}, None)
             with patch("scripts.collect_course_explorer.urlopen", side_effect=[limited, response]) as request, patch("scripts.collect_course_explorer.time.sleep") as sleep:
@@ -193,6 +198,7 @@ class HttpClientTests(unittest.TestCase):
     def test_html_response_is_rejected_and_not_cached(self):
         with tempfile.TemporaryDirectory() as directory:
             response = MagicMock()
+            response.__enter__.return_value.status = 200
             response.__enter__.return_value.read.return_value = b"<html>Service unavailable</html>"
             with patch("scripts.collect_course_explorer.urlopen", return_value=response):
                 with self.assertRaisesRegex(DataError, "Expected course XML"):
@@ -202,6 +208,7 @@ class HttpClientTests(unittest.TestCase):
     def test_cache_retains_fetch_timestamp_and_refresh_does_not_use_stale_cache(self):
         with tempfile.TemporaryDirectory() as directory:
             response = MagicMock()
+            response.__enter__.return_value.status = 200
             response.__enter__.return_value.read.return_value = (FIXTURES / "cs-index.xml").read_bytes()
             with patch("scripts.collect_course_explorer.urlopen", return_value=response) as request:
                 first = CourseExplorerClient(directory).fetch(self.url)
