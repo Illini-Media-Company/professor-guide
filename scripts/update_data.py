@@ -7,7 +7,7 @@ import sys
 
 from scripts.collect_campus import collect
 from scripts.collect_course_explorer import CourseExplorerClient, add_client_arguments
-from scripts.data_contract import DataError, atomic_write_json, atomic_write_text, require, timestamp
+from scripts.data_contract import DataError, atomic_write_text, require, timestamp
 from scripts.integration import publish_bundle, read, validate_bundle, validate_input
 from scripts.teaching_history import build_history, render_report, validate_history
 

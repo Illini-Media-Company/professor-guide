@@ -34,8 +34,40 @@ Entry point: fetch `${import.meta.env.BASE_URL}data/integration.json`. Resolve e
 
 Use term + CRN for section keys and term + course code for listing keys. Keep multiple/missing instructors on individual meetings. Use the separate verified links for real professor profiles; raw source names are unresolved. Use only verified GPA attribution from `preview.grade_attributions` (or the same documented join policy), preserve the supplied grade grain, and show unavailable data differently from numeric zero. Professor-wide RMP values are not course-specific grades. Alias evidence supports related searchable listings, not duplicate grade samples or merged registration records.
 
-The existing `src/data.js` and legacy public JSON remain compatible. `src/IntegrationStatus.jsx` is only a small pending/available shell. Synthetic fixtures are available through `python -m scripts.preview_integration` under `data/previews/`; do not publish them as production data.
+The starter’s `src/data.js` exports `loadGuide(signal)`, returning `{manifest, schedule}` from one manifest and its schedule object. `App.jsx` displays coverage/pending states and a few sample listings; replace that placeholder as needed. Original fixed-name JSON URLs are retained for compatibility, but new work uses the manifest. Synthetic examples live in `data/examples/` and are exercised by the offline checks; do not publish them as production data.
 
 Use query strings or hash navigation; GitHub Pages has no history-route fallback. Preserve iframe access, keyboard controls, narrow widths, and the external full-page link. Fixed 800px iframe height is the current handoff. Dynamic resize is unnecessary for this shell; any future resize protocol must validate origin, source window, finite bounded height, and parent-side origin allowlist.
 
 Completion criteria: the full requested interface, explicit loading/error/pending/zero states, source freshness links, correct joins, and passing `npm run build`, `npm run test:embed`, and published-data checks. Coordinate schema changes through `docs/data-contract.md` rather than changing saved JSON ad hoc.
+
+## Read the published data
+
+From the repository root, this loads and validates the same manifest/object set used by the frontend. The current schedule takes precedence over an archived copy of that term:
+
+```python
+from scripts.integration import snapshots_of, validate_bundle
+
+manifest, files = validate_bundle("public/data")
+for snapshot in snapshots_of(files["schedule"], files["history"]):
+    for section in snapshot["sections"]:
+        for meeting in section["meetings"]:
+            for index, instructor in enumerate(meeting["instructors"]):
+                occurrence = {
+                    "term_id": section["term_id"],
+                    "listing_id": section["listing_id"],
+                    "course_code": section["course_code"],
+                    "section_id": section["id"],
+                    "crn": section["crn"],
+                    "meeting_id": meeting["id"],
+                    "meeting_role": meeting["type"],
+                    "instructor_index": index,
+                    "instructor": instructor,  # original names; unresolved ID
+                    "source_url": section["source_url"],
+                    "collected_at": section["collected_at"],
+                }
+                # Pass occurrence to your own processing/review stage.
+```
+
+An empty instructor list produces no occurrence; use `instructor_list_status` and coverage when assessing missing assignments. Meeting IDs and instructor positions identify occurrences within a snapshot and may change after source edits. Preserve the collection context when retaining reviews.
+
+The initial fixed-name pilot contains ten course/term pairs and 308 registration sections. Its unchanged published JSON remains available; [history coverage](integration-history-coverage.md) describes the history currently integrated with the campus schedule. New processing should read the manifest so it sees later archival additions too.

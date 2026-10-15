@@ -6,6 +6,7 @@ import math
 from pathlib import Path
 import re
 import tempfile
+import warnings
 
 from scripts.data_contract import DataError, atomic_write_text, require, timestamp, validate_document
 from scripts.teaching_history import counts
@@ -192,6 +193,7 @@ def _stage_bundle(directory, schedule, history, inputs=None, coverage=None, allo
 def publish_bundle(directory, schedule, history, inputs=None, coverage=None, allow_fixtures=False, reviewed_aliases=None):
     directory = Path(directory)
     directory.parent.mkdir(parents=True, exist_ok=True)
+    previous = validate_bundle(directory)[0] if (directory / "integration.json").exists() else None
     with tempfile.TemporaryDirectory(prefix=".professor-guide-stage-", dir=directory.parent) as temporary:
         stage = Path(temporary)
         manifest = _stage_bundle(stage, schedule, history, inputs, coverage, allow_fixtures, reviewed_aliases)
@@ -204,7 +206,26 @@ def publish_bundle(directory, schedule, history, inputs=None, coverage=None, all
                 else:
                     atomic_write_text(target, source.read_text(encoding="utf-8"))
         atomic_write_text(directory / "integration.json", encoded(manifest).decode())
+    if manifest != previous:
+        prune_objects(directory, [manifest, previous] if previous else [manifest])
     return manifest
+
+
+def prune_objects(directory, manifests):
+    """Keep the current and previous publication; Git holds older versions.
+
+    Call only after a successful manifest switch. An identical publication keeps
+    the previous generation too. Cleanup failures must not report a committed
+    publication as failed or trigger report rollback.
+    """
+    keep = {item["path"] for manifest in manifests for item in manifest["files"].values()
+            if item["status"] == "available"}
+    for target in (Path(directory) / "objects").glob("*.json"):
+        if re.fullmatch(r"[a-f0-9]{64}\.json", target.name) and f"objects/{target.name}" not in keep:
+            try:
+                target.unlink()
+            except OSError as error:
+                warnings.warn(f"Published successfully; could not remove old object {target}: {error}")
 
 
 def validate_bundle(directory):

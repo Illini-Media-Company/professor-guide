@@ -37,3 +37,24 @@ test('hash and query navigation keep data available', async ({ page }) => {
   const response = await page.request.get('/professor-guide/data/integration.json')
   expect(response.ok()).toBeTruthy()
 })
+
+test('demo resolves one manifest and its schedule without legacy data requests', async ({ page }) => {
+  const requests = []
+  page.on('request', (request) => {
+    if (request.url().includes('/data/')) requests.push(new URL(request.url()).pathname)
+  })
+  await page.goto('/professor-guide/')
+  await expect(page.locator('summary').first()).toBeVisible()
+  expect(requests.filter((path) => path.endsWith('/integration.json'))).toHaveLength(1)
+  expect(requests.filter((path) => /\/objects\/[a-f0-9]{64}\.json$/.test(path))).toHaveLength(1)
+  expect(requests.some((path) => /\/(course-explorer|teaching-history)\.json$/.test(path))).toBeFalsy()
+  await expect(page.locator('details')).toHaveCount(2)
+})
+
+test('a missing manifest object produces a visible loading error', async ({ page }) => {
+  await page.route('**/data/objects/*.json', (route) => route.fulfill({ status: 404, body: 'Missing object' }))
+  await page.goto('/professor-guide/')
+  await expect(page.getByRole('alert')).toContainText('404')
+  await expect(page.getByText('Loading saved course data…')).toHaveCount(0)
+  await expect(page.locator('details')).toHaveCount(0)
+})

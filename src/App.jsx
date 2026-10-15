@@ -1,15 +1,18 @@
 import { useEffect, useState } from 'react'
-import { loadCourseExplorer } from './data.js'
-import IntegrationStatus from './IntegrationStatus.jsx'
+import { loadGuide } from './data.js'
 
 export default function App() {
-  const [data, setData] = useState(null)
+  const [guide, setGuide] = useState(null)
   const [error, setError] = useState(null)
+  const data = guide?.schedule
+  const manifest = guide?.manifest
+  const pilot = data?.courses.filter((course) => ['CS 374', 'ECE 374'].includes(course.course_code))
+  const courses = pilot?.length ? pilot : data?.courses.slice(0, 2)
 
   useEffect(() => {
     const controller = new AbortController()
-    loadCourseExplorer(controller.signal)
-      .then(setData)
+    loadGuide(controller.signal)
+      .then(setGuide)
       .catch((failure) => {
         if (failure.name !== 'AbortError') setError(failure.message)
       })
@@ -24,10 +27,20 @@ export default function App() {
         <p className="mt-3 text-slate-600">A starting point for exploring UIUC courses and professors.</p>
       </header>
 
-      <IntegrationStatus />
+      {manifest && (
+        <section aria-labelledby="integration-title" className="mt-6 rounded border border-slate-200 p-4">
+          <h2 id="integration-title" className="text-xl font-semibold">Integration preview</h2>
+          <p className="mt-2">{manifest.current_term.label}: {manifest.coverage.section_count.toLocaleString()} registration sections collected.</p>
+          <ul className="mt-2 list-inside list-disc text-sm">
+            <li>Course Explorer: available; source identities remain unresolved</li>
+            <li>Grade data: {manifest.files.gpa.status === 'available' ? 'available' : 'awaiting grade-processing teammate'}</li>
+            <li>Professor data: {manifest.files.professors.status === 'available' ? 'available' : 'awaiting matching teammate'}</li>
+          </ul>
+        </section>
+      )}
       <section className="mt-6" aria-labelledby="sample-title" aria-busy={!data && !error}>
         <h2 id="sample-title" className="text-xl font-semibold">Course data preview</h2>
-        <p className="mt-2 text-sm text-slate-600">Development preview. Search, profiles, GPA, and rating summaries are being built.</p>
+        <p className="mt-2 text-sm text-slate-600">A small sample from the saved schedule. Search, profiles, GPA, and rating summaries are being built.</p>
         {error && <p role="alert" className="mt-4 rounded border border-red-300 bg-red-50 p-4">{error}</p>}
         {!data && !error && <p role="status" className="mt-4">Loading saved course data…</p>}
         {data && (
@@ -40,7 +53,7 @@ export default function App() {
               {' '}This is a saved snapshot. Professor identities are unresolved.
             </p>
             <ul className="mt-4 space-y-4">
-              {data.courses.map((course) => {
+              {courses.map((course) => {
                 const sections = data.sections.filter((section) => section.listing_id === course.listing_id)
                 const related = [...new Set(data.relationships
                   .filter((relationship) => relationship.from_listing_id === course.listing_id)
@@ -57,7 +70,7 @@ export default function App() {
                       <ul className="mt-2 space-y-3">
                         {sections.map((section) => (
                           <li key={section.id}>
-                            <strong>{section.section_label}</strong> · CRN {section.crn}
+                            <strong>{section.section_label || 'Unlabeled section'}</strong> · CRN {section.crn}
                             <ul className="ml-4 list-disc">
                               {section.meetings.map((meeting) => (
                                 <li key={meeting.id}>

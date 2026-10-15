@@ -1,48 +1,77 @@
-# Collection, persistence, deployment, and restoration
+# Collection, deployment, and embedding
 
-## Normal operation
+Use the [README](../README.md) for installation and routine checks. Run commands from the repository root with `.venv` active.
 
-Install Node 24 and Python 3.11 with `requirements.txt`. Activate `.venv`, run `npm ci`, then `python -m scripts.update_data` from the repository root. No secret or Mac-specific setting is needed to collect public Course Explorer XML. `certifi` supplies a maintained public trust bundle with certificate verification enabled.
+## Routine collection
 
-`config/collection.json` is the current-term decision, not a guess based on the newest published semester. It selects `2026-fall` through `2026-12-31`; collection must also discover that term in the official calendar/year indexes. Expired configuration fails closed. At semester change, review the available term and update both fields. An explicit `--term YEAR-season` override is verified against available schedules.
+`python -m scripts.update_data` is the normal entry point. It discovers available schedules, collects the configured current term, reuses archived history, validates teammate inputs, reports coverage, and publishes one coherent dataset.
 
-The default command collects all discovered departments. `--scope sample` selects AAS/CS/MATH/CHEM/MUS. `--subjects` or `--courses` narrows it explicitly. Department indexes and `?mode=cascade` responses must contain matching course sets. Batch course/section parents, IDs, source URLs, and all resulting records are validated. Ordinary individual-course collection remains available with `scripts.collect_course_explorer`; the pilot remains available with `scripts.collect_teaching_history`.
+```sh
+python -m scripts.update_data --subjects CS ECE STAT IS
+python -m scripts.update_data --courses "CS 374" "ECE 374"
+python -m scripts.update_data --term 2026-fall
+python -m scripts.update_data --reuse-current
+python -m scripts.update_data --refresh-history
+```
 
-The live mixed sample and campus collection verified 186 subjects. Source corrections can occur; archived data is not assumed immutable. `--refresh` bypasses raw XML caches. `--refresh-history` explicitly rebuilds historical normalized data, which otherwise remains durable and unchanged.
+Narrowed collections replace the current publication with that narrower scope; inspect coverage before committing. `--reuse-current` makes no source requests and prefers committed data over ignored local candidates. It fails if required history is not archived yet. `--refresh-history` explicitly recollects history and cannot be combined with offline reuse.
 
-## History required by grades
+`config/collection.json` selects the current term and review deadline. Expired configuration fails closed; review both fields at semester change. An explicit `--term` override must still appear in official indexes. Empty subject/course lists mean all discovered departments.
 
-When `data/inputs/gpa.json` exists, its normalized `term_id`/`course_code` records add historical requirements alongside `historical_requests` in the configuration. The current campus term is already collected. The existing normalized history is reused when it covers every required pair. Otherwise the existing history collector collects the required terms and the union of required courses. Its established v1 format is a rectangular course × term grid; any extra pairs are explicit in coverage, not falsely described as grade-required. `requested_history_pairs` records the actual configured/grade requirements on newly collected history.
+Normalized GPA inputs add required historical course/term pairs to the configured pilot. Archived normalized history is reused when it covers those pairs. Otherwise the v1 history collector collects the required terms × union of courses; extra pairs remain explicit in coverage, and `requested_history_pairs` identifies actual requirements.
 
-This interface is ready for the GPA owner; no grade input currently exists in production. Grade calculations and source-to-term translation remain with that owner. Missing or unavailable grades are not zero. A valid average of zero remains zero.
+## Source requests and cache
 
-## Publication transaction
+Public XML uses verified HTTPS, a 20-second timeout, at most two retries by default (maximum five), and at least 0.4 seconds between requests. HTTP 401/403 stops immediately. `Retry-After` is honored up to 60 seconds; longer delays defer the refresh. Network/HTTP/parsing errors fail the attempt. Only absence from a successfully parsed official parent index means unavailable.
 
-1. Discover and collect into ignored local candidates. Source failures retain previous normalized public data; access denial stops immediately.
-2. Load and validate any teammate inputs. Perform identity/grade join checks without changing source records.
-3. Prepare reports and a temporary complete publication outside the live data directory.
-4. Validate schemas, coverage, joins, byte sizes, and hashes in that temporary publication.
-5. Copy immutable `objects/<sha256>.json` files, then atomically replace the single `integration.json` manifest last.
+Prior-calendar-year XML caches for 30 days; current-year/discovery responses cache for six hours. `--refresh` bypasses raw caches; `--refresh-history` bypasses raw caches during history collection too. Expired or invalid data is never a request-failure fallback. A cache older than an already published source fetch cannot roll that source backward. Cache hits and reused normalized history preserve original source timestamps. `.cache/` is disposable; committed JSON is the durable last successful data store.
 
-A failure before the manifest switch leaves the old manifest and all its source timestamps intact. An interrupted immutable-object copy can leave an unreferenced object; it cannot make old readers reference half-written data. Reports are restored if publication fails. Legacy public course/history files are not rewritten by integration publication.
+## Collection without publication
 
-The manifest is the transaction boundary for consumers. Resolve every object from one manifest response. Do not independently guess or mix object filenames. Each available entry contains `path`, `sha256`, `bytes`, and `collected_at`; each pending teammate entry has null values rather than fake empty/zero observations.
+Use these only when reviewing an isolated candidate. They write outside `public/` and do not change the live manifest:
 
-## Durable data and workflow behavior
+```sh
+python -m scripts.course_explorer_discovery --years 2025 2026
+python -m scripts.collect_campus --term 2026-fall --subjects CS ECE
+python -m scripts.collect_teaching_history --terms 2026-fall 2025-spring \
+  --courses "CS 374" "ECE 374" "CS 107" "STAT 107" "IS 107"
+```
 
-Normalized `public/data/` files and their original source timestamps are committed to Git. They survive cache eviction, runner replacement, and fresh checkouts. Normalized historical data is loaded through the committed manifest (or the retained initial history file). `.cache/course-explorer` only speeds source requests. Raw XML never goes into the public artifact.
+Candidates and attempt reports live in ignored `data/snapshots/` and `data/reports/`. The original individual-course collector and `scripts.publish_data` remain available for the two compatibility JSON files; they do not update the integration manifest. New integrations use `update_data`.
 
-One workflow handles push checks/deployment, PR checks, manual refreshes, and weekly Monday 10:20 UTC refreshes. All production jobs share one concurrency group, with cancellation disabled. The default branch is `main`.
+## Publication and retention
 
-Refresh sequence: checkout → optional collection/publication locally → offline tests → full public-data/hash validation → production build → embed tests → commit/push changed normalized files and reports → upload the already tested site → Pages deploy → verify the exact deployed manifest hash plus assets/data hashes. A failed refresh, test, build, or persistence step prevents deployment and leaves the previous live artifact in place.
+The publisher validates a complete temporary bundle: schemas, coverage, source timestamps, teammate joins, exact byte sizes, and SHA-256 hashes. It promotes immutable `objects/<sha256>.json` files, then atomically replaces `integration.json` last. A failure before that switch leaves the previous manifest, referenced data, and collection timestamps intact. Reports are restored if publication fails. Production rejects synthetic inputs.
 
-Commits made with `GITHUB_TOKEN` do not normally trigger another push workflow. Deployment deliberately happens in the same successful refresh workflow, so it cannot silently depend on that suppressed trigger. The build exports the manifest SHA-256 to the deploy job; CDN verification checks that exact revision. Workflow tokens need contents write, Pages write/id-token, and (for a protected-main fallback) pull-request/actions write.
+After a successful changed publication, objects referenced by the new manifest and the immediately preceding manifest are retained; older unreferenced objects are removed. This gives in-flight readers one previous generation and bounds accumulation across refreshes. Identical republishes do not discard the retained generation. A cleanup error is reported without treating a completed publication as a failed refresh. Interrupted writes may leave extra objects until the next changed successful publication. The original compatibility JSON files are outside this pruning policy. Older complete datasets remain recoverable from Git history.
 
-If a main push is protected, the workflow attempts a `data-refresh/<run-id>` branch and PR, dispatches checks on that branch, then stops before deployment. Merge after review triggers normal main deployment. Organization settings can disallow bot PR creation; that policy is an external repository control, not something the workflow bypasses. This repository had no branch rules when initially inspected.
+Consumers must resolve all files from one manifest response. Do not guess filenames, mix generations, or edit hashes/timestamps by hand. See the [contract](data-contract.md) and [reading example](team-handoffs.md#read-the-published-data).
 
-## Restore a previous published version
+## GitHub Pages
 
-Find a known-good commit and restore the complete data directory, preserving the manifest and all referenced objects together:
+Repository: `Illini-Media-Company/professor-guide`; default branch: `main`. Under **Settings → Pages**, select **GitHub Actions**. Vite uses `/professor-guide/` for assets and data URLs. HTTPS is enabled.
+
+The single workflow runs on main pushes, PRs, weekly Monday 10:20 UTC, and manual dispatch. PRs check without deploying. Production runs share a concurrency group with cancellation disabled. Refresh sequence:
+
+1. Collect/integrate locally, run offline data checks and published-data/hash validation.
+2. Build the site and run Chromium embed checks.
+3. Commit/push changed public JSON and coverage reports.
+4. Upload that tested artifact, deploy Pages, and verify the exact manifest revision, assets, all referenced JSON hashes, and iframe test page.
+
+A failed collection, check, build, or persistence step prevents deployment. Bot commits made with `GITHUB_TOKEN` do not normally trigger another push workflow; the same refresh run deploys its artifact. Tokens need contents write, Pages write/id-token, and pull-request/actions write for the protected-main fallback. If main rejects a push, the workflow attempts a data PR and dispatches branch checks, then stops before deployment. Repository policy must permit those bot actions.
+
+```sh
+gh workflow run pages.yml -f refresh=true -f scope=campus
+gh run list --workflow pages.yml
+python -m scripts.verify_site https://illini-media-company.github.io/professor-guide/ \
+  --expected-manifest public/data/integration.json
+```
+
+The [initial deployment](https://github.com/Illini-Media-Company/professor-guide/actions/runs/38672910528) and [full refresh](https://github.com/Illini-Media-Company/professor-guide/actions/runs/38672971027) passed. The refresh used 375 live requests, zero cache hits, collected all 186 departments, reused committed history, and persisted data before deploying. An independent browser check also loaded the deployed iframe from a different parent origin. Current runs are on the [workflow page](https://github.com/Illini-Media-Company/professor-guide/actions/workflows/pages.yml).
+
+## Restore a publication
+
+Restore the complete data directory and both generated reports from one known-good commit, then validate/build and commit normally:
 
 ```sh
 git log --oneline -- public/data
@@ -54,10 +83,29 @@ git commit -m "data: restore last successful publication"
 git push origin main
 ```
 
-Do not replace only an object or invent a new collection timestamp during restoration. If reverting a whole bad update is preferable, `git revert <bad-update-commit>` followed by checks and a normal push is also supported. Old normalized objects remain in Git history independently of caches. Retained immutable objects are intentionally not pruned during refresh; review site/repository size before introducing a retention policy.
+Never restore only an object or replace collection timestamps with the restoration time. No cache is required for rollback.
 
-## Verification boundaries
+## Daily Illini iframe handoff
 
-Live verified: public XML discovery, five-department sample, all current-term departments, actual missing labels/instructors, multiple instructors, roles, and source provenance. Fixture tested: explicit empty-section/meeting flags, uncertain mappings, valid zero/null values, HTTP failures/access denial, interrupted publication, and fresh cache-free operation. Browser checked: iframe shell widths, keyboard, and CSS 200% shell zoom; final DI CMS/theme behavior needs a DI staging session. Grade/RMP data and full interface remain teammate work.
+Use this in a DI custom HTML block:
 
-Final safeguards: `--reuse-current` prefers the committed publication over ignored local candidates, performs no source requests, and fails if required historical pairs are not yet archived. Run the normal update first to fill missing history. A raw cache older than an already published source fetch cannot roll that source backward; it is refreshed instead. `--refresh-history` bypasses both normalized archive reuse and raw caches during history collection. Timestamp comparisons use actual instants across timezone offsets. HTTP `Retry-After` is honored up to 60 seconds; a longer requested delay defers the refresh instead of ignoring the server's limit.
+```html
+<iframe
+  src="https://illini-media-company.github.io/professor-guide/?embed=1"
+  title="Professor Guide — UIUC courses and professors"
+  width="100%"
+  height="800"
+  style="border: 0; display: block;"
+  loading="lazy"
+></iframe>
+<p>
+  <a href="https://illini-media-company.github.io/professor-guide/"
+     target="_blank" rel="noopener">Open Professor Guide full page</a>
+</p>
+```
+
+The frame has its own scrolling, an accessible title, and a full-page alternative. No dynamic resize messages are used. Query/hash navigation works without a history-route fallback.
+
+Run `npm run build`, `npm run preview`, and open **http://localhost:4173/professor-guide/embed-test.html**. The deployed equivalent is **https://illini-media-company.github.io/professor-guide/embed-test.html**. Chromium checks cover 320/375/768px widths, keyboard disclosures/links, overflow, query/hash loading, and 200% CSS shell zoom. CSS zoom does not certify every browser or assistive technology.
+
+**DI staging remains external:** no authenticated staging session was supplied and no CMS content has been edited. Before DI publication, check the snippet in the DI theme for mobile width, keyboard traversal, scrolling, the full-page link, and retention of iframe attributes.

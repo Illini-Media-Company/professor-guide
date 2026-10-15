@@ -1,6 +1,6 @@
 # Data contract v1
 
-The executable contract is `scripts/data_contract.py`; the readable full example is [`data/examples/course-explorer.json`](../data/examples/course-explorer.json). The example is synthetic. Published live data is [`public/data/course-explorer.json`](../public/data/course-explorer.json).
+The executable contract is `scripts/data_contract.py`; the readable full example is [`data/examples/course-explorer.json`](../data/examples/course-explorer.json). The example is synthetic. Live datasets are resolved through [`public/data/integration.json`](../public/data/integration.json). Original fixed-name snapshot URLs remain available for compatibility.
 
 ## Course Explorer snapshot (implemented)
 
@@ -14,7 +14,7 @@ One JSON file contains the complete requested set for one term. Strings are sour
 | `collected_at` | Latest successful source fetch timestamp in this snapshot, UTC ISO 8601 |
 | `term` | `{id, year, season, source_term_id, label}`; e.g. `id: "2026-fall"`, official `source_term_id: "120268"` |
 | `requested_courses` | Exact set of requested course codes, e.g. `["CS 374", "ECE 374"]` |
-| `sources` | `{url, fetched_at}` for each ordinary and detailed course response; cache hits keep the original time |
+| `sources` | `{url, fetched_at}` for actual fetched responses (course index/detail or department index/batch); cache hits keep the original time |
 | `courses` | Related searchable catalog/registration listings, each kept separately |
 | `sections` | Registration records, keyed by term + CRN |
 | `relationships` | Directed “Same as” / “See” edges with source evidence |
@@ -70,11 +70,11 @@ The conservative extractor recognizes explicit punctuated sentence directives su
 
 ### Refresh and publication boundary
 
-Collection validates every requested course and compares index/detail CRN sets before replacing a candidate. Publication validates again and replaces one public file atomically. Failures retain the previous file bytes and timestamps. There is no partially published multi-file dataset. The collector snapshot deliberately requires all professor matches to remain unresolved; matching outputs join to it separately.
+Collection validates the complete requested set before replacing a candidate. Individual-course collection compares index/detail CRN sets; department collection compares index/batch course sets and validates nested sections. The integration publisher validates a complete bundle before switching one manifest atomically; the original single-file publisher remains for compatibility exports. Failures before the switch retain the previous published bytes and timestamps. Source professor matches remain unresolved; verified matching outputs join separately.
 
 ## Teaching-history bundle v1 (additive, implemented)
 
-`public/data/teaching-history.json` adds multi-term access without changing the existing Course Explorer snapshot or `public/data/course-explorer.json`. There are no renamed fields or new professor identity assumptions inside the nested snapshots. The publisher selects the public filename by `dataset` and prevents writing a history bundle over the original frontend file.
+The manifest’s `history` object provides multi-term assignments. `public/data/teaching-history.json` retains the initial pilot for compatibility. Nested snapshots use the original Course Explorer format, with no renamed fields or new professor identity assumptions. The standalone compatibility publisher selects filenames by `dataset` and prevents writing a history bundle over the course snapshot.
 
 | Field | Meaning |
 | --- | --- |
@@ -98,45 +98,17 @@ Nested snapshot `requested_courses` means the subset actually collected for that
 
 The history-level timestamp can be newer than historical course data because discovery indexes have different cache ages. Audit `discovery_sources`, each snapshot's `sources`, and individual section timestamps for freshness. The prior-year cache defaults to 30 days; current-year responses and the top-level year list default to six hours. `--refresh` bypasses both.
 
-See [the teaching-history handoff guide](teaching-history.md) for commands, reading examples, and GPA/matching join rules. The only proposed future changes remain the separate grade and professor enrichment contracts below; this milestone introduces no breaking changes to schedule records.
+See [operations](operations.md) for commands and [team handoffs](team-handoffs.md) for a reading example and GPA/matching responsibilities. Normalized enrichment inputs are defined below; they do not change source schedule records.
 
-## Team handoffs (proposed; agree before implementation)
+## Ownership and reviewed mappings
 
-| Owner | Input / join keys | Output and boundary |
-| --- | --- | --- |
-| Repository/data integration lead | Official Course Explorer XML | Validated schedule snapshot; manages publication and schema versions |
-| GPA/grade teammate | Grade sources; `term_id` + CRN when available, plus explicit source grain | Proposed `public/data/gpa.json`; owns counts, GPA formulas, suppression/missing-data rules and provenance |
-| Matching/RMP/faculty teammate | Raw instructor occurrence with `listing_id`, `section_id`, `meeting_id`, `name_raw`; reviewed evidence | Reviewed stable professor IDs, numeric RMP summaries, verified official faculty URLs; proposed `public/data/professors.json` |
-| Frontend teammate | Published JSON files and contract | Search, results, profiles, charts, loading/error/empty states; joins data without redoing matching or GPA calculations |
+Jon owns collection, validation, integration, and publication. The GPA owner supplies normalized grades; the matching owner supplies verified professor records, RMP/faculty summaries, and occurrence links. The frontend owner consumes published files. Detailed tasks and completion criteria are in [team handoffs](team-handoffs.md).
 
-Proposed enrichment envelopes use `{schema_version: 1, dataset, data_kind, collected_at, sources, records}`. Keep them separate until their owners supply their actual schemas and validators. The current publisher handles Course Explorer snapshots and the additive teaching-history bundle; it does not fabricate or publish placeholder GPA/RMP files.
-
-For GPA records, agree on explicit grain: `section`, `course_term`, or another documented level. Use a term-qualified `section_id` only when the grade source supplies a reliable CRN join. Use `listing_id` for a course/term summary, document whether cross-listings are aggregated, and never duplicate a summary across aliases without an explicit policy. Missing grades or ratings mean unavailable, not zero.
-
-For professor records, use a reviewed stable `professor_id` and occurrence-level assignments `{listing_id, section_id, meeting_id, name_raw, professor_id, evidence}`. Ambiguous and unmatched occurrences remain unresolved. Store `name_raw` even after enrichment. Numeric ratings require their source URL, source collection time, count/sample size, and clearly named measures. Faculty links need their own verification provenance. This starter makes no identity, RMP, or faculty-link claims.
-
-## Reviewed mapping files
-
-`data/mappings/professor-identities.json` and `course-aliases.json` are empty, labeled templates. They are **not consumed automatically** by this collector or publisher. The integration lead and matching teammate should add a reviewed integration step when real outputs arrive; keep the official raw schedule available for audit.
-
-Suggested identity entry:
-
-```json
-{
-  "professor_id": "reviewed-stable-id",
-  "display_name": "Reviewed full name",
-  "occurrences": [],
-  "evidence": [{"source_url": "https://example.edu/faculty", "note": "Explain the match"}],
-  "reviewed_by": "reviewer",
-  "reviewed_at": "2026-10-14T00:00:00Z"
-}
-```
-
-Suggested alias entry includes `course_codes`, optional `term_ids`, exact `evidence` text and URL, `reviewed_by`, and `reviewed_at`. A manual alias needs explicit official evidence too. Do not promote a prerequisite or schedule coincidence into an alias. These examples describe fields, not actual reviewed identities or aliases.
+`data/mappings/course-aliases.json` is consumed by publication using the reviewed-alias contract below. `data/mappings/professor-identities.json` is a matching review workspace; it is not automatically treated as verified links. Both start empty. Uncertain identities remain unresolved.
 
 ## Campus and integration publication (additive, implemented)
 
-The original v1 `course-explorer.json` and `teaching-history.json` remain intact for existing consumers. The full current campus schedule is another v1 Course Explorer snapshot, resolved through `integration.json` rather than overwriting the small original demo dataset.
+The original v1 `course-explorer.json` and `teaching-history.json` remain intact for existing consumers. New consumers, including the placeholder frontend, resolve the current schedule and history through `integration.json`. The current campus schedule is another v1 Course Explorer snapshot.
 
 Department batches use the live-verified `SUBJECT.xml?mode=cascade` endpoint. Canonical course/section `source_url` and course `detail_source_url` still point to their individual XML resources; they do not claim those resources were separately fetched. Optional `index_response_url` and `detail_response_url` identify the actual department index/batch responses. `sources` contains those actual URLs and fetch times. Sections include `response_source_url` for their batch. Course collection time is the latest index/batch fetch; section collection time is the batch fetch. The validator follows actual response URLs when present and the original course URLs otherwise.
 
@@ -144,7 +116,7 @@ Live campus data includes independent-study sections with missing section labels
 
 `integration.json` uses `schema_version: 1`, `dataset: "professor_guide"`, `data_kind`, source-derived `collected_at`, `current_term`, `coverage`, and `files`. An available file entry has `status: "available"`, immutable `path: "objects/<sha256>.json"`, exact `sha256`, `bytes`, and source `collected_at`. Pending entries have `status: "pending"` and null path/hash/size/time. They are not zero observations. Resolve paths relative to `data/` using Vite's base URL.
 
-Objects: `schedule` (v1 snapshot), `history` (v1 teaching-history bundle), `aliases` (explicit source relationships with `applicable_terms`, plus separate reviewed records), `department_coverage`, `preview`, and the optional normalized `gpa`, `professors`, `verified_occurrences`, and `reviewed_aliases` inputs. Source data is not overwritten with verified IDs. The publisher assembles and validates a temporary complete set, promotes immutable files, and switches one manifest last. Consumers must use one manifest's object set together. Hashes, sizes, source timestamps, coverage, and joins are checked offline.
+Objects: `schedule` (v1 snapshot), `history` (v1 teaching-history bundle), `aliases` (explicit source relationships with `applicable_terms`, plus separate reviewed records), `department_coverage`, `preview`, and the optional normalized `gpa`, `professors`, `verified_occurrences`, and `reviewed_aliases` inputs. Source data is not overwritten with verified IDs. The publisher assembles and validates a temporary complete set, promotes immutable files, and switches one manifest last. Consumers must use one manifest's object set together. Hashes, sizes, source timestamps, coverage, and joins are checked offline. After a changed successful publication, only the current and immediately preceding manifests’ objects are retained; older versions remain in Git. Identical republishes retain the previous generation. This retention policy changes no schema, filename, or join key; see [operations](operations.md#publication-and-retention).
 
 ### Normalized teammate inputs
 

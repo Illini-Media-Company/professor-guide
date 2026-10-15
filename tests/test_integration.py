@@ -6,7 +6,7 @@ import unittest
 from unittest.mock import patch
 from urllib.error import HTTPError
 
-from scripts.campus import department_snapshot
+from scripts.collect_campus import department_snapshot
 from scripts.collect_course_explorer import CourseExplorerClient
 from scripts.course_explorer_discovery import CourseExplorerDiscovery
 from scripts.data_contract import AccessDenied, DataError
@@ -77,6 +77,56 @@ class IntegrationTests(unittest.TestCase):
                 with self.assertRaises(OSError): publish_bundle(directory, fixture_snapshot(), history_fixture(), fixtures(), allow_fixtures=True)
             self.assertEqual(manifest_path.read_bytes(), original)
             validate_bundle(directory)
+
+    def test_retention_keeps_two_distinct_publications_and_noop_preserves_previous(self):
+        with tempfile.TemporaryDirectory() as directory:
+            manifests = []
+            for version in range(3):
+                schedule = fixture_snapshot()
+                schedule['courses'][0]['title'] = f'Synthetic title {version}'
+                manifests.append(publish_bundle(directory, schedule, history_fixture(), allow_fixtures=True))
+            expected = {item['path'] for manifest in manifests[-2:] for item in manifest['files'].values()
+                        if item['status'] == 'available'}
+            actual = {f'objects/{path.name}' for path in (Path(directory)/'objects').glob('*.json')}
+            self.assertEqual(actual, expected)
+            self.assertNotIn(manifests[0]['files']['schedule']['path'], actual)
+            publish_bundle(directory, schedule, history_fixture(), allow_fixtures=True)
+            self.assertEqual({f'objects/{path.name}' for path in (Path(directory)/'objects').glob('*.json')}, expected)
+            # A failed switch cannot prune the currently retained generations.
+            before = {path: (Path(directory)/path).read_bytes() for path in expected}
+            schedule['courses'][0]['title'] = 'Interrupted synthetic refresh'
+            from scripts.integration import atomic_write_text as real_write
+            def fail_switch(path, body):
+                if Path(path) == Path(directory)/'integration.json':
+                    raise OSError('Simulated failed switch')
+                return real_write(path, body)
+            with patch('scripts.integration.atomic_write_text', side_effect=fail_switch):
+                with self.assertRaises(OSError):
+                    publish_bundle(directory, schedule, history_fixture(), allow_fixtures=True)
+            for path, body in before.items():
+                self.assertEqual((Path(directory)/path).read_bytes(), body)
+            validate_bundle(directory)
+
+    def test_pruning_failure_does_not_fail_a_completed_publication(self):
+        with tempfile.TemporaryDirectory() as directory:
+            schedule = fixture_snapshot()
+            for version in range(2):
+                schedule['courses'][0]['title'] = f'Synthetic title {version}'
+                manifest = publish_bundle(directory, schedule, history_fixture(), allow_fixtures=True)
+                if version == 0:
+                    obsolete = Path(directory)/manifest['files']['schedule']['path']
+            schedule['courses'][0]['title'] = 'Latest synthetic title'
+            real_unlink = Path.unlink
+            def fail_old_object(path, *args, **kwargs):
+                if path == obsolete:
+                    raise OSError('Simulated cleanup permission error')
+                return real_unlink(path, *args, **kwargs)
+            with patch('pathlib.Path.unlink', fail_old_object):
+                with self.assertWarnsRegex(UserWarning, 'Published successfully'):
+                    manifest = publish_bundle(directory, schedule, history_fixture(), allow_fixtures=True)
+            self.assertEqual(read(Path(directory)/'integration.json'), manifest)
+            _, documents = validate_bundle(directory)
+            self.assertEqual(documents['schedule']['courses'][0]['title'], 'Latest synthetic title')
 
     def test_access_denial_stops_without_retries(self):
         with tempfile.TemporaryDirectory() as directory:
