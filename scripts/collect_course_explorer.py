@@ -2,6 +2,7 @@
 
 import argparse
 from datetime import datetime, timezone
+from email.utils import parsedate_to_datetime
 import hashlib
 from http.client import HTTPException
 import json
@@ -41,6 +42,7 @@ class CourseExplorerClient:
         self.network_requests = 0
         self.pace = pace
         self.last_request = 0
+        self.minimum_fetch_times = {}
 
     @classmethod
     def from_args(cls, args):
@@ -54,13 +56,15 @@ class CourseExplorerClient:
             try:
                 cached = json.loads(path.read_text(encoding="utf-8"))
                 age = (datetime.now(timezone.utc) - timestamp(cached["fetched_at"])).total_seconds()
-                if cached["url"] == url and 0 <= age < ttl:
+                floor = self.minimum_fetch_times.get(url)
+                if cached["url"] == url and 0 <= age < ttl and (floor is None or timestamp(cached["fetched_at"]) >= timestamp(floor)):
                     parse_xml(cached["body"], expected_root)
                     self.cache_hits += 1
                     return cached
             except (ValueError, KeyError, TypeError, OSError):
                 pass  # Corrupt cache is replaceable; expired data is never a fallback.
         for attempt in range(self.retries + 1):
+            retry_delay = min(2 ** attempt, 8)
             try:
                 request = Request(url, headers={"User-Agent": "ProfessorGuide/0.1 (+https://github.com/Illini-Media-Company/professor-guide)", "Accept": "application/xml"})
                 delay = self.pace - (time.monotonic() - self.last_request)
@@ -84,12 +88,24 @@ class CourseExplorerClient:
                     raise AccessDenied(f"Access denied for {url}: HTTP {error.code}; collection stopped") from error
                 if error.code not in (408, 429, 500, 502, 503, 504) or attempt == self.retries:
                     raise RequestError(f"Request failed for {url}: HTTP {error.code}") from error
+                retry_after = error.headers.get("Retry-After") if error.headers else None
+                if retry_after:
+                    try:
+                        seconds = float(retry_after)
+                    except ValueError:
+                        try:
+                            seconds = (parsedate_to_datetime(retry_after) - datetime.now(timezone.utc)).total_seconds()
+                        except (ValueError, TypeError):
+                            seconds = retry_delay
+                    if not math.isfinite(seconds) or seconds > 60:
+                        raise RequestError(f"Server requested delayed retry for {url}; defer this refresh") from error
+                    retry_delay = max(retry_delay, seconds)
             except UnicodeError as error:
                 raise DataError(f"Invalid UTF-8 response for {url}") from error
             except (URLError, TimeoutError, OSError, HTTPException) as error:
                 if attempt == self.retries:
                     raise RequestError(f"Request failed for {url}: {error}") from error
-            time.sleep(min(2 ** attempt, 8))
+            time.sleep(retry_delay)
         raise RequestError(f"Request failed for {url}")
 
 

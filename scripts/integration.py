@@ -113,7 +113,7 @@ def preview(schedule, history, inputs):
                              "grain": grade["grain"], "professor_id": next(iter(ids)) if len(ids) == 1 else None,
                              "status": "verified" if len(ids) == 1 else "unresolved"})
     return {"schema_version": 1, "dataset": "integration_preview", "data_kind": schedule["data_kind"],
-            "collected_at": schedule["collected_at"], "grade_attributions": attributions,
+            "collected_at": max((data["collected_at"] for data in [schedule, history, *inputs.values()]), key=timestamp), "grade_attributions": attributions,
             "pending_inputs": [name for name in ("gpa", "professors", "verified_occurrences") if name not in inputs],
             "coverage": counts(schedule["sections"])}
 
@@ -130,7 +130,7 @@ def validate_reviewed_aliases(mapping):
         for term in record["term_ids"]: parse_term_id(term)
         for evidence in record["evidence"]:
             hostname = urlparse(evidence["source_url"]).hostname or ""
-            require(hostname == "illinois.edu" or hostname.endswith(".illinois.edu"), "Official alias evidence required")
+            require(evidence["source_url"].startswith("https://") and (hostname == "illinois.edu" or hostname.endswith(".illinois.edu")), "Official HTTPS alias evidence required")
             require("Same as" in evidence["text"] or "See " in evidence["text"], "Explicit alias evidence required")
     return mapping
 
@@ -141,7 +141,7 @@ def aliases(schedule, history, mapping=None):
         for relation in snapshot["relationships"]:
             records.append({**relation, "applicable_terms": [snapshot["term"]["id"]]})
     return {"schema_version": 1, "dataset": "course_aliases", "data_kind": schedule["data_kind"],
-            "collected_at": max([schedule["collected_at"], history["collected_at"]]), "records": records,
+            "collected_at": max([schedule["collected_at"], history["collected_at"]], key=timestamp), "records": records,
             "reviewed_records": validate_reviewed_aliases(mapping)["aliases"] if mapping else []}
 
 
@@ -176,7 +176,7 @@ def _stage_bundle(directory, schedule, history, inputs=None, coverage=None, allo
         if name not in files:
             files[name] = {"status": "pending", "path": None, "sha256": None, "bytes": None, "collected_at": None}
     manifest = {"schema_version": 1, "dataset": "professor_guide", "data_kind": schedule["data_kind"],
-                "collected_at": max(item["collected_at"] for item in files.values() if item["collected_at"]),
+                "collected_at": max((item["collected_at"] for item in files.values() if item["collected_at"]), key=timestamp),
                 "current_term": schedule["term"], "coverage": counts(schedule["sections"]), "files": files}
     # All validation/join work above completes before any published object is written.
     for relative, body in staged:
@@ -233,6 +233,6 @@ def validate_bundle(directory):
     require(manifest["current_term"] == documents["schedule"]["term"], "Inconsistent current term")
     for name, data in documents.items():
         require(manifest["files"][name]["collected_at"] == data.get("collected_at", documents["schedule"]["collected_at"]), "Source timestamp mismatch")
-    require(manifest["collected_at"] == max(item["collected_at"] for item in manifest["files"].values() if item["collected_at"]), "Manifest timestamp mismatch")
+    require(manifest["collected_at"] == max((item["collected_at"] for item in manifest["files"].values() if item["collected_at"]), key=timestamp), "Manifest timestamp mismatch")
     require(manifest["data_kind"] == "development_fixture" or all(data.get("data_kind", "live") == "live" for data in documents.values()), "Production includes synthetic data")
     return manifest, documents

@@ -29,6 +29,14 @@ class FreshCheckoutTests(unittest.TestCase):
             self.assertEqual((root/'public/data/integration.json').read_bytes(),before)
             from scripts.integration import validate_bundle
             validate_bundle(root/'public/data')
+            # Ignored, stale local candidates must not roll back a publication
+            # received from Git (for example after an automated data refresh).
+            candidates = root/'data/snapshots'
+            candidates.mkdir(parents=True)
+            (candidates/'campus-schedule.json').write_text('stale invalid candidate')
+            again = subprocess.run([sys.executable,'-m','scripts.update_data','--reuse-current','--term',term],cwd=root,env=environment,text=True,capture_output=True)
+            self.assertEqual(again.returncode,0,again.stderr)
+            self.assertEqual((root/'public/data/integration.json').read_bytes(),before)
 
 
 if __name__ == '__main__': unittest.main()

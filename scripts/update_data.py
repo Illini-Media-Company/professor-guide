@@ -7,7 +7,7 @@ import sys
 
 from scripts.collect_campus import collect
 from scripts.collect_course_explorer import CourseExplorerClient, add_client_arguments
-from scripts.data_contract import DataError, atomic_write_json, atomic_write_text, require
+from scripts.data_contract import DataError, atomic_write_json, atomic_write_text, require, timestamp
 from scripts.integration import publish_bundle, read, validate_bundle, validate_input
 from scripts.teaching_history import build_history, render_report, validate_history
 
@@ -21,7 +21,7 @@ def teammate_inputs(config):
     return inputs
 
 
-def history_for(config, inputs, client, public_dir, refresh=False):
+def history_for(config, inputs, client, public_dir, refresh=False, allow_collection=True):
     requests = {term: set(codes) for term, codes in config["historical_requests"].items()}
     for grade in inputs.get("gpa", {}).get("records", []):
         if grade["term_id"] != config["current_term"]:
@@ -37,6 +37,7 @@ def history_for(config, inputs, client, public_dir, refresh=False):
     if not refresh and needed <= available:
         print("Reusing durable normalized history; original source timestamps retained.", flush=True)
         return existing
+    require(allow_collection, "Required historical pairs are not archived; run update_data without --reuse-current")
     require(requests, "No historical terms configured")
     # The established v1 history interface is a course × term grid. Extra pairs
     # are explicit in its coverage, never falsely called GPA-required pairs.
@@ -79,15 +80,28 @@ def main():
             require(date.today() <= date.fromisoformat(config["current_term_valid_until"]), "Configured term expired; review collection.json against available schedules")
         inputs = teammate_inputs(config)
         client = CourseExplorerClient.from_args(args)
-        history = history_for(config, inputs, client, args.public_dir, args.refresh_history)
+        if (args.public_dir / "integration.json").exists():
+            _, previous = validate_bundle(args.public_dir)
+            source_groups = [previous["schedule"]["sources"], previous["history"]["discovery_sources"]]
+            source_groups += [snapshot["sources"] for snapshot in previous["history"]["snapshots"]]
+            for source in [source for group in source_groups for source in group]:
+                old = client.minimum_fetch_times.get(source["url"])
+                client.minimum_fetch_times[source["url"]] = max([old, source["fetched_at"]], key=timestamp) if old else source["fetched_at"]
+        require(not (args.reuse_current and args.refresh_history), "--reuse-current cannot refresh history")
+        normal_ttl = client.cache_ttl
+        if args.refresh_history:
+            client.cache_ttl = 0
+        history = history_for(config, inputs, client, args.public_dir, args.refresh_history, not args.reuse_current)
+        client.cache_ttl = normal_ttl
         path = Path("data/snapshots/campus-schedule.json")
         if args.reuse_current:
-            if path.exists():
-                schedule = read(path)
-                coverage = read(path.with_suffix(".coverage.json"))
-            else:
+            if (args.public_dir / "integration.json").exists():
                 _, previous = validate_bundle(args.public_dir)
                 schedule, coverage = previous["schedule"], previous["department_coverage"]
+            else:
+                require(path.exists(), "No saved current schedule to reuse")
+                schedule = read(path)
+                coverage = read(path.with_suffix(".coverage.json"))
         else:
             subjects = args.subjects or config.get("subjects") or None
             courses = args.courses or config.get("courses") or None

@@ -123,5 +123,52 @@ class IntegrationTests(unittest.TestCase):
         mapping['aliases'][0]['term_ids'] = []
         with self.assertRaises(DataError): validate_reviewed_aliases(mapping)
 
+    def test_source_times_are_compared_chronologically_across_offsets(self):
+        inputs = fixtures()
+        inputs['gpa']['collected_at'] = '2025-12-31T19:00:01-05:00'
+        result = preview(fixture_snapshot(),history_fixture(),inputs)
+        self.assertEqual(result['collected_at'],inputs['gpa']['collected_at'])
+        with tempfile.TemporaryDirectory() as directory:
+            manifest = publish_bundle(directory,fixture_snapshot(),history_fixture(),inputs,allow_fixtures=True)
+            self.assertEqual(manifest['collected_at'],inputs['gpa']['collected_at'])
+            validate_bundle(directory)
+
+    def test_long_retry_after_defers_update_instead_of_ignoring_limit(self):
+        with tempfile.TemporaryDirectory() as directory:
+            error = HTTPError('https://example.org',429,'Limited',{'Retry-After':'120'},None)
+            with patch('scripts.collect_course_explorer.urlopen',side_effect=error) as request:
+                with self.assertRaisesRegex(DataError,'defer'): CourseExplorerClient(directory).fetch('https://example.org')
+                self.assertEqual(request.call_count,1)
+
+    def test_offline_reuse_does_not_fetch_missing_grade_history(self):
+        from scripts.update_data import history_for
+        from scripts.data_contract import atomic_write_json
+        from unittest.mock import MagicMock
+        with tempfile.TemporaryDirectory() as directory:
+            atomic_write_json(Path(directory)/'teaching-history.json',history_fixture())
+            client = MagicMock()
+            config = {'current_term':'2026-fall','historical_requests':{'2024-fall':['CS 374']}}
+            with self.assertRaisesRegex(DataError,'not archived'):
+                history_for(config,{},client,Path(directory),allow_collection=False)
+            client.fetch.assert_not_called()
+
+    def test_old_raw_cache_cannot_roll_back_a_newer_persisted_fetch(self):
+        from datetime import datetime, timedelta, timezone
+        import hashlib
+        from scripts.data_contract import atomic_write_json
+        from unittest.mock import MagicMock
+        from tests.test_course_explorer import FIXTURES
+        url = 'https://courses.illinois.edu/cisapp/explorer/schedule/2026/fall/CS/374.xml'
+        now = datetime.now(timezone.utc)
+        with tempfile.TemporaryDirectory() as directory:
+            atomic_write_json(Path(directory)/(hashlib.sha256(url.encode()).hexdigest()+'.json'),{'url':url,'fetched_at':(now-timedelta(minutes=2)).isoformat(),'body':(FIXTURES/'cs-index.xml').read_text()})
+            client = CourseExplorerClient(directory)
+            client.minimum_fetch_times[url] = (now-timedelta(minutes=1)).isoformat()
+            response = MagicMock()
+            response.__enter__.return_value.read.return_value = (FIXTURES/'cs-index.xml').read_bytes()
+            with patch('scripts.collect_course_explorer.urlopen',return_value=response) as request:
+                client.fetch(url)
+                self.assertEqual(request.call_count,1)
+
 
 if __name__ == '__main__': unittest.main()
