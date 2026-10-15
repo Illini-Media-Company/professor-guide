@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SYNTHETIC DEVELOPMENT FIXTURE: deliberately limited availability. -->
+<ns2:calendarYear xmlns:ns2="http://rest.cis.illinois.edu" id="2025">
+  <terms>
+    <term id="120251" href="https://courses.illinois.edu/cisapp/explorer/schedule/2025/spring.xml">Spring 2025</term>
+  </terms>
+</ns2:calendarYear>

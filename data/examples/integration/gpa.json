@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "data_kind": "development_fixture",
+  "collected_at": "2026-01-01T00:00:00Z",
+  "sources": [
+    {
+      "url": "https://example.org/synthetic-fixture",
+      "fetched_at": "2026-01-01T00:00:00Z"
+    }
+  ],
+  "dataset": "gpa",
+  "records": [
+    {
+      "id": "synthetic-zero",
+      "term_id": "2026-fall",
+      "course_code": "CS 374",
+      "grain": "instructor_course_term",
+      "section_id": null,
+      "primary_instructor_name_raw": "Example, Alex",
+      "gpa": 0,
+      "student_count": 0
+    },
+    {
+      "id": "synthetic-unavailable",
+      "term_id": "2026-fall",
+      "course_code": "CS 374",
+      "grain": "course_term",
+      "section_id": null,
+      "gpa": null,
+      "student_count": null
+    }
+  ]
+}

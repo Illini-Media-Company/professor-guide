@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SYNTHETIC DEVELOPMENT FIXTURE: deliberately limited availability. -->
+<ns2:subject xmlns:ns2="http://rest.cis.illinois.edu" id="ECE">
+  <parents>
+    <calendarYear id="2026" href="https://courses.illinois.edu/cisapp/explorer/schedule/2026.xml">2026</calendarYear>
+    <term id="120268" href="https://courses.illinois.edu/cisapp/explorer/schedule/2026/fall.xml">Fall 2026</term>
+  </parents>
+  <courses>
+    <course id="374" href="https://courses.illinois.edu/cisapp/explorer/schedule/2026/fall/ECE/374.xml">Synthetic algorithm course</course>
+  </courses>
+</ns2:subject>

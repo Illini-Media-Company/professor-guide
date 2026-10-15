@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SYNTHETIC DEVELOPMENT FIXTURE: deliberately limited availability. -->
+<ns2:term xmlns:ns2="http://rest.cis.illinois.edu" id="120268">
+  <parents>
+    <calendarYear id="2026" href="https://courses.illinois.edu/cisapp/explorer/schedule/2026.xml">2026</calendarYear>
+  </parents>
+  <label>Fall 2026</label>
+  <subjects>
+    <subject id="CS" href="https://courses.illinois.edu/cisapp/explorer/schedule/2026/fall/CS.xml">CS</subject>
+    <subject id="ECE" href="https://courses.illinois.edu/cisapp/explorer/schedule/2026/fall/ECE.xml">ECE</subject>
+  </subjects>
+</ns2:term>

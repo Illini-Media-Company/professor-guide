@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SYNTHETIC DEVELOPMENT FIXTURE: deliberately limited availability. -->
+<ns2:schedule xmlns:ns2="http://rest.cis.illinois.edu">
+  <calendarYears>
+    <calendarYear id="2026" href="https://courses.illinois.edu/cisapp/explorer/schedule/2026.xml">2026</calendarYear>
+    <calendarYear id="2025" href="https://courses.illinois.edu/cisapp/explorer/schedule/2025.xml">2025</calendarYear>
+  </calendarYears>
+</ns2:schedule>

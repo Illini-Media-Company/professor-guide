@@ -1,0 +1,130 @@
+name: Check, refresh, and deploy Pages
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: '20 10 * * 1'
+  workflow_dispatch:
+    inputs:
+      refresh:
+        description: Collect current Course Explorer data before building
+        type: boolean
+        default: false
+      scope:
+        description: Collection coverage
+        type: choice
+        options: [campus, sample]
+        default: campus
+      term:
+        description: Optional discovered term override (YEAR-season)
+        type: string
+        default: ''
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.event_name == 'pull_request' && github.ref || 'professor-guide-production' }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      manifest_sha256: ${{ steps.manifest.outputs.sha256 }}
+    permissions:
+      contents: write
+      pull-requests: write
+      actions: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install -r requirements.txt
+      - run: npm ci
+      - name: Optional source cache (never the durable data store)
+        uses: actions/cache@v4
+        with:
+          path: .cache/course-explorer
+          key: course-explorer-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: course-explorer-${{ runner.os }}-
+      - name: Refresh data
+        if: github.ref == 'refs/heads/main' && (github.event_name == 'schedule' || inputs.refresh == true)
+        env:
+          REFRESH_SCOPE: ${{ inputs.scope || 'campus' }}
+          REFRESH_TERM: ${{ inputs.term }}
+        shell: bash
+        run: |
+          args=(--scope "$REFRESH_SCOPE")
+          if [[ -n "$REFRESH_TERM" ]]; then args+=(--term "$REFRESH_TERM"); fi
+          python -m scripts.update_data "${args[@]}"
+      - run: npm run test:data
+      - run: npm run validate:data
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:embed
+      - name: Record the exact manifest being deployed
+        id: manifest
+        run: echo "sha256=$(sha256sum public/data/integration.json | cut -d ' ' -f 1)" >> "$GITHUB_OUTPUT"
+      - name: Persist validated data after all checks and build succeed
+        if: github.ref == 'refs/heads/main' && (github.event_name == 'schedule' || inputs.refresh == true)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/data docs/current-coverage.md docs/integration-history-coverage.md
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'data: refresh validated Course Explorer schedule'
+          if ! git push origin HEAD:main; then
+            branch="data-refresh/${GITHUB_RUN_ID}"
+            git push origin "HEAD:$branch"
+            cat > /tmp/refresh-pr-body.md <<'BODY'
+          Updates the saved Course Explorer schedule and integration manifest. Offline checks, published-data validation, the production build, and embed checks passed before this commit. Review coverage and source timestamps before merging.
+          BODY
+            gh pr create --base main --head "$branch" --title 'Refresh validated Course Explorer data' --body-file /tmp/refresh-pr-body.md
+            gh workflow run pages.yml --ref "$branch" -f refresh=false
+            echo 'Main push was protected; data PR created. Live version remains unchanged until merge.'
+            exit 1
+          fi
+      - uses: actions/upload-pages-artifact@v3
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        with:
+          path: dist
+
+  deploy:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install -r requirements.txt
+      - uses: actions/configure-pages@v5
+      - name: Deploy validated site and data together
+        id: deployment
+        uses: actions/deploy-pages@v4
+      - name: Verify deployed HTML, assets, and data hashes
+        env:
+          DEPLOYED_URL: ${{ steps.deployment.outputs.page_url }}
+          EXPECTED_SHA256: ${{ needs.build.outputs.manifest_sha256 }}
+        run: python -m scripts.verify_site "$DEPLOYED_URL" --expected-sha256 "$EXPECTED_SHA256"

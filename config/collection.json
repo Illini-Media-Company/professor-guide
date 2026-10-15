@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "current_term": "2026-fall",
+  "current_term_valid_until": "2026-12-31",
+  "subjects": [],
+  "courses": [],
+  "historical_requests": {
+    "2025-spring": ["CS 374", "ECE 374", "CS 107", "STAT 107", "IS 107"]
+  },
+  "gpa_input": "data/inputs/gpa.json",
+  "professor_input": "data/inputs/professors.json",
+  "verified_links_input": "data/inputs/verified-links.json"
+}

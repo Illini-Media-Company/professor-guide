@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SYNTHETIC DEVELOPMENT FIXTURE. Not actual enrollment or instructor data. -->
+<ns2:course xmlns:ns2="http://rest.cis.illinois.edu" id="CS 374" href="https://courses.illinois.edu/cisapp/explorer/schedule/2026/fall/CS/374.xml">
+  <parents>
+    <calendarYear id="2026" href="https://courses.illinois.edu/cisapp/explorer/schedule/2026.xml">2026</calendarYear>
+    <term id="120268" href="https://courses.illinois.edu/cisapp/explorer/schedule/2026/fall.xml">Fall 2026</term>
+    <subject id="CS" href="https://courses.illinois.edu/cisapp/explorer/schedule/2026/fall/CS.xml">CS</subject>
+  </parents>
+  <label>Synthetic algorithm course</label>
+  <description>Same as ECE 374. Prerequisite: CS 225.</description>
+  <courseSectionInformation>Same as ECE 374. Prerequisite: CS 225.</courseSectionInformation>
+  <creditHours>4 hours.</creditHours>
+  <sections>
+    <section id="10001" href="https://courses.illinois.edu/cisapp/explorer/schedule/2026/fall/CS/374/10001.xml">AL1</section>
+    <section id="10002" href="https://courses.illinois.edu/cisapp/explorer/schedule/2026/fall/CS/374/10002.xml">AD1</section>
+    <section id="10003" href="https://courses.illinois.edu/cisapp/explorer/schedule/2026/fall/CS/374/10003.xml">AB1</section>
+  </sections>
+</ns2:course>

@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "data_kind": "development_fixture",
+  "collected_at": "2026-01-01T00:00:00Z",
+  "sources": [
+    {
+      "url": "https://example.org/synthetic-fixture",
+      "fetched_at": "2026-01-01T00:00:00Z"
+    }
+  ],
+  "dataset": "professors",
+  "records": [
+    {
+      "professor_id": "synthetic-alex",
+      "display_name": "Alex Example (synthetic)",
+      "identity_evidence": [
+        "Synthetic example only"
+      ],
+      "faculty_links": [],
+      "rmp": {
+        "scope": "professor",
+        "overall_quality": null,
+        "num_ratings": 0,
+        "source_url": "https://example.org/synthetic-rmp",
+        "collected_at": "2026-01-01T00:00:00Z"
+      }
+    }
+  ]
+}

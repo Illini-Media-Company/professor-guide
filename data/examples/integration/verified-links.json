@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "data_kind": "development_fixture",
+  "collected_at": "2026-01-01T00:00:00Z",
+  "sources": [
+    {
+      "url": "https://example.org/synthetic-fixture",
+      "fetched_at": "2026-01-01T00:00:00Z"
+    }
+  ],
+  "dataset": "verified_occurrences",
+  "records": [
+    {
+      "id": "synthetic-occurrence",
+      "section_id": "2026-fall:10001",
+      "listing_id": "2026-fall:CS 374",
+      "meeting_id": "2026-fall:10001:0",
+      "instructor_index": 0,
+      "name_raw": "Example, Alex",
+      "professor_id": "synthetic-alex",
+      "verified": true,
+      "verified_at": "2026-01-01T00:00:00Z",
+      "evidence": [
+        "Synthetic match only"
+      ],
+      "is_primary": true,
+      "primary_evidence": [
+        "Synthetic source explicitly designates Alex as primary"
+      ]
+    }
+  ]
+}
