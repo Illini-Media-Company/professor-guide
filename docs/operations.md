@@ -32,11 +32,12 @@ Use these only when reviewing an isolated candidate. They write outside `public/
 ```sh
 python -m scripts.course_explorer_discovery --years 2025 2026
 python -m scripts.collect_campus --term 2026-fall --subjects CS ECE
-python -m scripts.collect_teaching_history --terms 2026-fall 2025-spring \
-  --courses "CS 374" "ECE 374" "CS 107" "STAT 107" "IS 107"
+python -m scripts.collect_campus --term 2025-spring \
+  --courses "CS 374" "ECE 374" "CS 107" "STAT 107" "IS 107" \
+  --output data/snapshots/selected-2025-spring.json
 ```
 
-Candidates and attempt reports live in ignored `data/snapshots/` and `data/reports/`. The individual-course collector requires explicit year, term, and course arguments. These investigation tools do not update the production manifest. Production publication uses `update_data`.
+Candidates and their `.coverage.json` attempt reports live in ignored `data/snapshots/`. `collect_campus` accepts one explicit term per run; repeat it for another term and use distinct output paths. The same collector powers the full multi-term archive through `update_data`. Investigation commands do not update the production manifest.
 
 ## Publication and retention
 
@@ -72,7 +73,7 @@ The [initial deployment](https://github.com/Illini-Media-Company/professor-guide
 
 ## Restore a publication
 
-Restore the complete data directory and both generated reports from one known-good commit, then validate/build and commit normally:
+Restore the complete data directory and both generated reports from a known-good v2 archive commit, then validate/build and commit normally:
 
 ```sh
 git log --oneline -- public/data
@@ -84,7 +85,7 @@ git commit -m "data: restore last successful publication"
 git push origin main
 ```
 
-Never restore only an object or replace collection timestamps with the restoration time. No cache is required for rollback.
+Never restore only an object or replace collection timestamps with the restoration time. No cache is required for rollback. Earlier v1 history/preview publications require their matching older code too; the current pipeline intentionally does not load those retired formats. The cleanup removed the last unreferenced objects from that pilot format; all prior publications remain in Git.
 
 ## Daily Illini iframe handoff
 

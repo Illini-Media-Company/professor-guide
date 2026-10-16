@@ -27,9 +27,9 @@ python -m scripts.update_data                  # collect, validate, integrate, p
 python -m scripts.update_data --reuse-current  # integrate saved data, no source requests
 ```
 
-`config/collection.json` selects the current term, departments/courses, historical requests, and optional teammate inputs. It currently selects Fall 2026, with a review deadline of December 31, 2026. Available terms are discovered from official indexes. Complete archived semesters are reused until explicitly refreshed. HTTP 401/403 or an HTTP 202 automated-access challenge stops collection immediately; failed refreshes keep the last good publication.
+`config/collection.json` selects the current term, archive start year, review deadline, and optional teammate inputs. It currently selects Fall 2026, with a review deadline of December 31, 2026. Available terms are discovered from official indexes. Complete archived semesters are reused until explicitly refreshed. HTTP 401/403 or an HTTP 202 automated-access challenge stops collection immediately; failed refreshes keep the last good publication.
 
-The production update always collects every department. `--start-year 2023` selects the archive’s first calendar year; `--term 2026-fall` selects the current/end term. Every available winter, spring, summer, and fall term within that range is included. Isolated collectors accept explicit courses for investigation without narrowing production coverage. Run `python -m scripts.update_data --help` for all options. Collection-only commands, cache behavior, publication safety, deployment, restoration, and the DI iframe snippet are in [operations](docs/operations.md).
+The production update always collects every department. `--start-year 2023` selects the archive’s first calendar year; `--term 2026-fall` selects the current/end term. Every available winter, spring, summer, and fall term within that range is included. `collect_campus` is the single collection engine; it also accepts explicit courses for isolated investigation without narrowing production coverage. Run `python -m scripts.update_data --help` for all options. Collection-only commands, cache behavior, publication safety, deployment, restoration, and the DI iframe snippet are in [operations](docs/operations.md).
 
 ## Data and team ownership
 
@@ -46,7 +46,7 @@ The shared entry point is **`public/data/integration.json`**. Its `files` entrie
 
 [Current coverage](docs/current-coverage.md): 186 Fall 2026 departments, 4,452 listings, and 12,839 registration sections. [History coverage](docs/integration-history-coverage.md) records the archive’s actual collected and unavailable terms. The configured range is 2023 through Fall 2026; discovery alone is not a claim that collection succeeded. See [verified API observations](docs/course-explorer-api.md) for source behavior and verification limits.
 
-New work uses the manifest and per-term archive files. Historical records keep the original v1 course/section format; the public history envelope is now a version 2 index so several years do not become one giant download. See the contract’s migration notes. The site retains objects for the current and previous publication; Git preserves older versions.
+Collection and integration use one path: `update_data` → `collect_campus` → validated archive → publication. `scripts/course_explorer.py` holds shared HTTP/XML helpers. Retired pilot collectors and the earlier history envelope have been removed. New work uses the manifest and per-term archive files. Historical records keep the original v1 course/section format; the public history envelope is now a version 2 index so several years do not become one giant download. See the contract’s migration notes. The site retains objects for the current and previous publication; Git preserves older versions.
 
 ## Checks and preview
 

@@ -6,11 +6,10 @@ from pathlib import Path
 import sys
 
 from scripts.collect_campus import collect
-from scripts.collect_course_explorer import CourseExplorerClient, add_client_arguments
-from scripts.data_contract import DataError, atomic_write_text, require, timestamp
+from scripts.course_explorer import CourseExplorerClient, add_client_arguments
+from scripts.data_contract import DataError, atomic_write_text, counts, require, timestamp
 from scripts.integration import publish_bundle, read, validate_bundle, validate_input
 from scripts.archive import collect_archive, render_archive_report, validate_department_coverage
-from scripts.teaching_history import counts
 
 
 def teammate_inputs(config):
@@ -20,20 +19,6 @@ def teammate_inputs(config):
         if path and Path(path).exists():
             inputs[name] = validate_input(read(path), name)
     return inputs
-
-
-def history_for(config, inputs, client, public_dir, refresh=False, allow_collection=True,
-                current=None, existing=None):
-    if existing is None and (public_dir / "integration.json").exists():
-        _, files = validate_bundle(public_dir)
-        existing = files["history"]
-    history = collect_archive(client, config["archive_start_year"], config["current_term"],
-                              existing=existing, current=current, refresh=refresh,
-                              allow_collection=allow_collection)
-    for grade in inputs.get('gpa', {}).get('records', []):
-        require(grade['term_id'] in history['requested_terms'],
-                f'GPA term {grade["term_id"]} is outside the archive; review archive_start_year/current_term before publishing')
-    return history
 
 
 def report_current(manifest, coverage):
@@ -79,13 +64,8 @@ def main():
         require(not (args.reuse_current and args.refresh_history), "--reuse-current cannot refresh history")
         path = Path("data/snapshots/campus-schedule.json")
         if args.reuse_current:
-            if (args.public_dir / "integration.json").exists():
-                _, previous = validate_bundle(args.public_dir)
-                schedule, coverage = previous["schedule"], previous["department_coverage"]
-            else:
-                require(path.exists(), "No saved current schedule to reuse")
-                schedule = read(path)
-                coverage = read(path.with_suffix(".coverage.json"))
+            require(previous, "No published archive to reuse; run a normal update first")
+            schedule, coverage = previous["schedule"], previous["department_coverage"]
         else:
             schedule = collect(client, config["current_term"], path)
             coverage = read(path.with_suffix(".coverage.json"))
@@ -93,8 +73,12 @@ def main():
         normal_ttl = client.cache_ttl
         if args.refresh_history:
             client.cache_ttl = 0
-        history = history_for(config, inputs, client, args.public_dir, args.refresh_history,
-                              not args.reuse_current, (schedule, coverage), previous.get("history"))
+        history = collect_archive(client, config["archive_start_year"], config["current_term"],
+                                  existing=previous.get("history"), current=(schedule, coverage),
+                                  refresh=args.refresh_history, allow_collection=not args.reuse_current)
+        for grade in inputs.get('gpa', {}).get('records', []):
+            require(grade['term_id'] in history['requested_terms'],
+                    f'GPA term {grade["term_id"]} is outside the archive; review collection.json before publishing')
         client.cache_ttl = normal_ttl
         require(schedule["term"]["id"] == config["current_term"], "Selected term and collected schedule disagree")
         reports = {Path("docs/current-coverage.md"): report_current({"current_term": schedule["term"], "coverage": counts(schedule["sections"]), "collected_at": schedule["collected_at"]}, coverage),

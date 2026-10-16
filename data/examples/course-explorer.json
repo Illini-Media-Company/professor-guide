@@ -2,7 +2,6 @@
   "schema_version": 1,
   "dataset": "course_explorer",
   "data_kind": "development_fixture",
-  "collected_at": "2026-01-01T00:00:00Z",
   "term": {
     "id": "2026-fall",
     "year": 2026,
@@ -10,27 +9,10 @@
     "source_term_id": "120268",
     "label": "Fall 2026"
   },
+  "collected_at": "2026-01-01T00:00:00Z",
   "requested_courses": [
     "CS 374",
     "ECE 374"
-  ],
-  "sources": [
-    {
-      "url": "https://courses.illinois.edu/cisapp/explorer/schedule/2026/fall/CS/374.xml",
-      "fetched_at": "2026-01-01T00:00:00Z"
-    },
-    {
-      "url": "https://courses.illinois.edu/cisapp/explorer/schedule/2026/fall/CS/374.xml?mode=detail",
-      "fetched_at": "2026-01-01T00:00:00Z"
-    },
-    {
-      "url": "https://courses.illinois.edu/cisapp/explorer/schedule/2026/fall/ECE/374.xml",
-      "fetched_at": "2026-01-01T00:00:00Z"
-    },
-    {
-      "url": "https://courses.illinois.edu/cisapp/explorer/schedule/2026/fall/ECE/374.xml?mode=detail",
-      "fetched_at": "2026-01-01T00:00:00Z"
-    }
   ],
   "courses": [
     {
@@ -43,12 +25,15 @@
       "credit_hours": "4 hours.",
       "source_url": "https://courses.illinois.edu/cisapp/explorer/schedule/2026/fall/CS/374.xml",
       "detail_source_url": "https://courses.illinois.edu/cisapp/explorer/schedule/2026/fall/CS/374.xml?mode=detail",
+      "index_response_url": "https://courses.illinois.edu/cisapp/explorer/schedule/2026/fall/CS.xml",
+      "detail_response_url": "https://courses.illinois.edu/cisapp/explorer/schedule/2026/fall/CS.xml?mode=cascade",
       "collected_at": "2026-01-01T00:00:00Z",
       "section_ids": [
         "2026-fall:10001",
         "2026-fall:10002",
         "2026-fall:10003"
-      ]
+      ],
+      "schedule_status": "listed"
     },
     {
       "course_code": "ECE 374",
@@ -60,10 +45,13 @@
       "credit_hours": "4 hours.",
       "source_url": "https://courses.illinois.edu/cisapp/explorer/schedule/2026/fall/ECE/374.xml",
       "detail_source_url": "https://courses.illinois.edu/cisapp/explorer/schedule/2026/fall/ECE/374.xml?mode=detail",
+      "index_response_url": "https://courses.illinois.edu/cisapp/explorer/schedule/2026/fall/ECE.xml",
+      "detail_response_url": "https://courses.illinois.edu/cisapp/explorer/schedule/2026/fall/ECE.xml?mode=cascade",
       "collected_at": "2026-01-01T00:00:00Z",
       "section_ids": [
         "2026-fall:20001"
-      ]
+      ],
+      "schedule_status": "listed"
     }
   ],
   "sections": [
@@ -136,7 +124,8 @@
             }
           ]
         }
-      ]
+      ],
+      "response_source_url": "https://courses.illinois.edu/cisapp/explorer/schedule/2026/fall/CS.xml?mode=cascade"
     },
     {
       "id": "2026-fall:10002",
@@ -169,7 +158,8 @@
           "instructor_list_status": "empty",
           "instructors": []
         }
-      ]
+      ],
+      "response_source_url": "https://courses.illinois.edu/cisapp/explorer/schedule/2026/fall/CS.xml?mode=cascade"
     },
     {
       "id": "2026-fall:10003",
@@ -202,7 +192,8 @@
           "instructor_list_status": "missing",
           "instructors": []
         }
-      ]
+      ],
+      "response_source_url": "https://courses.illinois.edu/cisapp/explorer/schedule/2026/fall/CS.xml?mode=cascade"
     },
     {
       "id": "2026-fall:20001",
@@ -250,7 +241,8 @@
             }
           ]
         }
-      ]
+      ],
+      "response_source_url": "https://courses.illinois.edu/cisapp/explorer/schedule/2026/fall/ECE.xml?mode=cascade"
     }
   ],
   "relationships": [
@@ -307,6 +299,24 @@
           "source_url": "https://courses.illinois.edu/cisapp/explorer/schedule/2026/fall/ECE/374.xml"
         }
       ]
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://courses.illinois.edu/cisapp/explorer/schedule/2026/fall/CS.xml",
+      "fetched_at": "2026-01-01T00:00:00Z"
+    },
+    {
+      "url": "https://courses.illinois.edu/cisapp/explorer/schedule/2026/fall/CS.xml?mode=cascade",
+      "fetched_at": "2026-01-01T00:00:00Z"
+    },
+    {
+      "url": "https://courses.illinois.edu/cisapp/explorer/schedule/2026/fall/ECE.xml",
+      "fetched_at": "2026-01-01T00:00:00Z"
+    },
+    {
+      "url": "https://courses.illinois.edu/cisapp/explorer/schedule/2026/fall/ECE.xml?mode=cascade",
+      "fetched_at": "2026-01-01T00:00:00Z"
     }
   ]
 }

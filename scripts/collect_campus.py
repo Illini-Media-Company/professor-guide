@@ -3,15 +3,15 @@
 import argparse
 from copy import deepcopy
 from pathlib import Path
+import re
 import sys
 
-from scripts.collect_course_explorer import (
+from scripts.course_explorer import (
     CourseExplorerClient, add_client_arguments, check_parents, extract_relationships,
     optional_text, parse_section,
 )
 from scripts.course_explorer_discovery import CourseExplorerDiscovery, historical_year
-from scripts.data_contract import API_BASE, AccessDenied, DataError, atomic_write_json, require, timestamp, validate_snapshot
-from scripts.teaching_history import counts, parse_term_id
+from scripts.data_contract import API_BASE, COURSE_PATTERN, AccessDenied, DataError, atomic_write_json, counts, parse_term_id, require, timestamp, validate_snapshot
 
 
 def subjects_for(discovery, term):
@@ -129,11 +129,20 @@ def collect(client, term_id, output, subjects=None, courses=None):
     return snapshot
 
 
+def normalize_course(value):
+    match = re.fullmatch(r"([A-Za-z][A-Za-z&]{1,9})[ :]*(\d{2,3}[A-Za-z]?)", value.strip())
+    if not match:
+        raise argparse.ArgumentTypeError('Use a course code such as "CS 374" or ECE374')
+    result = f"{match[1].upper()} {match[2].upper()}"
+    require(bool(COURSE_PATTERN.fullmatch(result)), "Invalid course code")
+    return result
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--term", required=True)
     parser.add_argument("--subjects", nargs="+")
-    parser.add_argument("--courses", nargs="+")
+    parser.add_argument("--courses", nargs="+", type=normalize_course)
     parser.add_argument("--output", type=Path, default=Path("data/snapshots/campus-schedule.json"))
     add_client_arguments(parser)
     args = parser.parse_args()

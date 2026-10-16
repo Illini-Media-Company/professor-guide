@@ -1,5 +1,6 @@
 """Shared snapshot validation and atomic JSON writes; no third-party dependencies."""
 
+from collections import Counter
 import json
 import os
 from pathlib import Path
@@ -37,6 +38,33 @@ def timestamp(value):
         raise DataError(f"Invalid timestamp: {value}") from error
     require(parsed.tzinfo is not None, "Timestamp must include a timezone")
     return parsed
+
+
+COUNT_FIELDS = (
+    "section_count", "meeting_count", "missing_instructor_meetings",
+    "multiple_instructor_meetings", "instructor_occurrences", "unresolved_occurrences",
+)
+
+
+def parse_term_id(value):
+    match = re.fullmatch(r"(\d{4})-([a-z]+)", value)
+    require(match is not None and match[2] in TERMS, "Use a term ID such as 2026-fall")
+    year = int(match[1])
+    require(1900 <= year <= 2200, "Invalid year")
+    return year, match[2]
+
+
+def counts(sections):
+    meetings = [meeting for section in sections for meeting in section["meetings"]]
+    instructors = [instructor for meeting in meetings for instructor in meeting["instructors"]]
+    return {
+        "section_count": len(sections), "meeting_count": len(meetings),
+        "missing_instructor_meetings": sum(not meeting["instructors"] for meeting in meetings),
+        "multiple_instructor_meetings": sum(len(meeting["instructors"]) > 1 for meeting in meetings),
+        "instructor_occurrences": len(instructors),
+        "unresolved_occurrences": sum(instructor["professor_id"] is None for instructor in instructors),
+        "meeting_types": dict(sorted(Counter(meeting["type"]["code"] for meeting in meetings).items())),
+    }
 
 
 def text_field(record, key):
@@ -176,10 +204,7 @@ def atomic_write_text(path, body):
 
 
 def validate_document(data):
-    if isinstance(data, dict) and data.get("dataset") == "teaching_history" and data.get("schema_version") == 2:
+    if isinstance(data, dict) and data.get("dataset") == "teaching_history":
         from scripts.archive import validate_archive
         return validate_archive(data)
-    if isinstance(data, dict) and data.get("dataset") == "teaching_history":
-        from scripts.teaching_history import validate_history
-        return validate_history(data)
     return validate_snapshot(data)

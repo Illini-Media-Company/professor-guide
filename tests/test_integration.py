@@ -7,12 +7,11 @@ from unittest.mock import patch
 from urllib.error import HTTPError
 
 from scripts.collect_campus import department_snapshot
-from scripts.collect_course_explorer import CourseExplorerClient
+from scripts.course_explorer import CourseExplorerClient
 from scripts.course_explorer_discovery import CourseExplorerDiscovery
 from scripts.data_contract import AccessDenied, DataError
 from scripts.integration import attribute_grades, publish_bundle, read, validate_bundle, validate_input
-from tests.test_course_explorer import FixtureClient, FIXTURE_TIME, fixture_snapshot
-from tests.test_teaching_history import history_fixture
+from tests.fixtures import FixtureClient, FIXTURES, FIXTURE_TIME, archive_fixture, fixture_snapshot
 
 
 def fixtures():
@@ -24,7 +23,7 @@ class IntegrationTests(unittest.TestCase):
     def test_zero_and_unavailable_remain_distinct_and_crnless_grades_stay_crnless(self):
         inputs = fixtures()
         validate_input(inputs['gpa'], 'gpa')
-        result = attribute_grades(fixture_snapshot(), history_fixture(), inputs)
+        result = attribute_grades(fixture_snapshot(), archive_fixture(), inputs)
         self.assertEqual(inputs['gpa']['records'][0]['gpa'], 0)
         self.assertIsNone(inputs['gpa']['records'][1]['gpa'])
         self.assertEqual(result['grade_attributions'][0]['professor_id'], 'synthetic-alex')
@@ -34,7 +33,7 @@ class IntegrationTests(unittest.TestCase):
     def test_primary_order_is_not_identity_or_primary_evidence(self):
         inputs = fixtures()
         inputs['verified_occurrences']['records'][0]['is_primary'] = False
-        self.assertIsNone(attribute_grades(fixture_snapshot(), history_fixture(), inputs)['grade_attributions'][0]['professor_id'])
+        self.assertIsNone(attribute_grades(fixture_snapshot(), archive_fixture(), inputs)['grade_attributions'][0]['professor_id'])
         inputs['verified_occurrences']['records'][0]['is_primary'] = True
         del inputs['verified_occurrences']['records'][0]['primary_evidence']
         with self.assertRaises(DataError): validate_input(inputs['verified_occurrences'], 'verified_occurrences')
@@ -49,12 +48,12 @@ class IntegrationTests(unittest.TestCase):
     def test_wrong_occurrence_cannot_receive_verified_identity(self):
         inputs = fixtures()
         inputs['verified_occurrences']['records'][0]['name_raw'] = 'Wrong, Person'
-        with self.assertRaises(DataError): attribute_grades(fixture_snapshot(), history_fixture(), inputs)
+        with self.assertRaises(DataError): attribute_grades(fixture_snapshot(), archive_fixture(), inputs)
 
     def test_fixture_production_separation_pending_inputs_and_hashes(self):
         with tempfile.TemporaryDirectory() as directory:
-            with self.assertRaises(DataError): publish_bundle(directory, fixture_snapshot(), history_fixture())
-            manifest = publish_bundle(directory, fixture_snapshot(), history_fixture(), allow_fixtures=True)
+            with self.assertRaises(DataError): publish_bundle(directory, fixture_snapshot(), archive_fixture())
+            manifest = publish_bundle(directory, fixture_snapshot(), archive_fixture(), allow_fixtures=True)
             self.assertEqual(manifest['files']['gpa']['status'], 'pending')
             self.assertIsNone(manifest['files']['gpa']['path'])
             validate_bundle(directory)
@@ -64,17 +63,17 @@ class IntegrationTests(unittest.TestCase):
 
     def test_cached_publication_is_identical_and_failed_manifest_switch_preserves_previous(self):
         with tempfile.TemporaryDirectory() as directory:
-            publish_bundle(directory, fixture_snapshot(), history_fixture(), allow_fixtures=True)
+            publish_bundle(directory, fixture_snapshot(), archive_fixture(), allow_fixtures=True)
             manifest_path = Path(directory)/'integration.json'
             original = manifest_path.read_bytes()
-            publish_bundle(directory, fixture_snapshot(), history_fixture(), allow_fixtures=True)
+            publish_bundle(directory, fixture_snapshot(), archive_fixture(), allow_fixtures=True)
             self.assertEqual(manifest_path.read_bytes(), original)
             from scripts.integration import atomic_write_text as real_write
             def fail_switch(path, body):
                 if Path(path) == manifest_path: raise OSError('Simulated interruption before manifest switch')
                 return real_write(path,body)
             with patch('scripts.integration.atomic_write_text', side_effect=fail_switch):
-                with self.assertRaises(OSError): publish_bundle(directory, fixture_snapshot(), history_fixture(), fixtures(), allow_fixtures=True)
+                with self.assertRaises(OSError): publish_bundle(directory, fixture_snapshot(), archive_fixture(), fixtures(), allow_fixtures=True)
             self.assertEqual(manifest_path.read_bytes(), original)
             validate_bundle(directory)
 
@@ -84,13 +83,17 @@ class IntegrationTests(unittest.TestCase):
             for version in range(3):
                 schedule = fixture_snapshot()
                 schedule['courses'][0]['title'] = f'Synthetic title {version}'
-                manifests.append(publish_bundle(directory, schedule, history_fixture(), allow_fixtures=True))
+                manifests.append(publish_bundle(directory, schedule, archive_fixture(current=schedule), allow_fixtures=True))
             expected = {item['path'] for manifest in manifests[-2:] for item in manifest['files'].values()
                         if item['status'] == 'available'}
+            for manifest in manifests[-2:]:
+                history = read(Path(directory)/manifest['files']['history']['path'])
+                expected.update(item['path'] for row in history['coverage']['terms'] if row['status'] == 'collected'
+                                for item in (row['snapshot'], row['department_coverage']))
             actual = {f'objects/{path.name}' for path in (Path(directory)/'objects').glob('*.json')}
             self.assertEqual(actual, expected)
             self.assertNotIn(manifests[0]['files']['schedule']['path'], actual)
-            publish_bundle(directory, schedule, history_fixture(), allow_fixtures=True)
+            publish_bundle(directory, schedule, archive_fixture(current=schedule), allow_fixtures=True)
             self.assertEqual({f'objects/{path.name}' for path in (Path(directory)/'objects').glob('*.json')}, expected)
             # A failed switch cannot prune the currently retained generations.
             before = {path: (Path(directory)/path).read_bytes() for path in expected}
@@ -102,7 +105,7 @@ class IntegrationTests(unittest.TestCase):
                 return real_write(path, body)
             with patch('scripts.integration.atomic_write_text', side_effect=fail_switch):
                 with self.assertRaises(OSError):
-                    publish_bundle(directory, schedule, history_fixture(), allow_fixtures=True)
+                    publish_bundle(directory, schedule, archive_fixture(current=schedule), allow_fixtures=True)
             for path, body in before.items():
                 self.assertEqual((Path(directory)/path).read_bytes(), body)
             validate_bundle(directory)
@@ -112,7 +115,7 @@ class IntegrationTests(unittest.TestCase):
             schedule = fixture_snapshot()
             for version in range(2):
                 schedule['courses'][0]['title'] = f'Synthetic title {version}'
-                manifest = publish_bundle(directory, schedule, history_fixture(), allow_fixtures=True)
+                manifest = publish_bundle(directory, schedule, archive_fixture(current=schedule), allow_fixtures=True)
                 if version == 0:
                     obsolete = Path(directory)/manifest['files']['schedule']['path']
             schedule['courses'][0]['title'] = 'Latest synthetic title'
@@ -123,14 +126,14 @@ class IntegrationTests(unittest.TestCase):
                 return real_unlink(path, *args, **kwargs)
             with patch('pathlib.Path.unlink', fail_old_object):
                 with self.assertWarnsRegex(UserWarning, 'Published successfully'):
-                    manifest = publish_bundle(directory, schedule, history_fixture(), allow_fixtures=True)
+                    manifest = publish_bundle(directory, schedule, archive_fixture(current=schedule), allow_fixtures=True)
             self.assertEqual(read(Path(directory)/'integration.json'), manifest)
             _, documents = validate_bundle(directory)
             self.assertEqual(documents['schedule']['courses'][0]['title'], 'Latest synthetic title')
 
     def test_access_denial_stops_without_retries(self):
         with tempfile.TemporaryDirectory() as directory:
-            with patch('scripts.collect_course_explorer.urlopen', side_effect=HTTPError('https://example.org',403,'Denied',{},None)) as request:
+            with patch('scripts.course_explorer.urlopen', side_effect=HTTPError('https://example.org',403,'Denied',{},None)) as request:
                 with self.assertRaises(AccessDenied): CourseExplorerClient(directory).fetch('https://example.org')
                 self.assertEqual(request.call_count,1)
 
@@ -140,7 +143,7 @@ class IntegrationTests(unittest.TestCase):
         response.__enter__.return_value.status = 202
         response.__enter__.return_value.headers = {'x-amzn-waf-action': 'challenge'}
         with tempfile.TemporaryDirectory() as directory:
-            with patch('scripts.collect_course_explorer.urlopen', return_value=response) as request:
+            with patch('scripts.course_explorer.urlopen', return_value=response) as request:
                 with self.assertRaisesRegex(AccessDenied, 'challenge'):
                     CourseExplorerClient(directory).fetch('https://courses.illinois.edu/example')
                 request.assert_called_once()
@@ -151,15 +154,13 @@ class IntegrationTests(unittest.TestCase):
         import xml.etree.ElementTree as ET
         class BatchFixture(FixtureClient):
             def fetch(self, url, **kwargs):
-                if '?mode=cascade' not in url: return super().fetch(url, **kwargs)
-                body = super().fetch(url.replace('CS.xml?mode=cascade','CS/374.xml?mode=detail'))['body']
-                root = ET.fromstring(body)
-                for e in root.iter(): e.tag = e.tag.rsplit('}',1)[-1]
-                root.tag = 'cascadingCourse'
-                root.find('detailedSections/detailedSection').remove(root.find('detailedSections/detailedSection/sectionNumber'))
-                subject = ET.Element('subject',id='CS')
-                ET.SubElement(subject,'cascadingCourses').append(root)
-                return {'url':url,'fetched_at':FIXTURE_TIME,'body':ET.tostring(subject,encoding='unicode')}
+                response = super().fetch(url, **kwargs)
+                if url.endswith('CS.xml?mode=cascade'):
+                    root = ET.fromstring(response['body'])
+                    section = root.find('cascadingCourses/cascadingCourse/detailedSections/detailedSection')
+                    section.remove(section.find('sectionNumber'))
+                    response['body'] = ET.tostring(root, encoding='unicode')
+                return response
         discovery = CourseExplorerDiscovery(BatchFixture())
         term,_ = discovery.term(2026,'fall')
         snapshot = department_snapshot(discovery,term,'CS')
@@ -189,48 +190,43 @@ class IntegrationTests(unittest.TestCase):
     def test_source_times_are_compared_chronologically_across_offsets(self):
         inputs = fixtures()
         inputs['gpa']['collected_at'] = '2025-12-31T19:00:01-05:00'
-        result = attribute_grades(fixture_snapshot(),history_fixture(),inputs)
+        result = attribute_grades(fixture_snapshot(),archive_fixture(),inputs)
         self.assertEqual(result['collected_at'],inputs['gpa']['collected_at'])
         with tempfile.TemporaryDirectory() as directory:
-            manifest = publish_bundle(directory,fixture_snapshot(),history_fixture(),inputs,allow_fixtures=True)
+            manifest = publish_bundle(directory,fixture_snapshot(),archive_fixture(),inputs,allow_fixtures=True)
             self.assertEqual(manifest['collected_at'],inputs['gpa']['collected_at'])
             validate_bundle(directory)
 
     def test_long_retry_after_defers_update_instead_of_ignoring_limit(self):
         with tempfile.TemporaryDirectory() as directory:
             error = HTTPError('https://example.org',429,'Limited',{'Retry-After':'120'},None)
-            with patch('scripts.collect_course_explorer.urlopen',side_effect=error) as request:
+            with patch('scripts.course_explorer.urlopen',side_effect=error) as request:
                 with self.assertRaisesRegex(DataError,'defer'): CourseExplorerClient(directory).fetch('https://example.org')
                 self.assertEqual(request.call_count,1)
 
     def test_offline_reuse_does_not_fetch_missing_grade_history(self):
-        from scripts.update_data import history_for
-        from scripts.data_contract import atomic_write_json
+        from scripts.archive import collect_archive
         from unittest.mock import MagicMock
-        with tempfile.TemporaryDirectory() as directory:
-            atomic_write_json(Path(directory)/'teaching-history.json',history_fixture())
-            client = MagicMock()
-            config = {'current_term':'2026-fall','archive_start_year':2024}
-            with self.assertRaisesRegex(DataError,'not archived'):
-                history_for(config,{},client,Path(directory),allow_collection=False)
-            client.fetch.assert_not_called()
+        client = MagicMock()
+        with self.assertRaisesRegex(DataError, 'not archived'):
+            collect_archive(client, 2024, '2026-fall', allow_collection=False)
+        client.fetch.assert_not_called()
 
     def test_old_raw_cache_cannot_roll_back_a_newer_persisted_fetch(self):
         from datetime import datetime, timedelta, timezone
         import hashlib
         from scripts.data_contract import atomic_write_json
         from unittest.mock import MagicMock
-        from tests.test_course_explorer import FIXTURES
         url = 'https://courses.illinois.edu/cisapp/explorer/schedule/2026/fall/CS/374.xml'
         now = datetime.now(timezone.utc)
         with tempfile.TemporaryDirectory() as directory:
-            atomic_write_json(Path(directory)/(hashlib.sha256(url.encode()).hexdigest()+'.json'),{'url':url,'fetched_at':(now-timedelta(minutes=2)).isoformat(),'body':(FIXTURES/'cs-index.xml').read_text()})
+            atomic_write_json(Path(directory)/(hashlib.sha256(url.encode()).hexdigest()+'.json'),{'url':url,'fetched_at':(now-timedelta(minutes=2)).isoformat(),'body':(FIXTURES/'cs-detail.xml').read_text()})
             client = CourseExplorerClient(directory)
             client.minimum_fetch_times[url] = (now-timedelta(minutes=1)).isoformat()
             response = MagicMock()
             response.__enter__.return_value.status = 200
-            response.__enter__.return_value.read.return_value = (FIXTURES/'cs-index.xml').read_bytes()
-            with patch('scripts.collect_course_explorer.urlopen',return_value=response) as request:
+            response.__enter__.return_value.read.return_value = (FIXTURES/'cs-detail.xml').read_bytes()
+            with patch('scripts.course_explorer.urlopen',return_value=response) as request:
                 client.fetch(url)
                 self.assertEqual(request.call_count,1)
 

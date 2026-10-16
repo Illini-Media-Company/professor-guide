@@ -8,8 +8,7 @@ import re
 import tempfile
 import warnings
 
-from scripts.data_contract import DataError, atomic_write_text, require, timestamp, validate_document
-from scripts.teaching_history import counts
+from scripts.data_contract import DataError, atomic_write_text, counts, require, timestamp, validate_document
 
 
 def encoded(value):
@@ -67,7 +66,7 @@ def validate_input(data, dataset):
             require(isinstance(identifier, str) and identifier and identifier not in ids, "Missing/duplicate record ID")
             ids.add(identifier)
             if dataset == "gpa":
-                from scripts.teaching_history import parse_term_id
+                from scripts.data_contract import parse_term_id
                 from scripts.data_contract import COURSE_PATTERN
                 parse_term_id(record["term_id"])
                 require(bool(COURSE_PATTERN.fullmatch(record["course_code"])), "Invalid grade course code")
@@ -145,7 +144,7 @@ def validate_reviewed_aliases(mapping):
     from urllib.parse import urlparse
     require(mapping["schema_version"] == 1 and isinstance(mapping["aliases"], list), "Invalid reviewed alias mapping")
     from scripts.data_contract import COURSE_PATTERN
-    from scripts.teaching_history import parse_term_id
+    from scripts.data_contract import parse_term_id
     for record in mapping["aliases"]:
         require(len(record["course_codes"]) >= 2 and all(COURSE_PATTERN.fullmatch(code) for code in record["course_codes"]), "Reviewed aliases require course codes")
         require(record["term_ids"] and record["reviewed_by"] and record["evidence"], "Alias review and applicable terms are required")
@@ -173,14 +172,13 @@ def _stage_bundle(directory, schedule, history, inputs=None, coverage=None, allo
     inputs = inputs or {}
     validate_document(schedule)
     validate_document(history)
-    if history['schema_version'] == 2:
-        require(history['through_term'] == schedule['term']['id'], 'Archive end term and current schedule disagree')
-        archived_current = next((snapshot for snapshot in history['snapshots'] if snapshot['term']['id'] == schedule['term']['id']), None)
-        require(archived_current == schedule, 'Current schedule differs from its archived term')
-        if not allow_fixtures:
-            from scripts.archive import validate_department_coverage
-            require(coverage is not None, 'Production publication requires complete current department coverage')
-            validate_department_coverage(schedule, coverage)
+    require(history['through_term'] == schedule['term']['id'], 'Archive end term and current schedule disagree')
+    archived_current = next((snapshot for snapshot in history['snapshots'] if snapshot['term']['id'] == schedule['term']['id']), None)
+    require(archived_current == schedule, 'Current schedule differs from its archived term')
+    if not allow_fixtures:
+        from scripts.archive import validate_department_coverage
+        require(coverage is not None, 'Production publication requires complete current department coverage')
+        validate_department_coverage(schedule, coverage)
     for name, data in inputs.items():
         validate_input(data, name)
     require(allow_fixtures or all(data["data_kind"] == "live" for data in [schedule, history, *inputs.values()]), "Synthetic inputs are forbidden in production")
@@ -209,9 +207,8 @@ def _stage_bundle(directory, schedule, history, inputs=None, coverage=None, allo
             atomic_write_text(target, body.decode())
         return {"status": "available", "path": relative, "sha256": digest, "bytes": len(body), "collected_at": data.get("collected_at", source_time or schedule["collected_at"])}
 
-    if history["schema_version"] == 2:
-        from scripts.archive import stage_archive
-        documents["history"] = stage_archive(history, write_object)
+    from scripts.archive import stage_archive
+    documents["history"] = stage_archive(history, write_object)
     for name, data in documents.items():
         files[name] = write_object(data)
     for name in ("gpa", "professors", "verified_occurrences"):
@@ -257,9 +254,8 @@ def prune_objects(directory, manifests):
     keep = {item["path"] for manifest in manifests for item in manifest["files"].values() if item["status"] == "available"}
     for manifest in manifests:
         history = read(Path(directory) / manifest["files"]["history"]["path"])
-        if history["schema_version"] == 2:
-            keep.update(item['path'] for row in history['coverage']['terms'] if row['status'] == 'collected'
-                        for item in (row['snapshot'], row['department_coverage']))
+        keep.update(item['path'] for row in history['coverage']['terms'] if row['status'] == 'collected'
+                    for item in (row['snapshot'], row['department_coverage']))
     for target in (Path(directory) / "objects").glob("*.json"):
         if re.fullmatch(r"[a-f0-9]{64}\.json", target.name) and f"objects/{target.name}" not in keep:
             try:
@@ -279,27 +275,20 @@ def validate_bundle(directory):
             require(name in ("gpa", "professors", "verified_occurrences") and all(item[key] is None for key in ("path", "sha256", "bytes", "collected_at")), "Pending data must not look like zero data")
             continue
         documents[name] = read_object(directory, item)
-    if documents["history"]["schema_version"] == 2:
-        from scripts.archive import load_archive
-        documents["history"] = load_archive(documents["history"], lambda item: read_object(directory, item))
-        require(documents['history']['through_term'] == manifest['current_term']['id'], 'Archive end term and current schedule disagree')
-        archived_current = next((snapshot for snapshot in documents['history']['snapshots'] if snapshot['term']['id'] == manifest['current_term']['id']), None)
-        require(archived_current == documents['schedule'], 'Current schedule differs from its archived term')
-        if manifest['data_kind'] == 'live':
-            from scripts.archive import validate_department_coverage
-            validate_department_coverage(documents['schedule'], documents['department_coverage'])
+    from scripts.archive import load_archive
+    documents["history"] = load_archive(documents["history"], lambda item: read_object(directory, item))
+    require(documents['history']['through_term'] == manifest['current_term']['id'], 'Archive end term and current schedule disagree')
+    archived_current = next((snapshot for snapshot in documents['history']['snapshots'] if snapshot['term']['id'] == manifest['current_term']['id']), None)
+    require(archived_current == documents['schedule'], 'Current schedule differs from its archived term')
+    if manifest['data_kind'] == 'live':
+        from scripts.archive import validate_department_coverage
+        validate_department_coverage(documents['schedule'], documents['department_coverage'])
     for name in ("schedule", "history"):
         validate_document(documents[name])
     inputs = {name: validate_input(documents[name], name) for name in ("gpa", "professors", "verified_occurrences") if name in documents}
     attribution = attribute_grades(documents["schedule"], documents["history"], inputs)
-    if "attributions" in documents:
-        require(documents["attributions"] == attribution, "Inconsistent grade attributions")
-    else:
-        # Read older publications for safe migration/rollback; new writes use attributions.
-        require(documents["preview"] == {**attribution, "dataset": "integration_preview"}, "Inconsistent legacy attributions")
+    require(documents["attributions"] == attribution, "Inconsistent grade attributions")
     expected_aliases = aliases(documents["schedule"], documents["history"], documents.get("reviewed_aliases"))
-    if "reviewed_records" not in documents["aliases"]:
-        expected_aliases.pop("reviewed_records")  # Earlier additive integration preview.
     require(documents["aliases"] == expected_aliases, "Inconsistent alias evidence")
     require(manifest["coverage"] == counts(documents["schedule"]["sections"]), "Inconsistent manifest coverage")
     require(manifest["current_term"] == documents["schedule"]["term"], "Inconsistent current term")

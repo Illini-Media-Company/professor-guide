@@ -4,8 +4,7 @@ from collections import defaultdict
 from pathlib import Path
 
 from scripts.course_explorer_discovery import CourseExplorerDiscovery
-from scripts.data_contract import API_BASE, DataError, require, timestamp, validate_snapshot
-from scripts.teaching_history import COUNT_FIELDS, counts, parse_term_id
+from scripts.data_contract import API_BASE, COUNT_FIELDS, DataError, counts, parse_term_id, require, timestamp, validate_snapshot
 
 SEASONS = ('winter', 'spring', 'summer', 'fall')
 
@@ -92,16 +91,17 @@ def validate_archive(history):
 def collect_archive(client, start_year, through_term, existing=None, current=None,
                     refresh=False, allow_collection=True, candidate_dir=Path('data/snapshots/archive')):
     expected = requested_terms(start_year, through_term)
-    if not allow_collection:
-        require(not refresh and existing is not None and existing.get('schema_version') == 2,
-                'Full history is not archived; run update_data without --reuse-current')
+    if existing is not None:
         validate_archive(existing)
+    if not allow_collection:
+        require(not refresh and existing is not None,
+                'Full history is not archived; run update_data without --reuse-current')
         require(existing['requested_terms'] == expected, 'Configured archive range is not saved; run a normal update')
         return existing
     from scripts.collect_campus import collect
     from scripts.integration import read
     discovery = CourseExplorerDiscovery(client)
-    old = {snapshot['term']['id']: snapshot for snapshot in existing['snapshots']} if existing and existing.get('schema_version') == 2 else {}
+    old = {snapshot['term']['id']: snapshot for snapshot in existing['snapshots']} if existing else {}
     snapshots, coverage_by_term, rows = [], {}, []
     for term_id in expected:
         term, evidence = discovery.term(*parse_term_id(term_id))
@@ -154,6 +154,7 @@ def stage_archive(history, write_object):
 
 
 def load_archive(index, read_object):
+    require(index.get('schema_version') == 2 and index.get('dataset') == 'teaching_history', 'Unsupported archive format')
     history = {key: value for key, value in index.items() if key != 'coverage'}
     rows, snapshots, departments = [], [], {}
     for row in index['coverage']['terms']:

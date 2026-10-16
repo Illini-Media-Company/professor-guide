@@ -27,9 +27,8 @@ def main():
             size = sum(item.stat().st_size for item in objects)
             require(size < 900 * 1024 * 1024, 'Public data exceeds the GitHub Pages size budget')
             print(f'Valid live publication: {manifest["coverage"]["section_count"]:,} current sections')
-            if files['history']['schema_version'] == 2:
-                totals = files['history']['coverage']['totals']
-                print(f'Archive: {totals["collected_terms"]} terms, {totals["course_count"]:,} listings, {totals["section_count"]:,} sections')
+            totals = files['history']['coverage']['totals']
+            print(f'Archive: {totals["collected_terms"]} terms, {totals["course_count"]:,} listings, {totals["section_count"]:,} sections')
             print(f'All hashes/joins validated; {len(objects)} retained objects, {size / 1024 / 1024:.1f} MiB')
     except (DataError, ValueError, OSError, KeyError) as error:
         print(f'Validation failed: {error}', file=sys.stderr)

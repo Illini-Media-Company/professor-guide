@@ -1,6 +1,5 @@
-"""Collect a complete Course Explorer snapshot without writing published files."""
+"""Course Explorer HTTP client, XML section parsing, and explicit alias extraction."""
 
-import argparse
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
 import hashlib
@@ -10,13 +9,12 @@ import math
 import ssl
 from pathlib import Path
 import re
-import sys
 import time
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
-from scripts.data_contract import API_BASE, COURSE_PATTERN, TERMS, AccessDenied, DataError, RequestError, atomic_write_json, require, timestamp, validate_snapshot
-from scripts.course_explorer_discovery import CourseExplorerDiscovery, historical_year, parse_xml
+from scripts.data_contract import AccessDenied, DataError, RequestError, atomic_write_json, require, timestamp
+from scripts.course_explorer_discovery import parse_xml
 
 ROOT = Path(__file__).resolve().parents[1]
 DIRECTIVE = re.compile(r"\b(Same as|See)\s+([A-Z][A-Z&]{1,9}\s+\d{2,3}[A-Z]?(?:\s*(?:,|and|/)\s*[A-Z][A-Z&]{1,9}\s+\d{2,3}[A-Z]?)*)\s*\.")
@@ -198,77 +196,6 @@ def extract_relationships(courses):
     return list(collected.values())
 
 
-def build_snapshot(client, year, season, course_codes, data_kind="live"):
-    courses, sections, sources = [], [], []
-    term = None
-    for code in course_codes:
-        subject, number = code.split()
-        url = f"{API_BASE}/{year}/{season}/{subject}/{number}.xml"
-        index_response = client.fetch(url, historical=historical_year(year))
-        detail_response = client.fetch(url + "?mode=detail", historical=historical_year(year))
-        index_root = parse_xml(index_response["body"])
-        detail_root = parse_xml(detail_response["body"])
-        expected_term = check_parents(index_root, year, season, subject)
-        require(check_parents(detail_root, year, season, subject) == expected_term, "Index/detail term mismatch")
-        if term is None:
-            term = expected_term
-        require(term == expected_term, "Courses disagree about term")
-        require(index_root.get("id") == detail_root.get("id") == code, "XML course ID mismatch")
-        require(optional_text(index_root, "label") == optional_text(detail_root, "label"), "Index/detail title mismatch")
-        index_sections = index_root.findall("sections/section")
-        detail_sections = detail_root.findall("detailedSections/detailedSection")
-        expected_crns = [section.get("id") for section in index_sections]
-        actual_crns = [section.get("id") for section in detail_sections]
-        require(expected_crns and len(set(expected_crns)) == len(expected_crns), f"Missing/duplicate CRNs for {code}")
-        require(len(actual_crns) == len(expected_crns) and set(actual_crns) == set(expected_crns), f"Incomplete detailed sections for {code}; recollect with --refresh")
-        parsed_sections = [parse_section(section, code, term, detail_response["fetched_at"]) for section in detail_sections]
-        labels = {section.get("id"): section.text for section in index_sections}
-        require(all(section["section_label"] == labels[section["crn"]] for section in parsed_sections), "Index/detail section label mismatch")
-        courses.append({
-            "course_code": code, "listing_id": f'{term["id"]}:{code}', "term_id": term["id"],
-            "title": optional_text(index_root, "label"),
-            "description": optional_text(index_root, "description"),
-            "course_section_information": optional_text(index_root, "courseSectionInformation"),
-            "credit_hours": optional_text(index_root, "creditHours"),
-            "source_url": url, "detail_source_url": url + "?mode=detail",
-            "collected_at": max(index_response["fetched_at"], detail_response["fetched_at"], key=timestamp),
-            "section_ids": [section["id"] for section in parsed_sections],
-        })
-        sections.extend(parsed_sections)
-        sources.extend({"url": response["url"], "fetched_at": response["fetched_at"]} for response in (index_response, detail_response))
-    snapshot = {
-        "schema_version": 1, "dataset": "course_explorer", "data_kind": data_kind,
-        "collected_at": max((source["fetched_at"] for source in sources), key=timestamp),
-        "term": term, "requested_courses": course_codes, "sources": sources,
-        "courses": courses, "sections": sections, "relationships": extract_relationships(courses),
-    }
-    return validate_snapshot(snapshot)
-
-
-def collect_to_file(client, year, season, course_codes, output):
-    output = Path(output)
-    require(not output.resolve().is_relative_to((ROOT / "public").resolve()), "Collect outside public/; production publication uses scripts.update_data")
-    discovery = CourseExplorerDiscovery(client)
-    term, evidence = discovery.term(year, season)
-    require(term is not None, f"Unavailable term {year}-{season}: {evidence['reason']}")
-    for code in course_codes:
-        available, evidence = discovery.course(term, code)
-        require(available, f"Unavailable course {code} in {term['id']}: {evidence['reason']}")
-    snapshot = build_snapshot(client, year, season, course_codes)
-    require(snapshot["term"] == term, "Collected term disagrees with discovery index")
-    atomic_write_json(output, snapshot)
-    return snapshot
-
-
-def normalize_course(value):
-    match = re.fullmatch(r"([A-Za-z][A-Za-z&]{1,9})[ :]*(\d{2,3}[A-Za-z]?)", value.strip())
-    if not match:
-        raise argparse.ArgumentTypeError('Use a course code such as "CS 374" or ECE374')
-    result = f"{match[1].upper()} {match[2].upper()}"
-    require(bool(COURSE_PATTERN.fullmatch(result)), "Invalid course code")
-    return result
-
-
 def add_client_arguments(parser):
     parser.add_argument("--cache-dir", type=Path, default=ROOT / ".cache/course-explorer")
     parser.add_argument("--cache-ttl", type=float, default=21600, help="Current-year/discovery cache seconds (default 6 hours)")
@@ -277,28 +204,3 @@ def add_client_arguments(parser):
     parser.add_argument("--retries", type=int, default=2, help="Retries after the initial request (0–5)")
     parser.add_argument("--refresh", action="store_true", help="Bypass all caches; never fall back to stale responses")
 
-
-def main():
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--year", type=int, required=True)
-    parser.add_argument("--term", choices=TERMS, required=True)
-    parser.add_argument("--courses", nargs="+", type=normalize_course, required=True)
-    parser.add_argument("--output", type=Path, help="Default: data/snapshots/course-explorer-YEAR-TERM.json")
-    add_client_arguments(parser)
-    args = parser.parse_args()
-    output = args.output or ROOT / f"data/snapshots/course-explorer-{args.year}-{args.term}.json"
-    try:
-        require(1900 <= args.year <= 2200, "Invalid year")
-        require(len(args.courses) == len(set(args.courses)), "Duplicate requested courses")
-        client = CourseExplorerClient.from_args(args)
-        snapshot = collect_to_file(client, args.year, args.term, args.courses, output)
-    except (DataError, OSError, AttributeError) as error:
-        print(f"Collection failed; existing snapshot preserved: {error}", file=sys.stderr)
-        return 1
-    print(f'Collected {len(snapshot["courses"])} listings / {len(snapshot["sections"])} sections → {output}')
-    print(f'Source collection timestamp: {snapshot["collected_at"]}. Publication is a separate command.')
-    return 0
-
-
-if __name__ == "__main__":
-    sys.exit(main())

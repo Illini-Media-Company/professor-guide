@@ -118,7 +118,7 @@ class CourseExplorerDiscovery:
 
 def main():
     # Imported here to keep discovery independent of transport/parser orchestration.
-    from scripts.collect_course_explorer import CourseExplorerClient, add_client_arguments
+    from scripts.course_explorer import CourseExplorerClient, add_client_arguments
 
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--years", nargs="+", type=int, required=True)

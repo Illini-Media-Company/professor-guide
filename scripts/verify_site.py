@@ -54,11 +54,11 @@ def verify(url, expected_manifest=None, expected_sha256=None):
             body = check(item)
             if name == 'history':
                 history = json.loads(body)
-                if history['schema_version'] == 2:
-                    for row in history['coverage']['terms']:
-                        if row['status'] == 'collected':
-                            check(row['snapshot'])
-                            check(row['department_coverage'])
+                assert history['schema_version'] == 2, 'Unsupported archive format'
+                for row in history['coverage']['terms']:
+                    if row['status'] == 'collected':
+                        check(row['snapshot'])
+                        check(row['department_coverage'])
     count = len(checked)
     assert get('embed-test.html')
     print(f'Verified {url}: HTML, {len(parser.paths)} assets, {count} JSON hashes, and embed test page.')

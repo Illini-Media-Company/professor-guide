@@ -6,43 +6,11 @@ import tempfile
 import unittest
 from unittest.mock import MagicMock, patch
 
-from scripts.archive import (collect_archive, requested_terms, totals, validate_archive,
+from scripts.archive import (collect_archive, render_archive_report, requested_terms, validate_archive,
                              validate_department_coverage)
-from scripts.data_contract import API_BASE, DataError, RequestError
+from scripts.data_contract import DataError, RequestError, counts
 from scripts.integration import load_term, publish_bundle, read, validate_bundle
-from scripts.teaching_history import counts
-from tests.test_teaching_history import history_fixture
-
-
-def archive_fixture():
-    old = history_fixture()
-    snapshots = sorted(old['snapshots'], key=lambda snapshot: requested_terms(2025, '2026-fall').index(snapshot['term']['id']))
-    by_term = {snapshot['term']['id']: snapshot for snapshot in snapshots}
-    department_coverage = {}
-    for term, snapshot in by_term.items():
-        subjects = sorted({course['course_code'].split()[0] for course in snapshot['courses']})
-        department_coverage[term] = {'term_id': term, 'discovered_subjects': subjects, 'requested_subjects': subjects,
-            'departments': [{'subject': subject, 'status': 'collected',
-                            'course_count': sum(course['course_code'].startswith(subject+' ') for course in snapshot['courses']),
-                            **counts([section for section in snapshot['sections'] if section['course_code'].startswith(subject+' ')])}
-                           for subject in subjects]}
-    sources = old['discovery_sources']
-    source_times = {source['url']: source['fetched_at'] for source in sources}
-    rows = []
-    for term in requested_terms(2025, '2026-fall'):
-        url = f'{API_BASE}/{term.split("-")[0]}.xml'
-        row = {'term_id': term, 'source_url': url, 'checked_at': source_times[url],
-               'status': 'unavailable', 'reason': 'term_not_listed', 'department_count': 0, 'course_count': 0, **counts([])}
-        if term in by_term:
-            snapshot = by_term[term]
-            row.update(status='collected', reason='term_listed', term=snapshot['term'],
-                       department_count=len(department_coverage[term]['departments']),
-                       course_count=len(snapshot['courses']), **counts(snapshot['sections']))
-        rows.append(row)
-    return validate_archive({'schema_version': 2, 'dataset': 'teaching_history', 'data_kind': 'development_fixture',
-        'start_year': 2025, 'through_term': '2026-fall', 'requested_terms': requested_terms(2025, '2026-fall'),
-        'collected_at': old['collected_at'], 'discovery_sources': sources, 'snapshots': snapshots,
-        'department_coverage': department_coverage, 'coverage': {'terms': rows, 'totals': totals(rows)}})
+from tests.fixtures import FixtureClient, archive_fixture
 
 
 class ArchiveTests(unittest.TestCase):
@@ -55,6 +23,46 @@ class ArchiveTests(unittest.TestCase):
         history['coverage']['terms'].pop()
         with self.assertRaisesRegex(DataError, 'Incomplete'):
             validate_archive(history)
+
+    def test_multi_term_records_keep_original_names_roles_and_separate_crns(self):
+        history = archive_fixture()
+        spring, fall = history['snapshots']
+        self.assertEqual([snapshot['term']['id'] for snapshot in history['snapshots']], ['2025-spring', '2026-fall'])
+        self.assertEqual(spring['sections'][0]['crn'], fall['sections'][0]['crn'])
+        self.assertNotEqual(spring['sections'][0]['id'], fall['sections'][0]['id'])
+        stats = history['coverage']['totals']
+        self.assertEqual((stats['section_count'], stats['meeting_count']), (8, 10))
+        self.assertEqual((stats['missing_instructor_meetings'], stats['multiple_instructor_meetings'], stats['unresolved_occurrences']), (4, 4, 10))
+        self.assertEqual(counts([section for snapshot in history['snapshots'] for section in snapshot['sections']])['meeting_types'], {'DIS': 2, 'LAB': 4, 'LEC': 4})
+        self.assertEqual(fall['relationships'][0]['to_listing_id'], '2026-fall:ECE 374')
+        self.assertEqual(fall['sections'][0]['meetings'][0]['instructors'][0]['name_raw'], 'Example, Alex')
+        self.assertIn('not unique people', render_archive_report(history))
+
+    def test_unavailable_year_has_explicit_coverage_and_no_invented_assignments(self):
+        history = collect_archive(FixtureClient(), 2024, '2024-fall')
+        self.assertEqual(history['snapshots'], [])
+        self.assertEqual(history['coverage']['totals']['unavailable_terms'], 4)
+        self.assertTrue(all(row['reason'] == 'year_not_listed' for row in history['coverage']['terms']))
+        validate_archive(history)
+
+    def test_tampered_counts_and_provenance_cannot_replace_published_archive(self):
+        history = archive_fixture()
+        with tempfile.TemporaryDirectory() as directory:
+            publish_bundle(directory, history['snapshots'][-1], history, allow_fixtures=True)
+            before = (Path(directory)/'integration.json').read_bytes()
+            for mutate in (
+                lambda data: data['coverage']['terms'][1].update(section_count=999),
+                lambda data: data['coverage']['terms'].pop(),
+                lambda data: data['coverage']['terms'][1].update(source_url='https://example.org/'),
+                lambda data: data['coverage']['totals'].update(unresolved_occurrences=0),
+                lambda data: data.update(schema_version=1),
+            ):
+                invalid = deepcopy(history)
+                mutate(invalid)
+                with self.subTest(mutate=mutate), self.assertRaises(DataError):
+                    publish_bundle(directory, invalid['snapshots'][-1], invalid, allow_fixtures=True)
+                self.assertEqual((Path(directory)/'integration.json').read_bytes(), before)
+            validate_bundle(directory)
 
     def test_partial_department_collection_is_rejected(self):
         history = archive_fixture()
@@ -93,9 +101,9 @@ class ArchiveTests(unittest.TestCase):
             client = MagicMock()
             self.assertIs(collect_archive(client, 2025, '2026-fall', existing=history, allow_collection=False), history)
             client.fetch.assert_not_called()
-            from tests.test_course_explorer import FixtureClient
-            # First discovered term is accepted; the next term fails during collection.
-            current = history['snapshots'][1]
+            # Reuse the first term, then fail while collecting the current term.
+            current = deepcopy(history['snapshots'][0])
+            current['data_kind'] = 'live'
             coverage = history['department_coverage'][current['term']['id']]
             with patch('scripts.collect_campus.collect', side_effect=RequestError('Simulated exhausted timeout')):
                 with self.assertRaisesRegex(RequestError, 'exhausted timeout'):
