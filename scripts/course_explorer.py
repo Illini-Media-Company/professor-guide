@@ -13,7 +13,7 @@ import time
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
-from scripts.data_contract import AccessDenied, DataError, RequestError, atomic_write_json, require, timestamp
+from scripts.data_contract import API_BASE, AccessDenied, DataError, RequestError, atomic_write_json, require, timestamp
 from scripts.course_explorer_discovery import parse_xml
 
 ROOT = Path(__file__).resolve().parents[1]
