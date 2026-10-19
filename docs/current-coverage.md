@@ -1,9 +1,9 @@
 # Current campus coverage
 
-Term: **Fall 2026**. Latest source fetch: `2026-10-15T02:52:23Z`.
+Term: **Fall 2026**. Latest source fetch: `2026-10-19T10:37:35Z`.
 
-186 requested of 186 discovered departments; 4452 course listings; 12839 registration sections; 13640 meetings.
-Meetings with missing instructors: 534. Multiple instructors: 3906. Unresolved listed instructor occurrences: 18594.
+186 requested of 186 discovered departments; 4452 course listings; 12836 registration sections; 13637 meetings.
+Meetings with missing instructors: 534. Multiple instructors: 3907. Unresolved listed instructor occurrences: 18592.
 
 Counts retain separate registration records and are not unique teaching groups or professors. Missing source labels and empty schedules are explicitly marked, never invented.
 
@@ -25,7 +25,7 @@ Counts retain separate registration records and are not unique teaching groups o
 | AIS | collected | 8 | 16 | 16 | 0 |
 | ALEC | collected | 9 | 15 | 15 | 0 |
 | ANSC | collected | 43 | 119 | 129 | 4 |
-| ANTH | collected | 49 | 73 | 75 | 14 |
+| ANTH | collected | 49 | 72 | 74 | 14 |
 | ARAB | collected | 6 | 8 | 16 | 0 |
 | ARCH | collected | 50 | 124 | 130 | 8 |
 | ART | collected | 8 | 15 | 15 | 1 |
@@ -62,7 +62,7 @@ Counts retain separate registration records and are not unique teaching groups o
 | CI | collected | 52 | 102 | 107 | 4 |
 | CIC | collected | 1 | 10 | 10 | 8 |
 | CLCV | collected | 18 | 45 | 45 | 3 |
-| CLE | collected | 72 | 199 | 199 | 0 |
+| CLE | collected | 71 | 197 | 197 | 0 |
 | CMN | collected | 51 | 169 | 176 | 6 |
 | CPSC | collected | 36 | 62 | 67 | 5 |
 | CS | collected | 97 | 499 | 564 | 7 |
@@ -99,7 +99,7 @@ Counts retain separate registration records and are not unique teaching groups o
 | GEOL | collected | 32 | 76 | 77 | 12 |
 | GER | collected | 24 | 40 | 40 | 6 |
 | GGIS | collected | 35 | 68 | 70 | 5 |
-| GLBL | collected | 22 | 45 | 47 | 1 |
+| GLBL | collected | 23 | 46 | 48 | 1 |
 | GMC | collected | 1 | 1 | 1 | 1 |
 | GRK | collected | 9 | 11 | 12 | 3 |
 | GRKM | collected | 4 | 4 | 4 | 1 |
@@ -144,7 +144,7 @@ Counts retain separate registration records and are not unique teaching groups o
 | MILS | collected | 10 | 23 | 27 | 0 |
 | MIP | collected | 3 | 24 | 24 | 1 |
 | MSE | collected | 38 | 132 | 133 | 6 |
-| MUS | collected | 104 | 264 | 284 | 2 |
+| MUS | collected | 104 | 263 | 283 | 2 |
 | MUSC | collected | 120 | 343 | 527 | 0 |
 | MUSE | collected | 3 | 3 | 3 | 0 |
 | NE | collected | 5 | 6 | 6 | 0 |
