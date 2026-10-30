@@ -13,7 +13,7 @@ from urllib.error import HTTPError, URLError
 from scripts.course_explorer import CourseExplorerClient, extract_relationships
 from scripts.collect_campus import collect, department_snapshot
 from scripts.course_explorer_discovery import CourseExplorerDiscovery
-from scripts.data_contract import API_BASE, DataError, RequestError, atomic_write_json, validate_snapshot
+from scripts.data_contract import API_BASE, DataError, RequestError, atomic_write_json, atomic_write_text, validate_snapshot
 from scripts.integration import publish_bundle
 
 from tests.fixtures import FIXTURES, FIXTURE_TIME, FixtureClient, RecordingClient, archive_fixture, fixture_snapshot
@@ -151,6 +151,13 @@ class PreservationTests(unittest.TestCase):
                 publish_bundle(public.parent, json.loads(candidate.read_text()), self.history,
                                coverage=self.history['department_coverage']['2026-fall'])
             self.assertFalse(public.exists())
+
+    def test_atomic_write_text_preserves_utf8_bytes_and_lf_newlines(self):
+        text = "Professor Guide\nGPA: café — 学生\n"
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "text.txt"
+            atomic_write_text(path, text)
+            self.assertEqual(path.read_bytes(), text.encode("utf-8"))
 
     def test_replace_failure_leaves_old_file_and_removes_temporary_file(self):
         with tempfile.TemporaryDirectory() as directory:
