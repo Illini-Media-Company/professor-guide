@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "data_kind": "live",
+  "collected_at": "2026-10-28T00:00:00Z",
+  "sources": [
+    {
+        "url": "https://sociology.illinois.edu/directory/profile/bsmiles",
+        "fetched_at": "2026-10-28T00:00:00Z"
+    },
+    {
+        "url": "https://courses.illinois.edu/cisapp/explorer/schedule/2025/winter/SOC.xml?mode=cascade",
+        "fetched_at": "2026-10-15T05:04:51Z"
+    }
+ ],
+  "dataset": "professors",
+  "records": [
+    {
+      "professor_id": "prof_0001",
+      "display_name": "Brittney Miles",
+      "identity_evidence": [
+        "Schedule name_raw 'Miles, B' appears as sole listed instructor on 18 occurrences, 2023-fall through 2026-spring (SOC 100, 196, 225, 273, 597), including 2025-winter:10018 meeting 2025-winter:10018:0. 'Miles, J' (CMN courses) is a separate initial and is excluded.",
+        "Sociology directory lists Brittney Miles, Assistant Professor, Department of Sociology (checked 2026-10-28); the only Miles, B in the directory."
+      ],
+      "faculty_links": [
+        {
+          "url": "https://sociology.illinois.edu/directory/profile/bsmiles",
+          "evidence": "Profile shows Brittney Miles, Assistant Professor, Department of Sociology",
+          "verified_at": "2026-10-28T00:00:00Z"
+        }
+      ],
+      "rmp": null
+    }
+  ]
+}
