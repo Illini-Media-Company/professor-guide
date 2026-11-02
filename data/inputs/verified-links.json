@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "data_kind": "live",
+  "collected_at": "2026-10-15T05:04:51Z",
+  "sources": [
+    {
+      "url": "https://courses.illinois.edu/cisapp/explorer/schedule/2025/winter/SOC.xml?mode=cascade",
+      "fetched_at": "2026-10-15T05:04:51Z"
+    }
+  ],
+  "dataset": "verified_occurrences",
+  "records": [
+    {
+      "id": "link_0001",
+      "section_id": "2025-winter:10018",
+      "listing_id": "2025-winter:SOC 100",
+      "meeting_id": "2025-winter:10018:0",
+      "instructor_index": 0,
+      "name_raw": "Miles, B",
+      "professor_id": "prof_0001",
+      "verified": true,
+      "verified_at": "2026-10-15T05:04:51Z",
+      "evidence": [
+        "Matched to prof_0001 by name 'Miles, B', sole listed instructor on 2025-winter:10018, and the Sociology directory's only Miles, B (archive fetched 2026-10-15)."
+      ],
+      "is_primary": false,
+      "primary_evidence": []
+    }
+  ]
+}
