@@ -1,0 +1,4 @@
+# Content-addressed objects must retain their exact hashed bytes.
+public/data/objects/*.json -text
+# Offline republication preserves this manifest's canonical LF bytes.
+public/data/integration.json text eol=lf

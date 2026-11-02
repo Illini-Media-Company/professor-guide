@@ -20,12 +20,78 @@ def fixtures():
 
 
 class IntegrationTests(unittest.TestCase):
+    def test_gpa_rejects_out_of_range_nonfinite_and_nonnumeric_values(self):
+        for value in (-0.01, 4.01, float('nan'), float('inf'), -float('inf'),
+                      '3.5', True, False, [], {}):
+            with self.subTest(gpa=value):
+                data = fixtures()['gpa']
+                data['records'][0]['gpa'] = value
+                with self.assertRaises(DataError):
+                    validate_input(data, 'gpa')
+
+    def test_gpa_accepts_upper_boundary_and_fractional_values(self):
+        for value in (4, 3.5):
+            with self.subTest(gpa=value):
+                data = fixtures()['gpa']
+                data['records'][0]['gpa'] = value
+                validate_input(data, 'gpa')
+                self.assertEqual(data['records'][0]['gpa'], value)
+
+    def test_gpa_rejects_invalid_student_counts(self):
+        for value in (-1, 1.5, float('nan'), float('inf'), -float('inf'),
+                      '10', True, False, [], {}):
+            with self.subTest(student_count=value):
+                data = fixtures()['gpa']
+                data['records'][0]['student_count'] = value
+                with self.assertRaises(DataError):
+                    validate_input(data, 'gpa')
+
+    def test_instructor_course_term_requires_primary_instructor_name(self):
+        for state in ('missing', 'null', 'empty'):
+            with self.subTest(name_state=state):
+                data = fixtures()['gpa']
+                record = data['records'][0]
+                if state == 'missing':
+                    del record['primary_instructor_name_raw']
+                else:
+                    record['primary_instructor_name_raw'] = None if state == 'null' else ''
+                with self.assertRaises(DataError):
+                    validate_input(data, 'gpa')
+
+    def test_gpa_rejects_duplicate_record_ids(self):
+        data = fixtures()['gpa']
+        data['records'][1]['id'] = data['records'][0]['id']
+        with self.assertRaises(DataError):
+            validate_input(data, 'gpa')
+
+    def test_section_grain_requires_a_section_id_with_matching_term_and_crn(self):
+        for section_id in (None, '', '10001', '2025-fall:10001',
+                           '2026-fall:abcde', '2026-fall:1000', '2026-fall:100001'):
+            with self.subTest(section_id=section_id):
+                data = fixtures()['gpa']
+                data['records'][0].update(grain='section', section_id=section_id)
+                with self.assertRaises(DataError):
+                    validate_input(data, 'gpa')
+        data = fixtures()['gpa']
+        data['records'][0].update(grain='section', section_id='2026-fall:10001')
+        validate_input(data, 'gpa')
+
+    def test_nonsection_grains_reject_section_ids(self):
+        for grain in ('course_term', 'instructor_course_term'):
+            with self.subTest(grain=grain):
+                data = fixtures()['gpa']
+                data['records'][0].update(grain=grain, section_id='2026-fall:10001')
+                with self.assertRaises(DataError):
+                    validate_input(data, 'gpa')
+
     def test_zero_and_unavailable_remain_distinct_and_crnless_grades_stay_crnless(self):
         inputs = fixtures()
         validate_input(inputs['gpa'], 'gpa')
         result = attribute_grades(fixture_snapshot(), archive_fixture(), inputs)
         self.assertEqual(inputs['gpa']['records'][0]['gpa'], 0)
         self.assertIsNone(inputs['gpa']['records'][1]['gpa'])
+        self.assertEqual(inputs['gpa']['records'][0]['student_count'], 0)
+        self.assertIsNone(inputs['gpa']['records'][1]['student_count'])
         self.assertEqual(result['grade_attributions'][0]['professor_id'], 'synthetic-alex')
         self.assertIsNone(result['grade_attributions'][0]['section_id'])
         self.assertIsNone(result['grade_attributions'][1]['professor_id'])
