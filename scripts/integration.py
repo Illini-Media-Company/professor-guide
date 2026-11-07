@@ -109,6 +109,8 @@ def validate_input(data, dataset):
                 if rmp is not None:
                     require(rmp["scope"] == "professor", "RMP summaries must remain professor-wide")
                     require(finite_number(rmp["overall_quality"], 0, 5), "Invalid RMP quality")
+                    require(finite_number(rmp.get("difficulty"), 0, 5), "Invalid RMP difficulty")
+                    require(finite_number(rmp.get("would_take_again_percent"), 0, 100), "Invalid RMP take-again percentage")
                     require(type(rmp["num_ratings"]) is int and rmp["num_ratings"] >= 0, "Invalid RMP sample count")
                     timestamp(rmp["collected_at"])
                     require(rmp["source_url"].startswith("https://"), "RMP source required")
@@ -238,6 +240,10 @@ def _stage_bundle(directory, schedule, history, inputs=None, coverage=None, allo
     if reviewed_aliases is not None:
         documents["reviewed_aliases"] = validate_reviewed_aliases(reviewed_aliases)
     documents["attributions"] = attribute_grades(schedule, history, inputs)
+    from scripts.guide_index import build_guide_index
+    guide = build_guide_index(schedule, history, inputs, documents['attributions'])
+    if guide is not None:
+        documents['guide'] = guide
     if coverage is not None:
         require([row["subject"] for row in coverage["departments"]] == coverage["requested_subjects"], "Incomplete department coverage")
         require(all(row["status"] in ("collected", "no_listings") for row in coverage["departments"]), "Failed department coverage cannot be published")
@@ -340,6 +346,17 @@ def validate_bundle(directory):
     inputs = {name: validate_input(documents[name], name) for name in ("gpa", "professors", "verified_occurrences") if name in documents}
     attribution = attribute_grades(documents["schedule"], documents["history"], inputs)
     require(documents["attributions"] == attribution, "Inconsistent grade attributions")
+    if 'guide' in documents:
+        from scripts.guide_index import build_guide_index
+        guide_version = documents['guide'].get('schema_version')
+        require(guide_version in (1, 2), 'Unsupported visitor guide index')
+        expected_guide = build_guide_index(documents['schedule'], documents['history'], inputs, attribution, schema_version=guide_version)
+        # Earlier v1 projections omitted the optional raw-grain field.
+        if expected_guide is not None and all('grain' not in row for row in documents['guide']['grade_records']):
+            for row in expected_guide['grade_records']:
+                row.pop('grain', None)
+        require(documents['guide'] == expected_guide,
+                'Inconsistent visitor guide index')
     expected_aliases = aliases(documents["schedule"], documents["history"], documents.get("reviewed_aliases"))
     require(documents["aliases"] == expected_aliases, "Inconsistent alias evidence")
     require(manifest["coverage"] == counts(documents["schedule"]["sections"]), "Inconsistent manifest coverage")

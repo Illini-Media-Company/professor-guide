@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "data_kind": "live",
-  "collected_at": "2026-11-02T16:05:21Z",
+  "collected_at": "2026-11-07T09:38:41Z",
   "sources": [
     {
       "url": "https://ahs.illinois.edu/directory",
@@ -262,6 +262,10 @@
     {
       "url": "https://complit.illinois.edu/directory/grad-students",
       "fetched_at": "2026-11-02T05:38:59Z"
+    },
+    {
+      "url": "https://courses.grainger.illinois.edu/cs374al1/fa2026/staff.html",
+      "fetched_at": "2026-11-07T09:38:41Z"
     },
     {
       "url": "https://courses.illinois.edu/cisapp/explorer/schedule/2023/fall/AAS.xml?mode=cascade",
@@ -3248,6 +3252,14 @@
       "fetched_at": "2026-10-15T05:04:53Z"
     },
     {
+      "url": "https://courses.illinois.edu/cisapp/explorer/schedule/2026/fall/CS.xml?mode=cascade",
+      "fetched_at": "2026-10-19T10:33:18Z"
+    },
+    {
+      "url": "https://courses.illinois.edu/cisapp/explorer/schedule/2026/fall/ECE.xml?mode=cascade",
+      "fetched_at": "2026-10-19T10:33:34Z"
+    },
+    {
       "url": "https://courses.illinois.edu/cisapp/explorer/schedule/2026/spring/AAS.xml?mode=cascade",
       "fetched_at": "2026-10-15T05:23:21Z"
     },
@@ -4742,6 +4754,10 @@
     {
       "url": "https://religion.illinois.edu/directory/grad-students",
       "fetched_at": "2026-11-02T05:38:30Z"
+    },
+    {
+      "url": "https://siebelschool.illinois.edu/about/people/all-faculty/ekfox",
+      "fetched_at": "2026-11-07T09:38:09Z"
     },
     {
       "url": "https://slavic.illinois.edu/directory",
@@ -354246,6 +354262,78 @@
             "No section-primary designation or CRN is inferred from this instructor/course/term grade."
           ]
         }
+      ]
+    },
+    {
+      "id": "link_9aab91ad5859f3084d7cf244",
+      "professor_id": "prof_uiuc_ekfox",
+      "listing_id": "2026-fall:CS 374",
+      "section_id": "2026-fall:75939",
+      "meeting_id": "2026-fall:75939:0",
+      "instructor_index": 0,
+      "name_raw": "Fox, E",
+      "verified": true,
+      "verified_at": "2026-11-07T09:39:30Z",
+      "is_primary": false,
+      "primary_evidence": [],
+      "evidence": [
+        "Official Fall 2026 CS/ECE 374 A staff page identifies Emily Fox as instructor: https://courses.grainger.illinois.edu/cs374al1/fa2026/staff.html",
+        "Official faculty profile confirms Emily Kyle Fox (ekfox) and lists CS 374 AL1 and ECE 374 AL1/ADL: https://siebelschool.illinois.edu/about/people/all-faculty/ekfox",
+        "Reviewed only this Fall 2026 AL1/ADL schedule occurrence. No GPA attribution or other same-initial occurrence is inferred."
+      ]
+    },
+    {
+      "id": "link_134f7f500f1248fa5f23bbb5",
+      "professor_id": "prof_uiuc_ekfox",
+      "listing_id": "2026-fall:CS 374",
+      "section_id": "2026-fall:66445",
+      "meeting_id": "2026-fall:66445:0",
+      "instructor_index": 0,
+      "name_raw": "Fox, E",
+      "verified": true,
+      "verified_at": "2026-11-07T09:39:30Z",
+      "is_primary": false,
+      "primary_evidence": [],
+      "evidence": [
+        "Official Fall 2026 CS/ECE 374 A staff page identifies Emily Fox as instructor: https://courses.grainger.illinois.edu/cs374al1/fa2026/staff.html",
+        "Official faculty profile confirms Emily Kyle Fox (ekfox) and lists CS 374 AL1 and ECE 374 AL1/ADL: https://siebelschool.illinois.edu/about/people/all-faculty/ekfox",
+        "Reviewed only this Fall 2026 AL1/ADL schedule occurrence. No GPA attribution or other same-initial occurrence is inferred."
+      ]
+    },
+    {
+      "id": "link_4db43f560c5d6220f53eb6d7",
+      "professor_id": "prof_uiuc_ekfox",
+      "listing_id": "2026-fall:ECE 374",
+      "section_id": "2026-fall:75940",
+      "meeting_id": "2026-fall:75940:0",
+      "instructor_index": 0,
+      "name_raw": "Fox, E",
+      "verified": true,
+      "verified_at": "2026-11-07T09:39:30Z",
+      "is_primary": false,
+      "primary_evidence": [],
+      "evidence": [
+        "Official Fall 2026 CS/ECE 374 A staff page identifies Emily Fox as instructor: https://courses.grainger.illinois.edu/cs374al1/fa2026/staff.html",
+        "Official faculty profile confirms Emily Kyle Fox (ekfox) and lists CS 374 AL1 and ECE 374 AL1/ADL: https://siebelschool.illinois.edu/about/people/all-faculty/ekfox",
+        "Reviewed only this Fall 2026 AL1/ADL schedule occurrence. No GPA attribution or other same-initial occurrence is inferred."
+      ]
+    },
+    {
+      "id": "link_f2963060f1b25534b164fc5f",
+      "professor_id": "prof_uiuc_ekfox",
+      "listing_id": "2026-fall:ECE 374",
+      "section_id": "2026-fall:66542",
+      "meeting_id": "2026-fall:66542:0",
+      "instructor_index": 0,
+      "name_raw": "Fox, E",
+      "verified": true,
+      "verified_at": "2026-11-07T09:39:30Z",
+      "is_primary": false,
+      "primary_evidence": [],
+      "evidence": [
+        "Official Fall 2026 CS/ECE 374 A staff page identifies Emily Fox as instructor: https://courses.grainger.illinois.edu/cs374al1/fa2026/staff.html",
+        "Official faculty profile confirms Emily Kyle Fox (ekfox) and lists CS 374 AL1 and ECE 374 AL1/ADL: https://siebelschool.illinois.edu/about/people/all-faculty/ekfox",
+        "Reviewed only this Fall 2026 AL1/ADL schedule occurrence. No GPA attribution or other same-initial occurrence is inferred."
       ]
     }
   ]

@@ -17,6 +17,7 @@ class FreshCheckoutTests(unittest.TestCase):
             shutil.copytree('config',root/'config')
             shutil.copytree('public/data',root/'public/data')
             shutil.copytree('data/mappings',root/'data/mappings')
+            shutil.copytree('data/inputs',root/'data/inputs')
             (root/'docs').mkdir()
             before = (root/'public/data/integration.json').read_bytes()
             environment = dict(os.environ)

@@ -51,6 +51,8 @@ Consumers must resolve all files from one manifest response. Do not guess filena
 
 ## GitHub Pages
 
+The workflow was manually disabled on November 7, 2026 at the user's request. Local builds and offline integration remain available; resuming remote checks/deployments requires re-enabling the workflow separately.
+
 Repository: `Illini-Media-Company/professor-guide`; default branch: `main`. Under **Settings → Pages**, select **GitHub Actions**. Vite uses `/professor-guide/` for assets and data URLs. HTTPS is enabled.
 
 The single workflow runs on main pushes, PRs, weekly Monday 10:20 UTC, and manual dispatch. PRs check without deploying. Production runs share a concurrency group with cancellation disabled. Refresh sequence:
@@ -93,11 +95,12 @@ Use this in a DI custom HTML block:
 
 ```html
 <iframe
+  id="professor-guide-widget"
   src="https://illini-media-company.github.io/professor-guide/?embed=1"
   title="Professor Guide — UIUC courses and professors"
   width="100%"
   height="800"
-  style="border: 0; display: block;"
+  style="border: 1px solid #d9d9d9; border-radius: 1.5rem; display: block;"
   loading="lazy"
 ></iframe>
 <p>
