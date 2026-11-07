@@ -33,6 +33,8 @@ The production update always collects every department. `--start-year 2023` sele
 
 ## Data and team ownership
 
+**Current scope (November 6, 2026):** proceed with the 2,287 identified instructors and 11,810 supported GPA attributions in the prepared inputs. Further GPA and archive-only identity review is deferred. See the [scope decision and do-later backlog](docs/backlog.md).
+
 The shared entry point is **`public/data/integration.json`**. Its `files` entries resolve to immutable JSON objects for the current schedule, teaching history, aliases, coverage, and optional teammate outputs. All consumers should use this manifest. The data page shows real coverage, source dates, and per-term downloads. It loads only the small archive index; schedules load when requested.
 
 | Owner | Work |

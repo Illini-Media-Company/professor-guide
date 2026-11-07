@@ -2,3 +2,5 @@
 public/data/objects/*.json -text
 # Offline republication preserves this manifest's canonical LF bytes.
 public/data/integration.json text eol=lf
+# Normalize generated CSV review queues to LF in Git.
+data/mappings/*.csv text eol=lf

@@ -1,0 +1,1414 @@
+{
+  "schema_version": 1,
+  "subject_units": {
+    "AAS": [
+      "Asian American Studies"
+    ],
+    "ABE": [
+      "Agricultural and Biological Engineering"
+    ],
+    "ADV": [
+      "Advertising"
+    ],
+    "AE": [
+      "Aerospace Engineering"
+    ],
+    "ACCY": [
+      "Accountancy"
+    ],
+    "ACE": [
+      "Agricultural and Consumer Economics"
+    ],
+    "ACES": [
+      "Agricultural, Consumer and Environmental Sciences"
+    ],
+    "AFAS": [
+      "Air Force Aerospace Studies"
+    ],
+    "AFRO": [
+      "African American Studies"
+    ],
+    "AFST": [
+      "African Studies"
+    ],
+    "AGCM": [
+      "Agricultural Communications",
+      "Agricultural Leadership"
+    ],
+    "AGED": [
+      "Agricultural Leadership"
+    ],
+    "ALEC": [
+      "Agricultural Leadership"
+    ],
+    "AHS": [
+      "Applied Health Sciences"
+    ],
+    "AIS": [
+      "American Indian Studies"
+    ],
+    "ANSC": [
+      "Animal Sciences"
+    ],
+    "ANTH": [
+      "Anthropology"
+    ],
+    "ARCH": [
+      "Architecture"
+    ],
+    "ARTE": [
+      "Art and Design"
+    ],
+    "ARTH": [
+      "Art and Design"
+    ],
+    "ART": [
+      "Art and Design"
+    ],
+    "ARTD": [
+      "Art and Design"
+    ],
+    "ARTF": [
+      "Art and Design"
+    ],
+    "ARTJ": [
+      "Art and Design"
+    ],
+    "ARTS": [
+      "Art and Design"
+    ],
+    "ASRM": [
+      "Actuarial Science",
+      "Mathematics"
+    ],
+    "ASTR": [
+      "Astronomy"
+    ],
+    "ATMS": [
+      "Climate, Meteorology and Atmospheric Sciences"
+    ],
+    "BADM": [
+      "Business Administration"
+    ],
+    "BCOG": [
+      "Psychology",
+      "Neuroscience"
+    ],
+    "BCS": [
+      "Slavic Languages"
+    ],
+    "BDI": [
+      "Business Administration"
+    ],
+    "BIOC": [
+      "Biochemistry"
+    ],
+    "BIOE": [
+      "Bioengineering"
+    ],
+    "BIOP": [
+      "Physics"
+    ],
+    "BTW": [
+      "English",
+      "Writing Studies"
+    ],
+    "BUS": [
+      "Business Administration",
+      "Business, Gies"
+    ],
+    "CEE": [
+      "Civil and Environmental Engineering"
+    ],
+    "CHBE": [
+      "Chemical and Biomolecular Engineering"
+    ],
+    "CHEM": [
+      "Chemistry"
+    ],
+    "CHLH": [
+      "Health and Kinesiology"
+    ],
+    "CHP": [
+      "Honors"
+    ],
+    "CI": [
+      "Curriculum and Instruction"
+    ],
+    "CLCV": [
+      "Classics"
+    ],
+    "CMN": [
+      "Communication, Department"
+    ],
+    "CPSC": [
+      "Crop Sciences"
+    ],
+    "CS": [
+      "Siebel School of Computing and Data Science"
+    ],
+    "CW": [
+      "English"
+    ],
+    "CWL": [
+      "Comparative and World Literature"
+    ],
+    "DANC": [
+      "Dance"
+    ],
+    "DTX": [
+      "Design Center"
+    ],
+    "EALC": [
+      "East Asian Languages"
+    ],
+    "ECE": [
+      "Electrical and Computer Engineering"
+    ],
+    "ECON": [
+      "Economics, Department"
+    ],
+    "EDUC": [
+      "Education, College"
+    ],
+    "EIL": [
+      "Linguistics"
+    ],
+    "ENG": [
+      "Engineering, Grainger",
+      "Engineering, College"
+    ],
+    "ENGL": [
+      "English"
+    ],
+    "ENSU": [
+      "Sustainability, Energy",
+      "Earth, Society and Environment"
+    ],
+    "ENVS": [
+      "Earth, Society and Environment"
+    ],
+    "EPOL": [
+      "Education Policy, Organization and Leadership"
+    ],
+    "EPS": [
+      "Education Policy, Organization and Leadership"
+    ],
+    "EPSY": [
+      "Educational Psychology"
+    ],
+    "ERAM": [
+      "Recreation, Sport and Tourism"
+    ],
+    "ESE": [
+      "Earth, Society and Environment"
+    ],
+    "ETMA": [
+      "Agricultural and Biological Engineering"
+    ],
+    "EURO": [
+      "European Union Center"
+    ],
+    "EXP": [
+      "Division of General Studies"
+    ],
+    "FAA": [
+      "Fine and Applied Arts"
+    ],
+    "FIN": [
+      "Finance, Department"
+    ],
+    "FR": [
+      "French & Italian"
+    ],
+    "FSHN": [
+      "Food Science and Human Nutrition"
+    ],
+    "GEOL": [
+      "Earth Science and Environmental Change"
+    ],
+    "GER": [
+      "Germanic Languages"
+    ],
+    "GGIS": [
+      "Geography & Geographic Information Science"
+    ],
+    "GLBL": [
+      "Global Studies"
+    ],
+    "GS": [
+      "Division of General Studies"
+    ],
+    "GSD": [
+      "Information Sciences",
+      "Media, College"
+    ],
+    "GWS": [
+      "Gender and Women's Studies"
+    ],
+    "HDFS": [
+      "Human Development & Family Studies"
+    ],
+    "HIST": [
+      "History, Department"
+    ],
+    "HK": [
+      "Health and Kinesiology"
+    ],
+    "HORT": [
+      "Crop Sciences"
+    ],
+    "HRD": [
+      "Education Policy, Organization and Leadership"
+    ],
+    "IB": [
+      "Integrative Biology",
+      "Evolution, Ecology, and Behavior",
+      "Plant Biology",
+      "Entomology"
+    ],
+    "IE": [
+      "Industrial and Enterprise Systems Engineering"
+    ],
+    "IHLT": [
+      "Interdisciplinary Health Sciences"
+    ],
+    "INFO": [
+      "Information Sciences",
+      "Informatics"
+    ],
+    "IS": [
+      "Information Sciences"
+    ],
+    "ITAL": [
+      "French & Italian"
+    ],
+    "JAPN": [
+      "East Asian Languages"
+    ],
+    "JOUR": [
+      "Journalism"
+    ],
+    "KIN": [
+      "Health and Kinesiology"
+    ],
+    "LA": [
+      "Landscape Architecture"
+    ],
+    "LAS": [
+      "Liberal Arts & Sciences"
+    ],
+    "LAST": [
+      "Latin American"
+    ],
+    "LAT": [
+      "Classics"
+    ],
+    "LAW": [
+      "Law, College"
+    ],
+    "LEAD": [
+      "Agricultural Leadership"
+    ],
+    "LER": [
+      "Labor and Employment Relations"
+    ],
+    "LING": [
+      "Linguistics"
+    ],
+    "LLS": [
+      "Latina/Latino Studies"
+    ],
+    "MACS": [
+      "Media and Cinema Studies"
+    ],
+    "MATH": [
+      "Mathematics"
+    ],
+    "MBA": [
+      "Business Administration",
+      "Business, Gies"
+    ],
+    "MCB": [
+      "Molecular and Cellular Biology",
+      "Microbiology",
+      "Biochemistry",
+      "Cell and Developmental Biology",
+      "Molecular and Integrative Physiology"
+    ],
+    "MDIA": [
+      "Media, College"
+    ],
+    "ME": [
+      "Mechanical Science and Engineering"
+    ],
+    "MILS": [
+      "Military Science"
+    ],
+    "MSE": [
+      "Materials Science and Engineering"
+    ],
+    "MUS": [
+      "Music, School"
+    ],
+    "MUSC": [
+      "Music, School"
+    ],
+    "MUSE": [
+      "Music, School"
+    ],
+    "NE": [
+      "Nuclear, Plasma, and Radiological Engineering"
+    ],
+    "NPRE": [
+      "Nuclear, Plasma, and Radiological Engineering"
+    ],
+    "NRES": [
+      "Natural Resources and Environmental Sciences"
+    ],
+    "NUTR": [
+      "Nutritional Sciences",
+      "Food Science and Human Nutrition"
+    ],
+    "PATH": [
+      "Pathobiology"
+    ],
+    "PHIL": [
+      "Philosophy"
+    ],
+    "PHYS": [
+      "Physics, Department"
+    ],
+    "PLPA": [
+      "Crop Sciences"
+    ],
+    "POL": [
+      "Slavic Languages"
+    ],
+    "PORT": [
+      "Spanish and Portuguese"
+    ],
+    "PS": [
+      "Political Science"
+    ],
+    "PSYC": [
+      "Psychology, Department"
+    ],
+    "REHB": [
+      "Health and Kinesiology"
+    ],
+    "REL": [
+      "Religion"
+    ],
+    "RHET": [
+      "English",
+      "Writing Studies"
+    ],
+    "RST": [
+      "Recreation, Sport and Tourism"
+    ],
+    "RUSS": [
+      "Slavic Languages"
+    ],
+    "SBC": [
+      "Business Administration"
+    ],
+    "SCAN": [
+      "Germanic Languages"
+    ],
+    "SE": [
+      "Industrial and Enterprise Systems Engineering"
+    ],
+    "SHS": [
+      "Speech and Hearing Science"
+    ],
+    "SLAV": [
+      "Slavic Languages"
+    ],
+    "SLCL": [
+      "Literatures, Cultures and Linguistics"
+    ],
+    "SOC": [
+      "Sociology, Department"
+    ],
+    "SOCW": [
+      "Social Work"
+    ],
+    "SPAN": [
+      "Spanish and Portuguese"
+    ],
+    "SPED": [
+      "Special Education"
+    ],
+    "STAT": [
+      "Statistics"
+    ],
+    "TAM": [
+      "Mechanical Science and Engineering"
+    ],
+    "TE": [
+      "Technology Entrepreneur Center"
+    ],
+    "THEA": [
+      "Theatre"
+    ],
+    "UP": [
+      "Urban and Regional Planning"
+    ],
+    "VCM": [
+      "Veterinary Clinical Medicine"
+    ],
+    "VM": [
+      "Veterinary Medicine, College"
+    ],
+    "ARAB": [
+      "Linguistics"
+    ],
+    "ASST": [
+      "Asian Studies",
+      "East Asian Languages"
+    ],
+    "BASQ": [
+      "Spanish and Portuguese"
+    ],
+    "BSE": [
+      "Bioengineering",
+      "Carle Illinois"
+    ],
+    "BULG": [
+      "Slavic Languages"
+    ],
+    "CAS": [
+      "Advanced Study",
+      "Center for Advanced Study"
+    ],
+    "CB": [
+      "Comparative Biosciences"
+    ],
+    "CDB": [
+      "Cell and Developmental Biology"
+    ],
+    "CGGE": [
+      "Global Gender Equity"
+    ],
+    "CHIN": [
+      "East Asian Languages"
+    ],
+    "CIC": [],
+    "CLE": [
+      "Carle Illinois"
+    ],
+    "CSE": [
+      "Computational Science and Engineering"
+    ],
+    "CZCH": [
+      "Slavic Languages"
+    ],
+    "EDPR": [
+      "Education, College"
+    ],
+    "EEB": [
+      "Evolution, Ecology, and Behavior"
+    ],
+    "ENT": [
+      "Entomology"
+    ],
+    "ES": [
+      "Energy Systems"
+    ],
+    "ESL": [
+      "Linguistics"
+    ],
+    "FLTE": [
+      "Literatures, Cultures and Linguistics"
+    ],
+    "GC": [
+      "Graduate College"
+    ],
+    "GMC": [
+      "Germanic Languages"
+    ],
+    "GRK": [
+      "Classics"
+    ],
+    "GRKM": [
+      "Classics"
+    ],
+    "HBSE": [
+      "Bioengineering",
+      "Carle Illinois"
+    ],
+    "HEBR": [
+      "Linguistics",
+      "Religion"
+    ],
+    "HNDI": [
+      "Linguistics"
+    ],
+    "HT": [
+      "Health Technology",
+      "Applied Health Sciences"
+    ],
+    "HUM": [
+      "Liberal Arts & Sciences"
+    ],
+    "JS": [
+      "Jewish Studies",
+      "Religion"
+    ],
+    "KOR": [
+      "East Asian Languages"
+    ],
+    "LCTL": [
+      "Linguistics"
+    ],
+    "MDVL": [
+      "Medieval Studies"
+    ],
+    "MICR": [
+      "Microbiology"
+    ],
+    "MIP": [
+      "Molecular and Integrative Physiology"
+    ],
+    "NEUR": [
+      "Neuroscience"
+    ],
+    "NS": [
+      "Naval Science"
+    ],
+    "PERS": [
+      "Linguistics"
+    ],
+    "PSM": [
+      "Professional Science Master"
+    ],
+    "QUEC": [
+      "Linguistics"
+    ],
+    "REES": [
+      "Russian, East European"
+    ],
+    "RMLG": [
+      "French & Italian",
+      "Spanish and Portuguese"
+    ],
+    "SAME": [
+      "Linguistics"
+    ],
+    "SWAH": [
+      "Linguistics"
+    ],
+    "TMGT": [
+      "Technology and Management"
+    ],
+    "TRST": [
+      "Translation and Interpreting Studies"
+    ],
+    "TURK": [
+      "Linguistics"
+    ],
+    "UKR": [
+      "Slavic Languages"
+    ],
+    "WGGP": [
+      "Global Gender Equity"
+    ],
+    "WLOF": [
+      "Linguistics"
+    ],
+    "WLTE": [
+      "Literatures, Cultures and Linguistics"
+    ],
+    "WRIT": [
+      "Writing Studies",
+      "English"
+    ],
+    "YDSH": [
+      "Germanic Languages"
+    ],
+    "ZULU": [
+      "Linguistics"
+    ]
+  },
+  "department_rosters": [
+    {
+      "url": "https://sociology.illinois.edu/directory",
+      "unit": "Sociology, Department of"
+    },
+    {
+      "url": "https://math.illinois.edu/directory",
+      "unit": "Mathematics, Department of"
+    },
+    {
+      "url": "https://stat.illinois.edu/directory",
+      "unit": "Statistics, Department of"
+    },
+    {
+      "url": "https://economics.illinois.edu/directory",
+      "unit": "Economics, Department of"
+    },
+    {
+      "url": "https://history.illinois.edu/directory",
+      "unit": "History, Department of"
+    },
+    {
+      "url": "https://psychology.illinois.edu/directory",
+      "unit": "Psychology, Department of"
+    },
+    {
+      "url": "https://english.illinois.edu/directory",
+      "unit": "English, Department of"
+    },
+    {
+      "url": "https://communication.illinois.edu/directory",
+      "unit": "Communication, Department of"
+    },
+    {
+      "url": "https://anthro.illinois.edu/directory",
+      "unit": "Anthropology, Department of"
+    },
+    {
+      "url": "https://philosophy.illinois.edu/directory",
+      "unit": "Philosophy, Department of"
+    },
+    {
+      "url": "https://linguistics.illinois.edu/directory",
+      "unit": "Linguistics, Department of"
+    },
+    {
+      "url": "https://chemistry.illinois.edu/directory",
+      "unit": "Chemistry, Department of"
+    },
+    {
+      "url": "https://astro.illinois.edu/directory",
+      "unit": "Astronomy, Department of"
+    },
+    {
+      "url": "https://geography.illinois.edu/directory",
+      "unit": "Geography & Geographic Information Science, Department of"
+    },
+    {
+      "url": "https://geology.illinois.edu/directory",
+      "unit": "Earth Science and Environmental Change"
+    },
+    {
+      "url": "https://atmos.illinois.edu/directory",
+      "unit": "Climate, Meteorology and Atmospheric Sciences, Department of"
+    },
+    {
+      "url": "https://ealc.illinois.edu/directory",
+      "unit": "East Asian Languages and Cultures, Department of"
+    },
+    {
+      "url": "https://religion.illinois.edu/directory",
+      "unit": "Religion, Department of"
+    },
+    {
+      "url": "https://gws.illinois.edu/directory",
+      "unit": "Gender and Women's Studies, Department of"
+    },
+    {
+      "url": "https://afro.illinois.edu/directory",
+      "unit": "African American Studies, Department of"
+    },
+    {
+      "url": "https://asianam.illinois.edu/directory",
+      "unit": "Asian American Studies, Department of"
+    },
+    {
+      "url": "https://lls.illinois.edu/directory",
+      "unit": "Latina/Latino Studies, Department of"
+    },
+    {
+      "url": "https://slcl.illinois.edu/directory",
+      "unit": "Literatures, Cultures and Linguistics, School of"
+    },
+    {
+      "url": "https://spanport.illinois.edu/directory",
+      "unit": "Spanish and Portuguese, Department of"
+    },
+    {
+      "url": "https://frit.illinois.edu/directory",
+      "unit": "French & Italian, Department of"
+    },
+    {
+      "url": "https://germanic.illinois.edu/directory",
+      "unit": "Germanic Languages and Literatures, Department of"
+    },
+    {
+      "url": "https://slavic.illinois.edu/directory",
+      "unit": "Slavic Languages and Literatures, Department of"
+    },
+    {
+      "url": "https://classics.illinois.edu/directory",
+      "unit": "Classics, Department of the"
+    },
+    {
+      "url": "https://complit.illinois.edu/directory",
+      "unit": "Comparative and World Literature"
+    },
+    {
+      "url": "https://ace.illinois.edu/directory",
+      "unit": "Agricultural and Consumer Economics, Department of"
+    },
+    {
+      "url": "https://mcb.illinois.edu/directory",
+      "unit": "Molecular and Cellular Biology, School of"
+    },
+    {
+      "url": "https://las.illinois.edu/directory",
+      "unit": "Liberal Arts & Sciences, College of"
+    },
+    {
+      "url": "https://ischool.illinois.edu/people/directory",
+      "unit": "Information Sciences, School of"
+    }
+  ],
+  "reviewed_name_variants": [
+    {
+      "grade_name_raw": "Bahreini Esfaha, Manijeh",
+      "directory_id": "bahreini",
+      "official_name": "Bahreini Esfahani, Manijeh",
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-02T05:53:29Z",
+      "source_urls": [
+        "https://directory.illinois.edu/facultyListing",
+        "https://raw.githubusercontent.com/wadefagen/datasets/main/gpa/README.md"
+      ],
+      "evidence": [
+        "Reviewed the documented grade-source truncation Bahreini Esfaha, Manijeh against the official full directory name Bahreini Esfahani, Manijeh (bahreini).",
+        "The source documentation explicitly states that long instructor names are truncated by the university. The remaining given-name tokens, department, and course/term occurrence are checked separately; this is an explicit literal variant review."
+      ]
+    },
+    {
+      "grade_name_raw": "Cattai de Godoy, Maria Re",
+      "directory_id": "mgodoy2",
+      "official_name": "Cattai de Godoy, Maria Regina",
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-02T05:53:29Z",
+      "source_urls": [
+        "https://directory.illinois.edu/facultyListing",
+        "https://raw.githubusercontent.com/wadefagen/datasets/main/gpa/README.md"
+      ],
+      "evidence": [
+        "Reviewed the documented grade-source truncation Cattai de Godoy, Maria Re against the official full directory name Cattai de Godoy, Maria Regina (mgodoy2).",
+        "The source documentation explicitly states that long instructor names are truncated by the university. The remaining given-name tokens, department, and course/term occurrence are checked separately; this is an explicit literal variant review."
+      ]
+    },
+    {
+      "grade_name_raw": "Cervantes Boter, Victor H",
+      "directory_id": "victorhc",
+      "official_name": "Cervantes Botero, Victor H",
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-02T05:53:29Z",
+      "source_urls": [
+        "https://directory.illinois.edu/facultyListing",
+        "https://raw.githubusercontent.com/wadefagen/datasets/main/gpa/README.md"
+      ],
+      "evidence": [
+        "Reviewed the documented grade-source truncation Cervantes Boter, Victor H against the official full directory name Cervantes Botero, Victor H (victorhc).",
+        "The source documentation explicitly states that long instructor names are truncated by the university. The remaining given-name tokens, department, and course/term occurrence are checked separately; this is an explicit literal variant review."
+      ]
+    },
+    {
+      "grade_name_raw": "Erlenbusch-Ande, Verena",
+      "directory_id": "vea",
+      "official_name": "Erlenbusch-Anderson, Verena",
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-02T05:53:29Z",
+      "source_urls": [
+        "https://directory.illinois.edu/facultyListing",
+        "https://raw.githubusercontent.com/wadefagen/datasets/main/gpa/README.md"
+      ],
+      "evidence": [
+        "Reviewed the documented grade-source truncation Erlenbusch-Ande, Verena against the official full directory name Erlenbusch-Anderson, Verena (vea).",
+        "The source documentation explicitly states that long instructor names are truncated by the university. The remaining given-name tokens, department, and course/term occurrence are checked separately; this is an explicit literal variant review."
+      ]
+    },
+    {
+      "grade_name_raw": "Fagen-Ulmschnei, Wade A",
+      "directory_id": "waf",
+      "official_name": "Fagen-Ulmschneider, Wade A",
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-02T05:53:29Z",
+      "source_urls": [
+        "https://directory.illinois.edu/facultyListing",
+        "https://raw.githubusercontent.com/wadefagen/datasets/main/gpa/README.md"
+      ],
+      "evidence": [
+        "Reviewed the documented grade-source truncation Fagen-Ulmschnei, Wade A against the official full directory name Fagen-Ulmschneider, Wade A (waf).",
+        "The source documentation explicitly states that long instructor names are truncated by the university. The remaining given-name tokens, department, and course/term occurrence are checked separately; this is an explicit literal variant review."
+      ]
+    },
+    {
+      "grade_name_raw": "Formigao Gameir, Armanda",
+      "directory_id": "armanda",
+      "official_name": "Formigao Gameiro, Armanda",
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-02T05:53:29Z",
+      "source_urls": [
+        "https://directory.illinois.edu/facultyListing",
+        "https://raw.githubusercontent.com/wadefagen/datasets/main/gpa/README.md"
+      ],
+      "evidence": [
+        "Reviewed the documented grade-source truncation Formigao Gameir, Armanda against the official full directory name Formigao Gameiro, Armanda (armanda).",
+        "The source documentation explicitly states that long instructor names are truncated by the university. The remaining given-name tokens, department, and course/term occurrence are checked separately; this is an explicit literal variant review."
+      ]
+    },
+    {
+      "grade_name_raw": "Girndt-Clougher, Tina",
+      "directory_id": "girndt",
+      "official_name": "Girndt-Clougherty, Tina",
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-02T05:53:29Z",
+      "source_urls": [
+        "https://directory.illinois.edu/facultyListing",
+        "https://raw.githubusercontent.com/wadefagen/datasets/main/gpa/README.md"
+      ],
+      "evidence": [
+        "Reviewed the documented grade-source truncation Girndt-Clougher, Tina against the official full directory name Girndt-Clougherty, Tina (girndt).",
+        "The source documentation explicitly states that long instructor names are truncated by the university. The remaining given-name tokens, department, and course/term occurrence are checked separately; this is an explicit literal variant review."
+      ]
+    },
+    {
+      "grade_name_raw": "Grosse Perdekam, Matthias",
+      "directory_id": "mgp",
+      "official_name": "Grosse Perdekamp, Matthias",
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-02T05:53:29Z",
+      "source_urls": [
+        "https://directory.illinois.edu/facultyListing",
+        "https://raw.githubusercontent.com/wadefagen/datasets/main/gpa/README.md"
+      ],
+      "evidence": [
+        "Reviewed the documented grade-source truncation Grosse Perdekam, Matthias against the official full directory name Grosse Perdekamp, Matthias (mgp).",
+        "The source documentation explicitly states that long instructor names are truncated by the university. The remaining given-name tokens, department, and course/term occurrence are checked separately; this is an explicit literal variant review."
+      ]
+    },
+    {
+      "grade_name_raw": "Hanasusanto, Grani Adiwen",
+      "directory_id": "gah",
+      "official_name": "Hanasusanto, Grani Adiwena",
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-02T05:53:29Z",
+      "source_urls": [
+        "https://directory.illinois.edu/facultyListing",
+        "https://raw.githubusercontent.com/wadefagen/datasets/main/gpa/README.md"
+      ],
+      "evidence": [
+        "Reviewed the documented grade-source truncation Hanasusanto, Grani Adiwen against the official full directory name Hanasusanto, Grani Adiwena (gah).",
+        "The source documentation explicitly states that long instructor names are truncated by the university. The remaining given-name tokens, department, and course/term occurrence are checked separately; this is an explicit literal variant review."
+      ]
+    },
+    {
+      "grade_name_raw": "Hasegawa-Johnso, Mark A",
+      "directory_id": "jhasegaw",
+      "official_name": "Hasegawa-Johnson, Mark",
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-02T05:53:29Z",
+      "source_urls": [
+        "https://directory.illinois.edu/facultyListing",
+        "https://raw.githubusercontent.com/wadefagen/datasets/main/gpa/README.md"
+      ],
+      "evidence": [
+        "Reviewed the documented grade-source truncation Hasegawa-Johnso, Mark A against the official full directory name Hasegawa-Johnson, Mark (jhasegaw).",
+        "The source documentation explicitly states that long instructor names are truncated by the university. The remaining given-name tokens, department, and course/term occurrence are checked separately; this is an explicit literal variant review."
+      ]
+    },
+    {
+      "grade_name_raw": "Klajbor-Goderic, Stefanie",
+      "directory_id": "klajbor2",
+      "official_name": "Klajbor-Goderich, Stefanie",
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-02T05:53:29Z",
+      "source_urls": [
+        "https://directory.illinois.edu/facultyListing",
+        "https://raw.githubusercontent.com/wadefagen/datasets/main/gpa/README.md"
+      ],
+      "evidence": [
+        "Reviewed the documented grade-source truncation Klajbor-Goderic, Stefanie against the official full directory name Klajbor-Goderich, Stefanie (klajbor2).",
+        "The source documentation explicitly states that long instructor names are truncated by the university. The remaining given-name tokens, department, and course/term occurrence are checked separately; this is an explicit literal variant review."
+      ]
+    },
+    {
+      "grade_name_raw": "Laystrom-Woodar, Julia K",
+      "directory_id": "laystrom",
+      "official_name": "Laystrom-Woodard, Julia Katherine",
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-02T05:53:29Z",
+      "source_urls": [
+        "https://directory.illinois.edu/facultyListing",
+        "https://raw.githubusercontent.com/wadefagen/datasets/main/gpa/README.md"
+      ],
+      "evidence": [
+        "Reviewed the documented grade-source truncation Laystrom-Woodar, Julia K against the official full directory name Laystrom-Woodard, Julia Katherine (laystrom).",
+        "The source documentation explicitly states that long instructor names are truncated by the university. The remaining given-name tokens, department, and course/term occurrence are checked separately; this is an explicit literal variant review."
+      ]
+    },
+    {
+      "grade_name_raw": "Provencher Lang, Gabriel",
+      "directory_id": "gp42",
+      "official_name": "Provencher Langlois, Gabriel",
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-02T05:53:29Z",
+      "source_urls": [
+        "https://directory.illinois.edu/facultyListing",
+        "https://raw.githubusercontent.com/wadefagen/datasets/main/gpa/README.md"
+      ],
+      "evidence": [
+        "Reviewed the documented grade-source truncation Provencher Lang, Gabriel against the official full directory name Provencher Langlois, Gabriel (gp42).",
+        "The source documentation explicitly states that long instructor names are truncated by the university. The remaining given-name tokens, department, and course/term occurrence are checked separately; this is an explicit literal variant review."
+      ]
+    },
+    {
+      "grade_name_raw": "Radhakrishnan, Chandrasek",
+      "directory_id": "cradhak",
+      "official_name": "Radhakrishnan, Chandrasekhar",
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-02T05:53:29Z",
+      "source_urls": [
+        "https://directory.illinois.edu/facultyListing",
+        "https://raw.githubusercontent.com/wadefagen/datasets/main/gpa/README.md"
+      ],
+      "evidence": [
+        "Reviewed the documented grade-source truncation Radhakrishnan, Chandrasek against the official full directory name Radhakrishnan, Chandrasekhar (cradhak).",
+        "The source documentation explicitly states that long instructor names are truncated by the university. The remaining given-name tokens, department, and course/term occurrence are checked separately; this is an explicit literal variant review."
+      ]
+    },
+    {
+      "grade_name_raw": "Rodriguez Palac, Violeta",
+      "directory_id": "vjrodrig",
+      "official_name": "Rodriguez Palacios, Violeta",
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-02T05:53:29Z",
+      "source_urls": [
+        "https://directory.illinois.edu/facultyListing",
+        "https://raw.githubusercontent.com/wadefagen/datasets/main/gpa/README.md"
+      ],
+      "evidence": [
+        "Reviewed the documented grade-source truncation Rodriguez Palac, Violeta against the official full directory name Rodriguez Palacios, Violeta (vjrodrig).",
+        "The source documentation explicitly states that long instructor names are truncated by the university. The remaining given-name tokens, department, and course/term occurrence are checked separately; this is an explicit literal variant review."
+      ]
+    },
+    {
+      "grade_name_raw": "Sweet-Manternac, Bridget",
+      "directory_id": "bsweet",
+      "official_name": "Sweet-Manternach, Bridget",
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-02T05:53:29Z",
+      "source_urls": [
+        "https://directory.illinois.edu/facultyListing",
+        "https://raw.githubusercontent.com/wadefagen/datasets/main/gpa/README.md"
+      ],
+      "evidence": [
+        "Reviewed the documented grade-source truncation Sweet-Manternac, Bridget against the official full directory name Sweet-Manternach, Bridget (bsweet).",
+        "The source documentation explicitly states that long instructor names are truncated by the university. The remaining given-name tokens, department, and course/term occurrence are checked separately; this is an explicit literal variant review."
+      ]
+    },
+    {
+      "grade_name_raw": "Torres-Cacoullo, Anna",
+      "directory_id": "ait5095",
+      "official_name": "Torres-Cacoullos, Anna",
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-02T05:53:29Z",
+      "source_urls": [
+        "https://directory.illinois.edu/facultyListing",
+        "https://raw.githubusercontent.com/wadefagen/datasets/main/gpa/README.md"
+      ],
+      "evidence": [
+        "Reviewed the documented grade-source truncation Torres-Cacoullo, Anna against the official full directory name Torres-Cacoullos, Anna (ait5095).",
+        "The source documentation explicitly states that long instructor names are truncated by the university. The remaining given-name tokens, department, and course/term occurrence are checked separately; this is an explicit literal variant review."
+      ]
+    },
+    {
+      "grade_name_raw": "Vergara Bracamo, Damian",
+      "directory_id": "dvb",
+      "official_name": "Vergara Bracamontes, Damian",
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-02T05:53:29Z",
+      "source_urls": [
+        "https://directory.illinois.edu/facultyListing",
+        "https://raw.githubusercontent.com/wadefagen/datasets/main/gpa/README.md"
+      ],
+      "evidence": [
+        "Reviewed the documented grade-source truncation Vergara Bracamo, Damian against the official full directory name Vergara Bracamontes, Damian (dvb).",
+        "The source documentation explicitly states that long instructor names are truncated by the university. The remaining given-name tokens, department, and course/term occurrence are checked separately; this is an explicit literal variant review."
+      ]
+    },
+    {
+      "grade_name_raw": "de la Garza Val, Jose A",
+      "directory_id": "delagv",
+      "official_name": "de la Garza Valenzuela, José A.",
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-02T05:53:29Z",
+      "source_urls": [
+        "https://directory.illinois.edu/facultyListing",
+        "https://raw.githubusercontent.com/wadefagen/datasets/main/gpa/README.md"
+      ],
+      "evidence": [
+        "Reviewed the documented grade-source truncation de la Garza Val, Jose A against the official full directory name de la Garza Valenzuela, José A. (delagv).",
+        "The source documentation explicitly states that long instructor names are truncated by the university. The remaining given-name tokens, department, and course/term occurrence are checked separately; this is an explicit literal variant review."
+      ]
+    },
+    {
+      "grade_name_raw": "de la Garza Val, José A",
+      "directory_id": "delagv",
+      "official_name": "de la Garza Valenzuela, José A.",
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-02T05:53:29Z",
+      "source_urls": [
+        "https://directory.illinois.edu/facultyListing",
+        "https://raw.githubusercontent.com/wadefagen/datasets/main/gpa/README.md"
+      ],
+      "evidence": [
+        "Reviewed the documented grade-source truncation de la Garza Val, José A against the official full directory name de la Garza Valenzuela, José A. (delagv).",
+        "The source documentation explicitly states that long instructor names are truncated by the university. The remaining given-name tokens, department, and course/term occurrence are checked separately; this is an explicit literal variant review."
+      ]
+    },
+    {
+      "grade_name_raw": "Kirchner, Nicholas C",
+      "directory_id": "kirchner",
+      "official_name": "Nick Kirchner",
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-02T06:54:51Z",
+      "source_urls": [
+        "https://mcb.illinois.edu/directory/advising-instruction",
+        "https://app.mcb.illinois.edu/courses/syllabi/MCB_251_syllabus.pdf"
+      ],
+      "faculty_profile_urls": [
+        "https://mcb.illinois.edu/directory/advising-instruction"
+      ],
+      "evidence": [
+        "The official MCB 251 Spring 2026 syllabus identifies Nicholas Kirchner with university identifier kirchner. The current instructional-team roster uses Nick Kirchner with the same identifier.",
+        "Reviewed the legal/preferred-name difference against those two independent official sources; this literal exception does not authorize nickname expansion for other people."
+      ]
+    },
+    {
+      "grade_name_raw": "Cooper, S L",
+      "directory_id": "slcooper",
+      "official_name": "Cooper, S Lance",
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-02T06:54:51Z",
+      "source_urls": [
+        "https://directory.illinois.edu/facultyListing",
+        "https://physics.illinois.edu/people/directory/profile/slcooper"
+      ],
+      "faculty_profile_urls": [
+        "https://physics.illinois.edu/people/directory/profile/slcooper"
+      ],
+      "evidence": [
+        "Reviewed the source initials in Cooper, S L against the publicly used professional name Cooper, S Lance and its official university profile (slcooper).",
+        "The department, supplied given/middle initials, profile identity, and course/term occurrence must all agree. No undisclosed legal first name is inferred; other matching initials remain a conflict."
+      ]
+    },
+    {
+      "grade_name_raw": "Love, E G",
+      "directory_id": "glove",
+      "official_name": "Love, E Geoffrey",
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-02T06:54:51Z",
+      "source_urls": [
+        "https://directory.illinois.edu/facultyListing",
+        "https://giesbusiness.illinois.edu/profile/e-geoffrey-love"
+      ],
+      "faculty_profile_urls": [
+        "https://giesbusiness.illinois.edu/profile/e-geoffrey-love"
+      ],
+      "evidence": [
+        "Reviewed the source initials in Love, E G against the publicly used professional name Love, E Geoffrey and its official university profile (glove).",
+        "The department, supplied given/middle initials, profile identity, and course/term occurrence must all agree. No undisclosed legal first name is inferred; other matching initials remain a conflict."
+      ]
+    },
+    {
+      "grade_name_raw": "Rao, V.N. Vimal",
+      "directory_id": "raovnv",
+      "official_name": "Rao, V.N. Vimal",
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-02T06:54:51Z",
+      "source_urls": [
+        "https://directory.illinois.edu/facultyListing",
+        "https://stat.illinois.edu/directory/profile/raovnv"
+      ],
+      "faculty_profile_urls": [
+        "https://stat.illinois.edu/directory/profile/raovnv"
+      ],
+      "evidence": [
+        "Reviewed the source initials in Rao, V.N. Vimal against the publicly used professional name Rao, V.N. Vimal and its official university profile (raovnv).",
+        "The department, supplied given/middle initials, profile identity, and course/term occurrence must all agree. No undisclosed legal first name is inferred; other matching initials remain a conflict."
+      ]
+    },
+    {
+      "grade_name_raw": "Ruggles, D F",
+      "directory_id": "dfr1",
+      "official_name": "Ruggles, D Fairchild",
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-02T06:54:51Z",
+      "source_urls": [
+        "https://directory.illinois.edu/facultyListing",
+        "https://landarch.illinois.edu/people/profiles/d-dede-fairchild-ruggles/"
+      ],
+      "faculty_profile_urls": [
+        "https://landarch.illinois.edu/people/profiles/d-dede-fairchild-ruggles/"
+      ],
+      "evidence": [
+        "Reviewed the source initials in Ruggles, D F against the publicly used professional name Ruggles, D Fairchild and its official university profile (dfr1).",
+        "The department, supplied given/middle initials, profile identity, and course/term occurrence must all agree. No undisclosed legal first name is inferred; other matching initials remain a conflict."
+      ]
+    },
+    {
+      "grade_name_raw": "Spencer, B F",
+      "directory_id": "bfs",
+      "official_name": "Spencer, B F",
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-02T06:54:51Z",
+      "source_urls": [
+        "https://directory.illinois.edu/facultyListing",
+        "https://cee.illinois.edu/directory/profile/bfs"
+      ],
+      "faculty_profile_urls": [
+        "https://cee.illinois.edu/directory/profile/bfs"
+      ],
+      "evidence": [
+        "Reviewed the source initials in Spencer, B F against the publicly used professional name Spencer, B F and its official university profile (bfs).",
+        "The department, supplied given/middle initials, profile identity, and course/term occurrence must all agree. No undisclosed legal first name is inferred; other matching initials remain a conflict."
+      ]
+    },
+    {
+      "grade_name_raw": "White, M C",
+      "directory_id": "mcwhite7",
+      "official_name": "White, M Christina",
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-02T06:54:51Z",
+      "source_urls": [
+        "https://directory.illinois.edu/facultyListing",
+        "https://chemistry.illinois.edu/directory/profile/mcwhite7"
+      ],
+      "faculty_profile_urls": [
+        "https://chemistry.illinois.edu/directory/profile/mcwhite7"
+      ],
+      "evidence": [
+        "Reviewed the source initials in White, M C against the publicly used professional name White, M Christina and its official university profile (mcwhite7).",
+        "The department, supplied given/middle initials, profile identity, and course/term occurrence must all agree. No undisclosed legal first name is inferred; other matching initials remain a conflict."
+      ]
+    }
+  ],
+  "api_rosters": [
+    {
+      "url": "https://directoryapi.wigg.illinois.edu/api/Directory/GetFull/education?offices=&jobtypes=",
+      "kind": "wigg_full",
+      "unit": "Education, College of",
+      "directory_url": "https://education.illinois.edu/about/directory",
+      "subjects": [
+        "CI",
+        "EDUC",
+        "EPOL",
+        "EPS",
+        "EPSY",
+        "SPED",
+        "HRD",
+        "EDPR"
+      ]
+    },
+    {
+      "url": "https://directoryapi.wigg.illinois.edu/api/Directory/Search/ahs?q=&useFullText=false&offices=&jobTypes=&tags=&skip=0&take=500",
+      "kind": "wigg_search",
+      "unit": "Applied Health Sciences, College of",
+      "directory_url": "https://ahs.illinois.edu/directory",
+      "subjects": [
+        "AHS",
+        "HK",
+        "KIN",
+        "CHLH",
+        "RST",
+        "ERAM",
+        "IHLT",
+        "SHS",
+        "REHB",
+        "HT"
+      ]
+    },
+    {
+      "url": "https://facultysearchapi.itpartners.illinois.edu/api/Search?q=&collegeType=business&departments=&units=&jobtypes=&username=&useFullText=false&skip=0&take=1000",
+      "kind": "gies",
+      "unit": "Business, Gies College of",
+      "directory_url": "https://giesbusiness.illinois.edu/about/faculty-staff-directory",
+      "subjects": [
+        "ACCY",
+        "BADM",
+        "FIN",
+        "BUS",
+        "MBA",
+        "BDI",
+        "SBC",
+        "TMGT"
+      ]
+    },
+    {
+      "kind": "wigg_search",
+      "url": "https://directoryapi.wigg.illinois.edu/api/Directory/Search/socialwork?q=&useFullText=false&offices=&jobTypes=&tags=&take=1000",
+      "directory_url": "https://socialwork.illinois.edu/directory/",
+      "unit": "Social Work",
+      "subjects": [
+        "SOCW"
+      ]
+    }
+  ],
+  "manual_directory_people": [
+    {
+      "directory_id": "dkhunter",
+      "official_name": "Darrell Hunter",
+      "unit": "Liberal Arts & Sciences, College of",
+      "subjects": [
+        "LAS"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-02T06:54:51Z",
+      "source_urls": [
+        "https://www.firstgen.illinois.edu/Program_Directory",
+        "https://las.illinois.edu/news/2023-10-04/creating-connections-first-year-experience"
+      ],
+      "directory_url": "https://www.firstgen.illinois.edu/Program_Directory",
+      "evidence": [
+        "The official First-Generation program directory names Darrell Hunter with identifier dkhunter as the LAS 101/102 First-Year Experience contact.",
+        "The dated October 2023 LAS staff feature independently confirms this historical First-Year Experience role. This supports the archived teaching period even though current staffing changed."
+      ]
+    },
+    {
+      "directory_id": "lltravis",
+      "official_name": "Lisa Travis",
+      "unit": "Psychology, Department of",
+      "subjects": [
+        "PSYC"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-02T06:54:51Z",
+      "source_urls": [
+        "https://studentsuccess.illinois.edu/files/2021/06/SSI-FY-Academic-Exp-Task-Force-Final-Report.pdf",
+        "https://learn.illinois.edu/course/info.php?id=52539"
+      ],
+      "evidence": [
+        "The official university first-year academic-experience report identifies Lisa Travis, identifier lltravis, for PSYC 100.",
+        "The public Learn@Illinois PSYC 100 course information independently lists Lisa Travis as a teacher. This is historical teaching evidence, not a claim about current employment."
+      ]
+    },
+    {
+      "directory_id": "murray",
+      "official_name": "Melissa Reedy",
+      "unit": "Molecular and Cellular Biology, School of",
+      "subjects": [
+        "MCB"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-02T06:54:51Z",
+      "source_urls": [
+        "https://las.illinois.edu/directory/deansoffice",
+        "https://mcb.illinois.edu/news/2024-12-09/congratulations-recipients-2024-school-mcb-awards"
+      ],
+      "directory_url": "https://las.illinois.edu/directory/deansoffice",
+      "evidence": [
+        "The current official LAS directory binds Melissa Reedy to identifier murray.",
+        "The dated December 2024 School of MCB award notice identifies Melissa Reedy as instructional staff. This historical affiliation supports the grade-source teaching period despite a later role change."
+      ]
+    }
+  ],
+  "profile_indexes": [
+    {
+      "url": "https://law.illinois.edu/faculty-research/faculty-profiles/",
+      "profile_prefix": "/faculty-research/faculty-profiles/",
+      "unit": "Law, College of",
+      "subjects": [
+        "LAW"
+      ]
+    },
+    {
+      "url": "https://www.media.illinois.edu/advertising-faculty/",
+      "profile_prefix": "/",
+      "unit": "Advertising",
+      "subjects": [
+        "ADV",
+        "SBC"
+      ]
+    },
+    {
+      "url": "https://www.media.illinois.edu/journalism-faculty/",
+      "profile_prefix": "/",
+      "unit": "Journalism",
+      "subjects": [
+        "JOUR"
+      ]
+    },
+    {
+      "url": "https://www.media.illinois.edu/media-and-cinema-studies-faculty/",
+      "profile_prefix": "/",
+      "unit": "Media and Cinema Studies",
+      "subjects": [
+        "MACS"
+      ]
+    },
+    {
+      "url": "https://theatre.illinois.edu/faculty-staff/faculty-directory/",
+      "profile_prefix": "/people/profiles/",
+      "page_prefix": "/faculty-staff/faculty-directory/page/",
+      "unit": "Theatre",
+      "subjects": [
+        "THEA"
+      ]
+    },
+    {
+      "url": "https://dance.illinois.edu/people/faculty/",
+      "profile_prefix": "/people/profiles/",
+      "page_prefix": "/people/faculty/page/",
+      "unit": "Dance",
+      "subjects": [
+        "DANC"
+      ]
+    },
+    {
+      "url": "https://art.illinois.edu/about/faculty-directory/",
+      "profile_prefix": "/people/profiles/",
+      "page_prefix": "/about/faculty-directory/page/",
+      "unit": "Art and Design",
+      "subjects": [
+        "ART",
+        "ARTD",
+        "ARTS",
+        "ARTE",
+        "ARTH",
+        "ARTF"
+      ]
+    },
+    {
+      "url": "https://music.illinois.edu/people/faculty/",
+      "profile_prefix": "/people/profiles/",
+      "page_prefix": "/people/faculty/page/",
+      "unit": "Music",
+      "subjects": [
+        "MUS",
+        "MUSC",
+        "MUSE",
+        "MUSP"
+      ]
+    }
+  ],
+  "grainger_rosters": [
+    {
+      "url": "https://grainger.illinois.edu/about/directory/faculty",
+      "units": {
+        "abe": "Agricultural and Biological Engineering",
+        "aero": "Aerospace Engineering",
+        "bioe": "Bioengineering",
+        "cee": "Civil and Environmental Engineering",
+        "chbe": "Chemical and Biomolecular Engineering",
+        "cs": "Computer Science",
+        "ece": "Electrical and Computer Engineering",
+        "ise": "Industrial and Enterprise Systems Engineering",
+        "matse": "Materials Science and Engineering",
+        "mechse": "Mechanical Science and Engineering",
+        "npre": "Nuclear, Plasma and Radiological Engineering",
+        "phys": "Physics",
+        "tec": "Technology Entrepreneur Center"
+      }
+    }
+  ]
+}

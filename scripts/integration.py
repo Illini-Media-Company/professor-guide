@@ -1,5 +1,6 @@
 """Validated teammate inputs and a hash-addressed, manifest-last publication."""
 
+from collections import defaultdict
 import hashlib
 import json
 import math
@@ -56,6 +57,29 @@ def finite_number(value, minimum, maximum):
     return value is None or (type(value) in (int, float) and math.isfinite(value) and minimum <= value <= maximum)
 
 
+def validate_grade_name_matches(record, sources):
+    """Reviewed grade-row bridges supplement, never replace, the schedule name."""
+    matches = record.get("grade_name_matches", [])
+    require(isinstance(matches, list), "grade_name_matches must be a list")
+    ids = set()
+    for match in matches:
+        identifier = match["grade_record_id"]
+        require(isinstance(identifier, str) and bool(identifier.strip()) and identifier not in ids,
+                "Missing/duplicate reviewed grade record ID on occurrence")
+        ids.add(identifier)
+        name = match["primary_instructor_name_raw"]
+        require(isinstance(name, str) and bool(name.strip()), "Reviewed grade source name required")
+        require(isinstance(match["reviewed_by"], str) and bool(match["reviewed_by"].strip()),
+                "Grade name reviewer required")
+        timestamp(match["verified_at"])
+        require(match["source_url"] in sources, "Reviewed grade source must appear in link provenance")
+        for key in ("evidence", "primary_evidence"):
+            evidence = match[key]
+            require(isinstance(evidence, list) and bool(evidence)
+                    and all(isinstance(item, str) and bool(item.strip()) for item in evidence),
+                    f"Reviewed grade match requires nonempty {key}")
+
+
 def validate_input(data, dataset):
     try:
         provenance(data)
@@ -99,6 +123,7 @@ def validate_input(data, dataset):
                 if record["is_primary"]:
                     require(record.get("primary_evidence"), "Do not infer primary instructor from source order")
                 timestamp(record["verified_at"])
+                validate_grade_name_matches(record, {source["url"] for source in data["sources"]})
     except (KeyError, TypeError, AttributeError) as error:
         raise DataError(f"Malformed {dataset} input: {error}") from error
     return data
@@ -110,9 +135,16 @@ def snapshots_of(schedule, history):
 
 
 def attribute_grades(schedule, history, inputs):
+    for name, data in inputs.items():
+        validate_input(data, name)
     people = {record["professor_id"] for record in inputs.get("professors", {}).get("records", [])}
     verified = inputs.get("verified_occurrences", {}).get("records", [])
+    grades = inputs.get("gpa", {}).get("records", [])
+    grades_by_id = {grade["id"]: grade for grade in grades}
+    grade_sources = {source["url"]: source["fetched_at"] for source in inputs.get("gpa", {}).get("sources", [])}
     sections = {section["id"]: section for snapshot in snapshots_of(schedule, history) for section in snapshot["sections"]} if verified else {}
+    primary_by_listing = defaultdict(list)
+    reviewed_by_grade = defaultdict(list)
     for record in verified:
         require(record["professor_id"] in people, "Verified link references an unknown professor")
         section = sections.get(record["section_id"])
@@ -121,14 +153,34 @@ def attribute_grades(schedule, history, inputs):
         meeting = meetings.get(record["meeting_id"])
         require(meeting is not None and record["instructor_index"] < len(meeting["instructors"]), "Verified link references an unknown instructor occurrence")
         require(meeting["instructors"][record["instructor_index"]]["name_raw"] == record["name_raw"], "Verified name differs from preserved source name")
+        if record["is_primary"]:
+            primary_by_listing[record["listing_id"]].append(record)
+        for match in record.get("grade_name_matches", []):
+            grade = grades_by_id.get(match["grade_record_id"])
+            require(grade is not None, "Reviewed grade match references an unknown grade record")
+            require(grade["grain"] in ("section", "instructor_course_term"),
+                    "Course-term aggregates cannot have professor name matches")
+            require(record["listing_id"] == f'{grade["term_id"]}:{grade["course_code"]}',
+                    "Reviewed grade match belongs to a different course/term")
+            require(grade["grain"] != "section" or grade["section_id"] == record["section_id"],
+                    "Reviewed grade match belongs to a different section")
+            require(match["primary_instructor_name_raw"] == grade.get("primary_instructor_name_raw"),
+                    "Reviewed name differs from preserved grade source name")
+            require(match["source_url"] in grade_sources, "Reviewed source differs from GPA provenance")
+            require(timestamp(match["verified_at"]) >= timestamp(grade_sources[match["source_url"]]),
+                    "Grade name review predates its source fetch")
+            reviewed_by_grade[grade["id"]].append(record)
     attributions = []
-    for grade in inputs.get("gpa", {}).get("records", []):
+    for grade in grades:
         listing_id = f'{grade["term_id"]}:{grade["course_code"]}'
-        candidates = [record for record in verified if record["listing_id"] == listing_id and record["is_primary"] and record["name_raw"] == grade.get("primary_instructor_name_raw")]
+        candidates = [record for record in primary_by_listing.get(listing_id, ()) if record["name_raw"] == grade.get("primary_instructor_name_raw")]
         if grade["grain"] == "section":
             candidates = [record for record in candidates if record["section_id"] == grade["section_id"]]
         elif grade["grain"] == "course_term":
             candidates = []
+        # The bridge carries primary evidence for this grade's grain. It does
+        # not promote the occurrence to primary on other grades or sections.
+        candidates.extend(reviewed_by_grade.get(grade["id"], ()))
         ids = {record["professor_id"] for record in candidates}
         attributions.append({"grade_record_id": grade["id"], "listing_id": listing_id,
                              "section_id": grade.get("section_id") if grade["grain"] == "section" else None,
