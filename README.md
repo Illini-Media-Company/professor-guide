@@ -33,9 +33,9 @@ The production update always collects every department. `--start-year 2023` sele
 
 ## Data and team ownership
 
-**Current scope (November 6, 2026):** proceed with the 2,287 identified instructors and 11,810 supported GPA attributions in the prepared inputs. Further GPA and archive-only identity review is deferred. See the [scope decision and do-later backlog](docs/backlog.md).
+**Current scope (November 7, 2026):** list the full collected course catalog, identified instructors, and recorded schedule names independently of GPA availability. Official faculty-directory identities are included even without grade records; unresolved source names remain labeled as such. Missing GPA and ratings display Pending. Further identity resolution is deferred; catalog visibility is not. See the [scope decisions and backlog](docs/backlog.md).
 
-The shared entry point is **`public/data/integration.json`**. Its `files` entries resolve to immutable JSON objects for the current schedule, teaching history, aliases, coverage, and optional teammate outputs. All consumers should use this manifest. The data page shows real coverage, source dates, and per-term downloads. It loads only the small archive index; schedules load when requested.
+The shared entry point is **`public/data/integration.json`**. Its `files` entries resolve to immutable JSON objects for the current schedule, teaching history, aliases, coverage, and teammate outputs. The search interface loads `files.guide` from that same manifest: every collected course, identified instructor profiles, and all unresolved schedule-name entries, independently of GPA availability. Course-specific GPA and RMP summaries appear only where verified; missing values display **Pending**. Raw archive files are available through source/download links and are not prefetched.
 
 | Owner | Work |
 | --- | --- |
@@ -54,6 +54,7 @@ Collection and integration use one path: `update_data` → `collect_campus` → 
 
 ```sh
 npm run test:data
+npm run test:ui
 npm run validate:data
 npm run build
 npx playwright install chromium

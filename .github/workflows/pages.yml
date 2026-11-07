@@ -63,6 +63,7 @@ jobs:
           if [[ -n "$REFRESH_TERM" ]]; then args+=(--term "$REFRESH_TERM"); fi
           python -m scripts.update_data "${args[@]}"
       - run: npm run test:data
+      - run: npm run test:ui
       - run: npm run validate:data
       - run: npm run build
       - run: npx playwright install --with-deps chromium

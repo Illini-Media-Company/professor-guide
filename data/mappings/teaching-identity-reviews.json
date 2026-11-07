@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "reviews": [
+    {
+      "professor_id": "prof_uiuc_ekfox",
+      "reviewed_at": "2026-11-07T09:39:30Z",
+      "reviewed_by": "Codex",
+      "course_codes": [
+        "CS 374",
+        "ECE 374"
+      ],
+      "term_id": "2026-fall",
+      "source_names": [
+        "Fox, E"
+      ],
+      "sources": [
+        {
+          "url": "https://siebelschool.illinois.edu/about/people/all-faculty/ekfox",
+          "fetched_at": "2026-11-07T09:38:09Z",
+          "sha256": "5b4b89ee9bb83e1365f64db258fb580f5fbc0b6d4d5b88621b78b8b0cdc2a22c"
+        },
+        {
+          "url": "https://courses.grainger.illinois.edu/cs374al1/fa2026/staff.html",
+          "fetched_at": "2026-11-07T09:38:41Z",
+          "sha256": "ddab6b71ae464e576b66b3f17fe2bc6c6b8932c990b94a08508bf9c525ab1947"
+        }
+      ]
+    }
+  ]
+}

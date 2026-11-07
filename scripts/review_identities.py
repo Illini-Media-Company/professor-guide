@@ -877,6 +877,7 @@ def export_reviews(ledger, gpa, professors, links):
         return person.get('institutional_id')
     professors['records'] = [person for person in professors['records']
         if not person['professor_id'].startswith('prof_uiuc_')
+        or person.get('identity_source') == 'official_faculty_directory'
         or directory_key(person) in accepted_ids
         or person['professor_id'] in independently_linked]
     grades = {grade['id']: grade for grade in gpa['records']}

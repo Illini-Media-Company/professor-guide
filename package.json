@@ -11,6 +11,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "test:data": "python3 -m unittest discover -s tests -v",
+    "test:ui": "node --test tests/guide.test.js",
     "validate:data": "python3 -m scripts.validate_data",
     "test:embed": "playwright test",
     "update:data": "python3 -m scripts.update_data"

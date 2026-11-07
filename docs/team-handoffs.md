@@ -2,7 +2,9 @@
 
 **Scope decision, November 6, 2026:** move forward with the 2,287 identified instructors and 11,810 supported GPA attributions. Further GPA and archive-only identity review is **do later**, and does not block development with this set. Preserve the unresolved queues for resuming GPA review first, then archive-only review. See the [backlog](backlog.md).
 
-Jon's collector/integration infrastructure is complete independently of these product implementations. Production currently marks all three normalized enrichment inputs pending. The examples under `data/examples/integration/` are synthetic and must not be copied into production as real observations.
+**November 7 clarification:** display all collected courses and recorded teaching names regardless of GPA, with official directory-only faculty profiles also searchable. Preserve the existing verified GPA links; unreviewed initials remain subject-scoped schedule-name entries with identity/metrics Pending. The visitor index is version 2 and course availability is independent of reviewed instructor links. No automatic initial expansion is authorized by this visibility change.
+
+Jon's collector/integration infrastructure is complete independently of these product implementations. The prepared publication includes all three normalized enrichment inputs and a compact visitor index. Further identity expansion is deferred, and missing RMP data displays Pending. The examples under `data/examples/integration/` are synthetic and must not be copied into production as real observations.
 
 ## GPA owner task
 
@@ -36,11 +38,11 @@ Completion criteria: evidence-backed identity review and links; professor-wide n
 
 Implement search, filters, results table, professor/course profiles, GPA/rating displays, and charts in `src/`. Extend the data page while preserving the Vite base path and embed behavior.
 
-Entry point: fetch `${import.meta.env.BASE_URL}data/integration.json`. Resolve each `files.NAME.path` relative to `${import.meta.env.BASE_URL}data/`. Available objects include `schedule`, `history`, `aliases`, `department_coverage`, and `attributions`; `gpa`, `professors`, and `verified_occurrences` are explicitly pending until supplied. Keep one manifest's object set together. File SHA-256/byte-size/source timestamps are provided; paths are immutable.
+Entry point: fetch `${import.meta.env.BASE_URL}data/integration.json`. Resolve each `files.NAME.path` relative to `${import.meta.env.BASE_URL}data/`. Available objects include `schedule`, `history`, `aliases`, `department_coverage`, `attributions`, and the supplied enrichment inputs. The optional `guide` entry is the compact visitor projection used by the interface. Keep one manifest's object set together. File SHA-256/byte-size/source timestamps are provided; paths are immutable.
 
 Use term + CRN for section keys and term + course code for listing keys. Keep multiple/missing instructors on individual meetings. Use the separate verified links for real professor profiles; raw source names are unresolved. Use only verified GPA attribution from `attributions.grade_attributions` (or the same documented join policy), preserve the supplied grade grain, and show unavailable data differently from numeric zero. Professor-wide RMP values are not course-specific grades. Alias evidence supports related searchable listings, not duplicate grade samples or merged registration records.
 
-The starter’s `src/data.js` exports `loadGuide(signal)`, returning `{manifest, history}` from one manifest and its small v2 archive index. `App.jsx` displays actual coverage, collection dates, and per-term downloads. Resolve a term’s `snapshot.path` only when its data is needed; do not preload every year into the browser. New work uses the manifest; fixed-name sample exports are retired. Synthetic examples live in `data/examples/` and are exercised by the offline checks; do not publish them as production data.
+`src/data.js` exports `loadGuide(signal)`, returning `{manifest, index}` from one manifest and its compact `files.guide` projection. The interface provides professor/course search, subject/semester filters, a results/detail split on desktop, a separate detail view on phones, per-course weighted GPA/history, and professor-wide RMP summaries with Pending states. It checks the downloaded index's exact hash and byte count. Raw archive and enrichment datasets are source/download links rather than startup requests. Synthetic examples stay in `data/examples/` and are never published as real observations.
 
 Use query strings or hash navigation; GitHub Pages has no history-route fallback. Preserve iframe access, keyboard controls, narrow widths, and the external full-page link. Fixed 800px iframe height is the current handoff. Dynamic resize is unnecessary for this shell; any future resize protocol must validate origin, source window, finite bounded height, and parent-side origin allowlist.
 
