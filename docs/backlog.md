@@ -55,3 +55,7 @@ See the [batch results, source evidence and remaining priorities](coverage-expan
 The second pass recovers another 520 GPA rows and 226 teaching occurrences, adds 20 supported RMP profiles (19 numerical ratings), and fully resolves two repeated subject/name labels. Current totals are 3,407 identified instructors, 1,430 numerical RMP ratings, 12,758 verified GPA rows, and 9,394 verified teaching occurrences. There remain 433 ambiguous RMP cases, 5,866 unresolved GPA rows, and 17,259 unresolved subject/name labels. This continuation withdrew no previous GPA or RMP matches.
 
 The [continuation report](coverage-expansion-followup-2026-11-08.md) records the individually sourced professional-name reconciliations, public profile-URI identity evidence, reviewed legacy IHLT affiliation, and reuse of already-reviewed GPA source names for RMP matching. No global nickname/initial expansion, Fall grade collection, or deployment was performed.
+
+## November 9, 2026: public deployment resumed
+
+The user authorized resuming public deployment. Re-enable the Pages workflow and deploy the saved publication on `main` without a source refresh. The earlier deployment pauses above describe historical checkpoints; Fall grade collection remains outside scope.

@@ -51,7 +51,7 @@ Consumers must resolve all files from one manifest response. Do not guess filena
 
 ## GitHub Pages
 
-The workflow was manually disabled on November 7, 2026 at the user's request. Local builds and offline integration remain available; resuming remote checks/deployments requires re-enabling the workflow separately.
+The workflow was manually disabled on November 7, 2026 and re-enabled on November 9 with the user's authorization to resume public deployment. The resumption deploys the saved publication on `main` without refreshing source data; Fall grade collection remains outside scope.
 
 Repository: `Illini-Media-Company/professor-guide`; default branch: `main`. Under **Settings → Pages**, select **GitHub Actions**. Vite uses `/professor-guide/` for assets and data URLs. HTTPS is enabled.
 
