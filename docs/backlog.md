@@ -41,3 +41,17 @@ The prepared visitor index now includes 3,390 identified instructors, 8,371 cour
 Before a text search, instructor browsing puts entries with numerical RMP ratings first, then pending entries. Each group is alphabetical by last name, including under subject and semester filters. Text searches retain all matching listings. A small chart icon beside a name indicates usable verified GPA data within the selected subject/semester scope, without a legend. The interface uses the Salary Guide's Gibson font kit, orange, gray borders, and panel/table styles, with repeated methodology text kept under About the data.
 
 Desktop details remain beside results; phones retain the detail view and Back to results. The proposed change to keep mobile results and details visible together was withdrawn. The Pages workflow remains manually disabled; committing and pushing this work does not resume deployment.
+
+## November 8, 2026: Resume existing-data coverage review
+
+The user resumed review of the 687 RMP candidate cases, 6,814 unresolved GPA rows, and abbreviated teaching names. Fall grades remain outside scope; deployment stays paused.
+
+The first evidence-backed batch resolves 252 of the original RMP candidates, adds a net 198 numerical RMP ratings and 428 GPA rows, and adds 107 verified teaching occurrences. Eight prior RMP matches returned to pending because additional department context exposed competing supported profiles. The prepared catalog now has 3,396 identified instructors, 1,411 numerical RMP ratings, and 12,238 verified GPA rows. There remain 444 ambiguous RMP cases, 6,386 unresolved GPA rows, and 17,261 unresolved subject/name labels; these labels are not unique people.
+
+See the [batch results, source evidence and remaining priorities](coverage-expansion-2026-11-08.md) and [machine-readable review ledger](../data/mappings/coverage-expansion-review.json). Further review should prioritize historical LAS names, middle-name/nickname conflicts, and dated syllabi for specific teaching occurrences. No initials-only bulk expansion, Fall grade collection, or deployment was performed.
+
+### Coverage review continuation
+
+The second pass recovers another 520 GPA rows and 226 teaching occurrences, adds 20 supported RMP profiles (19 numerical ratings), and fully resolves two repeated subject/name labels. Current totals are 3,407 identified instructors, 1,430 numerical RMP ratings, 12,758 verified GPA rows, and 9,394 verified teaching occurrences. There remain 433 ambiguous RMP cases, 5,866 unresolved GPA rows, and 17,259 unresolved subject/name labels. This continuation withdrew no previous GPA or RMP matches.
+
+The [continuation report](coverage-expansion-followup-2026-11-08.md) records the individually sourced professional-name reconciliations, public profile-URI identity evidence, reviewed legacy IHLT affiliation, and reuse of already-reviewed GPA source names for RMP matching. No global nickname/initial expansion, Fall grade collection, or deployment was performed.

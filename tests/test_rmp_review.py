@@ -61,11 +61,64 @@ class RMPReviewTests(unittest.TestCase):
         self.assertEqual(data['records'][0]['status'], 'verified_match')
         self.assertFalse(data['records'][0]['candidates'][0]['department_agrees'])
 
+    def test_only_reviewed_grade_spellings_supplement_an_established_identity(self):
+        people = professors()
+        people['records'][0].update(display_name='Alex Example', department_names=['Mathematics'])
+        source = 'https://example.org/synthetic-grade-source'
+        grades = {'sources': [{'url': source}], 'records': [{
+            'id': 'synthetic-grade', 'course_code': 'MATH 101',
+            'primary_instructor_name_raw': 'Example, Alexandra'}]}
+        links = {'records': [{'professor_id': 'synthetic-alex', 'verified': True,
+            'listing_id': '2026-fall:MATH 101', 'grade_name_matches': []}]}
+        context = context_for(people, {'identities': []}, links, grades)
+        self.assertEqual(ledger(context=context, people=people)['records'][0]['status'], 'ambiguous_candidates')
+        bridge = {'grade_record_id': 'synthetic-grade',
+                  'primary_instructor_name_raw': 'Example, Alexandra', 'source_url': source,
+                  'reviewed_by': 'Synthetic identity reviewer', 'verified_at': FIXTURE_TIME,
+                  'evidence': ['Individually verified identity spelling'],
+                  'primary_evidence': ['Synthetic primary-instructor source field']}
+        links['records'][0]['grade_name_matches'] = [bridge]
+        context = context_for(people, {'identities': []}, links, grades)
+        data = ledger(context=context, people=people)
+        self.assertEqual(data['records'][0]['status'], 'verified_match')
+        self.assertIn(source, data['records'][0]['rmp']['matching_evidence'][-1])
+        self.assertNotIn('Example, Alexandra', data['records'][0]['official_names'])
+        self.assertEqual(data['records'][0]['reviewed_grade_names'][0]['grade_record_id'], 'synthetic-grade')
+        bridge['primary_instructor_name_raw'] = 'Example, Somebody Else'
+        with self.assertRaises(DataError):
+            context_for(people, {'identities': []}, links, grades)
+
     def test_department_label_aliases_preserve_exact_names_and_do_not_merge_adjacent_fields(self):
         aliases = {'Computer Science': 'Siebel School of Computing and Data Science'}
         self.assertTrue(department_matches('Computer Science', {'Computer Science, Department of'}, aliases))
         self.assertTrue(department_matches('Computer Science', {'Siebel School of Computing and Data Science'}, aliases))
         self.assertFalse(department_matches('Psychology', {'Educational Psychology'}, aliases))
+        self.assertTrue(department_matches('Classics', {'Classics, Department of the'}, {}))
+
+    def test_reviewed_college_context_keeps_name_checks_and_duplicate_profile_ambiguity(self):
+        context = contexts()
+        context['synthetic-alex']['units'] = {'Electrical and Computer Engineering'}
+        context['synthetic-alex']['courses'] = set()
+        review = {'official_units': ['Electrical and Computer Engineering'],
+                  'reviewed_by': 'Synthetic reviewer', 'reviewed_at': FIXTURE_TIME,
+                  'evidence': 'Synthetic college hierarchy evidence',
+                  'sources': [{'url': 'https://catalog.illinois.edu/synthetic',
+                               'fetched_at': FIXTURE_TIME, 'sha256': 'c' * 64}]}
+        config = {'department_aliases': {'Engineering': review['official_units']},
+                  'department_alias_reviews': {'Engineering': review}}
+        directory = {'complete': True}
+        rows = audit(professors(), context, [node(department='Engineering', courseCodes=[])], directory, config, FIXTURE_TIME)
+        self.assertEqual(rows[0]['status'], 'verified_match')
+        self.assertEqual(rows[0]['candidates'][0]['department_alias_review'], review)
+        self.assertIn('https://catalog.illinois.edu/synthetic', rows[0]['rmp']['matching_evidence'][-1])
+        rows = audit(professors(), context, [node(firstName='Alex', department='Engineering')], directory, config, FIXTURE_TIME)
+        self.assertEqual(rows[0]['status'], 'ambiguous_candidates')
+        rows = audit(professors(), context, [node(department='Engineering'), node(2, department='Engineering')], directory, config, FIXTURE_TIME)
+        self.assertEqual(rows[0]['reason'], 'multiple_supported_profiles')
+        config['department_aliases']['Engineering'] = ['Unrelated unit']
+        context['synthetic-alex']['units'] = {'Unrelated unit'}
+        with self.assertRaises(DataError):
+            audit(professors(), context, [node(department='Engineering')], directory, config, FIXTURE_TIME)
 
     def test_initial_nickname_and_conflicting_middle_names_are_never_automatic_matches(self):
         for first in ('A', 'Alex', 'Alexandra R'):
@@ -75,6 +128,20 @@ class RMPReviewTests(unittest.TestCase):
                 entry = ledger([node(firstName=first)], context=context)['records'][0]
                 self.assertEqual(entry['status'], 'ambiguous_candidates')
                 self.assertIsNone(entry['rmp'])
+
+    def test_explicit_parenthetical_prefix_nickname_does_not_become_a_middle_name(self):
+        data = ledger([node(firstName='Alexandra (Alex)')])
+        self.assertEqual(data['records'][0]['status'], 'verified_match')
+        self.assertEqual(data['records'][0]['candidates'][0]['name'], 'Example, Alexandra (Alex)')
+        self.assertEqual(data['records'][0]['candidates'][0]['matching_name'], 'Example, Alexandra')
+        whitespace = ledger([node(firstName='Alexandra ')])
+        self.assertNotIn('matching_name', whitespace['records'][0]['candidates'][0])
+        context = contexts()
+        context['synthetic-alex']['names'] = {'Example, Alexandra Q'}
+        data = ledger([node(firstName='Alexandra R (Alex)')], context=context)
+        self.assertEqual(data['records'][0]['status'], 'ambiguous_candidates')
+        data = ledger([node(firstName='Alex')])
+        self.assertEqual(data['records'][0]['status'], 'ambiguous_candidates')
 
     def test_shortened_compound_surname_is_a_candidate_requiring_review(self):
         context = contexts()

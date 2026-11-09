@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "dataset": "reviewed_professional_names",
+  "reviewed_at": "2026-11-08T22:41:42Z",
+  "reviews": [
+    {
+      "professor_id": "prof_uiuc_mehrtens",
+      "institutional_id": "mehrtens",
+      "published_names": [
+        "Mehrtens, Bradley G"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:41:43Z",
+      "evidence": "The individual MCB profile identifies Brad Mehrtens at mehrtens and describes his MCB 150 teaching. The official personnel supplement lists Bradley G Mehrtens in MCB. This reviewed legal/professional spelling supports Bradley without a generic Brad/Bradley rule.",
+      "sources": [
+        {
+          "url": "https://mcb.illinois.edu/directory/profile/mehrtens",
+          "fetched_at": "2026-11-08T22:38:15Z",
+          "sha256": "7e4fd8ffa892db21b78f12791ed245904ccd2dbf763fdf18b2371327f8030632"
+        },
+        {
+          "url": "https://www.trustees.uillinois.edu/trustees/resources/historical-files/html%20versions/25-26-Graybook/UIUC.html",
+          "fetched_at": "2026-11-08T22:16:11Z",
+          "sha256": "9691691eafbfda3fcba74ba9b9c240739f92fb7376df021f77290d26d831ba18"
+        }
+      ]
+    },
+    {
+      "professor_id": "prof_uiuc_mwinters",
+      "institutional_id": "mwinters",
+      "published_names": [
+        "Matthew S. Winters"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:41:43Z",
+      "evidence": "The individual Political Science profile itself uses Matthew S. Winters and publishes mwinters. This directly supplements the campus roster name Matt Winters for the same institutional identity.",
+      "sources": [
+        {
+          "url": "https://pol.illinois.edu/directory/profile/mwinters",
+          "fetched_at": "2026-11-08T22:38:16Z",
+          "sha256": "8542d7b07c91f7d36d84efa3fa7b0ff5b65f608188c94bacca7845cd538fb270"
+        }
+      ]
+    },
+    {
+      "professor_id": "prof_uiuc_avakakis",
+      "institutional_id": "avakakis",
+      "published_names": [
+        "Vakakis, Alexander F"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:41:43Z",
+      "evidence": "The individual MechSE profile identifies Alex Vakakis at avakakis. The personnel supplement lists Alexander F Vakakis in the same department. This is an individual source-backed spelling review, not a generic Alex expansion.",
+      "sources": [
+        {
+          "url": "https://mechse.illinois.edu/people/profile/avakakis",
+          "fetched_at": "2026-11-08T22:38:19Z",
+          "sha256": "30a291fb406f034131de61494d9a6bcf47c5b21db8e2136627c33b4fea508abd"
+        },
+        {
+          "url": "https://www.trustees.uillinois.edu/trustees/resources/historical-files/html%20versions/25-26-Graybook/UIUC.html",
+          "fetched_at": "2026-11-08T22:16:11Z",
+          "sha256": "9691691eafbfda3fcba74ba9b9c240739f92fb7376df021f77290d26d831ba18"
+        }
+      ]
+    },
+    {
+      "professor_id": "prof_uiuc_rkiyer",
+      "institutional_id": "rkiyer",
+      "published_names": [
+        "Ravishankar K. Iyer"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:41:43Z",
+      "evidence": "The same individual official profile is headed Ravi Iyer, publishes rkiyer, and explicitly names Ravishankar K. Iyer in its biography, including ECE/Computer Science appointments.",
+      "sources": [
+        {
+          "url": "https://medicine.illinois.edu/about/directory/faculty/profile/rkiyer",
+          "fetched_at": "2026-11-08T22:38:22Z",
+          "sha256": "221652f62bd525fc35027309a5719c4b891e1edf89e2a342f927ccfa8bc1e490"
+        }
+      ]
+    },
+    {
+      "professor_id": "prof_uiuc_mfowler5",
+      "institutional_id": "mfowler5",
+      "published_names": [
+        "Fowler, Maxwell Louis"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:41:43Z",
+      "evidence": "The official Siebel School profile identifies Max Fowler at mfowler5; the personnel supplement lists Maxwell Louis Fowler as Teaching Assistant Professor in Computer Science. Preserve Max as the display name and use the reviewed full spelling only as additional name evidence.",
+      "sources": [
+        {
+          "url": "https://siebelschool.illinois.edu/about/people/all-faculty/mfowler5",
+          "fetched_at": "2026-11-08T22:38:23Z",
+          "sha256": "9a936535f8c684df74a49e1f12bc6f0ecee1a2a6a9a6146d9d8cffb88340cefa"
+        },
+        {
+          "url": "https://www.trustees.uillinois.edu/trustees/resources/historical-files/html%20versions/25-26-Graybook/UIUC.html",
+          "fetched_at": "2026-11-08T22:16:11Z",
+          "sha256": "9691691eafbfda3fcba74ba9b9c240739f92fb7376df021f77290d26d831ba18"
+        }
+      ]
+    },
+    {
+      "professor_id": "prof_uiuc_arabbott",
+      "institutional_id": "arabbott",
+      "published_names": [
+        "Ann Abbott"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:41:43Z",
+      "evidence": "The individual official Spanish and Portuguese profile itself uses Ann Abbott and publishes arabbott, the established university identity for Annie Ruth Abbott. This is a directly published professional name, not an inferred nickname.",
+      "sources": [
+        {
+          "url": "https://spanport.illinois.edu/directory/profile/arabbott",
+          "fetched_at": "2026-11-08T22:38:26Z",
+          "sha256": "92dc9efe2d37812c8bdaf44864ae3055aff1ba02f135bb7c7a21680801f28b8e"
+        }
+      ]
+    },
+    {
+      "professor_id": "prof_uiuc_raovnv",
+      "institutional_id": "raovnv",
+      "published_names": [
+        "Vimal Rao"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:41:43Z",
+      "evidence": "The official profile prints V.N. Vimal Rao and publishes raovnv. This individually reviewed matching form retains the fully printed given name Vimal and surname Rao while omitting only the published prefixed initials. No initials are expanded, and the original display name remains V.N. Vimal Rao; department/course and unique-profile checks still apply.",
+      "sources": [
+        {
+          "url": "https://stat.illinois.edu/directory/profile/raovnv",
+          "fetched_at": "2026-11-02T06:56:15Z",
+          "sha256": "dc401350409b72bc609e4a22b753a784407d89ef1ee1e6935bad81221c05bc35"
+        }
+      ]
+    }
+  ]
+}

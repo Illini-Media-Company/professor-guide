@@ -342,7 +342,8 @@ class SourceCache:
 
     def fetch(self, url):
         parsed = urlsplit(url)
-        official = (parsed.hostname or '').endswith('.illinois.edu')
+        official = ((parsed.hostname or '').endswith('.illinois.edu') or
+                    parsed.hostname == 'www.trustees.uillinois.edu')
         grade_documentation = parsed.hostname == 'raw.githubusercontent.com' and parsed.path.startswith('/wadefagen/datasets/main/gpa/')
         require(parsed.scheme == 'https' and (official or grade_documentation),
                 'Identity sources must use official Illinois HTTPS URLs')
@@ -378,7 +379,8 @@ class SourceCache:
             self.defer(parsed.hostname, now())
         require(status == 200 and not denied, f'Directory access deferred: HTTP {status}: {url}')
         final_host = urlsplit(effective_url.decode()).hostname or ''
-        require(final_host.endswith('.illinois.edu') or (grade_documentation and final_host == 'raw.githubusercontent.com'),
+        require(final_host.endswith('.illinois.edu') or final_host == 'www.trustees.uillinois.edu' or
+                (grade_documentation and final_host == 'raw.githubusercontent.com'),
                 'Directory redirected outside official Illinois sources')
         result = {'url': url, 'fetched_at': now(), 'sha256': digest(body), 'bytes': len(body), 'body': text}
         if is_pdf:
@@ -488,6 +490,13 @@ def collect_directories(cache, config):
     for spec in config.get('manual_directory_people', []):
         require(spec['reviewed_by'] and spec['evidence'] and spec['source_urls'], 'Manual identity needs explicit source review')
         timestamp(spec['reviewed_at'])
+        profile_url = spec.get('profile_url')
+        if spec['directory_id'].startswith('profile_'):
+            require(profile_url and spec['directory_id'] == 'profile_' + digest(profile_url.encode())[:24],
+                    'Manual profile identity must use its reviewed URI hash')
+            parsed_profile = urlsplit(profile_url)
+            require(parsed_profile.scheme == 'https' and (parsed_profile.hostname or '').endswith('.illinois.edu'),
+                    'Manual profile identity needs an official Illinois URI')
         available = True
         for url in spec['source_urls']:
             if url not in sources:
@@ -501,7 +510,7 @@ def collect_directories(cache, config):
             for url in spec['source_urls']:
                 people.append({'netid': spec['directory_id'], 'name': spec['official_name'],
                     'unit': spec['unit'], 'unit_url': url, 'source_url': url,
-                    'subject_scope': spec['subjects'], 'profile_url': None,
+                    'subject_scope': spec['subjects'], 'profile_url': profile_url,
                     'manual_review': spec,
                     'faculty_directory_urls': [spec['directory_url']] if spec.get('directory_url') else []})
     grade_names = config.get('_grade_names', [])
@@ -548,6 +557,26 @@ def collect_directories(cache, config):
                     failures.append({'url': url, 'unit': spec['unit'], 'reason': str(error)})
         except (DataError, OSError, ValueError, subprocess.TimeoutExpired) as error:
             failures.append({'url': spec['url'], 'unit': spec['unit'], 'reason': str(error)})
+    config['_subject_unit_sources'] = {}
+    for subject, review in config.get('subject_unit_reviews', {}).items():
+        require(review['reviewed_by'] and review['evidence'] and review['source_urls'] and review['added_units'],
+                'Reviewed subject affiliation needs explicit evidence')
+        timestamp(review['reviewed_at'])
+        require(set(review['added_units']) <= set(config['subject_units'].get(subject, [])),
+                'Reviewed subject affiliation disagrees with configured units')
+        available = True
+        for url in review['source_urls']:
+            try:
+                response = cache.fetch(url)
+                sources[url] = {key: value for key, value in response.items() if key != 'body'}
+            except (DataError, OSError, ValueError, subprocess.TimeoutExpired) as error:
+                failures.append({'url': url, 'unit': subject, 'reason': str(error)})
+                available = False
+        if available:
+            config['_subject_unit_sources'][subject] = review['source_urls']
+        else:
+            config['subject_units'][subject] = [unit for unit in config['subject_units'][subject]
+                                                if unit not in review['added_units']]
     return people, sources, failures
 
 
@@ -587,6 +616,8 @@ def schedule_index(public_dir):
 @lru_cache(maxsize=8192)
 def unit_tokens(value):
     result = words(value.replace('&', ' and '))
+    if result[-3:] in (['department', 'of', 'the'], ['school', 'of', 'the'], ['college', 'of', 'the']):
+        result = result[:-3]
     if result[:2] in (['department', 'of'], ['school', 'of'], ['college', 'of']):
         result = result[2:]
     if result[-2:] in (['department', 'of'], ['school', 'of'], ['college', 'of']):
@@ -686,6 +717,12 @@ def review_inventory(grades, people, listings, config, reviewed_at):
                 'faculty_directory_urls': sorted({url for p in evidence
                     for url in p.get('faculty_directory_urls', [p.get('directory_url', p['source_url'])])}),
                 'profile_urls': sorted({p['profile_url'] for p in evidence if p['profile_url']})})
+        for candidate in entry['candidates']:
+            for subject in subjects:
+                review = config.get('subject_unit_reviews', {}).get(subject)
+                if review and subject in config.get('_subject_unit_sources', {}) and any(
+                        unit_tokens(unit) == unit_tokens(added) for unit in candidate['units'] for added in review['added_units']):
+                    candidate['source_urls'] = sorted(set(candidate['source_urls']) | set(config['_subject_unit_sources'][subject]))
         if len(by_id) != 1 or next(iter(by_id), None) in conflicting_ids:
             entry['reason'] = ('no_full_name_and_department_match' if not by_id else
                               'conflicting_names_for_official_identity' if len(by_id) == 1 else 'multiple_official_identities')

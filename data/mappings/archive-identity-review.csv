@@ -170,11 +170,11 @@ ABE,"Witmer, A",gpa_context,needs_additional_source_evidence,22,0,"Witmer, Ann-P
 ABE,"Wood, J",archive_only_label,needs_additional_source_evidence,4,0,,,
 ABE,"Zhang, Y",archive_only_label,candidate_requires_occurrence_review,12,0,,yzhang1,
 ACCY,"Abdel-Khalik, A",archive_only_label,candidate_requires_occurrence_review,3,0,,rashad,
-ACCY,"Alt, M",archive_only_label,candidate_requires_occurrence_review,36,0,,mandialt,
+ACCY,"Alt, M",gpa_context,partially_verified_occurrences,36,10,"Alt, Amanda J",mandialt,mandialt
 ACCY,"Alwood, C",archive_only_label,needs_additional_source_evidence,2,0,,,
 ACCY,"Anand, V",gpa_context,needs_additional_source_evidence,6,0,"Anand, Vic",,
 ACCY,"Anquandah, D",archive_only_label,candidate_requires_occurrence_review,4,0,,daa5,
-ACCY,"Augusto Sampaio Franco de Lima, G",archive_only_label,needs_additional_source_evidence,68,0,,,
+ACCY,"Augusto Sampaio Franco de Lima, G",gpa_context,partially_verified_occurrences,68,15,"Augusto Sampaio, Gerlando",gerlando,gerlando
 ACCY,"Bach, B",archive_only_label,needs_additional_source_evidence,2,0,,,
 ACCY,"Beardsley, E",gpa_context,partially_verified_occurrences,22,3,"Beardsley, Erik L",elb,elb
 ACCY,"Bentley, J",archive_only_label,needs_additional_source_evidence,4,0,,,
@@ -375,7 +375,7 @@ ACE,"Goldsmith, P",gpa_context,needs_additional_source_evidence,8,0,"Goldsmith, 
 ACE,"Goodrich, B",archive_only_label,needs_additional_source_evidence,4,0,,,
 ACE,"Goodrich, R",gpa_context,needs_additional_source_evidence,22,0,"Goodrich, Ryan J",,
 ACE,"Graber, K",gpa_context,needs_additional_source_evidence,2,0,"Graber, Kelsey L",,
-ACE,"Gundersen, L",gpa_context,needs_additional_source_evidence,59,0,"Gundersen, Lisa C",,
+ACE,"Gundersen, L",gpa_context,partially_verified_occurrences,59,18,"Gundersen, Lisa C",lcgunder,lcgunder
 ACE,"Hadunka, P",gpa_context,needs_additional_source_evidence,18,0,"Hadunka, Protensia",,
 ACE,"Helton, C",gpa_context,needs_additional_source_evidence,3,0,"Helton, Caroline A",,
 ACE,"Herrera Almanza, C",gpa_context,needs_additional_source_evidence,20,0,"Herrera Almanza, Catalina",,
@@ -448,7 +448,7 @@ ACE,"Sigauke, T",gpa_context,needs_additional_source_evidence,19,0,"Sigauke, Tap
 ACE,"Skidmore, M",gpa_context,needs_additional_source_evidence,19,0,"Skidmore, Marin E",,
 ACE,"Slack, A",gpa_context,needs_additional_source_evidence,1,0,"Slack, Aaron D",,
 ACE,"Staples, A",archive_only_label,needs_additional_source_evidence,2,0,,,
-ACE,"Stoddard, P",gpa_context,needs_additional_source_evidence,35,0,"Stoddard, Paul B",,
+ACE,"Stoddard, P",gpa_context,partially_verified_occurrences,35,23,"Stoddard, Paul B",pstoddrd,pstoddrd
 ACE,"Taylor, B",archive_only_label,needs_additional_source_evidence,4,0,,,
 ACE,"Valdebenito Ramirez, R",archive_only_label,needs_additional_source_evidence,6,0,,,
 ACE,"Valencia Rivamontan, C",archive_only_label,needs_additional_source_evidence,8,0,,,
@@ -578,7 +578,7 @@ ADV,"Vargas, P",gpa_context,partially_verified_occurrences,33,4,"Vargas, Patrick
 ADV,"Voznyuk, C",gpa_context,needs_additional_source_evidence,1,0,"Voznyuk, Charlotte R",,
 ADV,"Wang, M",archive_only_label,needs_additional_source_evidence,1,0,,,
 ADV,"Willis, R",archive_only_label,needs_additional_source_evidence,3,0,,,
-ADV,"Wilson, C",gpa_context,needs_additional_source_evidence,18,0,"Wilson, Carrie A",,
+ADV,"Wilson, C",gpa_context,partially_verified_occurrences,18,11,"Wilson, Carrie A",,carrieaw
 ADV,"Wirtz, J",gpa_context,partially_verified_occurrences,13,6,"Wirtz, John",jwirtz,jwirtz
 ADV,"Wise, K",gpa_context,partially_verified_occurrences,25,7,"Wise, Kevin R",krwise,krwise
 ADV,"Yang, G",gpa_context,partially_verified_occurrences,8,5,"Yang, Guolan",gly3,gly3
@@ -2143,7 +2143,7 @@ BADM,"Sullivan, N",gpa_context,partially_verified_occurrences,2,1,"Sullivan, Nan
 BADM,"Sumkin, D",gpa_context,partially_verified_occurrences,14,6,"Sumkin, Dmitrii",dsumkin,dsumkin
 BADM,"Swenddal, H",gpa_context,partially_verified_occurrences,8,5,"Swenddal, Heather J",hjs,hjs
 BADM,"Szymanski, M",archive_only_label,candidate_requires_occurrence_review,2,0,,mikeszym,
-BADM,"Taghaboni-Dutta, F",gpa_context,needs_additional_source_evidence,28,0,"Taghaboni-Dutta, Fataneh",,
+BADM,"Taghaboni-Dutta, F",gpa_context,partially_verified_occurrences,28,14,"Taghaboni-Dutta, Fataneh",profile_2a36c9eb5d2bd5b1ebd433e0,profile_2a36c9eb5d2bd5b1ebd433e0
 BADM,"Takeda, Y",gpa_context,partially_verified_occurrences,16,6,"Takeda, Yusaku",ytakeda,ytakeda
 BADM,"Torelli, C",gpa_context,partially_verified_occurrences,5,2,"Torelli, Carlos J",ctorelli,ctorelli
 BADM,"Tyagi, H",gpa_context,partially_verified_occurrences,6,2,"Tyagi, Hanu",hanu,hanu
@@ -3970,12 +3970,12 @@ CHLH,"Carlson, K",archive_only_label,candidate_requires_occurrence_review,1,0,,c
 CHLH,"Casaclang, E",archive_only_label,needs_additional_source_evidence,4,0,,,
 CHLH,"Chiu, C",gpa_context,partially_verified_occurrences,5,3,"Chiu, Chung-Yi",chiucy,chiucy
 CHLH,"Choi, S",gpa_context,partially_verified_occurrences,7,2,"Choi, Soyoung",soyoung,soyoung
-CHLH,"Clarke, C",gpa_context,candidate_requires_occurrence_review,8,0,"Clarke, Caitlin L",vitosky,
+CHLH,"Clarke, C",gpa_context,partially_verified_occurrences,8,3,"Clarke, Caitlin L",vitosky,vitosky
 CHLH,"Cole, S",gpa_context,needs_additional_source_evidence,1,0,"Cole, Sara L",,
 CHLH,"DiFilippo, K",gpa_context,partially_verified_occurrences,7,2,"DiFilippo, Kristen N",kdifilip,kdifilip
 CHLH,"Dubure, E",archive_only_label,needs_additional_source_evidence,2,0,,,
 CHLH,"Elias Lamas, A",gpa_context,partially_verified_occurrences,7,1,"Elias Lamas, Aline",aline,aline
-CHLH,"Frasca, B",archive_only_label,candidate_requires_occurrence_review,20,0,,bfrasca,
+CHLH,"Frasca, B",gpa_context,partially_verified_occurrences,20,3,"Frasca, Elizabeth A",bfrasca,bfrasca
 CHLH,"Freehill, A",gpa_context,partially_verified_occurrences,11,4,"Freehill, Ariel N",anbohm2,anbohm2
 CHLH,"Fuqua, S",gpa_context,needs_additional_source_evidence,3,0,"Fuqua, Stephon",,
 CHLH,"Gao, X",archive_only_label,needs_additional_source_evidence,4,0,,,
@@ -4783,7 +4783,7 @@ CS,"Fong, M",archive_only_label,needs_additional_source_evidence,4,0,,,
 CS,"Forbes, M",gpa_context,partially_verified_occurrences,9,2,"Forbes, Michael A",miforbes,miforbes
 CS,"Forsyth, D",archive_only_label,candidate_requires_occurrence_review,11,0,,daf,
 CS,"Fowler, M",gpa_context,candidate_requires_occurrence_review,17,0,"Fowler, Maxwell L",mfowler5,
-CS,"Fox, E",archive_only_label,candidate_requires_occurrence_review,4,0,,ekfox,
+CS,"Fox, E",archive_only_label,partially_verified_occurrences,4,2,,ekfox,
 CS,"Fulfagar, H",archive_only_label,needs_additional_source_evidence,6,0,,,
 CS,"Ganesan, A",gpa_context,partially_verified_occurrences,37,1,"Ganesan, Aishwarya",aganesn2,aganesn2
 CS,"Gangwar, N",archive_only_label,needs_additional_source_evidence,2,0,,,
@@ -5775,7 +5775,7 @@ ECE,"Fletcher, C",archive_only_label,needs_additional_source_evidence,1,0,,,
 ECE,"Fliflet, A",gpa_context,partially_verified_occurrences,8,6,"Fliflet, Arne W",afliflet,afliflet
 ECE,"Forbes, M",archive_only_label,needs_additional_source_evidence,3,0,,,
 ECE,"Forsyth, D",gpa_context,needs_additional_source_evidence,8,0,"Forsyth, David A",,
-ECE,"Fox, E",archive_only_label,needs_additional_source_evidence,4,0,,,
+ECE,"Fox, E",archive_only_label,partially_verified_occurrences,4,2,,,
 ECE,"Franceschini, N",archive_only_label,needs_additional_source_evidence,2,0,,,
 ECE,"Froeter, P",gpa_context,needs_additional_source_evidence,36,0,"Froeter, Paul J",,
 ECE,"Fuss, D",archive_only_label,needs_additional_source_evidence,11,0,,,
@@ -6477,7 +6477,7 @@ EDUC,"Liu, W",archive_only_label,candidate_requires_occurrence_review,15,0,,weil
 EDUC,"Lomax, K",archive_only_label,candidate_requires_occurrence_review,1,0,,khalila2,
 EDUC,"March, L",archive_only_label,needs_additional_source_evidence,4,0,,,
 EDUC,"Masamitsu, T",archive_only_label,needs_additional_source_evidence,1,0,,,
-EDUC,"Mason, C",archive_only_label,candidate_requires_occurrence_review,52,0,,masonc,
+EDUC,"Mason, C",gpa_context,partially_verified_occurrences,52,3,"Mason, Terrence C",masonc,masonc
 EDUC,"Mason, E",archive_only_label,candidate_requires_occurrence_review,2,0,,enmason,
 EDUC,"Minniear, J",archive_only_label,candidate_requires_occurrence_review,34,0,,jminni3,
 EDUC,"Moreno, S",archive_only_label,needs_additional_source_evidence,4,0,,,
@@ -6603,7 +6603,7 @@ ENG,"Patel, S",archive_only_label,needs_additional_source_evidence,3,0,,,
 ENG,"Patton, M",gpa_context,needs_additional_source_evidence,1,0,"Patton, Michaela J",,
 ENG,"Philpott, M",archive_only_label,needs_additional_source_evidence,1,0,,,
 ENG,"Pinson, M",archive_only_label,needs_additional_source_evidence,2,0,,,
-ENG,"Powers, K",gpa_context,needs_additional_source_evidence,371,0,"Powers, Kimberly",,
+ENG,"Powers, K",gpa_context,partially_verified_occurrences,371,16,"Powers, Kimberly",powerska,powerska
 ENG,"Reid, J",archive_only_label,needs_additional_source_evidence,6,0,,,
 ENG,"Reiter, L",archive_only_label,needs_additional_source_evidence,6,0,,,
 ENG,"Rodriguez, L",archive_only_label,needs_additional_source_evidence,8,0,,,
@@ -6616,7 +6616,7 @@ ENG,"Short, C",archive_only_label,needs_additional_source_evidence,2,0,,,
 ENG,"Singh, S",archive_only_label,needs_additional_source_evidence,3,0,,,
 ENG,"Snyder, C",archive_only_label,needs_additional_source_evidence,2,0,,,
 ENG,"Solomon, B",gpa_context,needs_additional_source_evidence,8,0,"Solomon, Brad R",,
-ENG,"Soranso, M",gpa_context,needs_additional_source_evidence,345,0,"Soranso, Murillo S",,
+ENG,"Soranso, M",gpa_context,partially_verified_occurrences,345,8,"Soranso, Murillo S",msoranso,msoranso
 ENG,"Stites, L",gpa_context,needs_additional_source_evidence,10,0,"Stites, Lauren E",,
 ENG,"Stratton, M",gpa_context,needs_additional_source_evidence,5,0,"Stratton, Murphy C",,
 ENG,"Tempel, D",gpa_context,needs_additional_source_evidence,116,0,"Tempel, Dana M",,
@@ -6946,7 +6946,7 @@ EPOL,"Livingston, C",archive_only_label,needs_additional_source_evidence,2,0,,,
 EPOL,"Loidl, V",archive_only_label,needs_additional_source_evidence,2,0,,,
 EPOL,"Magee, L",archive_only_label,candidate_requires_occurrence_review,11,0,,lmagee,
 EPOL,"Masamitsu, T",archive_only_label,needs_additional_source_evidence,5,0,,,
-EPOL,"Mason, C",archive_only_label,candidate_requires_occurrence_review,37,0,,masonc,
+EPOL,"Mason, C",gpa_context,partially_verified_occurrences,37,6,"Mason, Terrence C",masonc,masonc
 EPOL,"Mattingly, S",archive_only_label,needs_additional_source_evidence,48,0,,,
 EPOL,"Mazid, S",archive_only_label,needs_additional_source_evidence,7,0,,,
 EPOL,"McCarthy, C",gpa_context,partially_verified_occurrences,2,1,"McCarthy, Cameron R",cmccart1,cmccart1
@@ -7844,7 +7844,7 @@ FSHN,"Demejia, E",gpa_context,partially_verified_occurrences,10,2,"Demejia, Elvi
 FSHN,"Engeseth, N",gpa_context,partially_verified_occurrences,30,4,"Engeseth, Nicki J",engeseth,engeseth
 FSHN,"Feng, H",gpa_context,verified_occurrences,1,1,"Feng, Hao",haofeng,haofeng
 FSHN,"Flaws, J",archive_only_label,needs_additional_source_evidence,2,0,,,
-FSHN,"Gist, T",gpa_context,needs_additional_source_evidence,60,0,"Gist, Toni M",,
+FSHN,"Gist, T",gpa_context,partially_verified_occurrences,60,21,"Gist, Toni M",burkhalt,burkhalt
 FSHN,"Goldsmith, P",archive_only_label,needs_additional_source_evidence,2,0,,,
 FSHN,"Guevara Garcia, J",archive_only_label,needs_additional_source_evidence,4,0,,,
 FSHN,"Hall, L",archive_only_label,needs_additional_source_evidence,4,0,,,
@@ -8761,7 +8761,7 @@ HK,"Chiu, C",gpa_context,partially_verified_occurrences,8,2,"Chiu, Chung-Yi",chi
 HK,"Choi, J",gpa_context,needs_additional_source_evidence,12,0,"Choi, Jihoon",,
 HK,"Choi, S",gpa_context,partially_verified_occurrences,32,1,"Choi, Soyoung",soyoung,soyoung
 HK,"Chuhdry, A",archive_only_label,needs_additional_source_evidence,6,0,,,
-HK,"Clarke, C",gpa_context,candidate_requires_occurrence_review,79,0,"Clarke, Caitlin L",vitosky,
+HK,"Clarke, C",gpa_context,partially_verified_occurrences,79,8,"Clarke, Caitlin L",vitosky,vitosky
 HK,"Corral, C",gpa_context,needs_additional_source_evidence,6,0,"Corral, Christian J",,
 HK,"Couture, J",gpa_context,partially_verified_occurrences,20,13,"Couture, Jesse",jcouture,jcouture
 HK,"Couture, K",gpa_context,needs_additional_source_evidence,4,0,"Couture, Katherine",,
@@ -8782,7 +8782,7 @@ HK,"Fardous, J",archive_only_label,needs_additional_source_evidence,1,0,,,
 HK,"Ferdows, N",archive_only_label,candidate_requires_occurrence_review,1,0,,nferdows,
 HK,"Fink, E",gpa_context,needs_additional_source_evidence,1,0,"Fink, Emily A",,
 HK,"Fliflet, A",archive_only_label,needs_additional_source_evidence,4,0,,,
-HK,"Frasca, B",archive_only_label,candidate_requires_occurrence_review,59,0,,bfrasca,
+HK,"Frasca, B",gpa_context,partially_verified_occurrences,59,17,"Frasca, Elizabeth A",bfrasca,bfrasca
 HK,"Freehill, A",gpa_context,partially_verified_occurrences,9,4,"Freehill, Ariel N",anbohm2,anbohm2
 HK,"Frees-Williams, A",archive_only_label,candidate_requires_occurrence_review,2,0,,allisonf,
 HK,"Gardner, K",gpa_context,verified_occurrences,2,2,"Gardner, Karianne J",kjg3,kjg3
@@ -9053,7 +9053,7 @@ IB,"Chen, Y",archive_only_label,needs_additional_source_evidence,8,0,,,
 IB,"Cheng, V",archive_only_label,needs_additional_source_evidence,6,0,,,
 IB,"Cheng-De Vries, C",gpa_context,partially_verified_occurrences,9,4,"Cheng-De Vries, Chi-Hing",c-cheng,c-cheng
 IB,"Chung, S",archive_only_label,needs_additional_source_evidence,3,0,,,
-IB,"Clegg, B",gpa_context,needs_additional_source_evidence,365,0,"Clegg, Benjamin F",,
+IB,"Clegg, B",gpa_context,partially_verified_occurrences,365,23,"Clegg, Benjamin F",bclegg,bclegg
 IB,"Clodfelter, E",archive_only_label,needs_additional_source_evidence,3,0,,,
 IB,"Cloud, B",archive_only_label,needs_additional_source_evidence,4,0,,,
 IB,"Coates, H",archive_only_label,needs_additional_source_evidence,6,0,,,
@@ -9327,16 +9327,16 @@ IE,"Zhang, H",archive_only_label,needs_additional_source_evidence,1,0,,,
 IE,"Zhang, X",archive_only_label,needs_additional_source_evidence,2,0,,,
 IE,"Zhou, D",archive_only_label,needs_additional_source_evidence,7,0,,,
 IE,"Zhu, X",archive_only_label,needs_additional_source_evidence,6,0,,,
-IHLT,"DiFilippo, K",gpa_context,needs_additional_source_evidence,10,0,"DiFilippo, Kristen N",,
-IHLT,"Frasca, B",archive_only_label,needs_additional_source_evidence,14,0,,,
+IHLT,"DiFilippo, K",gpa_context,partially_verified_occurrences,10,4,"DiFilippo, Kristen N",kdifilip,kdifilip
+IHLT,"Frasca, B",gpa_context,partially_verified_occurrences,14,7,"Frasca, Elizabeth A",bfrasca,bfrasca
 IHLT,"Holterman, C",gpa_context,needs_additional_source_evidence,1,0,"Holterman, Christopher J",,
-IHLT,"Lara-Cinisomo, S",gpa_context,needs_additional_source_evidence,2,0,"Lara-Cinisomo, Sandraluz",,
-IHLT,"Mamaril, C",gpa_context,needs_additional_source_evidence,1,0,"Mamaril, Cezar Brian C",,
+IHLT,"Lara-Cinisomo, S",gpa_context,verified_occurrences,2,2,"Lara-Cinisomo, Sandraluz",laracini,laracini
+IHLT,"Mamaril, C",gpa_context,verified_occurrences,1,1,"Mamaril, Cezar Brian C",cbm,cbm
 IHLT,"Quintero Silva, L",gpa_context,needs_additional_source_evidence,3,0,"Quintero Silva, Laura M",,
-IHLT,"Rice, I",archive_only_label,needs_additional_source_evidence,1,0,,,
-IHLT,"Schwingel, A",archive_only_label,needs_additional_source_evidence,2,0,,,
+IHLT,"Rice, I",archive_only_label,candidate_requires_occurrence_review,1,0,,ianrice,
+IHLT,"Schwingel, A",archive_only_label,candidate_requires_occurrence_review,2,0,,andiara,
 IHLT,"Starwalt, W",gpa_context,needs_additional_source_evidence,3,0,"Starwalt, Wendy E",,
-IHLT,"Wisdom, A",archive_only_label,needs_additional_source_evidence,1,0,,,
+IHLT,"Wisdom, A",archive_only_label,candidate_requires_occurrence_review,1,0,,akmorgan,
 INFO,"Abdelatif, E",archive_only_label,needs_additional_source_evidence,1,0,,,
 INFO,"Abrams, K",archive_only_label,needs_additional_source_evidence,3,0,,,
 INFO,"Adewunmi, J",archive_only_label,candidate_requires_occurrence_review,1,0,,joannaa2,
@@ -10011,7 +10011,7 @@ JOUR,"Erdey, K",gpa_context,partially_verified_occurrences,77,1,"Erdey, Kenneth 
 JOUR,"Evans, C",gpa_context,needs_additional_source_evidence,5,0,"Evans, Christopher R",,
 JOUR,"Garza, M",gpa_context,partially_verified_occurrences,22,9,"Garza, Melita M",melitamg,melitamg
 JOUR,"Goncalves, A",gpa_context,partially_verified_occurrences,10,8,"Goncalves, Alexandre A",gonca,gonca
-JOUR,"Heuman, J",gpa_context,needs_additional_source_evidence,7,0,"Heuman, Joshua M",,
+JOUR,"Heuman, J",gpa_context,partially_verified_occurrences,7,6,"Heuman, Joshua M",jmheuman,jmheuman
 JOUR,"Houston, B",archive_only_label,needs_additional_source_evidence,30,0,,,
 JOUR,"Johnson, B",gpa_context,verified_occurrences,1,1,"Johnson, Brian K",bkj,bkj
 JOUR,"Kieser, E",gpa_context,needs_additional_source_evidence,4,0,"Kieser, Edward A",,
@@ -10060,7 +10060,7 @@ KIN,"Canton, I",gpa_context,needs_additional_source_evidence,6,0,"Canton, Imani"
 KIN,"Carlson, K",archive_only_label,candidate_requires_occurrence_review,3,0,,carlso1,
 KIN,"Choi, J",gpa_context,needs_additional_source_evidence,4,0,"Choi, Jihoon",,
 KIN,"Choi, S",archive_only_label,candidate_requires_occurrence_review,8,0,,soyoung,
-KIN,"Clarke, C",gpa_context,candidate_requires_occurrence_review,39,0,"Clarke, Caitlin L",vitosky,
+KIN,"Clarke, C",gpa_context,partially_verified_occurrences,39,3,"Clarke, Caitlin L",vitosky,vitosky
 KIN,"Couture, J",gpa_context,partially_verified_occurrences,9,5,"Couture, Jesse",jcouture,jcouture
 KIN,"Cuadra-Arguello, B",gpa_context,needs_additional_source_evidence,6,0,"Cuadra-Arguello, Brendama",,
 KIN,"Danbury, A",gpa_context,verified_occurrences,1,1,"Danbury, Anne E",schafsm2,schafsm2
@@ -10345,7 +10345,7 @@ LAS,"Fitch, E",archive_only_label,needs_additional_source_evidence,1,0,,,
 LAS,"Fitz-Henley, J",archive_only_label,needs_additional_source_evidence,3,0,,,
 LAS,"Flores, D",archive_only_label,needs_additional_source_evidence,1,0,,,
 LAS,"Frechette, M",archive_only_label,needs_additional_source_evidence,3,0,,,
-LAS,"Friedman, R",gpa_context,needs_additional_source_evidence,241,0,"Friedman, Roman",,
+LAS,"Friedman, R",gpa_context,partially_verified_occurrences,241,7,"Friedman, Roman",rfridmn2,rfridmn2
 LAS,"Gabis, L",archive_only_label,needs_additional_source_evidence,1,0,,,
 LAS,"Gajula, A",archive_only_label,needs_additional_source_evidence,3,0,,,
 LAS,"Garcia Lopez, S",archive_only_label,needs_additional_source_evidence,1,0,,,
@@ -10446,7 +10446,7 @@ LAS,"Letran, C",archive_only_label,needs_additional_source_evidence,1,0,,,
 LAS,"Leylani, A",archive_only_label,needs_additional_source_evidence,1,0,,,
 LAS,"Li, C",archive_only_label,needs_additional_source_evidence,1,0,,,
 LAS,"Li, S",archive_only_label,needs_additional_source_evidence,1,0,,,
-LAS,"Licht, M",gpa_context,candidate_requires_occurrence_review,153,0,"Licht, Mary J",mjlicht,
+LAS,"Licht, M",gpa_context,partially_verified_occurrences,153,3,"Licht, Mary J",mjlicht,mjlicht
 LAS,"Lichtenberg, S",archive_only_label,needs_additional_source_evidence,1,0,,,
 LAS,"Lickerman, N",archive_only_label,needs_additional_source_evidence,1,0,,,
 LAS,"Lisa, N",archive_only_label,needs_additional_source_evidence,1,0,,,
@@ -11325,7 +11325,7 @@ MACS,"Hasanpoursagharlou, A",archive_only_label,needs_additional_source_evidence
 MACS,"Hay, J",gpa_context,partially_verified_occurrences,9,8,"Hay, James W",jameshay,jameshay
 MACS,"He, B",archive_only_label,needs_additional_source_evidence,1,0,,,
 MACS,"Helmke, W",gpa_context,needs_additional_source_evidence,15,0,"Helmke, William H",,
-MACS,"Heuman, J",gpa_context,needs_additional_source_evidence,16,0,"Heuman, Joshua M",,
+MACS,"Heuman, J",gpa_context,partially_verified_occurrences,16,13,"Heuman, Joshua M",jmheuman,jmheuman
 MACS,"Hicks, M",gpa_context,needs_additional_source_evidence,1,0,"Hicks, Marisa C",,
 MACS,"Hong, Y",gpa_context,needs_additional_source_evidence,8,0,"Hong, Ye Won",,
 MACS,"Huh, M",archive_only_label,needs_additional_source_evidence,3,0,,,
@@ -11413,7 +11413,7 @@ MACS,"Ugwuoke, V",archive_only_label,needs_additional_source_evidence,2,0,,,
 MACS,"Valdivia, A",archive_only_label,needs_additional_source_evidence,1,0,,,
 MACS,"Wilder, D",archive_only_label,needs_additional_source_evidence,2,0,,,
 MACS,"Wilfley, M",archive_only_label,needs_additional_source_evidence,1,0,,,
-MACS,"Wilson, C",gpa_context,needs_additional_source_evidence,15,0,"Wilson, Carrie A",,
+MACS,"Wilson, C",gpa_context,partially_verified_occurrences,15,9,"Wilson, Carrie A",,carrieaw
 MACS,"Wright, P",archive_only_label,needs_additional_source_evidence,1,0,,,
 MACS,"Xiao, W",gpa_context,needs_additional_source_evidence,7,0,"Xiao, Wei",,
 MACS,"Yan, Z",archive_only_label,needs_additional_source_evidence,1,0,,,
@@ -12169,7 +12169,7 @@ MCB,"Jayasingh Ramkumar, J",archive_only_label,needs_additional_source_evidence,
 MCB,"Ji, Y",archive_only_label,needs_additional_source_evidence,7,0,,,
 MCB,"Jiang, Y",archive_only_label,needs_additional_source_evidence,2,0,,,
 MCB,"Jin, H",gpa_context,verified_occurrences,3,3,"Jin, Hong",hjin,hjin
-MCB,"Joesting, J",gpa_context,needs_additional_source_evidence,59,0,"Joesting, Jennifer J",,
+MCB,"Joesting, J",gpa_context,partially_verified_occurrences,59,4,"Joesting, Jennifer J",profile_f95ee7d8b88238a5fadbdc54,profile_f95ee7d8b88238a5fadbdc54
 MCB,"Johnson, K",archive_only_label,needs_additional_source_evidence,2,0,,,
 MCB,"Joo, D",archive_only_label,needs_additional_source_evidence,1,0,,,
 MCB,"Joshi, A",archive_only_label,needs_additional_source_evidence,1,0,,,
@@ -12581,7 +12581,7 @@ ME,"Gazzola, M",gpa_context,partially_verified_occurrences,8,3,"Gazzola, Mattia"
 ME,"Gerrard, N",archive_only_label,needs_additional_source_evidence,6,0,,,
 ME,"Ghaddar, D",archive_only_label,needs_additional_source_evidence,5,0,,,
 ME,"Glumac, N",gpa_context,partially_verified_occurrences,12,3,"Glumac, Nick; Glumac, Nick G",glumac,glumac
-ME,"Golecki, T",gpa_context,candidate_requires_occurrence_review,27,0,"Golecki, Thomas F",tfg,
+ME,"Golecki, T",gpa_context,partially_verified_occurrences,27,5,"Golecki, Thomas F",tfg,tfg
 ME,"Gonzalez, D",archive_only_label,needs_additional_source_evidence,6,0,,,
 ME,"Goza, A",gpa_context,partially_verified_occurrences,2,1,"Goza, Andres J",agoza,agoza
 ME,"Guo, J",archive_only_label,needs_additional_source_evidence,6,0,,,
@@ -12692,7 +12692,7 @@ ME,"McCann, D",archive_only_label,needs_additional_source_evidence,3,0,,,
 ME,"Mehta, P",gpa_context,partially_verified_occurrences,5,3,"Mehta, Prashant G",mehtapg,mehtapg
 ME,"Mei, A",archive_only_label,needs_additional_source_evidence,1,0,,,
 ME,"Mensing, G",gpa_context,partially_verified_occurrences,8,3,"Mensing, Glennys A",gmensing,gmensing
-ME,"Mercer, B",gpa_context,needs_additional_source_evidence,22,0,"Mercer, Brian S",,
+ME,"Mercer, B",gpa_context,partially_verified_occurrences,22,11,"Mercer, Brian S",bmercer,bmercer
 ME,"Michaloliakos, A",archive_only_label,needs_additional_source_evidence,6,0,,,
 ME,"Miljkovic, N",gpa_context,partially_verified_occurrences,6,5,"Miljkovic, Nenad",nmiljkov,nmiljkov
 ME,"Mirjavadi, K",archive_only_label,needs_additional_source_evidence,2,0,,,
@@ -15522,7 +15522,7 @@ RST,"Pazmino, J",gpa_context,needs_additional_source_evidence,7,0,"Pazmino, Jazm
 RST,"Pitas, N",gpa_context,needs_additional_source_evidence,11,0,"Pitas, Nicholas A",,
 RST,"Posbergh, A",archive_only_label,candidate_requires_occurrence_review,1,0,,posbergh,
 RST,"Puddicombe, N",archive_only_label,needs_additional_source_evidence,3,0,,,
-RST,"Raycraft, M",gpa_context,candidate_requires_occurrence_review,61,0,"Raycraft, Michael",mraycraf,
+RST,"Raycraft, M",gpa_context,partially_verified_occurrences,61,19,"Raycraft, Michael",mraycraf,mraycraf
 RST,"Reyes, L",archive_only_label,needs_additional_source_evidence,1,0,,,
 RST,"Rich, S",gpa_context,needs_additional_source_evidence,7,0,"Rich, Samantha Anne R",,
 RST,"Rocha De Oliveira, J",archive_only_label,needs_additional_source_evidence,5,0,,,
@@ -15736,7 +15736,7 @@ SHS,"Channell, M",gpa_context,partially_verified_occurrences,13,4,"Channell, Mar
 SHS,"Chesnut, K",gpa_context,partially_verified_occurrences,32,1,"Chesnut, Katherine A",kcoobs2,kcoobs2
 SHS,"Clark, M",archive_only_label,needs_additional_source_evidence,6,0,,,
 SHS,"Clough, B",archive_only_label,needs_additional_source_evidence,1,0,,,
-SHS,"Colon, I",archive_only_label,needs_additional_source_evidence,43,0,,,
+SHS,"Colon, I",gpa_context,partially_verified_occurrences,43,21,"Colon, Carlos",,colon17
 SHS,"Dahman, J",gpa_context,partially_verified_occurrences,112,5,"Dahman, Jennifer",jdahman,jdahman
 SHS,"Delaram Gharamaleki, V",archive_only_label,needs_additional_source_evidence,7,0,,,
 SHS,"Demas, M",archive_only_label,needs_additional_source_evidence,1,0,,,
@@ -16587,7 +16587,7 @@ TAM,"Garg, Y",archive_only_label,needs_additional_source_evidence,4,0,,,
 TAM,"Gerrard, N",archive_only_label,needs_additional_source_evidence,3,0,,,
 TAM,"Ghadiri Yazdi, M",archive_only_label,needs_additional_source_evidence,3,0,,,
 TAM,"Ghosh, S",archive_only_label,needs_additional_source_evidence,2,0,,,
-TAM,"Golecki, T",gpa_context,candidate_requires_occurrence_review,30,0,"Golecki, Thomas F",tfg,
+TAM,"Golecki, T",gpa_context,partially_verified_occurrences,30,8,"Golecki, Thomas F",tfg,tfg
 TAM,"Guo, J",archive_only_label,needs_additional_source_evidence,6,0,,,
 TAM,"Guo, W",archive_only_label,needs_additional_source_evidence,4,0,,,
 TAM,"Guo, Z",archive_only_label,needs_additional_source_evidence,12,0,,,
@@ -16655,7 +16655,7 @@ TAM,"Matalon, M",archive_only_label,candidate_requires_occurrence_review,3,0,,ma
 TAM,"Matlack, K",gpa_context,partially_verified_occurrences,6,3,"Matlack, Kathryn",kmatlack,kmatlack
 TAM,"Maxwell, T",archive_only_label,needs_additional_source_evidence,11,0,,,
 TAM,"Mehta, P",gpa_context,partially_verified_occurrences,3,1,"Mehta, Prashant G",mehtapg,mehtapg
-TAM,"Mercer, B",gpa_context,needs_additional_source_evidence,10,0,"Mercer, Brian S",,
+TAM,"Mercer, B",gpa_context,partially_verified_occurrences,10,5,"Mercer, Brian S",bmercer,bmercer
 TAM,"Michaloliakos, A",archive_only_label,needs_additional_source_evidence,5,0,,,
 TAM,"Mohebalhojeh, M",archive_only_label,needs_additional_source_evidence,6,0,,,
 TAM,"Moon, C",archive_only_label,needs_additional_source_evidence,3,0,,,
@@ -16842,7 +16842,7 @@ THEA,"McKean, K",gpa_context,candidate_requires_occurrence_review,28,0,"McKean, 
 THEA,"McKinnis, A",archive_only_label,needs_additional_source_evidence,6,0,,,
 THEA,"Meegan, K",archive_only_label,needs_additional_source_evidence,1,0,,,
 THEA,"Miguens, M",gpa_context,partially_verified_occurrences,75,1,"Miguens, Maria",miguens2,miguens2
-THEA,"Miller, T",gpa_context,candidate_requires_occurrence_review,240,0,"Miller, Thomas J",miller64,
+THEA,"Miller, T",gpa_context,partially_verified_occurrences,240,6,"Miller, Thomas J",miller64,miller64
 THEA,"Mitchell, T",archive_only_label,candidate_requires_occurrence_review,4,0,,tomitche,
 THEA,"Monson, J",archive_only_label,needs_additional_source_evidence,1,0,,,
 THEA,"Moody, A",archive_only_label,candidate_requires_occurrence_review,34,0,,amoody,

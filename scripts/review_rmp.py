@@ -157,7 +157,8 @@ def course_key(code):
 def context_for(professors, identity_ledger, links, grades):
     """Use established identity evidence and verified GPA links only."""
     contexts = {person['professor_id']: {'names': {person['display_name'], *person.get('official_names', [])}, 'units': set(person.get('department_names', [])),
-                'courses': set(), 'official_sources': {link['url'] for link in person.get('faculty_links', [])}}
+                'courses': set(), 'official_sources': {link['url'] for link in person.get('faculty_links', [])},
+                'reviewed_grade_names': {}}
                 for person in professors['records']}
     by_key = {}
     for person in professors['records']:
@@ -183,6 +184,14 @@ def context_for(professors, identity_ledger, links, grades):
             for match in link.get('grade_name_matches', []):
                 grade = by_grade[match['grade_record_id']]
                 context['courses'].add(course_key(grade['course_code']))
+                require(match['primary_instructor_name_raw'] == grade['primary_instructor_name_raw'] and
+                        match['source_url'] in {source['url'] for source in grades['sources']} and
+                        match['reviewed_by'] and match['evidence'] and match['primary_evidence'],
+                        'RMP name context requires an individually reviewed, source-consistent grade bridge')
+                timestamp(match['verified_at'])
+                context['reviewed_grade_names'].setdefault(grade['primary_instructor_name_raw'], {
+                    key: match[key] for key in ('grade_record_id', 'primary_instructor_name_raw',
+                                               'source_url', 'reviewed_by', 'verified_at', 'evidence')})
     return contexts
 
 
@@ -214,6 +223,18 @@ def metrics(node):
     return values
 
 
+def profile_matching_name(node):
+    given = node['firstName']
+    parenthetical = re.fullmatch(r'(.+?)\s*\(([^()]*)\)', given.strip())
+    if parenthetical:
+        full, nickname = words(parenthetical[1]), words(parenthetical[2])
+        # An explicit prefix nickname, e.g. Timothy (Tim), is not a supplied
+        # middle name. Keep all middle tokens outside the parentheses.
+        if full and len(nickname) == 1 and len(nickname[0]) >= 2 and full[0].startswith(nickname[0]):
+            given = parenthetical[1].strip()
+    return f"{node['lastName']}, {given}"
+
+
 def audit(professors, contexts, nodes, directory, config, reviewed_at):
     by_last = defaultdict(list)
     for node in nodes:
@@ -221,10 +242,12 @@ def audit(professors, contexts, nodes, directory, config, reviewed_at):
     entries = []
     for person in professors['records']:
         context = contexts[person['professor_id']]
+        reviewed_names = context.get('reviewed_grade_names', {})
+        all_names = set(context['names']) | set(reviewed_names)
         # Split natural names in every possible way; RMP supplies the surname
         # boundary. Full first/surname confirmation still happens below.
         surnames = set()
-        for name in context['names']:
+        for name in all_names:
             if ',' in name:
                 last = name_parts(name)[0]
                 surnames.update(tuple(last[:cut]) for cut in range(1, len(last) + 1))
@@ -236,11 +259,14 @@ def audit(professors, contexts, nodes, directory, config, reviewed_at):
         candidates, supported = [], []
         for node in possible.values():
             rmp_name = f"{node['lastName']}, {node['firstName']}"
-            full = any(full_name_agrees(rmp_name, name) for name in context['names'])
+            matching_name = profile_matching_name(node)
+            official_full = any(full_name_agrees(matching_name, name) for name in context['names'])
+            grade_name_support = [proof for name, proof in reviewed_names.items() if full_name_agrees(matching_name, name)]
+            full = official_full or bool(grade_name_support)
             # Initial/nickname candidates remain explicitly unverified.
             given = words(node['firstName'])
             plausible = full or any((parts := (name_parts(name)[1] if ',' in name else words(name)))
-                                   and given and parts[0][0] == given[0][0] for name in context['names'])
+                                   and given and parts[0][0] == given[0][0] for name in all_names)
             if not plausible:
                 continue
             same_department = department_matches(node['department'], context['units'], config.get('department_aliases', {}))
@@ -250,6 +276,21 @@ def audit(professors, contexts, nodes, directory, config, reviewed_at):
                 'full_name_agrees': full, 'department_agrees': same_department, 'shared_courses': shared,
                 'raw_metrics': {key: node.get(key) for key in ('avgRating', 'numRatings', 'avgDifficulty', 'wouldTakeAgainPercent')},
                 'metrics': metrics(node), 'source': node['_source']}
+            if matching_name != rmp_name:
+                candidate['matching_name'] = matching_name
+            if not official_full and grade_name_support:
+                candidate['reviewed_grade_name_evidence'] = grade_name_support
+            alias_review = config.get('department_alias_reviews', {}).get(node['department'])
+            if same_department and alias_review:
+                require(alias_review['official_units'] == config['department_aliases'][node['department']],
+                        'Department alias review disagrees with configured units')
+                require(alias_review['reviewed_by'] and alias_review['evidence'] and alias_review['sources'],
+                        'Department alias review needs supporting evidence')
+                timestamp(alias_review['reviewed_at'])
+                for source in alias_review['sources']:
+                    require(source['url'].startswith('https://') and source['sha256'], 'Department alias needs source provenance')
+                    timestamp(source['fetched_at'])
+                candidate['department_alias_review'] = alias_review
             candidates.append(candidate)
             if full and (same_department or shared):
                 supported.append(candidate)
@@ -258,6 +299,8 @@ def audit(professors, contexts, nodes, directory, config, reviewed_at):
                  'reason': 'incomplete_directory', 'candidates': sorted(candidates, key=lambda c: c['profile_id']),
                  'official_sources': sorted(context['official_sources']), 'official_names': sorted(context['names']),
                  'official_units': sorted(context['units']), 'verified_courses': sorted(context['courses']), 'rmp': None}
+        if reviewed_names:
+            entry['reviewed_grade_names'] = list(reviewed_names.values())
         if len(supported) == 1 and directory['complete']:
             candidate = supported[0]
             entry.update(status='verified_match', reason='unique_full_name_school_and_context',
@@ -268,6 +311,20 @@ def audit(professors, contexts, nodes, directory, config, reviewed_at):
                      'matching_evidence': [f"Full name agrees with established official identity; RMP school is {SCHOOL_NAME}.",
                          f"RMP department {candidate['department']} agrees with official unit evidence." if candidate['department_agrees']
                          else 'RMP course codes agree with verified GPA course context: ' + ', '.join(candidate['shared_courses'])]})
+            if candidate.get('department_alias_review'):
+                entry['rmp']['matching_evidence'].append('Reviewed department-label context: ' +
+                    candidate['department_alias_review']['evidence'] + ' Sources: ' +
+                    ', '.join(source['url'] for source in candidate['department_alias_review']['sources']))
+            if candidate.get('reviewed_grade_name_evidence'):
+                entry['rmp']['matching_evidence'][0] = f'Full name agrees with an individually reviewed grade-source identity; RMP school is {SCHOOL_NAME}.'
+                entry['rmp']['matching_evidence'].extend(
+                    f"Reviewed spelling {proof['primary_instructor_name_raw']} from grade {proof['grade_record_id']}; "
+                    f"identity review by {proof['reviewed_by']} at {proof['verified_at']}; source {proof['source_url']}."
+                    for proof in candidate['reviewed_grade_name_evidence'])
+            if candidate.get('matching_name'):
+                entry['rmp']['matching_evidence'].append(
+                    f"The RMP field explicitly lists a prefix nickname in parentheses ({candidate['name']}); "
+                    f"the full-name comparison uses {candidate['matching_name']} and preserves middle tokens outside parentheses.")
         elif directory['complete']:
             entry.update(status='ambiguous_candidates' if candidates else 'no_matching_profile_found',
                          reason='multiple_supported_profiles' if len(supported) > 1 else
@@ -336,12 +393,13 @@ def write_reports(ledger):
     lines += [f'| {key} | {value:,} |' for key, value in available.items()]
     lines += ['', '## Method and limits', '',
         'The audit compares the fixed accepted instructor set with the public RMP school-directory results for University Of Illinois at Urbana - Champaign. A match requires a compatible full first/surname, compatible supplied middle names, the correct school, and official department or verified course context. Initial-only and nickname candidates require further review; multiple supported profiles and shared profile assignments remain ambiguous.',
+        '', 'Full source names from individually reviewed GPA bridges can supplement official directory spellings. These require an exact grade-record/name/source reference and prior identity evidence; unreviewed grade names never participate. The accepted rating retains the spelling review and grade-source provenance separately from the RMP metric source.',
         '', 'These are bulk rule-based matches, not individual manual investigations. RMP course codes are supporting profile context; they do not make its aggregate ratings course-specific. The source is an anonymous query to the same public directory endpoint and pagination interface used by the RMP website, requesting its public profile summary/course fields. No individual review text is collected. Profile URLs identify the rated person; retrieval timestamps and query/response hashes identify where each metric was actually fetched.',
         '', 'Missing values and source sentinel values remain null; a genuine zero-percent take-again value is retained. Rating counts are counts of reviews, not graded enrollments. Failure or incomplete pagination is lookup unavailable, never evidence of absence. A no-match outcome means no name candidate was found in the directory results returned during this run; it does not establish that no profile exists. Repeated result IDs can reflect indexing or changing search order, so pagination completeness does not guarantee an exhaustive list of every real RMP profile.',
         '', '## Launch checkpoint', '',
-        ('Launch decision: proceed with available verified ratings. Missing metrics and unmatched profiles display Pending; there is no minimum coverage requirement. Deployment remains paused. Wider GPA/archive identity expansion remains deferred.'
+        ('Launch decision: proceed with available verified ratings. Missing metrics and unmatched profiles display Pending; there is no minimum coverage requirement. Deployment remains paused. Further GPA/archive identity review is tracked separately.'
          if ledger.get('status') == 'available_ratings_with_pending_missing' else
-         'No minimum ratings coverage is assumed. Stop here to decide launch coverage with the user. Deployment remains paused. Wider GPA/archive identity expansion remains deferred.'),
+         'No minimum ratings coverage is assumed. Stop here to decide launch coverage with the user. Deployment remains paused. Further GPA/archive identity review is tracked separately.'),
         '', 'See the [complete audit queue](../data/mappings/rmp-review.csv) and [evidence ledger](../data/mappings/rmp-identities.json).', '']
     for failure in ledger['directory']['failures']:
         lines += ['Source failure: ' + failure['reason'], '']
@@ -394,6 +452,9 @@ def main():
     ledger = {'schema_version': 1, 'dataset': 'rmp_identity_review', 'checked_at': checked_at,
         'status': config.get('launch_policy', 'awaiting_launch_coverage_decision'), 'method': 'rmp_directory_context_v1',
         'inputs': {'identity_sha256': identity_fingerprint(professors),
+                   'gpa_sha256': sha(Path('data/inputs/gpa.json').read_bytes()),
+                   'verified_links_sha256': sha(Path('data/inputs/verified-links.json').read_bytes()),
+                   'identity_ledger_sha256': sha(Path('data/mappings/professor-identities.json').read_bytes()),
                    'config_sha256': sha(Path('config/rmp-review.json').read_bytes()),
                    'script_sha256': sha(Path(__file__).read_bytes())},
         'directory': directory, 'records': entries}

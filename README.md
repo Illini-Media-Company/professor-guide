@@ -33,7 +33,7 @@ The production update always collects every department. `--start-year 2023` sele
 
 ## Data and team ownership
 
-**Current scope (November 7, 2026):** list the full collected course catalog, identified instructors, and recorded schedule names independently of GPA availability. Official faculty-directory identities are included even without grade records; unresolved source names remain labeled as such. Missing GPA and ratings display Pending. Further identity resolution is deferred; catalog visibility is not. See the [scope decisions and backlog](docs/backlog.md).
+**Current scope (November 7, 2026):** list the full collected course catalog, identified instructors, and recorded schedule names independently of GPA availability. Official faculty-directory identities are included even without grade records; unresolved source names remain labeled as such. Missing GPA and ratings display Pending. Review of existing GPA/RMP identities resumed November 8; Fall grade collection and deployment remain paused. See the [scope decisions and backlog](docs/backlog.md).
 
 The shared entry point is **`public/data/integration.json`**. Its `files` entries resolve to immutable JSON objects for the current schedule, teaching history, aliases, coverage, and teammate outputs. The search interface loads `files.guide` from that same manifest: every collected course, identified instructor profiles, and all unresolved schedule-name entries, independently of GPA availability. Course-specific GPA and RMP summaries appear only where verified; missing values display **Pending**. Raw archive files are available through source/download links and are not prefetched.
 

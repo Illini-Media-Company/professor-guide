@@ -271,7 +271,8 @@
       "Industrial and Enterprise Systems Engineering"
     ],
     "IHLT": [
-      "Interdisciplinary Health Sciences"
+      "Interdisciplinary Health Sciences",
+      "Health and Kinesiology"
     ],
     "INFO": [
       "Information Sciences",
@@ -1039,7 +1040,7 @@
     {
       "grade_name_raw": "de la Garza Val, Jose A",
       "directory_id": "delagv",
-      "official_name": "de la Garza Valenzuela, José A.",
+      "official_name": "de la Garza Valenzuela, Jos\u00e9 A.",
       "reviewed_by": "Codex",
       "reviewed_at": "2026-11-02T05:53:29Z",
       "source_urls": [
@@ -1047,14 +1048,14 @@
         "https://raw.githubusercontent.com/wadefagen/datasets/main/gpa/README.md"
       ],
       "evidence": [
-        "Reviewed the documented grade-source truncation de la Garza Val, Jose A against the official full directory name de la Garza Valenzuela, José A. (delagv).",
+        "Reviewed the documented grade-source truncation de la Garza Val, Jose A against the official full directory name de la Garza Valenzuela, Jos\u00e9 A. (delagv).",
         "The source documentation explicitly states that long instructor names are truncated by the university. The remaining given-name tokens, department, and course/term occurrence are checked separately; this is an explicit literal variant review."
       ]
     },
     {
-      "grade_name_raw": "de la Garza Val, José A",
+      "grade_name_raw": "de la Garza Val, Jos\u00e9 A",
       "directory_id": "delagv",
-      "official_name": "de la Garza Valenzuela, José A.",
+      "official_name": "de la Garza Valenzuela, Jos\u00e9 A.",
       "reviewed_by": "Codex",
       "reviewed_at": "2026-11-02T05:53:29Z",
       "source_urls": [
@@ -1062,7 +1063,7 @@
         "https://raw.githubusercontent.com/wadefagen/datasets/main/gpa/README.md"
       ],
       "evidence": [
-        "Reviewed the documented grade-source truncation de la Garza Val, José A against the official full directory name de la Garza Valenzuela, José A. (delagv).",
+        "Reviewed the documented grade-source truncation de la Garza Val, Jos\u00e9 A against the official full directory name de la Garza Valenzuela, Jos\u00e9 A. (delagv).",
         "The source documentation explicitly states that long instructor names are truncated by the university. The remaining given-name tokens, department, and course/term occurrence are checked separately; this is an explicit literal variant review."
       ]
     },
@@ -1191,6 +1192,193 @@
         "Reviewed the source initials in White, M C against the publicly used professional name White, M Christina and its official university profile (mcwhite7).",
         "The department, supplied given/middle initials, profile identity, and course/term occurrence must all agree. No undisclosed legal first name is inferred; other matching initials remain a conflict."
       ]
+    },
+    {
+      "grade_name_raw": "Augusto Sampaio, Gerlando",
+      "directory_id": "gerlando",
+      "official_name": "Gerlando Augusto Sampaio Franco de Lima",
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T21:59:26Z",
+      "source_urls": [
+        "https://lemann.illinois.edu/directory/profile/gerlando",
+        "https://giesbusiness.illinois.edu/profile/gerlando-lima"
+      ],
+      "faculty_profile_urls": [
+        "https://lemann.illinois.edu/directory/profile/gerlando"
+      ],
+      "evidence": [
+        "The grade source truncates the compound surname to Augusto Sampaio. Both official faculty profiles identify the same Gerlando and Accountancy affiliation. The preserved schedules use Augusto Sampaio Franco de Lima, G; accept only exact course/term occurrences under that reviewed full surname."
+      ],
+      "schedule_identity_name": "Augusto Sampaio Franco de Lima, Gerlando"
+    },
+    {
+      "grade_name_raw": "Miller, Thomas J",
+      "directory_id": "miller64",
+      "official_name": "Miller, Thom",
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T21:59:26Z",
+      "source_urls": [
+        "https://theatre.illinois.edu/people/profiles/thom-miller/",
+        "https://www.trustees.uillinois.edu/trustees/resources/historical-files/html%20versions/25-26-Graybook/KR.html"
+      ],
+      "faculty_profile_urls": [
+        "https://theatre.illinois.edu/people/profiles/thom-miller/"
+      ],
+      "evidence": [
+        "The official Theatre profile identifies Thom Miller at miller64@illinois.edu as Teaching Associate Professor and instructor of record for THEA 101. The official 2025\u20132026 academic personnel supplement independently lists Miller, Thomas J as TCH ASSOC PROF in Theatre. This individually reviewed professional-name variant is restricted to this identity; the GPA name and middle initial remain unchanged."
+      ]
+    },
+    {
+      "grade_name_raw": "Alt, Amanda J",
+      "directory_id": "mandialt",
+      "official_name": "Alt, Mandi",
+      "schedule_identity_name": "Alt, Mandi",
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:25:33Z",
+      "source_urls": [
+        "https://giesbusiness.illinois.edu/profile/mandi-alt",
+        "https://facultysearchapi.itpartners.illinois.edu/api/Search?q=&collegeType=business&departments=&units=&jobtypes=&username=&useFullText=false&skip=0&take=1000",
+        "https://www.trustees.uillinois.edu/trustees/resources/historical-files/html%20versions/25-26-Graybook/KM.html"
+      ],
+      "faculty_profile_urls": [
+        "https://giesbusiness.illinois.edu/profile/mandi-alt"
+      ],
+      "evidence": [
+        "The GPA source uses Amanda J; the personnel supplement lists Amanda Jo Alt in Accountancy, and the official profile/API identify Mandi Alt at mandialt. Preserved schedules use Alt, M. Restrict this given-name exception to this identity and retain the original GPA name."
+      ]
+    },
+    {
+      "grade_name_raw": "Clarke, Caitlin L",
+      "directory_id": "vitosky",
+      "official_name": "Clarke, Caitlin Vitosky",
+      "schedule_identity_name": "Clarke, Caitlin",
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:25:33Z",
+      "source_urls": [
+        "https://wggp.illinois.edu/directory/profile/vitosky",
+        "https://www.trustees.uillinois.edu/trustees/resources/historical-files/html%20versions/25-26-Graybook/KY.html",
+        "https://directoryapi.wigg.illinois.edu/api/Directory/Search/ahs?q=&useFullText=false&offices=&jobTypes=&tags=&skip=0&take=500"
+      ],
+      "faculty_profile_urls": [
+        "https://wggp.illinois.edu/directory/profile/vitosky"
+      ],
+      "evidence": [
+        "The source middle initial L is supported by the official personnel name Caitlin Leeann Clarke. The university faculty profile and AHS API identify the professionally used Caitlin Vitosky Clarke at vitosky in the same department. This is an individually sourced identity-name exception; the source name and initial are preserved."
+      ]
+    },
+    {
+      "grade_name_raw": "Frasca, Elizabeth A",
+      "directory_id": "bfrasca",
+      "official_name": "Frasca, Beth",
+      "schedule_identity_name": "Frasca, Beth",
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:25:33Z",
+      "source_urls": [
+        "https://publish.illinois.edu/hkfocusareas/",
+        "https://www.trustees.uillinois.edu/trustees/resources/historical-files/html%20versions/25-26-Graybook/KY.html",
+        "https://directoryapi.wigg.illinois.edu/api/Directory/Search/ahs?q=&useFullText=false&offices=&jobTypes=&tags=&skip=0&take=500"
+      ],
+      "faculty_profile_urls": [
+        "https://publish.illinois.edu/hkfocusareas/"
+      ],
+      "evidence": [
+        "The official personnel name Elizabeth Anne Frasca supports the GPA initial A. The official teaching roster/API use Beth Frasca at bfrasca; preserved course records use Frasca, B. This is a literal person-specific exception."
+      ]
+    },
+    {
+      "grade_name_raw": "Golecki, Thomas F",
+      "directory_id": "tfg",
+      "official_name": "Tom Golecki",
+      "schedule_identity_name": "Golecki, Tom",
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:25:34Z",
+      "source_urls": [
+        "https://mechse.illinois.edu/people/profile/tfg",
+        "https://www.trustees.uillinois.edu/trustees/resources/26-27-Graybook/KP.html"
+      ],
+      "faculty_profile_urls": [
+        "https://mechse.illinois.edu/people/profile/tfg"
+      ],
+      "evidence": [
+        "The personnel supplement lists Thomas Farley Golecki in MechSE as Teaching Assistant Professor; the official faculty profile identifies Tom Golecki at tfg and lists the ME/TAM courses present in these grade records. This given-name exception is person-specific and retains the original Thomas F source spelling."
+      ]
+    },
+    {
+      "grade_name_raw": "Heuman, Joshua M",
+      "directory_id": "jmheuman",
+      "official_name": "Josh Heuman",
+      "schedule_identity_name": "Heuman, Josh",
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:25:34Z",
+      "source_urls": [
+        "https://www.media.illinois.edu/heuman-josh/",
+        "https://www.media.illinois.edu/journalism-faculty/",
+        "https://www.media.illinois.edu/media-and-cinema-studies-faculty/",
+        "https://www.trustees.uillinois.edu/trustees/resources/historical-files/html%20versions/25-26-Graybook/UIUC.html"
+      ],
+      "faculty_profile_urls": [
+        "https://www.media.illinois.edu/heuman-josh/"
+      ],
+      "evidence": [
+        "The official campus identity uses Joshua M Heuman; the individual faculty profile uses Josh Heuman at jmheuman and lists both relevant department affiliations. Limit this nickname reconciliation to jmheuman."
+      ]
+    },
+    {
+      "grade_name_raw": "Wilson, Carrie A",
+      "directory_id": "carrieaw",
+      "official_name": "Carrie Wilson-Brown",
+      "schedule_identity_name": "Wilson, Carrie",
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:25:34Z",
+      "source_urls": [
+        "https://www.media.illinois.edu/wilson-brown-carrie/",
+        "https://www.media.illinois.edu/carrie-wilson/",
+        "https://directory.illinois.edu/facultyListing"
+      ],
+      "faculty_profile_urls": [
+        "https://www.media.illinois.edu/wilson-brown-carrie/"
+      ],
+      "evidence": [
+        "The older full source name Wilson, Carrie A agrees with the campus faculty identity Carrie Wilson at carrieaw. The current official individual profile uses Carrie Wilson-Brown and the same address. Preserve Wilson, C schedule labels and each exact course/term; do not merge other Wilson identities."
+      ]
+    },
+    {
+      "grade_name_raw": "Mason, Terrence C",
+      "directory_id": "masonc",
+      "official_name": "Mason, Curtis",
+      "schedule_identity_name": "Mason, Curtis",
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:28:26Z",
+      "source_urls": [
+        "https://education.illinois.edu/people/curtis-mason",
+        "https://directoryapi.wigg.illinois.edu/api/Directory/GetFull/education?offices=&jobtypes=",
+        "https://sce.education.illinois.edu/docs/librariesprovider33/default-document-library/educ-201-syllabus.fall-2021.final.pdf?Status=Master&sfvrsn=f2d6bb6c_5",
+        "https://www.trustees.uillinois.edu/trustees/resources/historical-files/html%20versions/25-26-Graybook/UIUC.html"
+      ],
+      "faculty_profile_urls": [
+        "https://education.illinois.edu/people/curtis-mason"
+      ],
+      "evidence": [
+        "The university personnel list supplies the exact Terrence C source spelling in EPOL. The official Education API and EDUC 201 syllabus identify the professionally used Curtis Mason at masonc. Restrict the middle-name usage to this reviewed identity; retain the source grade name and exact course/term."
+      ]
+    },
+    {
+      "grade_name_raw": "Colon, Carlos",
+      "directory_id": "colon17",
+      "official_name": "Colon, Carlos Ivan",
+      "schedule_identity_name": "Colon, Ivan",
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:28:26Z",
+      "source_urls": [
+        "https://citl.illinois.edu/proficiency-testing/testing-less-commonly-studied-languages",
+        "https://directoryapi.wigg.illinois.edu/api/Directory/Search/ahs?q=&useFullText=false&offices=&jobTypes=&tags=&skip=0&take=500"
+      ],
+      "faculty_profile_urls": [
+        "https://citl.illinois.edu/proficiency-testing/testing-less-commonly-studied-languages"
+      ],
+      "evidence": [
+        "The source first name Carlos and the official full given name Carlos Ivan refer to colon17. The official CITL roster explicitly uses Ivan Colon and colon17 for ASL in Speech and Hearing Science. Restrict the schedule initial I to this documented professional-name usage; do not apply a general middle-name matching rule."
+      ]
     }
   ],
   "api_rosters": [
@@ -1310,6 +1498,456 @@
         "The current official LAS directory binds Melissa Reedy to identifier murray.",
         "The dated December 2024 School of MCB award notice identifies Melissa Reedy as instructional staff. This historical affiliation supports the grade-source teaching period despite a later role change."
       ]
+    },
+    {
+      "directory_id": "msoranso",
+      "official_name": "Murillo Soranso",
+      "unit": "Engineering, Grainger",
+      "subjects": [
+        "ENG"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T21:59:26Z",
+      "source_urls": [
+        "https://gfx.grainger.illinois.edu/contact-us"
+      ],
+      "directory_url": "https://gfx.grainger.illinois.edu/contact-us",
+      "evidence": [
+        "The official Grainger First-Year Experience contact page names Murillo Soranso, GFX Associate Director, and publishes msoranso@illinois.edu. This confirms institutional identity and engineering affiliation; each grade still needs its own matching course/term occurrence."
+      ]
+    },
+    {
+      "directory_id": "powerska",
+      "official_name": "Kimberly Powers",
+      "unit": "Engineering, Grainger",
+      "subjects": [
+        "ENG"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T21:59:26Z",
+      "source_urls": [
+        "https://ws.engr.illinois.edu/custom/getsyllabus.asp?id=1875",
+        "https://ws.engr.illinois.edu/custom/getsyllabus.asp?id=2007"
+      ],
+      "directory_url": "https://ws.engr.illinois.edu/custom/getsyllabus.asp?id=1875",
+      "evidence": [
+        "The official Fall 2023 ENG 101 syllabus identifies course coordinator Kimberly Powers and powerska@illinois.edu. The official Fall 2023 ENG 177 SI syllabus independently names her as instructor with the same address. No course, semester, or primary role is inferred beyond the separate grade/occurrence review."
+      ]
+    },
+    {
+      "directory_id": "bclegg",
+      "official_name": "Benjamin Clegg",
+      "unit": "Integrative Biology",
+      "subjects": [
+        "IB"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T21:59:26Z",
+      "source_urls": [
+        "https://sib.illinois.edu/directory/profile/bclegg",
+        "https://sib.illinois.edu/directory/school-leadership-staff"
+      ],
+      "directory_url": "https://sib.illinois.edu/directory/profile/bclegg",
+      "evidence": [
+        "The School of Integrative Biology faculty profile and school-faculty roster name Benjamin Clegg, Teaching Assistant Professor, and bclegg@illinois.edu. The source middle initial F is retained in GPA records and not expanded."
+      ]
+    },
+    {
+      "directory_id": "burkhalt",
+      "official_name": "Toni Marie Gist",
+      "unit": "Food Science and Human Nutrition",
+      "subjects": [
+        "FSHN"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T21:59:26Z",
+      "source_urls": [
+        "https://publish.illinois.edu/fshn101-gist/syllabus/"
+      ],
+      "directory_url": "https://publish.illinois.edu/fshn101-gist/syllabus/",
+      "evidence": [
+        "The official FSHN 101 course site is titled FSHN 101 with Toni Marie Gist and gives Burkhalt@Illinois.edu as the instructor contact. This supports the full source first name and middle initial M without an invented name expansion."
+      ]
+    },
+    {
+      "directory_id": "lcgunder",
+      "official_name": "Lisa Gundersen",
+      "unit": "Agricultural and Consumer Economics",
+      "subjects": [
+        "ACE"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T21:59:26Z",
+      "source_urls": [
+        "https://aces.illinois.edu/sites/default/files/2023-09/Final.UGR_.Overview.FY2024.pdf",
+        "https://ace.illinois.edu/about/what-we-do-why-it-matters"
+      ],
+      "directory_url": "https://aces.illinois.edu/sites/default/files/2023-09/Final.UGR_.Overview.FY2024.pdf",
+      "evidence": [
+        "The official FY2024 ACES undergraduate overview identifies Lisa Gundersen as ACE honors advisor with lcgunder@illinois.edu. The ACE department page independently names her. This is dated affiliation evidence, not a claim of continuous current employment."
+      ]
+    },
+    {
+      "directory_id": "gerlando",
+      "official_name": "Gerlando Augusto Sampaio Franco de Lima",
+      "unit": "Accountancy",
+      "subjects": [
+        "ACCY"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T21:59:26Z",
+      "source_urls": [
+        "https://lemann.illinois.edu/directory/profile/gerlando",
+        "https://giesbusiness.illinois.edu/profile/gerlando-lima"
+      ],
+      "directory_url": "https://lemann.illinois.edu/directory/profile/gerlando",
+      "evidence": [
+        "The official Lemann profile names Gerlando Augusto Sampaio Franco de Lima, publishes gerlando@illinois.edu, and identifies Teaching Associate Professor, Accountancy. The Gies faculty profile independently confirms the person and unit."
+      ]
+    },
+    {
+      "directory_id": "rfridmn2",
+      "official_name": "Roman Friedman",
+      "unit": "Liberal Arts & Sciences, College of",
+      "subjects": [
+        "LAS"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:25:33Z",
+      "source_urls": [
+        "https://blogs.illinois.edu/view/6115/327357",
+        "https://www.trustees.uillinois.edu/trustees/resources/historical-files/html%20versions/25-26-Graybook/UIUC.html"
+      ],
+      "directory_url": "https://blogs.illinois.edu/view/6115/327357",
+      "evidence": [
+        "The official campus honors notice names Roman Friedman and rfridmn2@illinois.edu. The 2025\u20132026 personnel supplement places Roman Friedman in LAS Administration as Global Learning Senior Coordinator. Each grade still requires its own preserved course/term occurrence; no current-teaching claim is made."
+      ]
+    },
+    {
+      "directory_id": "mjlicht",
+      "official_name": "Mary Jo Licht",
+      "unit": "Liberal Arts & Sciences, College of",
+      "subjects": [
+        "LAS"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:25:33Z",
+      "source_urls": [
+        "https://las.illinois.edu/directory/saao",
+        "https://itproforum.illinois.edu/archives/fall-2021-conference/"
+      ],
+      "directory_url": "https://las.illinois.edu/directory/saao",
+      "evidence": [
+        "The official LAS first-year staff directory identifies MJ Licht at mjlicht@illinois.edu. The dated university IT Professionals Forum program identifies Mary Jo Licht of LAS and describes her work on the LAS 100/101/102/122/399 course systems. This literal professional-name reconciliation uses the distinctive name, same university office, and course role, not a generic initials expansion."
+      ]
+    },
+    {
+      "directory_id": "pstoddrd",
+      "official_name": "Paul Stoddard",
+      "unit": "Agricultural and Consumer Economics",
+      "subjects": [
+        "ACE"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:25:33Z",
+      "source_urls": [
+        "https://aces.illinois.edu/news/alumni-public-experienced-paul-stoddards-last-lecture-retirement"
+      ],
+      "directory_url": "https://aces.illinois.edu/news/alumni-public-experienced-paul-stoddards-last-lecture-retirement",
+      "evidence": [
+        "The official ACES retirement feature identifies Paul Stoddard, ACE teaching faculty, and gives pstoddrd@illinois.edu. This supports historical affiliation; it does not imply current employment."
+      ]
+    },
+    {
+      "directory_id": "mandialt",
+      "official_name": "Alt, Amanda Jo",
+      "unit": "Accountancy",
+      "subjects": [
+        "ACCY"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:25:33Z",
+      "source_urls": [
+        "https://giesbusiness.illinois.edu/profile/mandi-alt",
+        "https://facultysearchapi.itpartners.illinois.edu/api/Search?q=&collegeType=business&departments=&units=&jobtypes=&username=&useFullText=false&skip=0&take=1000",
+        "https://www.trustees.uillinois.edu/trustees/resources/historical-files/html%20versions/25-26-Graybook/KM.html"
+      ],
+      "directory_url": "https://giesbusiness.illinois.edu/profile/mandi-alt",
+      "evidence": [
+        "The official 2025\u20132026 Accountancy personnel list uses Amanda Jo Alt; the official Accountancy profile and API use Mandi Alt and publish mandialt. Accountancy role and tax-teaching context independently support this individually reviewed name variant."
+      ]
+    },
+    {
+      "directory_id": "vitosky",
+      "official_name": "Clarke, Caitlin Vitosky",
+      "unit": "Health and Kinesiology",
+      "subjects": [
+        "CHLH",
+        "HK",
+        "KIN"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:25:33Z",
+      "source_urls": [
+        "https://wggp.illinois.edu/directory/profile/vitosky",
+        "https://www.trustees.uillinois.edu/trustees/resources/historical-files/html%20versions/25-26-Graybook/KY.html",
+        "https://directoryapi.wigg.illinois.edu/api/Directory/Search/ahs?q=&useFullText=false&offices=&jobTypes=&tags=&skip=0&take=500"
+      ],
+      "directory_url": "https://wggp.illinois.edu/directory/profile/vitosky",
+      "evidence": [
+        "The personnel supplement names Clarke, Caitlin Leeann as Teaching Assistant Professor in Health and Kinesiology. The official faculty profile/API use Caitlin Vitosky Clarke, publish vitosky, and identify the Kinesiology affiliation and KIN 104 teaching. The legal/professional middle-name difference is explicitly reconciled for this person, not ignored globally."
+      ]
+    },
+    {
+      "directory_id": "bfrasca",
+      "official_name": "Frasca, Elizabeth Anne",
+      "unit": "Health and Kinesiology",
+      "subjects": [
+        "CHLH",
+        "HK",
+        "IHLT"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:25:33Z",
+      "source_urls": [
+        "https://publish.illinois.edu/hkfocusareas/",
+        "https://www.trustees.uillinois.edu/trustees/resources/historical-files/html%20versions/25-26-Graybook/KY.html",
+        "https://directoryapi.wigg.illinois.edu/api/Directory/Search/ahs?q=&useFullText=false&offices=&jobTypes=&tags=&skip=0&take=500"
+      ],
+      "directory_url": "https://publish.illinois.edu/hkfocusareas/",
+      "evidence": [
+        "The personnel supplement lists Elizabeth Anne Frasca as Instructor in Health and Kinesiology. The official HK roster/API name Beth Frasca, Instructor, at bfrasca. Matching institutional role, department and distinctive surname support this reviewed professional-name relationship."
+      ]
+    },
+    {
+      "directory_id": "mraycraf",
+      "official_name": "Michael Raycraft",
+      "unit": "Recreation, Sport and Tourism",
+      "subjects": [
+        "RST"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:25:33Z",
+      "source_urls": [
+        "https://ahs.illinois.edu/rst-directory",
+        "https://www.trustees.uillinois.edu/trustees/resources/historical-files/html%20versions/25-26-Graybook/KY.html"
+      ],
+      "directory_url": "https://ahs.illinois.edu/rst-directory",
+      "evidence": [
+        "The official RST directory publishes Michael Raycraft, Clinical Associate Professor, and mraycraf@illinois.edu. The personnel supplement independently confirms the name and RST appointment."
+      ]
+    },
+    {
+      "directory_id": "bmercer",
+      "official_name": "Brian S Mercer",
+      "unit": "Mechanical Science and Engineering",
+      "subjects": [
+        "ME",
+        "TAM"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:25:34Z",
+      "source_urls": [
+        "https://mechse.illinois.edu/people/profile/bmercer",
+        "https://www.trustees.uillinois.edu/trustees/resources/historical-files/html%20versions/25-26-Graybook/UIUC.html"
+      ],
+      "directory_url": "https://mechse.illinois.edu/people/profile/bmercer",
+      "evidence": [
+        "The official MechSE profile identifies Brian S Mercer at bmercer, dates his Lecturer appointment from 2018, and explicitly lists ME 371/471 and TAM 251/470 teaching. The personnel supplement independently confirms the appointment."
+      ]
+    },
+    {
+      "directory_id": "tfg",
+      "official_name": "Tom Golecki",
+      "unit": "Mechanical Science and Engineering",
+      "subjects": [
+        "ME",
+        "TAM"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:25:34Z",
+      "source_urls": [
+        "https://mechse.illinois.edu/people/profile/tfg",
+        "https://www.trustees.uillinois.edu/trustees/resources/26-27-Graybook/KP.html"
+      ],
+      "directory_url": "https://mechse.illinois.edu/people/profile/tfg",
+      "evidence": [
+        "The individual MechSE faculty profile binds Tom Golecki to tfg and the named ME/TAM teaching; the personnel record supplies Thomas Farley."
+      ]
+    },
+    {
+      "directory_id": "jmheuman",
+      "official_name": "Josh Heuman",
+      "unit": "Journalism",
+      "subjects": [
+        "JOUR"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:25:34Z",
+      "source_urls": [
+        "https://www.media.illinois.edu/heuman-josh/",
+        "https://www.media.illinois.edu/journalism-faculty/",
+        "https://www.media.illinois.edu/media-and-cinema-studies-faculty/",
+        "https://www.trustees.uillinois.edu/trustees/resources/historical-files/html%20versions/25-26-Graybook/UIUC.html"
+      ],
+      "directory_url": "https://www.media.illinois.edu/heuman-josh/",
+      "evidence": [
+        "The official individual profile identifies Josh Heuman at jmheuman and explicitly lists Journalism and Media & Cinema Studies affiliations. The campus personnel/faculty records use Joshua M Heuman."
+      ]
+    },
+    {
+      "directory_id": "jmheuman",
+      "official_name": "Josh Heuman",
+      "unit": "Media and Cinema Studies",
+      "subjects": [
+        "MACS"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:25:34Z",
+      "source_urls": [
+        "https://www.media.illinois.edu/heuman-josh/",
+        "https://www.media.illinois.edu/journalism-faculty/",
+        "https://www.media.illinois.edu/media-and-cinema-studies-faculty/",
+        "https://www.trustees.uillinois.edu/trustees/resources/historical-files/html%20versions/25-26-Graybook/UIUC.html"
+      ],
+      "directory_url": "https://www.media.illinois.edu/heuman-josh/",
+      "evidence": [
+        "The official individual profile identifies Josh Heuman at jmheuman and explicitly lists Journalism and Media & Cinema Studies affiliations. The campus personnel/faculty records use Joshua M Heuman."
+      ]
+    },
+    {
+      "directory_id": "carrieaw",
+      "official_name": "Carrie Wilson-Brown",
+      "unit": "Advertising",
+      "subjects": [
+        "ADV"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:25:34Z",
+      "source_urls": [
+        "https://www.media.illinois.edu/wilson-brown-carrie/",
+        "https://www.media.illinois.edu/carrie-wilson/",
+        "https://directory.illinois.edu/facultyListing"
+      ],
+      "directory_url": "https://www.media.illinois.edu/wilson-brown-carrie/",
+      "evidence": [
+        "The official individual profile publishes carrieaw and explicitly lists Advertising and Media & Cinema Studies affiliations. The campus faculty rollup binds the earlier professional name Carrie Wilson to the same university identity."
+      ]
+    },
+    {
+      "directory_id": "carrieaw",
+      "official_name": "Carrie Wilson-Brown",
+      "unit": "Media and Cinema Studies",
+      "subjects": [
+        "MACS"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:25:34Z",
+      "source_urls": [
+        "https://www.media.illinois.edu/wilson-brown-carrie/",
+        "https://www.media.illinois.edu/carrie-wilson/",
+        "https://directory.illinois.edu/facultyListing"
+      ],
+      "directory_url": "https://www.media.illinois.edu/wilson-brown-carrie/",
+      "evidence": [
+        "The official individual profile publishes carrieaw and explicitly lists Advertising and Media & Cinema Studies affiliations. The campus faculty rollup binds the earlier professional name Carrie Wilson to the same university identity."
+      ]
+    },
+    {
+      "directory_id": "profile_f95ee7d8b88238a5fadbdc54",
+      "official_name": "Jennifer Joesting",
+      "unit": "Molecular and Cellular Biology",
+      "subjects": [
+        "MCB"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:25:34Z",
+      "source_urls": [
+        "https://learn.illinois.edu/course/index.php?categoryid=5763",
+        "https://mcb.illinois.edu/news/2022-03-25/mcb-course-instructor-named-most-valuable-professor-womens-gymnastics-athletes"
+      ],
+      "directory_url": "https://learn.illinois.edu/course/index.php?categoryid=5763",
+      "evidence": [
+        "The public Learn@Illinois MCB course directory explicitly identifies Jennifer Joesting as Teacher and links that exact name to university teacher account 125448. The dated MCB feature independently confirms her Anatomy & Physiology instructor/course-coordinator role. Use the reviewed profile URI as a local identity key; no NetID is asserted and no protected profile page is fetched."
+      ],
+      "profile_url": "https://learn.illinois.edu/user/profile.php?id=125448"
+    },
+    {
+      "directory_id": "profile_2a36c9eb5d2bd5b1ebd433e0",
+      "official_name": "Fataneh Taghaboni-Dutta",
+      "unit": "Business Administration",
+      "subjects": [
+        "BADM"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:25:34Z",
+      "source_urls": [
+        "https://giesonline.illinois.edu/event/2023/02/16/default-calendar/meet-the-imba-faculty-with-professor-fatanah-taghaboni-dutta",
+        "https://onlinestudents.giesbusiness.illinois.edu/blog-posts/onlineimba-news-blog/2023/03/06/at-a-glance-february-6-2023"
+      ],
+      "directory_url": "https://giesonline.illinois.edu/event/2023/02/16/default-calendar/meet-the-imba-faculty-with-professor-fatanah-taghaboni-dutta",
+      "evidence": [
+        "The individual official faculty-event page names Professor Fataneh Taghaboni-Dutta. The dated 2023 Gies faculty feature identifies her as Clinical Professor of Business Administration and lead instructor for BADM 572 and BADM 589. This is historical faculty evidence; the individual faculty-bio URI supplies a local reviewed identity key, without inventing a NetID or claiming current employment."
+      ],
+      "profile_url": "https://giesonline.illinois.edu/event/2023/02/16/default-calendar/meet-the-imba-faculty-with-professor-fatanah-taghaboni-dutta"
+    },
+    {
+      "directory_id": "masonc",
+      "official_name": "Mason, Curtis",
+      "unit": "Education Policy, Organization and Leadership",
+      "subjects": [
+        "EPOL"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:28:26Z",
+      "source_urls": [
+        "https://education.illinois.edu/people/curtis-mason",
+        "https://directoryapi.wigg.illinois.edu/api/Directory/GetFull/education?offices=&jobtypes=",
+        "https://sce.education.illinois.edu/docs/librariesprovider33/default-document-library/educ-201-syllabus.fall-2021.final.pdf?Status=Master&sfvrsn=f2d6bb6c_5",
+        "https://www.trustees.uillinois.edu/trustees/resources/historical-files/html%20versions/25-26-Graybook/UIUC.html"
+      ],
+      "directory_url": "https://education.illinois.edu/people/curtis-mason",
+      "evidence": [
+        "The official Education API names Curtis Mason at masonc in Education Policy, Organization & Leadership and undergraduate programs. The dated EDUC 201 syllabus names Professor Curtis Mason at masonc. The university personnel supplement independently lists Terrence C Mason as Teaching Associate Professor in EPOL. This is the UIUC identity, not the similarly named Indiana University professor."
+      ]
+    },
+    {
+      "directory_id": "masonc",
+      "official_name": "Mason, Curtis",
+      "unit": "Education, College of",
+      "subjects": [
+        "EDUC"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:28:26Z",
+      "source_urls": [
+        "https://education.illinois.edu/people/curtis-mason",
+        "https://directoryapi.wigg.illinois.edu/api/Directory/GetFull/education?offices=&jobtypes=",
+        "https://sce.education.illinois.edu/docs/librariesprovider33/default-document-library/educ-201-syllabus.fall-2021.final.pdf?Status=Master&sfvrsn=f2d6bb6c_5",
+        "https://www.trustees.uillinois.edu/trustees/resources/historical-files/html%20versions/25-26-Graybook/UIUC.html"
+      ],
+      "directory_url": "https://education.illinois.edu/people/curtis-mason",
+      "evidence": [
+        "The official Education API names Curtis Mason at masonc in Education Policy, Organization & Leadership and undergraduate programs. The dated EDUC 201 syllabus names Professor Curtis Mason at masonc. The university personnel supplement independently lists Terrence C Mason as Teaching Associate Professor in EPOL. This is the UIUC identity, not the similarly named Indiana University professor."
+      ]
+    },
+    {
+      "directory_id": "colon17",
+      "official_name": "Colon, Carlos Ivan",
+      "unit": "Speech and Hearing Science",
+      "subjects": [
+        "SHS"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:28:26Z",
+      "source_urls": [
+        "https://citl.illinois.edu/proficiency-testing/testing-less-commonly-studied-languages",
+        "https://directoryapi.wigg.illinois.edu/api/Directory/Search/ahs?q=&useFullText=false&offices=&jobTypes=&tags=&skip=0&take=500"
+      ],
+      "directory_url": "https://citl.illinois.edu/proficiency-testing/testing-less-commonly-studied-languages",
+      "evidence": [
+        "The official AHS API identifies Carlos Ivan Colon at colon17 in Speech and Hearing Science. The official CITL ASL testing roster independently names Ivan Colon at colon17 for the same department. This directly documents professional use of the middle given name."
+      ]
     }
   ],
   "profile_indexes": [
@@ -1410,5 +2048,31 @@
         "tec": "Technology Entrepreneur Center"
       }
     }
-  ]
+  ],
+  "subject_unit_reviews": {
+    "IHLT": {
+      "reviewed_at": "2026-11-08T22:25:33Z",
+      "reviewed_by": "Codex",
+      "source_urls": [
+        "https://courses.illinois.edu/schedule/2026/fall/HK",
+        "https://www.hk.illinois.edu/academics/undergrad-programs/bs-in-interdiciplinary-health-sciences/"
+      ],
+      "evidence": "The official HK subject notes explicitly identify IHLT as a former rubric, and the department identifies the legacy Interdisciplinary Health Sciences program. This establishes subject affiliation only; course codes and grade samples remain separate.",
+      "added_units": [
+        "Health and Kinesiology"
+      ],
+      "sources": [
+        {
+          "url": "https://courses.illinois.edu/schedule/2026/fall/HK",
+          "fetched_at": "2026-11-08T22:22:19Z",
+          "sha256": "99bed8223c80b124789bd760a7d600fbda1302856fac6612846a3f3a8d716f0c"
+        },
+        {
+          "url": "https://www.hk.illinois.edu/academics/undergrad-programs/bs-in-interdiciplinary-health-sciences/",
+          "fetched_at": "2026-11-08T22:19:48Z",
+          "sha256": "10643b6ab5b1072ca611b3d2401666245c277db30ae3d07cc127eb881c123702"
+        }
+      ]
+    }
+  }
 }

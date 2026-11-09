@@ -6,6 +6,10 @@
 
 Jon's collector/integration infrastructure is complete independently of these product implementations. The prepared publication includes all three normalized enrichment inputs and a compact visitor index. Further identity expansion is deferred, and missing RMP data displays Pending. The examples under `data/examples/integration/` are synthetic and must not be copied into production as real observations.
 
+**November 8 coverage review:** existing-data identity work resumed. The first batch adds 428 verified GPA rows, 107 verified teaching occurrences, and a net 198 numerical RMP ratings. The [batch report](coverage-expansion-2026-11-08.md) records evidence, eight reclassified RMP matches, and remaining queues. Fall grade collection and deployment remain paused.
+
+**Coverage continuation:** the [follow-up report](coverage-expansion-followup-2026-11-08.md) records another 520 GPA rows, 226 teaching occurrences, and 19 numerical RMP ratings. The current prepared index has 3,407 identified instructors and 12,758 verified GPA rows. Original source grades and prior accepted links remain intact.
+
 ## GPA owner task
 
 Implement your grade-source ingestion and GPA calculations. Produce **`data/inputs/gpa.json`** using `data/examples/integration/gpa.json` as the shape, with `data_kind: "live"`, real source URLs/timestamps, and stable record IDs.
