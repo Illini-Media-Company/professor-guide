@@ -327,6 +327,43 @@ class IdentityReviewTests(unittest.TestCase):
         expected = deepcopy((professors, links))
         self.assertEqual(export_reviews(ledger, gpa, professors, links), expected)
 
+    def test_reviewed_public_teacher_profile_can_establish_identity_without_a_netid(self):
+        profile = 'https://learn.illinois.edu/user/profile.php?id=123'
+        identifier = 'profile_' + digest(profile.encode())[:24]
+        config = {'subject_units': {}, 'manual_directory_people': [{
+            'directory_id': identifier, 'official_name': 'Alexandra Example',
+            'profile_url': profile, 'unit': 'Mathematics', 'subjects': ['MATH'],
+            'source_urls': [URL], 'reviewed_by': 'Synthetic reviewer',
+            'reviewed_at': FIXTURE_TIME, 'evidence': ['The public course page explicitly links this named teacher to this profile URI.']} ]}
+        with tempfile.TemporaryDirectory() as directory:
+            cache = SourceCache(directory, offline=True)
+            with patch.object(cache, 'fetch', side_effect=lambda url: {
+                    'url': url, 'fetched_at': FIXTURE_TIME, 'body': '', 'sha256': digest(b'')}):
+                people, _, failures = collect_directories(cache, config)
+                self.assertFalse(failures)
+                self.assertEqual([(p['netid'], p['profile_url']) for p in people], [(identifier, profile)])
+                config['manual_directory_people'][0]['directory_id'] = 'profile_invented'
+                with self.assertRaises(DataError):
+                    collect_directories(cache, config)
+
+    def test_missing_subject_affiliation_evidence_disables_only_the_added_unit(self):
+        proof = 'https://math.illinois.edu/program-history'
+        config = {'subject_units': {'MATH': ['Legacy unit', 'Mathematics']},
+                  'subject_unit_reviews': {'MATH': {'added_units': ['Mathematics'],
+                      'reviewed_by': 'Synthetic reviewer', 'reviewed_at': FIXTURE_TIME,
+                      'source_urls': [proof], 'evidence': 'Synthetic academic reorganization'}}}
+        def fetch(url):
+            if url == proof:
+                raise DataError('Evidence unavailable')
+            return {'url': url, 'fetched_at': FIXTURE_TIME, 'body': '', 'sha256': digest(b'')}
+        with tempfile.TemporaryDirectory() as directory:
+            cache = SourceCache(directory, offline=True)
+            with patch.object(cache, 'fetch', side_effect=fetch):
+                _, _, failures = collect_directories(cache, config)
+        self.assertEqual(config['subject_units']['MATH'], ['Legacy unit'])
+        self.assertEqual(config['_subject_unit_sources'], {})
+        self.assertEqual(failures[0]['url'], proof)
+
     def test_binary_source_cache_checks_original_pdf_bytes(self):
         url = 'https://math.illinois.edu/syllabus.pdf'
         body = b'%PDF-1.5\n\xff synthetic evidence'
@@ -367,6 +404,19 @@ class IdentityReviewTests(unittest.TestCase):
                     SourceCache(root, pace=0).fetch(URL)
                 with self.assertRaisesRegex(DataError, 'host deferred'):
                     SourceCache(root, pace=0).fetch('https://math.illinois.edu/directory/faculty')
+                self.assertEqual(request.call_count, 1)
+
+    def test_trustees_personnel_evidence_is_allowed_but_unrelated_hosts_are_not(self):
+        url = 'https://www.trustees.uillinois.edu/synthetic-personnel.html'
+        response = subprocess.CompletedProcess([], 0, b'<h1>Synthetic personnel</h1>\n200\n' + url.encode(), b'')
+        with tempfile.TemporaryDirectory() as root:
+            with patch('scripts.review_identities.subprocess.run', return_value=response) as request:
+                saved = SourceCache(root, pace=0).fetch(url)
+                self.assertEqual(saved['url'], url)
+                self.assertEqual(saved['sha256'], digest(b'<h1>Synthetic personnel</h1>'))
+                for unrelated in ('https://other.uillinois.edu/personnel', 'https://www.trustees.uillinois.edu.example.org/personnel'):
+                    with self.assertRaises(DataError):
+                        SourceCache(root, pace=0).fetch(unrelated)
                 self.assertEqual(request.call_count, 1)
 
     def test_cached_http_200_directory_unavailable_is_not_an_empty_roster(self):

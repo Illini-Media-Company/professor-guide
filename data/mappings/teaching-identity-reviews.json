@@ -25,6 +25,34 @@
           "sha256": "ddab6b71ae464e576b66b3f17fe2bc6c6b8932c990b94a08508bf9c525ab1947"
         }
       ]
+    },
+    {
+      "professor_id": "prof_uiuc_powerska",
+      "reviewed_at": "2026-11-08T22:03:34Z",
+      "reviewed_by": "Codex",
+      "course_codes": [
+        "ENG 101"
+      ],
+      "term_id": "2023-fall",
+      "source_names": [
+        "Powers, K"
+      ],
+      "section_labels": [
+        "BL1",
+        "SL1"
+      ],
+      "verified_occurrence_ids": [
+        "teaching_review_de3630804178cb9180ec393a",
+        "teaching_review_27df98d6e1fff90c969b1036"
+      ],
+      "sources": [
+        {
+          "url": "https://ws.engr.illinois.edu/custom/getsyllabus.asp?id=1875",
+          "fetched_at": "2026-11-08T21:52:45Z",
+          "sha256": "41ff9462dab18fa4f2529c5738a9bc55166bf11d29c482b744d342f43b0a12af"
+        }
+      ],
+      "evidence": "Exact dated lecture sections listed in the syllabus; discussion staff are explicitly excluded."
     }
   ]
 }

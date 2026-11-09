@@ -14,8 +14,965 @@
     "Materials Science": "Materials Science and Engineering",
     "Communications": "Communication",
     "Political Science": "Political Science",
-    "Kinesiology": "Kinesiology and Community Health",
+    "Kinesiology": [
+      "Health and Kinesiology"
+    ],
     "Information Science": "Information Sciences",
-    "Advertising & Public Relations": "Advertising"
+    "Advertising & Public Relations": "Advertising",
+    "Engineering": [
+      "Aerospace Engineering",
+      "Agricultural and Biological Engineering",
+      "Bioengineering",
+      "Chemical and Biomolecular Engineering",
+      "Civil and Environmental Engineering",
+      "Computer Science",
+      "Siebel School of Computing and Data Science",
+      "Electrical and Computer Engineering",
+      "Industrial and Enterprise Systems Engineering",
+      "Materials Science and Engineering",
+      "Mechanical Science and Engineering",
+      "Nuclear, Plasma and Radiological Engineering",
+      "Physics"
+    ],
+    "Business": [
+      "Business Administration",
+      "Accountancy",
+      "Finance",
+      "Business, Gies College of"
+    ],
+    "Marketing": [
+      "Business Administration"
+    ],
+    "Education": [
+      "Curriculum and Instruction",
+      "Education Policy, Organization and Leadership",
+      "Educational Psychology",
+      "Special Education"
+    ],
+    "Agriculture": [
+      "Agricultural and Biological Engineering",
+      "Agricultural and Consumer Economics",
+      "Agricultural Leadership, Education and Communications Department",
+      "Agricultural Communications Program",
+      "Animal Sciences",
+      "Crop Sciences",
+      "Food Science and Human Nutrition",
+      "Human Development and Family Studies",
+      "Natural Resources and Environmental Sciences"
+    ],
+    "Theater": [
+      "Theatre"
+    ],
+    "Electrical  Computer Engineering": [
+      "Electrical and Computer Engineering"
+    ],
+    "Electrical & Comp. Engineering": [
+      "Electrical and Computer Engineering"
+    ],
+    "Electrical  Comp. Engineering": [
+      "Electrical and Computer Engineering"
+    ],
+    "Electrical amp Computer Engineering": [
+      "Electrical and Computer Engineering"
+    ],
+    "Electrical amp Comp. Engineering": [
+      "Electrical and Computer Engineering"
+    ],
+    "Computer Engineering": [
+      "Electrical and Computer Engineering"
+    ],
+    "Materials Engineering": [
+      "Materials Science and Engineering"
+    ],
+    "Systems Engineering": [
+      "Industrial and Enterprise Systems Engineering"
+    ],
+    "Community Health Sciences": [
+      "Health and Kinesiology"
+    ],
+    "Foods & Nutrition": [
+      "Food Science and Human Nutrition"
+    ],
+    "Nutrition": [
+      "Food Science and Human Nutrition"
+    ],
+    "Human & Community Development": [
+      "Human Development and Family Studies"
+    ],
+    "Crop Studies": [
+      "Crop Sciences"
+    ],
+    "Geology": [
+      "Earth Science and Environmental Change"
+    ],
+    "Atmospheric Sciences": [
+      "Climate, Meteorology and Atmospheric Sciences"
+    ],
+    "Spanish": [
+      "Spanish and Portuguese"
+    ],
+    "French": [
+      "French and Italian"
+    ],
+    "German": [
+      "Germanic Languages and Literatures"
+    ],
+    "East Asian Studies": [
+      "East Asian Languages and Cultures"
+    ],
+    "Comparative Literature": [
+      "Comparative and World Literature"
+    ],
+    "Speech & Hearing Sciences": [
+      "Speech and Hearing Science"
+    ],
+    "Speech  Hearing Sciences": [
+      "Speech and Hearing Science"
+    ],
+    "Speech amp Hearing Sciences": [
+      "Speech and Hearing Science"
+    ],
+    "Speech Communication": [
+      "Communication"
+    ],
+    "Recreation, Parks, & Tourism": [
+      "Recreation, Sport and Tourism"
+    ],
+    "Writing": [
+      "English"
+    ],
+    "Biology": [
+      "Integrative Biology",
+      "Evolution, Ecology, and Behavior",
+      "Plant Biology",
+      "Entomology",
+      "Molecular and Cellular Biology",
+      "Biochemistry",
+      "Cell and Developmental Biology",
+      "Microbiology",
+      "Molecular and Integrative Physiology"
+    ],
+    "Biochem. & Molecular Biology": [
+      "Biochemistry",
+      "Molecular and Cellular Biology",
+      "Cell and Developmental Biology",
+      "Microbiology",
+      "Molecular and Integrative Physiology"
+    ],
+    "Biochem. amp Molecular Biology": [
+      "Biochemistry",
+      "Molecular and Cellular Biology",
+      "Cell and Developmental Biology",
+      "Microbiology",
+      "Molecular and Integrative Physiology"
+    ],
+    "Biochem.  Molecular Biology": [
+      "Biochemistry",
+      "Molecular and Cellular Biology",
+      "Cell and Developmental Biology",
+      "Microbiology",
+      "Molecular and Integrative Physiology"
+    ],
+    "Art History": [
+      "Art and Design"
+    ],
+    "Art  Design": [
+      "Art and Design"
+    ],
+    "Art amp Design": [
+      "Art and Design"
+    ],
+    "Design": [
+      "Art and Design"
+    ],
+    "Studio Art": [
+      "Art and Design"
+    ],
+    "Women's Studies": [
+      "Gender and Women's Studies"
+    ],
+    "Languages": [
+      "Linguistics",
+      "Spanish and Portuguese",
+      "French and Italian",
+      "Germanic Languages and Literatures",
+      "East Asian Languages and Cultures",
+      "Slavic Languages and Literatures",
+      "Comparative and World Literature"
+    ],
+    "Foreign Languages": [
+      "Linguistics",
+      "Spanish and Portuguese",
+      "French and Italian",
+      "Germanic Languages and Literatures",
+      "East Asian Languages and Cultures",
+      "Slavic Languages and Literatures",
+      "Comparative and World Literature"
+    ]
+  },
+  "department_alias_reviews": {
+    "Engineering": {
+      "official_units": [
+        "Aerospace Engineering",
+        "Agricultural and Biological Engineering",
+        "Bioengineering",
+        "Chemical and Biomolecular Engineering",
+        "Civil and Environmental Engineering",
+        "Computer Science",
+        "Siebel School of Computing and Data Science",
+        "Electrical and Computer Engineering",
+        "Industrial and Enterprise Systems Engineering",
+        "Materials Science and Engineering",
+        "Mechanical Science and Engineering",
+        "Nuclear, Plasma and Radiological Engineering",
+        "Physics"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T21:53:58Z",
+      "evidence": "The UIUC catalog lists these academic units under Grainger. A broad RMP college label supplies affiliation context only; full-name agreement and unique profile ownership remain required.",
+      "sources": [
+        {
+          "url": "https://catalog.illinois.edu/schools/engineering/",
+          "fetched_at": "2026-11-08T21:52:39Z",
+          "sha256": "85786d6604c88bfff8dcdfb078f59249cdf29d106d339d99d3e75ac71a832015"
+        }
+      ]
+    },
+    "Business": {
+      "official_units": [
+        "Business Administration",
+        "Accountancy",
+        "Finance",
+        "Business, Gies College of"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T21:53:58Z",
+      "evidence": "The official Gies catalog identifies Accountancy, Business Administration, and Finance as its departments.",
+      "sources": [
+        {
+          "url": "https://catalog.illinois.edu/schools/gies-business/",
+          "fetched_at": "2026-11-08T21:52:41Z",
+          "sha256": "781dc593313438af8a1155f7b172703ecd582397567fbf718dda8c34abbd95c2"
+        }
+      ]
+    },
+    "Marketing": {
+      "official_units": [
+        "Business Administration"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T21:53:58Z",
+      "evidence": "The Gies catalog places the marketing degree within Business Administration; this is unit context, never a name alias.",
+      "sources": [
+        {
+          "url": "https://catalog.illinois.edu/schools/gies-business/",
+          "fetched_at": "2026-11-08T21:52:41Z",
+          "sha256": "781dc593313438af8a1155f7b172703ecd582397567fbf718dda8c34abbd95c2"
+        }
+      ]
+    },
+    "Education": {
+      "official_units": [
+        "Curriculum and Instruction",
+        "Education Policy, Organization and Leadership",
+        "Educational Psychology",
+        "Special Education"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T21:53:58Z",
+      "evidence": "The official College of Education catalog enumerates these four departments.",
+      "sources": [
+        {
+          "url": "https://catalog.illinois.edu/schools/education/",
+          "fetched_at": "2026-11-08T21:52:40Z",
+          "sha256": "d836dcd87c0ceb9138d0c8fdd352c1d9ea3be283be0c3259d6953b536ac18dc2"
+        }
+      ]
+    },
+    "Agriculture": {
+      "official_units": [
+        "Agricultural and Biological Engineering",
+        "Agricultural and Consumer Economics",
+        "Agricultural Leadership, Education and Communications Department",
+        "Agricultural Communications Program",
+        "Animal Sciences",
+        "Crop Sciences",
+        "Food Science and Human Nutrition",
+        "Human Development and Family Studies",
+        "Natural Resources and Environmental Sciences"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:05:48Z",
+      "evidence": "The official ACES catalog lists the agricultural academic units; unrelated engineering/education units are not included.",
+      "sources": [
+        {
+          "url": "https://catalog.illinois.edu/schools/aces/",
+          "fetched_at": "2026-11-08T21:52:42Z",
+          "sha256": "6933d4077536d959cd2eded167c3f04e629c5caee916befc0cef685e7d03d3a9"
+        },
+        {
+          "url": "https://aces.illinois.edu/news/college-aces-announces-merger-agricultural-leadership-education-communications-program",
+          "fetched_at": "2026-11-08T22:05:48Z",
+          "sha256": "a72d085ea3faf6fb492cf1d7a42f538553615a03bd13a20b8d7fc1d306d5b4ff"
+        }
+      ]
+    },
+    "Theater": {
+      "official_units": [
+        "Theatre"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T21:53:58Z",
+      "evidence": "Reviewed RMP label \"Theater\" against official UIUC unit \"Theatre\"; punctuation/abbreviations and discipline names are affiliation context only.",
+      "sources": [
+        {
+          "url": "https://theatre.illinois.edu/people/profiles/thom-miller/",
+          "fetched_at": "2026-11-08T21:52:44Z",
+          "sha256": "f94a2423aad5b65c2a402c6efc115f61e1351997cfd1e7d401083ca2396e3cc4"
+        }
+      ]
+    },
+    "Electrical  Computer Engineering": {
+      "official_units": [
+        "Electrical and Computer Engineering"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T21:53:58Z",
+      "evidence": "Reviewed RMP label \"Electrical  Computer Engineering\" against official UIUC unit \"Electrical and Computer Engineering\"; punctuation/abbreviations and discipline names are affiliation context only.",
+      "sources": [
+        {
+          "url": "https://grainger.illinois.edu/about/directory/faculty",
+          "fetched_at": "2026-11-02T15:56:08Z",
+          "sha256": "bccd61f3226d65050ada5b72a1ee068f9b9b480d8948a849bf8c967b38bcde83"
+        }
+      ]
+    },
+    "Electrical & Comp. Engineering": {
+      "official_units": [
+        "Electrical and Computer Engineering"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T21:53:58Z",
+      "evidence": "Reviewed RMP label \"Electrical & Comp. Engineering\" against official UIUC unit \"Electrical and Computer Engineering\"; punctuation/abbreviations and discipline names are affiliation context only.",
+      "sources": [
+        {
+          "url": "https://grainger.illinois.edu/about/directory/faculty",
+          "fetched_at": "2026-11-02T15:56:08Z",
+          "sha256": "bccd61f3226d65050ada5b72a1ee068f9b9b480d8948a849bf8c967b38bcde83"
+        }
+      ]
+    },
+    "Electrical  Comp. Engineering": {
+      "official_units": [
+        "Electrical and Computer Engineering"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T21:53:58Z",
+      "evidence": "Reviewed RMP label \"Electrical  Comp. Engineering\" against official UIUC unit \"Electrical and Computer Engineering\"; punctuation/abbreviations and discipline names are affiliation context only.",
+      "sources": [
+        {
+          "url": "https://grainger.illinois.edu/about/directory/faculty",
+          "fetched_at": "2026-11-02T15:56:08Z",
+          "sha256": "bccd61f3226d65050ada5b72a1ee068f9b9b480d8948a849bf8c967b38bcde83"
+        }
+      ]
+    },
+    "Electrical amp Computer Engineering": {
+      "official_units": [
+        "Electrical and Computer Engineering"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T21:53:58Z",
+      "evidence": "Reviewed RMP label \"Electrical amp Computer Engineering\" against official UIUC unit \"Electrical and Computer Engineering\"; punctuation/abbreviations and discipline names are affiliation context only.",
+      "sources": [
+        {
+          "url": "https://grainger.illinois.edu/about/directory/faculty",
+          "fetched_at": "2026-11-02T15:56:08Z",
+          "sha256": "bccd61f3226d65050ada5b72a1ee068f9b9b480d8948a849bf8c967b38bcde83"
+        }
+      ]
+    },
+    "Electrical amp Comp. Engineering": {
+      "official_units": [
+        "Electrical and Computer Engineering"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T21:53:58Z",
+      "evidence": "Reviewed RMP label \"Electrical amp Comp. Engineering\" against official UIUC unit \"Electrical and Computer Engineering\"; punctuation/abbreviations and discipline names are affiliation context only.",
+      "sources": [
+        {
+          "url": "https://grainger.illinois.edu/about/directory/faculty",
+          "fetched_at": "2026-11-02T15:56:08Z",
+          "sha256": "bccd61f3226d65050ada5b72a1ee068f9b9b480d8948a849bf8c967b38bcde83"
+        }
+      ]
+    },
+    "Computer Engineering": {
+      "official_units": [
+        "Electrical and Computer Engineering"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T21:53:58Z",
+      "evidence": "Reviewed RMP label \"Computer Engineering\" against official UIUC unit \"Electrical and Computer Engineering\"; punctuation/abbreviations and discipline names are affiliation context only.",
+      "sources": [
+        {
+          "url": "https://grainger.illinois.edu/about/directory/faculty",
+          "fetched_at": "2026-11-02T15:56:08Z",
+          "sha256": "bccd61f3226d65050ada5b72a1ee068f9b9b480d8948a849bf8c967b38bcde83"
+        }
+      ]
+    },
+    "Materials Engineering": {
+      "official_units": [
+        "Materials Science and Engineering"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T21:53:58Z",
+      "evidence": "Reviewed RMP label \"Materials Engineering\" against official UIUC unit \"Materials Science and Engineering\"; punctuation/abbreviations and discipline names are affiliation context only.",
+      "sources": [
+        {
+          "url": "https://grainger.illinois.edu/about/directory/faculty",
+          "fetched_at": "2026-11-02T15:56:08Z",
+          "sha256": "bccd61f3226d65050ada5b72a1ee068f9b9b480d8948a849bf8c967b38bcde83"
+        }
+      ]
+    },
+    "Systems Engineering": {
+      "official_units": [
+        "Industrial and Enterprise Systems Engineering"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T21:53:58Z",
+      "evidence": "Reviewed RMP label \"Systems Engineering\" against official UIUC unit \"Industrial and Enterprise Systems Engineering\"; punctuation/abbreviations and discipline names are affiliation context only.",
+      "sources": [
+        {
+          "url": "https://grainger.illinois.edu/about/directory/faculty",
+          "fetched_at": "2026-11-02T15:56:08Z",
+          "sha256": "bccd61f3226d65050ada5b72a1ee068f9b9b480d8948a849bf8c967b38bcde83"
+        }
+      ]
+    },
+    "Kinesiology": {
+      "official_units": [
+        "Health and Kinesiology"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T21:53:58Z",
+      "evidence": "Reviewed RMP label \"Kinesiology\" against official UIUC unit \"Health and Kinesiology\"; punctuation/abbreviations and discipline names are affiliation context only.",
+      "sources": [
+        {
+          "url": "https://publish.illinois.edu/hkfocusareas/",
+          "fetched_at": "2026-11-08T21:52:51Z",
+          "sha256": "fb617383ef38de66a4d7c3a6658d96bc5583c3332ce341e9d53e2cf13c4fe607"
+        }
+      ]
+    },
+    "Community Health Sciences": {
+      "official_units": [
+        "Health and Kinesiology"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T21:53:58Z",
+      "evidence": "Reviewed RMP label \"Community Health Sciences\" against official UIUC unit \"Health and Kinesiology\"; punctuation/abbreviations and discipline names are affiliation context only.",
+      "sources": [
+        {
+          "url": "https://publish.illinois.edu/hkfocusareas/",
+          "fetched_at": "2026-11-08T21:52:51Z",
+          "sha256": "fb617383ef38de66a4d7c3a6658d96bc5583c3332ce341e9d53e2cf13c4fe607"
+        }
+      ]
+    },
+    "Foods & Nutrition": {
+      "official_units": [
+        "Food Science and Human Nutrition"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T21:53:58Z",
+      "evidence": "Reviewed RMP label \"Foods & Nutrition\" against official UIUC unit \"Food Science and Human Nutrition\"; punctuation/abbreviations and discipline names are affiliation context only.",
+      "sources": [
+        {
+          "url": "https://catalog.illinois.edu/schools/aces/",
+          "fetched_at": "2026-11-08T21:52:42Z",
+          "sha256": "6933d4077536d959cd2eded167c3f04e629c5caee916befc0cef685e7d03d3a9"
+        }
+      ]
+    },
+    "Nutrition": {
+      "official_units": [
+        "Food Science and Human Nutrition"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T21:53:58Z",
+      "evidence": "Reviewed RMP label \"Nutrition\" against official UIUC unit \"Food Science and Human Nutrition\"; punctuation/abbreviations and discipline names are affiliation context only.",
+      "sources": [
+        {
+          "url": "https://catalog.illinois.edu/schools/aces/",
+          "fetched_at": "2026-11-08T21:52:42Z",
+          "sha256": "6933d4077536d959cd2eded167c3f04e629c5caee916befc0cef685e7d03d3a9"
+        }
+      ]
+    },
+    "Human & Community Development": {
+      "official_units": [
+        "Human Development and Family Studies"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T21:53:58Z",
+      "evidence": "Reviewed RMP label \"Human & Community Development\" against official UIUC unit \"Human Development and Family Studies\"; punctuation/abbreviations and discipline names are affiliation context only.",
+      "sources": [
+        {
+          "url": "https://catalog.illinois.edu/schools/aces/",
+          "fetched_at": "2026-11-08T21:52:42Z",
+          "sha256": "6933d4077536d959cd2eded167c3f04e629c5caee916befc0cef685e7d03d3a9"
+        }
+      ]
+    },
+    "Crop Studies": {
+      "official_units": [
+        "Crop Sciences"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T21:53:58Z",
+      "evidence": "Reviewed RMP label \"Crop Studies\" against official UIUC unit \"Crop Sciences\"; punctuation/abbreviations and discipline names are affiliation context only.",
+      "sources": [
+        {
+          "url": "https://catalog.illinois.edu/schools/aces/",
+          "fetched_at": "2026-11-08T21:52:42Z",
+          "sha256": "6933d4077536d959cd2eded167c3f04e629c5caee916befc0cef685e7d03d3a9"
+        }
+      ]
+    },
+    "Geology": {
+      "official_units": [
+        "Earth Science and Environmental Change"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T21:53:58Z",
+      "evidence": "Reviewed RMP label \"Geology\" against official UIUC unit \"Earth Science and Environmental Change\"; punctuation/abbreviations and discipline names are affiliation context only.",
+      "sources": [
+        {
+          "url": "https://geology.illinois.edu/directory",
+          "fetched_at": "2026-11-02T05:33:54Z",
+          "sha256": "f2ed4b1cb904b8b58fe13a50c20cbdb5b64fbdb6b14b14114840520ab80e44f9"
+        }
+      ]
+    },
+    "Atmospheric Sciences": {
+      "official_units": [
+        "Climate, Meteorology and Atmospheric Sciences"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T21:53:58Z",
+      "evidence": "Reviewed RMP label \"Atmospheric Sciences\" against official UIUC unit \"Climate, Meteorology and Atmospheric Sciences\"; punctuation/abbreviations and discipline names are affiliation context only.",
+      "sources": [
+        {
+          "url": "https://atmos.illinois.edu/directory",
+          "fetched_at": "2026-11-02T05:33:54Z",
+          "sha256": "d14151760970476bade6d526cc6211f7b52c787c9317e363b9c11b8aa1c2427d"
+        }
+      ]
+    },
+    "Spanish": {
+      "official_units": [
+        "Spanish and Portuguese"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T21:53:58Z",
+      "evidence": "Reviewed RMP label \"Spanish\" against official UIUC unit \"Spanish and Portuguese\"; punctuation/abbreviations and discipline names are affiliation context only.",
+      "sources": [
+        {
+          "url": "https://spanport.illinois.edu/directory",
+          "fetched_at": "2026-11-02T05:34:10Z",
+          "sha256": "ad5b2a4f688a2169d6b77270894b97922e91df655c7c684de5e64bedca2397e1"
+        }
+      ]
+    },
+    "French": {
+      "official_units": [
+        "French and Italian"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T21:53:58Z",
+      "evidence": "Reviewed RMP label \"French\" against official UIUC unit \"French and Italian\"; punctuation/abbreviations and discipline names are affiliation context only.",
+      "sources": [
+        {
+          "url": "https://frit.illinois.edu/directory",
+          "fetched_at": "2026-11-02T05:36:40Z",
+          "sha256": "461127dfbe8dd6a8c9d6051466d7c9881fa0a4c18237e0dd100f0a996d713f06"
+        }
+      ]
+    },
+    "German": {
+      "official_units": [
+        "Germanic Languages and Literatures"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T21:53:58Z",
+      "evidence": "Reviewed RMP label \"German\" against official UIUC unit \"Germanic Languages and Literatures\"; punctuation/abbreviations and discipline names are affiliation context only.",
+      "sources": [
+        {
+          "url": "https://germanic.illinois.edu/directory",
+          "fetched_at": "2026-11-02T05:34:16Z",
+          "sha256": "392726fb8be37516f8f9d8d3a5c937a384cd925ac14ad1637ceb7f2f56d9a016"
+        }
+      ]
+    },
+    "East Asian Studies": {
+      "official_units": [
+        "East Asian Languages and Cultures"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T21:53:58Z",
+      "evidence": "Reviewed RMP label \"East Asian Studies\" against official UIUC unit \"East Asian Languages and Cultures\"; punctuation/abbreviations and discipline names are affiliation context only.",
+      "sources": [
+        {
+          "url": "https://ealc.illinois.edu/directory",
+          "fetched_at": "2026-11-02T05:33:55Z",
+          "sha256": "7f259f5e74b3115750649c0fd457558775e88037b741b542766ac2f47f87c44b"
+        }
+      ]
+    },
+    "Comparative Literature": {
+      "official_units": [
+        "Comparative and World Literature"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T21:53:58Z",
+      "evidence": "Reviewed RMP label \"Comparative Literature\" against official UIUC unit \"Comparative and World Literature\"; punctuation/abbreviations and discipline names are affiliation context only.",
+      "sources": [
+        {
+          "url": "https://complit.illinois.edu/directory",
+          "fetched_at": "2026-11-02T05:34:27Z",
+          "sha256": "cc5b1c910526e71d8747fbed304956694944d937350b960c8c42f5f330823222"
+        }
+      ]
+    },
+    "Speech & Hearing Sciences": {
+      "official_units": [
+        "Speech and Hearing Science"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T21:53:58Z",
+      "evidence": "Reviewed RMP label \"Speech & Hearing Sciences\" against official UIUC unit \"Speech and Hearing Science\"; punctuation/abbreviations and discipline names are affiliation context only.",
+      "sources": [
+        {
+          "url": "https://directoryapi.wigg.illinois.edu/api/Directory/Search/ahs?q=&useFullText=false&offices=&jobTypes=&tags=&skip=0&take=500",
+          "fetched_at": "2026-11-02T05:55:13Z",
+          "sha256": "472840897bfaa163a27ef6c832385b60eb924adb5e80c835c5e2d88aae943371"
+        }
+      ]
+    },
+    "Speech  Hearing Sciences": {
+      "official_units": [
+        "Speech and Hearing Science"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T21:53:58Z",
+      "evidence": "Reviewed RMP label \"Speech  Hearing Sciences\" against official UIUC unit \"Speech and Hearing Science\"; punctuation/abbreviations and discipline names are affiliation context only.",
+      "sources": [
+        {
+          "url": "https://directoryapi.wigg.illinois.edu/api/Directory/Search/ahs?q=&useFullText=false&offices=&jobTypes=&tags=&skip=0&take=500",
+          "fetched_at": "2026-11-02T05:55:13Z",
+          "sha256": "472840897bfaa163a27ef6c832385b60eb924adb5e80c835c5e2d88aae943371"
+        }
+      ]
+    },
+    "Speech amp Hearing Sciences": {
+      "official_units": [
+        "Speech and Hearing Science"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T21:53:58Z",
+      "evidence": "Reviewed RMP label \"Speech amp Hearing Sciences\" against official UIUC unit \"Speech and Hearing Science\"; punctuation/abbreviations and discipline names are affiliation context only.",
+      "sources": [
+        {
+          "url": "https://directoryapi.wigg.illinois.edu/api/Directory/Search/ahs?q=&useFullText=false&offices=&jobTypes=&tags=&skip=0&take=500",
+          "fetched_at": "2026-11-02T05:55:13Z",
+          "sha256": "472840897bfaa163a27ef6c832385b60eb924adb5e80c835c5e2d88aae943371"
+        }
+      ]
+    },
+    "Speech Communication": {
+      "official_units": [
+        "Communication"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T21:53:58Z",
+      "evidence": "Reviewed RMP label \"Speech Communication\" against official UIUC unit \"Communication\"; punctuation/abbreviations and discipline names are affiliation context only.",
+      "sources": [
+        {
+          "url": "https://communication.illinois.edu/directory",
+          "fetched_at": "2026-11-02T05:33:18Z",
+          "sha256": "8ce6268bb656075ff4dd92f92eb310197d15a2abf3ebe7ead05817d023409131"
+        }
+      ]
+    },
+    "Recreation, Parks, & Tourism": {
+      "official_units": [
+        "Recreation, Sport and Tourism"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T21:53:58Z",
+      "evidence": "Reviewed RMP label \"Recreation, Parks, & Tourism\" against official UIUC unit \"Recreation, Sport and Tourism\"; punctuation/abbreviations and discipline names are affiliation context only.",
+      "sources": [
+        {
+          "url": "https://directoryapi.wigg.illinois.edu/api/Directory/Search/ahs?q=&useFullText=false&offices=&jobTypes=&tags=&skip=0&take=500",
+          "fetched_at": "2026-11-02T05:55:13Z",
+          "sha256": "472840897bfaa163a27ef6c832385b60eb924adb5e80c835c5e2d88aae943371"
+        }
+      ]
+    },
+    "Writing": {
+      "official_units": [
+        "English"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T21:53:58Z",
+      "evidence": "Reviewed RMP label \"Writing\" against official UIUC unit \"English\"; punctuation/abbreviations and discipline names are affiliation context only.",
+      "sources": [
+        {
+          "url": "https://english.illinois.edu/directory",
+          "fetched_at": "2026-11-02T05:33:09Z",
+          "sha256": "b3d6e66a5aa0974965556d6607e2bc3930d2355db708f6ebf95334b712eb56cd"
+        }
+      ]
+    },
+    "Biology": {
+      "official_units": [
+        "Integrative Biology",
+        "Evolution, Ecology, and Behavior",
+        "Plant Biology",
+        "Entomology",
+        "Molecular and Cellular Biology",
+        "Biochemistry",
+        "Cell and Developmental Biology",
+        "Microbiology",
+        "Molecular and Integrative Physiology"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:00:25Z",
+      "evidence": "The two official biology-school directories identify their respective departments. The broad RMP Biology label supports affiliation with those units only, not unrelated Bioengineering or Geography.",
+      "sources": [
+        {
+          "url": "https://mcb.illinois.edu/directory",
+          "fetched_at": "2026-11-02T05:44:52Z",
+          "sha256": "1a4cd780d7a0c6a6a965597eb1bc30de852052e9fae9c0d6e3fb5d103b2ac9fe"
+        },
+        {
+          "url": "https://sib.illinois.edu/directory/profile/bclegg",
+          "fetched_at": "2026-11-08T21:52:47Z",
+          "sha256": "06c7176cf4877592110c2c5d358679e7f88a2f3f883b076ae5441571c5e3e9f3"
+        }
+      ]
+    },
+    "Biochem. & Molecular Biology": {
+      "official_units": [
+        "Biochemistry",
+        "Molecular and Cellular Biology",
+        "Cell and Developmental Biology",
+        "Microbiology",
+        "Molecular and Integrative Physiology"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:00:25Z",
+      "evidence": "The MCB directory lists these biological-science departments. The RMP abbreviation supplies school/discipline context; it does not authorize matching Crop Sciences or changing a name.",
+      "sources": [
+        {
+          "url": "https://mcb.illinois.edu/directory",
+          "fetched_at": "2026-11-02T05:44:52Z",
+          "sha256": "1a4cd780d7a0c6a6a965597eb1bc30de852052e9fae9c0d6e3fb5d103b2ac9fe"
+        }
+      ]
+    },
+    "Biochem. amp Molecular Biology": {
+      "official_units": [
+        "Biochemistry",
+        "Molecular and Cellular Biology",
+        "Cell and Developmental Biology",
+        "Microbiology",
+        "Molecular and Integrative Physiology"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:00:25Z",
+      "evidence": "The MCB directory lists these biological-science departments. The RMP abbreviation supplies school/discipline context; it does not authorize matching Crop Sciences or changing a name.",
+      "sources": [
+        {
+          "url": "https://mcb.illinois.edu/directory",
+          "fetched_at": "2026-11-02T05:44:52Z",
+          "sha256": "1a4cd780d7a0c6a6a965597eb1bc30de852052e9fae9c0d6e3fb5d103b2ac9fe"
+        }
+      ]
+    },
+    "Biochem.  Molecular Biology": {
+      "official_units": [
+        "Biochemistry",
+        "Molecular and Cellular Biology",
+        "Cell and Developmental Biology",
+        "Microbiology",
+        "Molecular and Integrative Physiology"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:00:25Z",
+      "evidence": "The MCB directory lists these biological-science departments. The RMP abbreviation supplies school/discipline context; it does not authorize matching Crop Sciences or changing a name.",
+      "sources": [
+        {
+          "url": "https://mcb.illinois.edu/directory",
+          "fetched_at": "2026-11-02T05:44:52Z",
+          "sha256": "1a4cd780d7a0c6a6a965597eb1bc30de852052e9fae9c0d6e3fb5d103b2ac9fe"
+        }
+      ]
+    },
+    "Art History": {
+      "official_units": [
+        "Art and Design"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:00:25Z",
+      "evidence": "The official School of Art and Design faculty directory lists Art History, Design and Studio Art program areas. Only the named school is compatible, not similarly named activities in Business or Mathematics.",
+      "sources": [
+        {
+          "url": "https://art.illinois.edu/about/faculty-directory/",
+          "fetched_at": "2026-11-02T16:01:53Z",
+          "sha256": "c070f19091961e98124e66ccd5297d9cd2fd35458c1e680009dce61a70bf63fb"
+        }
+      ]
+    },
+    "Art  Design": {
+      "official_units": [
+        "Art and Design"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:00:25Z",
+      "evidence": "The official School of Art and Design faculty directory lists Art History, Design and Studio Art program areas. Only the named school is compatible, not similarly named activities in Business or Mathematics.",
+      "sources": [
+        {
+          "url": "https://art.illinois.edu/about/faculty-directory/",
+          "fetched_at": "2026-11-02T16:01:53Z",
+          "sha256": "c070f19091961e98124e66ccd5297d9cd2fd35458c1e680009dce61a70bf63fb"
+        }
+      ]
+    },
+    "Art amp Design": {
+      "official_units": [
+        "Art and Design"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:00:25Z",
+      "evidence": "The official School of Art and Design faculty directory lists Art History, Design and Studio Art program areas. Only the named school is compatible, not similarly named activities in Business or Mathematics.",
+      "sources": [
+        {
+          "url": "https://art.illinois.edu/about/faculty-directory/",
+          "fetched_at": "2026-11-02T16:01:53Z",
+          "sha256": "c070f19091961e98124e66ccd5297d9cd2fd35458c1e680009dce61a70bf63fb"
+        }
+      ]
+    },
+    "Design": {
+      "official_units": [
+        "Art and Design"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:00:25Z",
+      "evidence": "The official School of Art and Design faculty directory lists Art History, Design and Studio Art program areas. Only the named school is compatible, not similarly named activities in Business or Mathematics.",
+      "sources": [
+        {
+          "url": "https://art.illinois.edu/about/faculty-directory/",
+          "fetched_at": "2026-11-02T16:01:53Z",
+          "sha256": "c070f19091961e98124e66ccd5297d9cd2fd35458c1e680009dce61a70bf63fb"
+        }
+      ]
+    },
+    "Studio Art": {
+      "official_units": [
+        "Art and Design"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:00:25Z",
+      "evidence": "The official School of Art and Design faculty directory lists Art History, Design and Studio Art program areas. Only the named school is compatible, not similarly named activities in Business or Mathematics.",
+      "sources": [
+        {
+          "url": "https://art.illinois.edu/about/faculty-directory/",
+          "fetched_at": "2026-11-02T16:01:53Z",
+          "sha256": "c070f19091961e98124e66ccd5297d9cd2fd35458c1e680009dce61a70bf63fb"
+        }
+      ]
+    },
+    "Women's Studies": {
+      "official_units": [
+        "Gender and Women's Studies"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:00:25Z",
+      "evidence": "The official department name is Gender and Women's Studies. Adjacent ethnic studies or history affiliations are not treated as equivalent.",
+      "sources": [
+        {
+          "url": "https://gws.illinois.edu/directory",
+          "fetched_at": "2026-11-02T05:33:57Z",
+          "sha256": "5099fdfd6af49730388212d8ed0fdefb9a9703a2d9fe941d6a681791438c8b91"
+        }
+      ]
+    },
+    "Languages": {
+      "official_units": [
+        "Linguistics",
+        "Spanish and Portuguese",
+        "French and Italian",
+        "Germanic Languages and Literatures",
+        "East Asian Languages and Cultures",
+        "Slavic Languages and Literatures",
+        "Comparative and World Literature"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:05:48Z",
+      "evidence": "The official School of Literatures, Cultures and Linguistics directory supplies language-unit context; unrelated business affiliations do not qualify.",
+      "sources": [
+        {
+          "url": "https://slcl.illinois.edu/directory",
+          "fetched_at": "2026-11-02T05:34:10Z",
+          "sha256": "733570a27c2630ebcd9555275aad9620c5a8f34009458d21efa09d9b42482242"
+        },
+        {
+          "url": "https://slcl.illinois.edu/graduate/departments",
+          "fetched_at": "2026-11-08T22:05:46Z",
+          "sha256": "1bde00231d32460436a54a3bf0d3b9ef5d5ef097f98aa800371fcfba79902a4f"
+        },
+        {
+          "url": "https://slcl.illinois.edu/system/files/inline-files/SLCL_Winter17_NL_v2.pdf",
+          "fetched_at": "2026-11-08T22:05:48Z",
+          "sha256": "9fbcdd3e7b019925326dd5e9999f6abfaa2f6fce74f6ed185c08b4c5fc02d85f"
+        }
+      ]
+    },
+    "Foreign Languages": {
+      "official_units": [
+        "Linguistics",
+        "Spanish and Portuguese",
+        "French and Italian",
+        "Germanic Languages and Literatures",
+        "East Asian Languages and Cultures",
+        "Slavic Languages and Literatures",
+        "Comparative and World Literature"
+      ],
+      "reviewed_by": "Codex",
+      "reviewed_at": "2026-11-08T22:05:48Z",
+      "evidence": "The official School of Literatures, Cultures and Linguistics directory supplies language-unit context; unrelated business affiliations do not qualify.",
+      "sources": [
+        {
+          "url": "https://slcl.illinois.edu/directory",
+          "fetched_at": "2026-11-02T05:34:10Z",
+          "sha256": "733570a27c2630ebcd9555275aad9620c5a8f34009458d21efa09d9b42482242"
+        },
+        {
+          "url": "https://slcl.illinois.edu/graduate/departments",
+          "fetched_at": "2026-11-08T22:05:46Z",
+          "sha256": "1bde00231d32460436a54a3bf0d3b9ef5d5ef097f98aa800371fcfba79902a4f"
+        },
+        {
+          "url": "https://slcl.illinois.edu/system/files/inline-files/SLCL_Winter17_NL_v2.pdf",
+          "fetched_at": "2026-11-08T22:05:48Z",
+          "sha256": "9fbcdd3e7b019925326dd5e9999f6abfaa2f6fce74f6ed185c08b4c5fc02d85f"
+        }
+      ]
+    }
   }
 }

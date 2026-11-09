@@ -1,0 +1,2280 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-11-08T22:07:58Z",
+  "scope": "Existing GPA records, RMP candidate matching, and individually supported archived teaching occurrences. No Fall grade collection.",
+  "base_commit": "53397c659292c91a08acad00ceab8511942031b8",
+  "before": {
+    "identified_instructors": 3390,
+    "rmp_profiles": 1341,
+    "numerical_rmp_ratings": 1213,
+    "verified_grade_rows": 11810,
+    "unresolved_grade_rows": 6814,
+    "verified_teaching_occurrences": 9061
+  },
+  "after": {
+    "identified_instructors": 3396,
+    "rmp_profiles": 1587,
+    "numerical_rmp_ratings": 1411,
+    "verified_grade_rows": 12238,
+    "unresolved_grade_rows": 6386,
+    "verified_teaching_occurrences": 9168
+  },
+  "original_687_rmp_candidate_outcomes": {
+    "ambiguous_candidates": 435,
+    "verified_match": 252
+  },
+  "new_rmp_matches": [
+    {
+      "professor_id": "prof_uiuc_ahsen",
+      "display_name": "Mehmet Ahsen",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2643205",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_ebena",
+      "display_name": "Eben Alguire",
+      "profile_url": "https://www.ratemyprofessors.com/professor/3098606",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_vausten",
+      "display_name": "Victoria Austen",
+      "profile_url": "https://www.ratemyprofessors.com/professor/3071376",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_saustin8",
+      "display_name": "Sarah Austin",
+      "profile_url": "https://www.ratemyprofessors.com/professor/3406075",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_ldbaber",
+      "display_name": "Lorenzo Baber",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1183814",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_ybao",
+      "display_name": "Ying Bao",
+      "profile_url": "https://www.ratemyprofessors.com/professor/3072772",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_becker2",
+      "display_name": "Susan E Becker",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2982160",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_bodony",
+      "display_name": "Daniel J Bodony",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1197501",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_dbrehart",
+      "display_name": "Dawn Bohn",
+      "profile_url": "https://www.ratemyprofessors.com/professor/980836",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_boses",
+      "display_name": "Subhonmesh Bose",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2277448",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_jabradly",
+      "display_name": "Joe Bradley",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1708311",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_naburd",
+      "display_name": "Nicholas A Burd",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2755066",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_sjb287",
+      "display_name": "Steven James Burgess",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2930848",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_lilicai",
+      "display_name": "Lili Cai",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2981667",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_hbchew",
+      "display_name": "Huck Beng Chew",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2965051",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_choquett",
+      "display_name": "Kent D Choquette",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1477321",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_kiel",
+      "display_name": "Kiel Christianson",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2417348",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_mlc7",
+      "display_name": "Max Lawrence Christie",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2748667",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_chuong",
+      "display_name": "Jennifer Chuong",
+      "profile_url": "https://www.ratemyprofessors.com/professor/5075261",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_jconro",
+      "display_name": "Jessica Conroy",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1943165",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_billcope",
+      "display_name": "William Cope",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1835664",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_mmdave2",
+      "display_name": "Mudita Dave",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1253885",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_adolezal",
+      "display_name": "Adam Gregory Dolezal",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2776290",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_hyuneuh",
+      "display_name": "Hyun Euh",
+      "profile_url": "https://www.ratemyprofessors.com/professor/3156869",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_mfrnndz2",
+      "display_name": "Mariela Fernandez",
+      "profile_url": "https://www.ratemyprofessors.com/professor/3065305",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_afliflet",
+      "display_name": "Arne Woolsey Fliflet",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2084675",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_kbost",
+      "display_name": "Kelly K Freeman Bost",
+      "profile_url": "https://www.ratemyprofessors.com/professor/499733",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_garcia89",
+      "display_name": "Michael Garcia",
+      "profile_url": "https://www.ratemyprofessors.com/professor/5066074",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_geissler",
+      "display_name": "Dorie Geissler",
+      "profile_url": "https://www.ratemyprofessors.com/professor/3050375",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_rgobin",
+      "display_name": "Robyn Gobin",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2488179",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_agoza",
+      "display_name": "Andres Jared Goza",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2704056",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_reng",
+      "display_name": "Ren Grabert",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2831771",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_grantnkr",
+      "display_name": "Nkrumah Grant",
+      "profile_url": "https://www.ratemyprofessors.com/professor/3080457",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_nhg",
+      "display_name": "Nancy Greenwalt",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2753825",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_rtgrossm",
+      "display_name": "Rachelle Grossman",
+      "profile_url": "https://www.ratemyprofessors.com/professor/3059988",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_wrg",
+      "display_name": "William Guenthner",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2250313",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_ngunji",
+      "display_name": "Naoko Gunji",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2914474",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_phadley",
+      "display_name": "Pamela Hadley",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1244082",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_b-hajek",
+      "display_name": "Bruce Hajek",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1117270",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_mbhauge2",
+      "display_name": "Matthew Haugen",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2799868",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_kheath",
+      "display_name": "Katy Denise Heath",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1927982",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_lherrera",
+      "display_name": "Linda Herrera",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1658950",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_shino",
+      "display_name": "Shino Hayashi Hirata",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2879893",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_hholsche",
+      "display_name": "Hannah Diane Holscher",
+      "profile_url": "https://www.ratemyprofessors.com/professor/3139585",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_anelhe",
+      "display_name": "Anna Hunt",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2647736",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_cinoue",
+      "display_name": "Carlos Inoue",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2880215",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_tjamann",
+      "display_name": "Tiffany M Jamann",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2735790",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_jegerski",
+      "display_name": "Jill Jegerski",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1749451",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_bjewett",
+      "display_name": "Brian Jewett",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2160385",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_j-jin1",
+      "display_name": "Jianming Jin",
+      "profile_url": "https://www.ratemyprofessors.com/professor/391763",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_jfj3",
+      "display_name": "Jasmine Johnson",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2602955",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_mkashani",
+      "display_name": "Maryam Kashani",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2336605",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_juneykim",
+      "display_name": "June-Young Kim",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2604181",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_mkim1223",
+      "display_name": "Myoung Hee Kim",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2734796",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_kindrtnk",
+      "display_name": "Volodymyr Kindratenko",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1550607",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_gkrishna",
+      "display_name": "Girish Krishnan",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2012939",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_jleburto",
+      "display_name": "Jean-Pierre Leburton",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1692951",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_leedk",
+      "display_name": "DoKyoung Lee",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2876661",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_mlehrer2",
+      "display_name": "Martin Lehrer",
+      "profile_url": "https://www.ratemyprofessors.com/professor/3066240",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_levesque",
+      "display_name": "Lyne Levesque",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1718203",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_deblevin",
+      "display_name": "Deborah Levin Fliflet",
+      "profile_url": "https://www.ratemyprofessors.com/professor/3118894",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_lixu6",
+      "display_name": "Xu Li",
+      "profile_url": "https://www.ratemyprofessors.com/professor/5054897",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_yumengl",
+      "display_name": "Yumeng Li",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2771062",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_robblind",
+      "display_name": "Robb Lindgren",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2893111",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_yingzhi3",
+      "display_name": "Yingzhi Lu",
+      "profile_url": "https://www.ratemyprofessors.com/professor/3071623",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_lyding",
+      "display_name": "Joseph W Lyding",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2486092",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_hm40",
+      "display_name": "Haiting Ma",
+      "profile_url": "https://www.ratemyprofessors.com/professor/3105085",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_machaka2",
+      "display_name": "Nessrine Machaka",
+      "profile_url": "https://www.ratemyprofessors.com/professor/3015915",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_jmarble",
+      "display_name": "Jena Marble",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2915180",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_cmarceli",
+      "display_name": "Christine Marcelino",
+      "profile_url": "https://www.ratemyprofessors.com/professor/3157722",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_lavanyam",
+      "display_name": "Lavanya Marla",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1836373",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_smarte4",
+      "display_name": "Sheena Martenies",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2742965",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_pmera",
+      "display_name": "Paola Mera",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2972591",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_nmiller",
+      "display_name": "Nolan Miller",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2922080",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_mitras",
+      "display_name": "Sayan Mitra",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1766542",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_ummonye",
+      "display_name": "Uzoma Monye",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2729988",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_raksha",
+      "display_name": "Raksha Mudar",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2063266",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_dknelson",
+      "display_name": "Dylan Nelson",
+      "profile_url": "https://www.ratemyprofessors.com/professor/3040297",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_cnozaki2",
+      "display_name": "Chie Nozaki",
+      "profile_url": "https://www.ratemyprofessors.com/professor/3027264",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_garyochs",
+      "display_name": "Gary Ochs",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1983628",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_yoonpak",
+      "display_name": "Yoon Pak",
+      "profile_url": "https://www.ratemyprofessors.com/professor/944140",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_jcpettij",
+      "display_name": "Justin Cory Pettijohn",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2138306",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_jpilgrim",
+      "display_name": "James Pilgrim",
+      "profile_url": "https://www.ratemyprofessors.com/professor/3106834",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_pucilow2",
+      "display_name": "Anna Pucilowski",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2674334",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_r-rauber",
+      "display_name": "Robert M Rauber",
+      "profile_url": "https://www.ratemyprofessors.com/professor/355377",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_reeber",
+      "display_name": "Joy E. Reeber",
+      "profile_url": "https://www.ratemyprofessors.com/professor/3164706",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_emmaf6",
+      "display_name": "Emma Reymann",
+      "profile_url": "https://www.ratemyprofessors.com/professor/3085595",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_riechers",
+      "display_name": "Dean Edward Riechers",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1098297",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_nriemer",
+      "display_name": "Nicole Riemer",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2937941",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_mwroach",
+      "display_name": "Michael Roach",
+      "profile_url": "https://www.ratemyprofessors.com/professor/4467268",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_grodrig2",
+      "display_name": "Gabriel Rodriguez",
+      "profile_url": "https://www.ratemyprofessors.com/professor/3021133",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_roegman",
+      "display_name": "Rachel Roegman",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2753523",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_sadlerm",
+      "display_name": "Misumi Sadler",
+      "profile_url": "https://www.ratemyprofessors.com/professor/562551",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_rsadler",
+      "display_name": "Randall W Sadler",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1092868",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_arkadiys",
+      "display_name": "Arkadiy Sakhartov",
+      "profile_url": "https://www.ratemyprofessors.com/professor/3132221",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_csantos",
+      "display_name": "Carla Santos",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1282904",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_maryschu",
+      "display_name": "Mary A. Schuler",
+      "profile_url": "https://www.ratemyprofessors.com/professor/971209",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_maschutz",
+      "display_name": "Michele Schutz",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2944952",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_andiara",
+      "display_name": "Andiara Schwingel",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1562928",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_esebast2",
+      "display_name": "Emerson Sebastiao",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1874200",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_nseiter",
+      "display_name": "Nicholas J Seiter",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2740408",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_sethis1",
+      "display_name": "Suresh Sethi",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2593789",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_sonali",
+      "display_name": "Sonali Shah",
+      "profile_url": "https://www.ratemyprofessors.com/professor/640042",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_mshim",
+      "display_name": "Moonsub Shim",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2829258",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_rsbolton",
+      "display_name": "Rachel Smith-Bolton",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2264481",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_rsrikant",
+      "display_name": "Rayadurgam Srikant",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2798867",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_rsriver",
+      "display_name": "Ryan Sriver",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2708833",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_dusan",
+      "display_name": "Dusan M Stipanovic",
+      "profile_url": "https://www.ratemyprofessors.com/professor/781813",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_astuder",
+      "display_name": "Anthony Joseph Studer",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2569947",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_emad",
+      "display_name": "Emad Tajkhorshid",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2497439",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_ktfrantz",
+      "display_name": "Kelly M Tu",
+      "profile_url": "https://www.ratemyprofessors.com/professor/3135808",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_hanu",
+      "display_name": "Hanu Tyagi",
+      "profile_url": "https://www.ratemyprofessors.com/professor/3105859",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_ajwj",
+      "display_name": "Amy Jaye Wagoner Johnson",
+      "profile_url": "https://www.ratemyprofessors.com/professor/532813",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_qwang04",
+      "display_name": "Qiong Wang",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2012969",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_xwang2",
+      "display_name": "Xinlei Wang",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2428604",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_iriswang",
+      "display_name": "Yixin Iris Wang",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2976843",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_diw",
+      "display_name": "David Ian Weightman",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2257351",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_riwilson",
+      "display_name": "Roderick Ike Wilson",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1776543",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_ncyang",
+      "display_name": "Nathan Yang",
+      "profile_url": "https://www.ratemyprofessors.com/professor/3197200",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_kzarat2",
+      "display_name": "Kary Zarate",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2810260",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_jmzhang",
+      "display_name": "Jinming Zhang",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1324764",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_shuoz4",
+      "display_name": "Shuo Zhang",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2684405",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_zhizhenz",
+      "display_name": "Zhizhen Zhao",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2403596",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_murray",
+      "display_name": "Melissa Reedy",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1686167",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_rbhatta2",
+      "display_name": "Rabin Bhattarai",
+      "profile_url": "https://www.ratemyprofessors.com/professor/3099654",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_mlchu",
+      "display_name": "Maria L. Chu",
+      "profile_url": "https://www.ratemyprofessors.com/professor/3049364",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_pdavidso",
+      "display_name": "Paul C. Davidson",
+      "profile_url": "https://www.ratemyprofessors.com/professor/749702",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_bheuser",
+      "display_name": "Brent Heuser",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1891114",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_binhu7",
+      "display_name": "Bin Hu",
+      "profile_url": "https://www.ratemyprofessors.com/professor/3043097",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_yuduli2",
+      "display_name": "Yudu Li",
+      "profile_url": "https://www.ratemyprofessors.com/professor/3154129",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_druzic",
+      "display_name": "David Ruzic",
+      "profile_url": "https://www.ratemyprofessors.com/professor/198914",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_yzhang1",
+      "display_name": "Yuanhui Zhang",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1442711",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_zhangyp",
+      "display_name": "Yupeng Zhang",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2999174",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_wjz",
+      "display_name": "Wenjie Zhou",
+      "profile_url": "https://www.ratemyprofessors.com/professor/3165193",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_a-jacobi",
+      "display_name": "Anthony Jacobi",
+      "profile_url": "https://www.ratemyprofessors.com/professor/616627",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_abwaner",
+      "display_name": "Angelica Waner",
+      "profile_url": "https://www.ratemyprofessors.com/professor/3146030",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_aclay",
+      "display_name": "Amy Lynette Clay",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2791381",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_acsinger",
+      "display_name": "Andrew Singer",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1453160",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_ahedeman",
+      "display_name": "Anne D Hedeman",
+      "profile_url": "https://www.ratemyprofessors.com/professor/690515",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_aledan",
+      "display_name": "Alejandro Dominguez-Garcia",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1493506",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_amanders",
+      "display_name": "Alison M Anders",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1759342",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_amt1998",
+      "display_name": "Alexandre Tartakovsky",
+      "profile_url": "https://www.ratemyprofessors.com/professor/3022993",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_anakk",
+      "display_name": "Sayeepriyadarshini Anakk",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2678661",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_apmroz",
+      "display_name": "Aurore Patricia Mroz",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2227633",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_arockett",
+      "display_name": "Angus Rockett",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1236315",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_ashakar",
+      "display_name": "Alex Shakar",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1231612",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_babadoos",
+      "display_name": "Mohammad Babadoost",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2435785",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_basar1",
+      "display_name": "Tamer Basar",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2718979",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_bconway",
+      "display_name": "Bruce A Conway",
+      "profile_url": "https://www.ratemyprofessors.com/professor/134166",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_bowlesm",
+      "display_name": "Melissa A Bowles",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1181092",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_btmurray",
+      "display_name": "Brant Murray",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2694526",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_carlso1",
+      "display_name": "Kristin Nicole Carlson",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2095514",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_carriej2",
+      "display_name": "Carrie Ann Johnson",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2818132",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_cathchri",
+      "display_name": "Catherine Christian-Hinman",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2874239",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_cfirkins",
+      "display_name": "Carol Firkins",
+      "profile_url": "https://www.ratemyprofessors.com/professor/989523",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_chuyoung",
+      "display_name": "Chu-Young Kim",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2985501",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_cotnes",
+      "display_name": "Cele Otnes",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1177521",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_crl",
+      "display_name": "Charissa Lansing",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1784289",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_ctucker",
+      "display_name": "Charles L Tucker",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2948741",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_cunjiang",
+      "display_name": "Cunjiang Yu",
+      "profile_url": "https://www.ratemyprofessors.com/professor/3159219",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_cwebste",
+      "display_name": "Charles Robert Webster",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2697834",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_dixon1",
+      "display_name": "Lisa G Dixon",
+      "profile_url": "https://www.ratemyprofessors.com/professor/3075775",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_djb",
+      "display_name": "Donna Brown",
+      "profile_url": "https://www.ratemyprofessors.com/professor/7738",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_dl-jones",
+      "display_name": "Douglas L Jones",
+      "profile_url": "https://www.ratemyprofessors.com/professor/567280",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_dtrinkle",
+      "display_name": "Dallas Trinkle",
+      "profile_url": "https://www.ratemyprofessors.com/professor/949791",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_ehostett",
+      "display_name": "Eric R Hostetter",
+      "profile_url": "https://www.ratemyprofessors.com/professor/971699",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_fproulx",
+      "display_name": "Francois Proulx",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2962404",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_gjo",
+      "display_name": "Gary J Olsen",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1581872",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_gnair",
+      "display_name": "Gopu Nair",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2554155",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_grosman",
+      "display_name": "Claudio F Grosman",
+      "profile_url": "https://www.ratemyprofessors.com/professor/904942",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_gross",
+      "display_name": "George Gross",
+      "profile_url": "https://www.ratemyprofessors.com/professor/850996",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_gzhang13",
+      "display_name": "Gan Zhang",
+      "profile_url": "https://www.ratemyprofessors.com/professor/3018894",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_haus",
+      "display_name": "Matt Hausman",
+      "profile_url": "https://www.ratemyprofessors.com/professor/3158612",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_hengst",
+      "display_name": "Julie A Hengst",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1864543",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_hilger",
+      "display_name": "Stephanie M Hilger",
+      "profile_url": "https://www.ratemyprofessors.com/professor/593985",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_hmiller1",
+      "display_name": "Heather Cupps-Miller",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2206667",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_hughesro",
+      "display_name": "Robert Hughes",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2694164",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_irigoyen",
+      "display_name": "Javier Irigoyen Garcia",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1545182",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_jbfreund",
+      "display_name": "Jonathan Freund",
+      "profile_url": "https://www.ratemyprofessors.com/professor/990682",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_jcdutton",
+      "display_name": "Craig Dutton",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1725773",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_jenkinrj",
+      "display_name": "Robert Jenkins",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2654392",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_jkindt",
+      "display_name": "John W Kindt",
+      "profile_url": "https://www.ratemyprofessors.com/professor/536569",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_jmwood",
+      "display_name": "Jeryldene M Wood",
+      "profile_url": "https://www.ratemyprofessors.com/professor/979811",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_jones86",
+      "display_name": "John Jones",
+      "profile_url": "https://www.ratemyprofessors.com/professor/3150537",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_jontalle",
+      "display_name": "Jont Allen",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2478966",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_jsosnoff",
+      "display_name": "Jacob J Sosnoff",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2420426",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_karay2",
+      "display_name": "Kara Yarrington",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2272564",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_karkafi",
+      "display_name": "Josephine El Karkafi",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2050782",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_kdlee",
+      "display_name": "Ki D Lee",
+      "profile_url": "https://www.ratemyprofessors.com/professor/134133",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_kgraber",
+      "display_name": "Kim C Graber",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1950927",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_klonoffc",
+      "display_name": "Hillary Klonoff-Cohen",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2494693",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_kmc",
+      "display_name": "Karen Marie Chapman-Novakofski",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1780162",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_krdc",
+      "display_name": "Katie Driggs-Campbell",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2581530",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_krein",
+      "display_name": "Philip T Krein",
+      "profile_url": "https://www.ratemyprofessors.com/professor/907666",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_l-haken",
+      "display_name": "Lippold Haken",
+      "profile_url": "https://www.ratemyprofessors.com/professor/843959",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_lbatten",
+      "display_name": "Luke Batten",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1048932",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_ldaviesb",
+      "display_name": "Laura Davies Brenier",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2289474",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_lfr",
+      "display_name": "Luis Rodriguez",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1114193",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_loui",
+      "display_name": "Michael Loui",
+      "profile_url": "https://www.ratemyprofessors.com/professor/832793",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_lrosenth",
+      "display_name": "Lisa Rosenthal",
+      "profile_url": "https://www.ratemyprofessors.com/professor/722084",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_lundstro",
+      "display_name": "Craig Campbell Lundstrom",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1548553",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_mdfwong",
+      "display_name": "Martin D F Wong",
+      "profile_url": "https://www.ratemyprofessors.com/professor/872925",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_melendez",
+      "display_name": "Mariselle Melendez",
+      "profile_url": "https://www.ratemyprofessors.com/professor/934047",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_mfeng",
+      "display_name": "Milton Feng",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1477320",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_mhq",
+      "display_name": "Hongqiang Ma",
+      "profile_url": "https://www.ratemyprofessors.com/professor/3154128",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_mhudson",
+      "display_name": "Matthew Hudson",
+      "profile_url": "https://www.ratemyprofessors.com/professor/774000",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_mjlara",
+      "display_name": "Mark Jason Lara",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2862576",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_mjshaw",
+      "display_name": "Michael Shaw",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2545092",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_mkeller",
+      "display_name": "Marcus Keller",
+      "profile_url": "https://www.ratemyprofessors.com/professor/843543",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_montrul",
+      "display_name": "Silvina Andrea Montrul",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1277271",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_nambrose",
+      "display_name": "Nicoline G Ambrose",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1105271",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_niekerk",
+      "display_name": "Carl Hendrik Niekerk",
+      "profile_url": "https://www.ratemyprofessors.com/professor/917109",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_nptsai",
+      "display_name": "Nien-Pei Tsai",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2104735",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_palekar",
+      "display_name": "Udatta S Palekar",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2632804",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_parthb2",
+      "display_name": "Parth Bansal",
+      "profile_url": "https://www.ratemyprofessors.com/professor/5097551",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_pbraun",
+      "display_name": "Paul V. Braun",
+      "profile_url": "https://www.ratemyprofessors.com/professor/500022",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_pduncum",
+      "display_name": "Paul Angus Duncum",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1993319",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_pinkert",
+      "display_name": "Anke Pinkert",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2254206",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_plansing",
+      "display_name": "Paul Lansing",
+      "profile_url": "https://www.ratemyprofessors.com/professor/600560",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_pquiroga",
+      "display_name": "Pilar Martinez-Quiroga",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1826503",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_pramodv",
+      "display_name": "Pramod Viswanath",
+      "profile_url": "https://www.ratemyprofessors.com/professor/572116",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_rcgoebel",
+      "display_name": "Raquel Goebel",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2083829",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_rcooke",
+      "display_name": "Richard Cooke",
+      "profile_url": "https://www.ratemyprofessors.com/professor/3154340",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_rdc",
+      "display_name": "Ron Chambers",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1983829",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_rganders",
+      "display_name": "Robert G Anderson",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2499080",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_rhajj",
+      "display_name": "Ramez M. Hajj",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2996641",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_rxb",
+      "display_name": "Rohit Bhargava",
+      "profile_url": "https://www.ratemyprofessors.com/professor/842056",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_sarwate",
+      "display_name": "Dilip Sarwate",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1109126",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_scalle",
+      "display_name": "Salvatore James Callesano",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2752640",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_sdownie",
+      "display_name": "Stephen R Downie",
+      "profile_url": "https://www.ratemyprofessors.com/professor/459555",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_seth",
+      "display_name": "Seth Andrew Hutchinson",
+      "profile_url": "https://www.ratemyprofessors.com/professor/7743",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_sgkapoor",
+      "display_name": "Shiv Kapoor",
+      "profile_url": "https://www.ratemyprofessors.com/professor/485086",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_shavitt",
+      "display_name": "Sharon Shavitt",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1061267",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_smideros",
+      "display_name": "Santiago X Mideros Mora",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2749135",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_smoose",
+      "display_name": "Stephen Patrick Moose",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2142858",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_snair",
+      "display_name": "Satish K Nair",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1841728",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_stengrim",
+      "display_name": "Laura Stengrim",
+      "profile_url": "https://www.ratemyprofessors.com/professor/931839",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_tfg",
+      "display_name": "Tom Golecki",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2946923",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_thecliff",
+      "display_name": "Cliff Sungsoo Shin",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1972239",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_theide",
+      "display_name": "Billie J Theide",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2329223",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_thurston",
+      "display_name": "Deborah L Thurston",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2135842",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_valleri2",
+      "display_name": "Valleri J Robinson",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1979327",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_vcc",
+      "display_name": "Victoria Coverstone",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1175195",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_w-chew",
+      "display_name": "Weng Chew",
+      "profile_url": "https://www.ratemyprofessors.com/professor/587188",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_w-hwu",
+      "display_name": "Wen-mei Hwu",
+      "profile_url": "https://www.ratemyprofessors.com/professor/249015",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_wbrieher",
+      "display_name": "William M Brieher",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1987021",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_wqualls",
+      "display_name": "William J Qualls",
+      "profile_url": "https://www.ratemyprofessors.com/professor/990591",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_wroblew3",
+      "display_name": "Elle Wroblewski",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2878255",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_xunyan",
+      "display_name": "Xun Yan",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2885774",
+      "numerical_rating_available": false
+    },
+    {
+      "professor_id": "prof_uiuc_ybresler",
+      "display_name": "Yoram Bresler",
+      "profile_url": "https://www.ratemyprofessors.com/professor/1269903",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_yunsheng",
+      "display_name": "Yun-Sheng Chen",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2611226",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_zhuffman",
+      "display_name": "Zach Huffman",
+      "profile_url": "https://www.ratemyprofessors.com/professor/3065661",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_gerlando",
+      "display_name": "Gerlando Augusto Sampaio Franco de Lima",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2796371",
+      "numerical_rating_available": true
+    },
+    {
+      "professor_id": "prof_uiuc_burkhalt",
+      "display_name": "Toni Marie Gist",
+      "profile_url": "https://www.ratemyprofessors.com/professor/2320708",
+      "numerical_rating_available": true
+    }
+  ],
+  "previous_rmp_matches_now_ambiguous": [
+    {
+      "professor_id": "prof_uiuc_jkkraft",
+      "display_name": "Julie Kraft",
+      "previous_profile_url": "https://www.ratemyprofessors.com/professor/3089432",
+      "reason": "multiple_supported_profiles",
+      "candidate_profile_urls": [
+        "https://www.ratemyprofessors.com/professor/3089432",
+        "https://www.ratemyprofessors.com/professor/3089435"
+      ]
+    },
+    {
+      "professor_id": "prof_uiuc_ggnds",
+      "display_name": "Gagandeep Singh",
+      "previous_profile_url": "https://www.ratemyprofessors.com/professor/3093279",
+      "reason": "multiple_supported_profiles",
+      "candidate_profile_urls": [
+        "https://www.ratemyprofessors.com/professor/2208235",
+        "https://www.ratemyprofessors.com/professor/3093279",
+        "https://www.ratemyprofessors.com/professor/3094059"
+      ]
+    },
+    {
+      "professor_id": "prof_uiuc_crbrad",
+      "display_name": "Craig Bradshaw",
+      "previous_profile_url": "https://www.ratemyprofessors.com/professor/3077259",
+      "reason": "multiple_supported_profiles",
+      "candidate_profile_urls": [
+        "https://www.ratemyprofessors.com/professor/3077259",
+        "https://www.ratemyprofessors.com/professor/3098437"
+      ]
+    },
+    {
+      "professor_id": "prof_uiuc_esaadah2",
+      "display_name": "Eman Saadah",
+      "previous_profile_url": "https://www.ratemyprofessors.com/professor/2700094",
+      "reason": "multiple_supported_profiles",
+      "candidate_profile_urls": [
+        "https://www.ratemyprofessors.com/professor/757260",
+        "https://www.ratemyprofessors.com/professor/2700094"
+      ]
+    },
+    {
+      "professor_id": "prof_uiuc_karthe",
+      "display_name": "Karthekeyan Chandrasekaran",
+      "previous_profile_url": "https://www.ratemyprofessors.com/professor/2440361",
+      "reason": "multiple_supported_profiles",
+      "candidate_profile_urls": [
+        "https://www.ratemyprofessors.com/professor/2065382",
+        "https://www.ratemyprofessors.com/professor/2180127",
+        "https://www.ratemyprofessors.com/professor/2440361"
+      ]
+    },
+    {
+      "professor_id": "prof_uiuc_mcdonagh",
+      "display_name": "Deana C McDonagh",
+      "previous_profile_url": "https://www.ratemyprofessors.com/professor/2524851",
+      "reason": "multiple_supported_profiles",
+      "candidate_profile_urls": [
+        "https://www.ratemyprofessors.com/professor/902716",
+        "https://www.ratemyprofessors.com/professor/2524851"
+      ]
+    },
+    {
+      "professor_id": "prof_uiuc_rweber",
+      "display_name": "Rebecca Weber",
+      "previous_profile_url": "https://www.ratemyprofessors.com/professor/933131",
+      "reason": "multiple_supported_profiles",
+      "candidate_profile_urls": [
+        "https://www.ratemyprofessors.com/professor/933131",
+        "https://www.ratemyprofessors.com/professor/2423000"
+      ]
+    },
+    {
+      "professor_id": "prof_uiuc_soc1024",
+      "display_name": "Andrew Edmund Miller",
+      "previous_profile_url": "https://www.ratemyprofessors.com/professor/2653161",
+      "reason": "multiple_supported_profiles",
+      "candidate_profile_urls": [
+        "https://www.ratemyprofessors.com/professor/2182952",
+        "https://www.ratemyprofessors.com/professor/2213668",
+        "https://www.ratemyprofessors.com/professor/2233205",
+        "https://www.ratemyprofessors.com/professor/2653161"
+      ]
+    }
+  ],
+  "grade_recoveries": [
+    {
+      "grade_name_raw": "Miller, Thomas J",
+      "directory_id": "miller64",
+      "grade_rows_added": 103,
+      "grade_record_ids": [
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-5443",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-5444",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-5445",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-5446",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-5447",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-5448",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-5449",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-5450",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-5451",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-5452",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-5453",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-5454",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-7825",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-7826",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-7827",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-7828",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-7829",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-7830",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-7831",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-7832",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-7833",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-7834",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-7835",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-7836",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-7837",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-7838",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-7839",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-10946",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-10947",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-10948",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-10949",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-10950",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-10951",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-10952",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-10953",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-10954",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-10955",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-10956",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-10957",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-10958",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-10960",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-10961",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-10962",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-13306",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-13307",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-13308",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-13309",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-13311",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-13312",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-13313",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-13314",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-13315",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-13316",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-13317",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-13318",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-13319",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-13320",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-13321",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-13322",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-13323",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-13324",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-13325",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-13326",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-13327",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-16305",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-16306",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-16307",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-16308",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-16309",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-16310",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-16311",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-16312",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-16313",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-16314",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-16315",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-16316",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-16317",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-16318",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-16319",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-16320",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-16321",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-16322",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-16323",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-16324",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-16325",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-18537",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-18538",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-18539",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-18540",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-18542",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-18543",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-18544",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-18545",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-18546",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-18547",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-18548",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-18549",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-18550",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-18551",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-18552",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-18553",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-18554",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-18555"
+      ],
+      "official_sources": [
+        "https://directory.illinois.edu/detail?departmentId=illinois.eduKR883",
+        "https://directory.illinois.edu/facultyListing",
+        "https://theatre.illinois.edu/people/profiles/thom-miller/",
+        "https://www.trustees.uillinois.edu/trustees/resources/historical-files/html%20versions/25-26-Graybook/KR.html"
+      ]
+    },
+    {
+      "grade_name_raw": "Soranso, Murillo S",
+      "directory_id": "msoranso",
+      "grade_rows_added": 87,
+      "grade_record_ids": [
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-981",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-985",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-986",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-987",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-988",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3715",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3716",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3717",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3718",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3719",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3720",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3721",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3722",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3723",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3724",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3725",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3726",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3727",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3728",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3729",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3730",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3731",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3732",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3733",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3734",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3735",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3736",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3737",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3738",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3739",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3740",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3741",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3742",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3743",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3744",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3745",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3746",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3747",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3748",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3749",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3750",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3751",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3752",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3753",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3754",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3755",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3756",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3757",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3758",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3759",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3760",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3761",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3762",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3763",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3764",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3765",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3766",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3767",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3768",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3769",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3770",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3771",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3772",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3773",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3774",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3775",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3776",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3777",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3778",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3779",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3780",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3781",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3782",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3783",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3784",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3785",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3793",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3796",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3797",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3798",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3799",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3800",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3801",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3802",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3803",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3804",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3805"
+      ],
+      "official_sources": [
+        "https://gfx.grainger.illinois.edu/contact-us"
+      ]
+    },
+    {
+      "grade_name_raw": "Powers, Kimberly",
+      "directory_id": "powerska",
+      "grade_rows_added": 81,
+      "grade_record_ids": [
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-6463",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-6468",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9247",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9248",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9249",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9250",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9251",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9252",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9253",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9254",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9255",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9256",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9257",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9258",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9259",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9260",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9261",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9262",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9263",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9264",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9265",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9266",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9267",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9268",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9269",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9270",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9271",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9272",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9273",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9274",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9275",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9276",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9277",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9278",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9279",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9280",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9281",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9297",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9298",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9299",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9300",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9301",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9302",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9303",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9304",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9305",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9306",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-12074",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-12079",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-12080",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-12081",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-12082",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-14762",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-14763",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-14764",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-14765",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-14766",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-14767",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-14768",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-14769",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-14770",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-14771",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-14772",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-14773",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-14774",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-14775",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-14776",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-14777",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-14778",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-14779",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-14780",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-14781",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-14782",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-14783",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-14788",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-14796",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-14797",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-14798",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-14799",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-14800",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-14801"
+      ],
+      "official_sources": [
+        "https://ws.engr.illinois.edu/custom/getsyllabus.asp?id=1875",
+        "https://ws.engr.illinois.edu/custom/getsyllabus.asp?id=2007"
+      ]
+    },
+    {
+      "grade_name_raw": "Clegg, Benjamin F",
+      "directory_id": "bclegg",
+      "grade_rows_added": 47,
+      "grade_record_ids": [
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-1371",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-1372",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-1373",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-1374",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-1375",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-2502",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-4275",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-4276",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-4277",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-4278",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-4279",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-6852",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-6853",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-6854",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-6855",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-7982",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9769",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9770",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9771",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9772",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9773",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9774",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9775",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9776",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9777",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-12333",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-12334",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-12335",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-12336",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-12337",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-12338",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-12339",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-13464",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-15167",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-15168",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-15169",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-15170",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-15171",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-15172",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-17631",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-17632",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-17633",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-17634",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-17635",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-17636",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-17637",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-17638"
+      ],
+      "official_sources": [
+        "https://sib.illinois.edu/directory/profile/bclegg",
+        "https://sib.illinois.edu/directory/school-leadership-staff"
+      ]
+    },
+    {
+      "grade_name_raw": "Augusto Sampaio, Gerlando",
+      "directory_id": "gerlando",
+      "grade_rows_added": 41,
+      "grade_record_ids": [
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-63",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-64",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-65",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-66",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-73",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-74",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-75",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-2402",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-2403",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-2661",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-2662",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-2663",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-2701",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-2702",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-2703",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-5548",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-5549",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-5550",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-5551",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-5555",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-5556",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-5558",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-5559",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-7881",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-7882",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-8151",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-8153",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-8154",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-8155",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-8157",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-8158",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-11054",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-11055",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-13364",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-13365",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-13651",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-13654",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-13655",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-13656",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-16418",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-16419"
+      ],
+      "official_sources": [
+        "https://giesbusiness.illinois.edu/profile/gerlando-lima",
+        "https://lemann.illinois.edu/directory/profile/gerlando"
+      ]
+    },
+    {
+      "grade_name_raw": "Gundersen, Lisa C",
+      "directory_id": "lcgunder",
+      "grade_rows_added": 39,
+      "grade_record_ids": [
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-91",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-92",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-93",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-110",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-111",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-2705",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-2706",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-2707",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-2708",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-2709",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-2710",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-2727",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-5589",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-5590",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-5591",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-5606",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-5608",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-8203",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-8204",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-8205",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-8206",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-8207",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-8208",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-8227",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-11085",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-11086",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-11087",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-11099",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-11101",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-13703",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-13704",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-13705",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-13706",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-13707",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-13708",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-13721",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-13723",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-16470",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-16472"
+      ],
+      "official_sources": [
+        "https://ace.illinois.edu/about/what-we-do-why-it-matters",
+        "https://aces.illinois.edu/sites/default/files/2023-09/Final.UGR_.Overview.FY2024.pdf"
+      ]
+    },
+    {
+      "grade_name_raw": "Gist, Toni M",
+      "directory_id": "burkhalt",
+      "grade_rows_added": 30,
+      "grade_record_ids": [
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-1131",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-1132",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-2489",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-2490",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3989",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-3990",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-6614",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-6615",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-6616",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-6619",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-7972",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-7973",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9470",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9471",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9472",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9473",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-9474",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-12216",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-12217",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-12218",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-13455",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-13456",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-14970",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-14971",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-14972",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-14973",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-17513",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-17514",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-17515",
+        "7e00a38b6c05c3989342a6580f95965f903e753c66687d5b7d3ed0764080f855:row-17516"
+      ],
+      "official_sources": [
+        "https://publish.illinois.edu/fshn101-gist/syllabus/"
+      ]
+    }
+  ],
+  "new_verified_occurrence_ids": [
+    "teaching_review_de3630804178cb9180ec393a",
+    "teaching_review_27df98d6e1fff90c969b1036",
+    "link_6c3059f2bda7245d77dcab04",
+    "link_275aab5f05a291bcc2ec7cb6",
+    "link_92c0f0b2719ea8c77dc6ac38",
+    "link_4602902a1a517977924416c3",
+    "link_3db8ca4290dd10a98ee8128c",
+    "link_3d360b85ce0b96fa8f46ace4",
+    "link_bf9653eb74417c877ff17e40",
+    "link_69af1dd6e1e124cf63540c9a",
+    "link_4cddf914a594e17510c200bd",
+    "link_5cf3a9a46964912028388e7d",
+    "link_dc743db5f4d37630aa302c10",
+    "link_0ddf1c8fd6e7e73e9b7e928f",
+    "link_2bfe8fb9036e075be5c25887",
+    "link_d325d9348e12fcf8d392537d",
+    "link_995b1a6b06204389999cb362",
+    "link_9cd8ff01146b4b5606b4cadf",
+    "link_d6109f8d263a2933263be48b",
+    "link_91b9758e0ee9ce749479bf28",
+    "link_8a719ca19fb2a306deeeb9ad",
+    "link_8e609d5e31487d5261a198d8",
+    "link_1fd702d4960006232a450571",
+    "link_b87b23e6b40264222614dd39",
+    "link_72f61278ce95f5dd764fce30",
+    "link_15e8ab701652ae851932effb",
+    "link_847c8e322e1792f80eaa10db",
+    "link_cfe231b2ea37dc5b997768f4",
+    "link_245f88fa5870b9632b9c6b68",
+    "link_02d2ebfd4d7fc367c9ee8fe5",
+    "link_ac5bccfff0cf61935cf142b1",
+    "link_bfeb34106134167e2a5ef8ca",
+    "link_2c0b8901e92c88b48946967f",
+    "link_8a8ff62e76ef111428e698f8",
+    "link_cf25617573ca3f212196c550",
+    "link_21fb4fdb5c76f546f32e1845",
+    "link_fcf7e2c7e745ec73cac2511b",
+    "link_44ed3affd3195cac8d4e5dbe",
+    "link_b7406adab5e31f8770a9d921",
+    "link_2ae8ee70eb3d7fde3e06be90",
+    "link_5655d08cbbd956d4f9fe129d",
+    "link_11f85ebc416aaadf9da73d8f",
+    "link_921412b93fdf4ffa0894bf96",
+    "link_4123a59da2e5ab05db498d1b",
+    "link_326b51e6f8d2e83471eea6d8",
+    "link_e62cb9508fbdadb5df1f4ee1",
+    "link_7809ef69a8d095db879b4bbd",
+    "link_a52ff9473782db808d1b6cfd",
+    "link_c0825677fc183f336e7f2f01",
+    "link_e18ae4ae08fb026fb6d2f24a",
+    "link_bfa559173dd5551356bf9c29",
+    "link_e61df938685e8b0d1c40faa9",
+    "link_782da2f69169d63d38ee8dc9",
+    "link_8448648d8905b2291392ed6e",
+    "link_b808419bde4692226491a6b9",
+    "link_dd2e2c572a8701b6a713d9f7",
+    "link_1e801e38753b03e815840621",
+    "link_b6bd4a2d69a2c2554a19cce0",
+    "link_c0c29505edcedb47963b9933",
+    "link_87d72e4964bc3f9f87205ee3",
+    "link_3113f01ce907337608e6f25a",
+    "link_8ca6dafcfea0eee4e072b71b",
+    "link_ad077c39dd02de4634259f00",
+    "link_36be913cab1c652232b027bf",
+    "link_ca836bf1805ab782aa07ef92",
+    "link_53b4b5e7e5da4c97bac9cd96",
+    "link_7e3d85e715c0fd6d3792874a",
+    "link_c6952ee790521c31e17ef5c4",
+    "link_26e6eaf6b96315b3e2d48ee6",
+    "link_1114f0db7a72e6d13b84c0f5",
+    "link_a2ecb260c1db1ad2827d8c62",
+    "link_20aeebc131f1550934b83d1b",
+    "link_87d2efee623632b5e6613e75",
+    "link_fac268fc8b5406298bb707dd",
+    "link_2c0c895fe70ef56ce966aab7",
+    "link_55090df9dd4bdaf92d6b3e59",
+    "link_7eb88e72a2b1307dbb230122",
+    "link_cb34b31a823b97c674764dbf",
+    "link_1b6ba251f24ac90ccb992ed4",
+    "link_13145e634a5ec3be1305869e",
+    "link_e71c17d4349da4207f2b5009",
+    "link_41bb6e96a08a7a7e70925dac",
+    "link_e445489e08c54c0b87269c0d",
+    "link_30c6133f709fae4d16433f49",
+    "link_2c06532acc53f800c3f76d01",
+    "link_d0af5ca43050a8ea22b93611",
+    "link_a142c1cb8318c0357c4eaa5e",
+    "link_f5c52fd88eb128d0d4ff2cd2",
+    "link_1c3f2155986e0eecf3ef7c14",
+    "link_3ef7b6f40816bb9dda67fd9d",
+    "link_5584201140347a4b6ffb74ae",
+    "link_26d80f61fbd0e8e7ddec6bf3",
+    "link_d649d517e005713c5ce0f43f",
+    "link_9965dbcaa4fb841943272991",
+    "link_1f7f667c33b47652e59c37b4",
+    "link_8c58d64a51887ce499f01501",
+    "link_c38b7d4f51f3bed603564547",
+    "link_5458aed2ecca5de54508c6f5",
+    "link_d65299bc372da84b089f9295",
+    "link_c7423a8ebde5b13a0f5e6b8f",
+    "link_69ba89f809cf7896f480272e",
+    "link_171e952f10852168482671b6",
+    "link_7864cfaecbeab7d594db775c",
+    "link_204f41135b4052c052bc30b2",
+    "link_9b4d6edc3beff7c2b5f01d41",
+    "link_945dd81980fe359317747d8a",
+    "link_898afe58a9f5ccc751ce12f2"
+  ],
+  "conservation": {
+    "existing_grade_bridge_ids_preserved": true,
+    "raw_gpa_input_unchanged": true,
+    "gpa_source_sha256": "3775e85e5881c9179e38e2aead69c8e33b6447393994359de28eccc17c8980a4",
+    "schedule_and_archive_source_objects_unchanged": true,
+    "deployment_paused": true
+  },
+  "held_examples": [
+    {
+      "name": "Clarke, Caitlin L",
+      "reason": "Current official evidence uses Caitlin Vitosky Clarke. The supplied middle name/initial conflict needs historical/course evidence; no forced alias was added."
+    },
+    {
+      "name": "Joesting, Jennifer J",
+      "reason": "Official MCB news confirms the professional role, but reviewed legacy course pages returned 404 and no saved official source tied the institutional identifier to the required historical courses."
+    },
+    {
+      "name": "Frasca, Elizabeth A",
+      "reason": "The current saved AHS roster uses Beth Frasca. The Experts source returned 403 and the additional campus awards source timed out; no nickname equivalence was applied from search snippets."
+    }
+  ],
+  "remaining_work": {
+    "rmp_ambiguous_candidates": 444,
+    "gpa_rows_requiring_evidence": 6386,
+    "archive_scope": "Subject/name labels remain unresolved outside individually verified occurrences. This batch does not claim a bulk resolution of the 17,261 source labels."
+  }
+}
