@@ -1,88 +1,42 @@
 # Professor Guide
 
-The Daily Illini’s UIUC course/professor guide. React + Vite + Tailwind loads saved JSON on GitHub Pages at `/professor-guide/`. Python collects and integrates data offline; there is no database or always-running backend.
+The Daily Illini’s UIUC course and professor guide. React/Vite reads saved JSON; Python collects and prepares it. Hosted on [GitHub Pages](https://illini-media-company.github.io/professor-guide/).
 
-Live site: **https://illini-media-company.github.io/professor-guide/**
+## Develop
 
-## Local setup
-
-Use Node 24 (`.nvmrc`) and Python 3.11+. Run from the repository root:
+Node 24 (`.nvmrc`), Python 3.11+. Run from the repo root:
 
 ```sh
 python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install -r requirements.txt
+pip install -r requirements.txt
 npm ci
 npm run dev
 ```
 
-Open **http://localhost:5173/professor-guide/**. Committed data works without contacting Course Explorer. `certifi` supplies verified HTTPS for collection; no certificate override is needed.
+Open **http://localhost:5173/professor-guide/**. Saved data is ready to use.
 
-## Update data
+- UI changes: `npm run test:ui`, `npm run build`, `npm run test:embed`.
+- Data changes: `npm run test:data`, `npm run validate:data`.
+- Install the browser once: `npx playwright install chromium`.
+- Preview: `npm run preview`; iframe test at `/professor-guide/embed-test.html`. Browser tests use port 4173; stop stale preview servers first.
 
-With the virtual environment active:
+## Find things
 
-```sh
-python -m scripts.update_data                  # collect, validate, integrate, publish
-python -m scripts.update_data --reuse-current  # integrate saved data, no source requests
-```
+- `src/Guide.jsx`: search and details; `src/guide.js`: filtering and GPA calculations; `src/data.js`: loading; `src/index.css`: styling.
+- `scripts/`: collection, matching, validation, publication. `config/`: term settings and reviewed matching rules.
+- `data/inputs/`: normalized GPA, instructors, and verified links. `data/mappings/`: evidence and unresolved queues. `data/examples/`: synthetic test fixtures.
+- `public/data/integration.json`: published manifest; `files.guide` is the compact visitor index. Hashed objects are generated.
 
-`config/collection.json` selects the current term, archive start year, review deadline, and optional teammate inputs. It currently selects Fall 2026, with a review deadline of December 31, 2026. Available terms are discovered from official indexes. Complete archived semesters are reused until explicitly refreshed. HTTP 401/403 or an HTTP 202 automated-access challenge stops collection immediately; failed refreshes keep the last good publication.
-
-The production update always collects every department. `--start-year 2023` selects the archive’s first calendar year; `--term 2026-fall` selects the current/end term. Every available winter, spring, summer, and fall term within that range is included. `collect_campus` is the single collection engine; it also accepts explicit courses for isolated investigation without narrowing production coverage. Run `python -m scripts.update_data --help` for all options. Collection-only commands, cache behavior, publication safety, deployment, restoration, and the DI iframe snippet are in [operations](docs/operations.md).
-
-## Data and team ownership
-
-**Current scope (November 9, 2026):** list the full collected course catalog, identified instructors, and recorded schedule names independently of GPA availability. Official faculty-directory identities are included even without grade records; unresolved source names remain labeled as such. Missing GPA and ratings display Pending. Review of existing GPA/RMP identities resumed November 8. Public deployment resumed November 9; Fall grade collection remains outside scope. See the [scope decisions and backlog](docs/backlog.md).
-
-The shared entry point is **`public/data/integration.json`**. Its `files` entries resolve to immutable JSON objects for the current schedule, teaching history, aliases, coverage, and teammate outputs. The search interface loads `files.guide` from that same manifest: every collected course, identified instructor profiles, and all unresolved schedule-name entries, independently of GPA availability. Course-specific GPA and RMP summaries appear only where verified; missing values display **Pending**. Raw archive files are available through source/download links and are not prefetched.
-
-| Owner | Work |
-| --- | --- |
-| Jon | Repository, Course Explorer collection, integration, publication, Pages deployment |
-| GPA owner | Grade-source processing, calculations, normalized `data/inputs/gpa.json` |
-| Matching owner | Identity verification, RMP/faculty links, normalized professor and occurrence files |
-| Frontend owner | Search, results, profiles, charts, and final interface in `src/` |
-
-[Team handoffs](docs/team-handoffs.md) provide input/output instructions and a Python reading example. [Data contract](docs/data-contract.md) defines fields and joins. Original instructor names remain available; source professor IDs stay unresolved. Missing grades/ratings are unavailable, never fabricated zeros. Synthetic development fixtures live only in `data/examples/` and are rejected by production publication.
-
-[Current coverage](docs/current-coverage.md): 186 Fall 2026 departments, 4,452 listings, and 12,839 registration sections. [History coverage](docs/integration-history-coverage.md) records the archive’s actual collected and unavailable terms. The configured range is 2023 through Fall 2026; discovery alone is not a claim that collection succeeded. See [verified API observations](docs/course-explorer-api.md) for source behavior and verification limits.
-
-Collection and integration use one path: `update_data` → `collect_campus` → validated archive → publication. `scripts/course_explorer.py` holds shared HTTP/XML helpers. Retired pilot collectors and the earlier history envelope have been removed. New work uses the manifest and per-term archive files. Historical records keep the original v1 course/section format; the public history envelope is now a version 2 index so several years do not become one giant download. See the contract’s migration notes. The site retains objects for the current and previous publication; Git preserves older versions.
-
-## Checks and preview
+## Update and deploy
 
 ```sh
-npm run test:data
-npm run test:ui
-npm run validate:data
-npm run build
-npx playwright install chromium
-npm run test:embed
-npm run preview
+python -m scripts.update_data --reuse-current  # rebuild using saved sources
+python -m scripts.update_data                  # collect schedules and publish locally
 ```
 
-Preview: **http://localhost:4173/professor-guide/**. Iframe test: **http://localhost:4173/professor-guide/embed-test.html**. Data tests are offline; browser tests cover loading, errors, narrow iframes, keyboard controls, and zoom.
+Pushes to `main` deploy after checks. PRs check only. The weekly Monday 10:20 UTC workflow refreshes schedules. Deploy saved data manually with `gh workflow run pages.yml --ref main -f refresh=false`.
 
-## Deployment
+[Operations](docs/operations.md): collection, rollback, and the DI iframe snippet. [Data contract](docs/data-contract.md): schemas and attribution rules. [Review workflow](data/mappings/README.md): matching and evidence. [Backlog](docs/backlog.md): current scope and remaining work.
 
-GitHub Pages uses the single workflow in `.github/workflows/pages.yml`. Main pushes check and deploy; PRs check only. Weekly Monday 10:20 UTC and manual refreshes collect, run checks, commit validated data, and deploy the tested artifact.
-
-```sh
-gh workflow run pages.yml -f refresh=true
-gh run list --workflow pages.yml
-```
-
-[Operations](docs/operations.md) covers repository settings, failure behavior, rollback, and embedding. DI staging verification still needs an authenticated staging session; no DI CMS content has been edited.
-
-## Layout
-
-- `src/`: frontend and shared manifest loader.
-- `scripts/`: collectors, validation, integration, publication, and deployment verification.
-- `config/`: reviewed collection settings.
-- `data/inputs/`, `data/mappings/`, `data/examples/`: teammate outputs, reviewed mappings, synthetic fixtures.
-- `public/data/`: committed generated visitor data.
-- `tests/`: offline data checks and browser embed checks.
-- `docs/`: contract, operations, teammate handoffs, API observations, and generated coverage reports.
-
-Dependencies, environments, raw downloads, local candidates, caches, and test output are ignored. Salary Guide’s React/Vite, repository base path, and saved-JSON patterns informed the starter; its inspected revision is recorded in the API notes.
+Coverage: [schedule](docs/current-coverage.md) · [archive](docs/integration-history-coverage.md) · [GPA identities](docs/identity-review-coverage.md) · [RMP](docs/rmp-coverage.md).

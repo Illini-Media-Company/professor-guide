@@ -4,7 +4,7 @@ Use the [README](../README.md) for installation and routine checks. Run commands
 
 ## Routine collection
 
-`python -m scripts.update_data` is the normal entry point. It discovers available schedules, collects the configured current term, reuses archived history, validates teammate inputs, reports coverage, and publishes one coherent dataset.
+`python -m scripts.update_data` is the normal entry point. It discovers available schedules, collects the configured current term, reuses archived history, validates normalized inputs, reports coverage, and publishes one coherent dataset.
 
 ```sh
 python -m scripts.update_data --start-year 2023
@@ -43,11 +43,11 @@ Candidates and their `.coverage.json` attempt reports live in ignored `data/snap
 
 The history v2 index references one v1 schedule and department-coverage object per collected semester. Historical objects are immutable and reused across refreshes. A cold checkout can reuse the committed archive without XML caches. Complete local backfill candidates under `data/snapshots/archive/` are resumable after validation; partial coverage files are never mistaken for completed semesters.
 
-The publisher validates a complete temporary bundle: schemas, coverage, source timestamps, teammate joins, exact byte sizes, and SHA-256 hashes. It promotes immutable `objects/<sha256>.json` files, then atomically replaces `integration.json` last. A failure before that switch leaves the previous manifest, referenced data, and collection timestamps intact. Reports are restored if publication fails. Production rejects synthetic inputs.
+The publisher validates a complete temporary bundle: schemas, coverage, source timestamps, enrichment joins, exact byte sizes, and SHA-256 hashes. It promotes immutable `objects/<sha256>.json` files, then atomically replaces `integration.json` last. A failure before that switch leaves the previous manifest, referenced data, and collection timestamps intact. Reports are restored if publication fails. Production rejects synthetic inputs.
 
 After a successful changed publication, objects referenced by the new manifest and the immediately preceding manifest are retained; older unreferenced objects are removed. This gives in-flight readers one previous generation and bounds accumulation across refreshes. Identical republishes do not discard the retained generation. A cleanup error is reported without treating a completed publication as a failed refresh. Interrupted writes may leave extra objects until the next changed successful publication. Per-term schedules and coverage files referenced by an archive index are included in retention. Older complete datasets remain recoverable from Git history.
 
-Consumers must resolve all files from one manifest response. Do not guess filenames, mix generations, or edit hashes/timestamps by hand. See the [contract](data-contract.md) and [reading example](team-handoffs.md#read-the-published-data).
+Consumers must resolve all files from one manifest response. Do not guess filenames, mix generations, or edit hashes/timestamps by hand. See the [contract](data-contract.md). For offline Python access, `load_term("public/data", "2023-spring")` from `scripts.integration` reads and validates one semester; `validate_bundle("public/data")` loads all terms.
 
 ## GitHub Pages
 

@@ -2,9 +2,9 @@
 
 **Resumed November 8, 2026:** review the existing RMP candidates and GPA/teaching identity queues, prioritizing high-impact cases. Fall 2026 grades are outside this review. The catalog still displays all collected courses, official faculty-directory identities, and unresolved schedule-name entries, independently of GPA availability. Keep both review queues. The [scope decisions](../../docs/backlog.md) record the clarification and resumption order.
 
-`course-aliases.json` is consumed by the shared publisher. The array starts empty. A reviewed entry needs course codes, explicit applicable `term_ids`, review identity/time, and exact official “Same as”/“See” evidence and URL. Automated source relationships are already published with their terms and provenance; reviewed records remain separate and never merge CRNs.
+`course-aliases.json` is consumed by the shared publisher. A reviewed entry needs course codes, explicit applicable `term_ids`, review identity/time, and exact official “Same as”/“See” evidence and URL. Automated source relationships are already published with their terms and provenance; reviewed records remain separate and never merge CRNs.
 
-`professor-identities.json` is the matching owner's review workspace. It is not automatically interpreted as verified identity links. That owner produces `data/inputs/professors.json` and `verified-links.json` with explicit evidence; uncertain names remain unresolved.
+`professor-identities.json` is the identity review workspace. It is not automatically interpreted as verified links. Accepted decisions export to `data/inputs/professors.json` and `verified-links.json` with explicit evidence; uncertain names remain unresolved.
 
 `python3 -m scripts.review_identities --include-archive` compares every GPA source name with official full-name/unit directories and saved course/term occurrences. It writes the ledger, a complete GPA queue (`identity-review.csv`), an archive queue (`archive-identity-review.csv`), and the [coverage report](../../docs/identity-review-coverage.md). GPA decisions come first; archive-only labels remain a separate follow-up queue. A completed comparison can still require more evidence before an identity is verified.
 
@@ -14,7 +14,7 @@ The rules and individually sourced name variants live in [`config/identity-revie
 
 Access-denied directory pages are recorded as failures, never as evidence that a person is absent. Such hosts are deferred for 24 hours; earlier valid saved responses remain usable. Former instructors often require an official historical roster, syllabus, or dated unit page beyond today's directories.
 
-See [the implemented contract](../../docs/data-contract.md) and [team handoffs](../../docs/team-handoffs.md).
+See [the data contract](../../docs/data-contract.md).
 
 ## RMP coverage checkpoint
 
@@ -24,7 +24,7 @@ See [the implemented contract](../../docs/data-contract.md) and [team handoffs](
 
 Each instructor gets exactly one outcome in `rmp-identities.json` and `rmp-review.csv`: `verified_match`, `ambiguous_candidates`, `no_matching_profile_found`, or `lookup_unavailable`. Matching requires compatible full names, UIUC, and official unit or previously verified course context. `config/rmp-review.json` lists explicit department-label equivalents and reviewed college/department relationships; they never establish name identity. New label reviews retain official source URLs, fetch dates and hashes, and accepted candidates retain the corresponding affiliation evidence. Competing supported profiles remain ambiguous. Nicknames, shortened surnames, multiple supported profiles, and shared profile ownership remain unverified. A no-match outcome is limited to the results returned by this run, not proof that no profile exists. Directory duplicates and limitations are documented in the [report](../../docs/rmp-coverage.md).
 
-Add `--reuse-sources` to replay cached aggregate data in ignored `.cache/rmp-review` without requests. Add `--apply` to export accepted numerical summaries to the existing instructor records; this preserves the instructor set, rebuilds this batch's prior ratings, and refuses to apply incomplete pagination. Independent ratings require explicit reconciliation. The public publication and Pages workflow are separate and remain paused for this checkpoint. Every accepted summary records matching evidence, raw/normalized metrics in the ledger, source timestamps, and retrieval hashes.
+Add `--reuse-sources` to replay cached aggregate data in ignored `.cache/rmp-review` without requests. Add `--apply` to export accepted numerical summaries to the existing instructor records; this preserves the instructor set, rebuilds this batch's prior ratings, and refuses to apply incomplete pagination. Independent ratings require explicit reconciliation. Publication is a separate step; review commands do not deploy. The Pages workflow is enabled. Every accepted summary records matching evidence, raw/normalized metrics in the ledger, source timestamps, and retrieval hashes.
 
 ## Continued identity evidence
 

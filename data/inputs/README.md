@@ -1,5 +1,13 @@
-# Optional normalized teammate inputs
+# Normalized publication inputs
 
-Supply `gpa.json`, `professors.json`, and `verified-links.json` here when real outputs are ready. Until then the integration manifest explicitly says `pending`. These files are normalized public data inputs, not raw downloads or secrets.
+These committed files supply real enrichment data to `scripts.update_data`:
 
-See [team handoffs](../../docs/team-handoffs.md), [the contract](../../docs/data-contract.md), and clearly labeled synthetic examples under `data/examples/integration/`. The GPA and matching owners generate these files without editing the collector. Production rejects fixture-labeled inputs. Raw downloads belong in ignored `data/raw/` or `data/downloads/`.
+| File | Dataset |
+| --- | --- |
+| `gpa.json` | Normalized source GPA rows, grade grain, enrollment counts, provenance |
+| `professors.json` | Verified instructor identities, faculty links, professor-wide RMP summaries |
+| `verified-links.json` | Reviewed schedule occurrences and individual grade-name bridges |
+
+Paths are configured in `config/collection.json`. See the [data contract](../../docs/data-contract.md), [review workflow](../mappings/README.md), and [synthetic shape examples](../examples/integration/README.md). Raw downloads belong in ignored `data/raw/` or `data/downloads/`. Production rejects synthetic inputs.
+
+After reviewed input changes, run `python -m scripts.update_data --reuse-current` and `npm run validate:data`. This rebuilds the publication from saved schedules without source requests; it does not deploy until pushed to main.
