@@ -62,8 +62,8 @@ table { width: 100%; border-collapse: collapse; text-align: left; }
 .results-table td { border-bottom: 1px solid var(--border); vertical-align: middle; }
 .results-table tbody tr:last-child td { border-bottom: 0; }
 .results-table tbody tr:nth-child(even) td { background: #f8f8f7; }
-.results-table tr:hover td { background: #fdba74; }
-.results-table tr.selected td { background: #fb923c; }
+.results-table tbody tr:hover td { background: #fdba74; }
+.results-table tbody tr.selected td { background: #fb923c; }
 .result-link { display: flex; flex-direction: column; justify-content: center; gap: 0; padding: 10px 16px; width: 100%; text-align: left; min-height: 64px; }
 .result-link strong { font-size: 16px; font-weight: 500; line-height: 24px; overflow-wrap: anywhere; }
 .gpa-indicator { display: inline-block; margin-left: 6px; vertical-align: -2px; line-height: 1; }
