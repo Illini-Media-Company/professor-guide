@@ -3,7 +3,7 @@ import { DATA_BASE } from './data.js'
 import { courseSource, createModel, dateLabel, hasGpaFor, isProfessorBrowse, number, readState, resultId, searchResults, stateUrl, summarizeGrades, termLabel, termOrder } from './guide.js'
 import { GradeHistory, Pending, Ratings } from './components/Grades.jsx'
 
-const PAGE_SIZE = 5
+const PAGE_SIZE = 10
 const Arrow = () => <span aria-hidden="true">↗</span>
 const GpaIcon = () => <span className="gpa-indicator" title="GPA data available"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" role="img" aria-label="GPA data available"><path d="M1 1h1v12h13v1H1zM4 8h2v3H4zm4-4h2v7H8zm4 2h2v5h-2z" /></svg></span>
 

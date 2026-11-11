@@ -111,16 +111,16 @@ test('initial browsing includes everyone with rated instructors first; paginatio
   await page.goto('/professor-guide/')
   await expect(page.getByRole('status')).toContainText(`${resultCount} results`)
   await expect(page.getByRole('heading', { name: 'Professors', exact: true })).toBeVisible()
-  const expected = index.professors.filter((p) => p.rmp?.overall_quality != null).sort((a, b) => a.display_name.split(' ').at(-1).localeCompare(b.display_name.split(' ').at(-1)) || a.display_name.localeCompare(b.display_name)).slice(0, 5).map((p) => p.display_name)
+  const expected = index.professors.filter((p) => p.rmp?.overall_quality != null).sort((a, b) => a.display_name.split(' ').at(-1).localeCompare(b.display_name.split(' ').at(-1)) || a.display_name.localeCompare(b.display_name)).slice(0, 10).map((p) => p.display_name)
   await expect(page.locator('.result-link strong')).toHaveText(expected)
   await expect(page.locator('.results-table .pending')).toHaveCount(0)
   await page.getByRole('button', { name: 'Next results page' }).click()
-  await expect(page.locator('.pagination')).toContainText('6–10')
+  await expect(page.locator('.pagination')).toContainText('11–20')
   await page.getByRole('searchbox').fill('no-such-instructor-987654321')
   await expect(page.getByRole('heading', { name: 'No results found' })).toBeVisible()
   await page.getByRole('button', { name: 'Clear filters' }).first().click()
   await expect(page.getByRole('status')).toContainText(`${resultCount} results`)
-  await expect(page.locator('.pagination')).toContainText('1–5')
+  await expect(page.locator('.pagination')).toContainText('1–10')
 })
 
 test('subject and semester browsing keep rated instructors first without hiding pending listings', async ({ page }) => {
@@ -134,7 +134,7 @@ test('subject and semester browsing keep rated instructors first without hiding 
     expect(matches.some((p) => p.rmp?.overall_quality == null)).toBeTruthy()
     const ordered = [...matches].sort((a, b) => Number(b.rmp?.overall_quality != null) - Number(a.rmp?.overall_quality != null) || alphabetical(a, b))
     await expect(page.getByRole('status')).toContainText(`${matches.length.toLocaleString('en-US')} results`)
-    await expect(page.locator('.result-link strong')).toHaveText(ordered.slice(0, 5).map((p) => p.display_name))
+    await expect(page.locator('.result-link strong')).toHaveText(ordered.slice(0, 10).map((p) => p.display_name))
   }
   await page.getByRole('combobox', { name: 'Subject', exact: true }).selectOption(subject)
   await check(subject, '')
