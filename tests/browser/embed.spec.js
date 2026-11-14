@@ -1,14 +1,15 @@
 import { test, expect } from '@playwright/test'
 import fs from 'node:fs'
 import { createHash } from 'node:crypto'
-import { summarizeGrades } from '../../src/guide.js'
+import { createModel, summarizeGrades } from '../../src/guide.js'
 
 const manifest = JSON.parse(fs.readFileSync('public/data/integration.json', 'utf8'))
 const index = JSON.parse(fs.readFileSync(`public/data/${manifest.files.guide.path}`, 'utf8'))
 const coursePerson = index.professors.find((p) => p.professor_id === 'prof_0001')
 const rated = index.professors.find((p) => p.rmp?.overall_quality != null && p.courses.length)
 const pending = index.professors.find((p) => !p.rmp && p.courses.length)
-const resultCount = (index.professors.length + (index.schedule_names?.length || 0)).toLocaleString('en-US')
+const model = createModel(index)
+const resultCount = model.people.length.toLocaleString('en-US')
 const searchAndSelect = async (page, person) => {
   await page.getByRole('searchbox', { name: 'Search', exact: true }).fill(person.display_name)
   await page.getByRole('button', { name: person.display_name, exact: false }).first().click()
@@ -95,16 +96,19 @@ test('ECE 374 and Emily Fox are available without GPA, and existing RMP data is 
   await expect(page.getByRole('combobox', { name: 'Course', exact: true }).locator('option')).toContainText(['CS 374', 'ECE 374'])
 })
 
-test('unverified source names remain searchable with identity and metric states pending', async ({ page }) => {
+test('duplicate schedule names open one profile across departments and retain old links', async ({ page }) => {
   const raw = index.schedule_names.find((e) => e.display_name === 'Fox, E' && e.subject === 'CS')
   await page.goto(`/professor-guide/#view=professors&person=${raw.entry_id}&course=CS+374`)
-  await expect(page.getByRole('heading', { name: 'Fox, E', exact: true })).toBeVisible()
-  await expect(page.getByText('Schedule name · identity pending')).toBeVisible()
-  await expect(page.getByText(/same abbreviation may refer to different people/)).toBeVisible()
-  await expect(page.locator('.ratings-grid .pending')).toHaveCount(4)
+  await expect(page.getByRole('heading', { name: 'Emily Kyle Fox', exact: true })).toBeVisible()
+  await expect(page.getByText(/Grouped schedule names: Fox, E/)).toBeVisible()
   await expect(page.locator('.gpa-number')).toHaveText('Pending')
-  await page.getByText('Teaching history', { exact: true }).click()
-  await expect(page.locator('.teaching-terms p')).not.toBeEmpty()
+  await page.getByRole('button', { name: 'Back to results' }).click()
+  await page.getByRole('searchbox').fill('Fox, E')
+  for (const subject of ['CS', 'ECE']) {
+    await page.getByRole('combobox', { name: 'Subject', exact: true }).selectOption(subject)
+    await expect(page.getByRole('status')).toContainText('1 result')
+    await expect(page.locator('.result-link strong')).toHaveText(['Emily Kyle Fox'])
+  }
 })
 
 test('initial browsing includes everyone with rated instructors first; pagination and clearing restore that list', async ({ page }) => {
@@ -125,7 +129,7 @@ test('initial browsing includes everyone with rated instructors first; paginatio
 
 test('subject and semester browsing keep rated instructors first without hiding pending listings', async ({ page }) => {
   await page.goto('/professor-guide/')
-  const entries = [...index.professors, ...(index.schedule_names || [])]
+  const entries = model.people
   const subject = 'CS'
   const term = '2025-fall'
   const alphabetical = (a, b) => a.display_name.split(' ').at(-1).localeCompare(b.display_name.split(' ').at(-1)) || a.display_name.localeCompare(b.display_name)

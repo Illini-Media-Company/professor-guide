@@ -1,9 +1,9 @@
 # Identity review coverage
 
-Review run: `2026-11-08T22:44:24Z`.
+Review run: `2026-11-13T09:57:51Z`.
 
 All **3,921 GPA source-name labels** and **18,624 grade rows** were evaluated against the saved official directory sources and the campus archive.
-**2,308 distinct directory identities** have supporting full-name and department evidence. 12,758 grade rows have a reviewed course/term occurrence; 5,866 require further evidence.
+**2,323 distinct directory identities** have supporting name, department, and course/term evidence. 12,801 grade rows have a reviewed course/term occurrence; 5,823 require further evidence.
 
 Names with incomplete, conflicting, or unavailable evidence stay unresolved. Public source access failures are recorded in the ledger. Current rosters may omit former instructors.
 
@@ -11,7 +11,7 @@ Names with incomplete, conflicting, or unavailable evidence stay unresolved. Pub
 
 | Grade-row outcome | Rows |
 | --- | ---: |
-| no_full_name_and_department_match | 5,203 |
+| no_full_name_and_department_match | 5,160 |
 | department_not_verified_for_this_subject | 302 |
 | no_matching_schedule_occurrence | 174 |
 | ambiguous_grade_source_names | 89 |
@@ -26,9 +26,9 @@ Each row is a subject/name label; abbreviated labels are not counts of unique pe
 | Outcome | Subject/name labels |
 | --- | ---: |
 | needs_additional_source_evidence | 12,277 |
-| candidate_requires_occurrence_review | 2,620 |
-| partially_verified_occurrences | 2,315 |
-| verified_occurrences | 93 |
+| candidate_requires_occurrence_review | 2,604 |
+| partially_verified_occurrences | 2,330 |
+| verified_occurrences | 94 |
 | ambiguous_directory_identities | 47 |
 
 ## Follow-up queue

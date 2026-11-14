@@ -64,6 +64,73 @@ class IdentityReviewTests(unittest.TestCase):
         self.assertTrue(schedule_name_agrees('Example, Alexandra', 'Example, A'))
         self.assertFalse(schedule_name_agrees('Example, Alexandra', 'Example, Alice'))
 
+    def test_initial_grade_needs_a_full_name_in_the_same_course_and_term(self):
+        gpa, listings = data()
+        gpa['records'][0]['primary_instructor_name_raw'] = 'Example, A Q'
+        rows = review_inventory(gpa['records'], [person()], listings, CONFIG, FIXTURE_TIME)
+        self.assertFalse(rows[0]['matched_grades'])
+        listings['2026-fall:MATH 101'][0]['name_raw'] = 'Example, Alexandra Q'
+        rows = review_inventory(gpa['records'], [person()], listings, CONFIG, FIXTURE_TIME)
+        self.assertEqual(len(rows[0]['matched_grades']), 1)
+        self.assertEqual(rows[0]['reason'], 'course_term_anchored_name_variant')
+        gpa['records'][0]['term_id'] = '2026-spring'
+        self.assertFalse(review_inventory(gpa['records'], [person()], listings, CONFIG, FIXTURE_TIME)[0]['matched_grades'])
+
+    def test_surname_variant_needs_the_official_spelling_in_a_scoped_schedule(self):
+        gpa, listings = data()
+        gpa['records'][0]['primary_instructor_name_raw'] = 'Exampl, Alexandra Q'
+        rows = review_inventory(gpa['records'], [person()], listings, CONFIG, FIXTURE_TIME)
+        self.assertEqual(len(rows[0]['matched_grades']), 1)
+        self.assertEqual(rows[0]['matched_grades'][0]['identity_anchor']['schedule_name_raw'], 'Example, A')
+        listings['2026-fall:MATH 101'][0]['name_raw'] = 'Exampl, A'
+        self.assertFalse(review_inventory(gpa['records'], [person()], listings, CONFIG, FIXTURE_TIME)[0]['matched_grades'])
+
+    def test_contextual_grade_matching_preserves_middle_name_and_historical_collisions(self):
+        gpa, listings = data()
+        gpa['records'][0]['primary_instructor_name_raw'] = 'Exampl, Alexandra Q'
+        for other in (person(netid='alice', name='Example, Alice'), person(name='Example, Alexandra R')):
+            with self.subTest(other=other):
+                directory = [person(), other] if other['netid'] == 'alice' else [other]
+                self.assertFalse(review_inventory(gpa['records'], directory, listings, CONFIG, FIXTURE_TIME)[0]['matched_grades'])
+        historical = deepcopy(gpa['records'][0])
+        historical.update(id='other', term_id='2025-fall', primary_instructor_name_raw='Example, Alice')
+        gpa['records'].append(historical)
+        rows = review_inventory(gpa['records'], [person()], listings, CONFIG, FIXTURE_TIME)
+        self.assertTrue(all(not row['matched_grades'] for row in rows))
+
+    def test_contextual_grade_match_is_still_subject_and_section_scoped(self):
+        gpa, listings = data()
+        gpa['records'][0].update(primary_instructor_name_raw='Exampl, Alexandra Q', grain='section', section_id='2026-fall:99999')
+        self.assertFalse(review_inventory(gpa['records'], [person()], listings, CONFIG, FIXTURE_TIME)[0]['matched_grades'])
+        gpa['records'][0].update(grain='instructor_course_term', section_id=None)
+        self.assertFalse(review_inventory(gpa['records'], [person(unit='Physics')], listings, CONFIG, FIXTURE_TIME)[0]['matched_grades'])
+
+    def test_multiple_departments_of_one_identity_keep_separate_grade_rows(self):
+        gpa, listings = data()
+        gpa['records'][0]['primary_instructor_name_raw'] = 'Exampl, Alexandra Q'
+        another = deepcopy(gpa['records'][0])
+        another.update(id='psych', course_code='PSYC 101')
+        gpa['records'].append(another)
+        occurrence = deepcopy(listings['2026-fall:MATH 101'][0])
+        occurrence.update(listing_id='2026-fall:PSYC 101', section_id='2026-fall:20001', meeting_id='2026-fall:20001:0')
+        listings[occurrence['listing_id']] = [occurrence]
+        rows = review_inventory(gpa['records'], [person(), person(unit='Psychology, Department')], listings, CONFIG, FIXTURE_TIME)
+        self.assertEqual(len(rows[0]['matched_grades']), 2)
+        self.assertEqual({m['occurrence']['listing_id'] for m in rows[0]['matched_grades']}, {'2026-fall:MATH 101', '2026-fall:PSYC 101'})
+
+    def test_contextual_export_retains_literal_names_and_the_matching_evidence(self):
+        gpa, listings = data()
+        gpa['records'][0]['primary_instructor_name_raw'] = 'Exampl, Alexandra Q'
+        rows = review_inventory(gpa['records'], [person()], listings, CONFIG, FIXTURE_TIME)
+        ledger = {'identities': rows, 'reviewed_at': FIXTURE_TIME, 'sources': {URL: {'fetched_at': FIXTURE_TIME}}}
+        professors = read('data/examples/integration/professors.json')
+        links = read('data/examples/integration/verified-links.json')
+        _, exported = export_reviews(ledger, gpa, professors, links)
+        match = next(m for link in exported['records'] for m in link.get('grade_name_matches', []))
+        self.assertEqual(match['primary_instructor_name_raw'], 'Exampl, Alexandra Q')
+        self.assertIn('Course/term-anchored', match['evidence'][0])
+        self.assertIn('Example, A', match['evidence'][0])
+
     def test_department_scope_does_not_confuse_psychology_and_educational_psychology(self):
         self.assertFalse(unit_agrees('PSYC', person(unit='Educational Psychology, Department of'), CONFIG))
         self.assertEqual(review([person(unit='Physics, Department of')])[0]['status'], 'needs_review')

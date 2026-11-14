@@ -1,3 +1,5 @@
+import { groupPeople } from './people.js'
+
 export const seasonOrder = { winter: 0, spring: 1, summer: 2, fall: 3 }
 export const termOrder = (id) => Number(id.split('-')[0]) * 4 + (seasonOrder[id.split('-')[1]] ?? 0)
 export const termLabel = (id) => {
@@ -43,18 +45,16 @@ export function createModel(index) {
     if (!grades.has(key)) grades.set(key, [])
     grades.get(key).push(row)
   }
-  const entries = [...index.professors, ...(index.schedule_names || []).map((entry) => ({ ...entry,
-    entry_type: 'schedule_name', professor_id: null, faculty_links: [], rmp: null,
-  }))]
+  const entries = groupPeople(index)
   const people = entries.map((person) => ({ ...person,
-    searchText: normalize([person.display_name, ...person.courses.flatMap((c) => [c.course_code, courses.get(c.course_code)?.title || ''])].join(' ')),
+    searchText: normalize([...person.names, ...person.courses.flatMap((c) => [c.course_code, courses.get(c.course_code)?.title || ''])].join(' ')),
   }))
   const peopleByCourse = new Map()
   for (const person of people) for (const course of person.courses) {
     if (!peopleByCourse.has(course.course_code)) peopleByCourse.set(course.course_code, [])
     peopleByCourse.get(course.course_code).push(person)
   }
-  return { people, peopleById: new Map(people.map((p) => [resultId(p), p])), courses,
+  return { people, peopleById: new Map(people.flatMap((p) => [resultId(p), ...p.alias_ids].map((id) => [id, p]))), courses,
     subjects: [...new Set(index.courses.map((c) => c.course_code.split(' ')[0]))].sort(),
     terms: [...index.terms].sort((a, b) => termOrder(b.id) - termOrder(a.id)),
     gradesFor: (personId, code, term = '') => (personId == null ? [] : grades.get(`${personId}|${code}`) || []).filter((row) => !term || row.term_id === term),

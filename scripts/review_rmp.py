@@ -20,7 +20,7 @@ import time
 
 from scripts.data_contract import DataError, atomic_write_json, atomic_write_text, require, timestamp
 from scripts.integration import read, validate_input
-from scripts.review_identities import full_name_agrees, name_parts, unit_tokens, words
+from scripts.review_identities import contextual_name_agrees, full_name_agrees, name_parts, unit_tokens, words
 
 
 API = 'https://www.ratemyprofessors.com/graphql'
@@ -237,8 +237,18 @@ def profile_matching_name(node):
 
 def audit(professors, contexts, nodes, directory, config, reviewed_at):
     by_last = defaultdict(list)
+    by_initial = defaultdict(list)
     for node in nodes:
         by_last[tuple(words(node['lastName']))].append(node)
+        given = words(node['firstName'])
+        if given:
+            by_initial[given[0][0]].append(node)
+    identities_by_initial = defaultdict(set)
+    for identifier, context in contexts.items():
+        for name in context['names']:
+            given = name_parts(name)[1] if ',' in name else words(name)
+            if given:
+                identities_by_initial[given[0][0]].add(identifier)
     entries = []
     for person in professors['records']:
         context = contexts[person['professor_id']]
@@ -256,6 +266,11 @@ def audit(professors, contexts, nodes, directory, config, reviewed_at):
                 surnames.update(tuple(tokens[start:end]) for start in range(1, len(tokens))
                                 for end in range(start + 1, len(tokens) + 1))
         possible = {node['legacyId']: node for last in surnames for node in by_last.get(last, [])}
+        for name in all_names:
+            given = name_parts(name)[1] if ',' in name else words(name)
+            for node in by_initial.get(given[0][0] if given else '', []):
+                if contextual_name_agrees(profile_matching_name(node), name):
+                    possible[node['legacyId']] = node
         candidates, supported = [], []
         for node in possible.values():
             rmp_name = f"{node['lastName']}, {node['firstName']}"
@@ -271,11 +286,20 @@ def audit(professors, contexts, nodes, directory, config, reviewed_at):
                 continue
             same_department = department_matches(node['department'], context['units'], config.get('department_aliases', {}))
             shared = sorted(context['courses'] & {course_key(x['courseName']) for x in node.get('courseCodes', [])})
+            contextual = not full and any(contextual_name_agrees(matching_name, name) for name in context['names'])
+            competing = []
+            if contextual:
+                competing = sorted(identifier for identifier in identities_by_initial.get(given[0][0] if given else '', [])
+                    if identifier != person['professor_id'] and
+                    any(contextual_name_agrees(matching_name, name) for name in contexts[identifier]['names']))
             candidate = {'profile_id': node['legacyId'], 'profile_url': f"https://www.ratemyprofessors.com/professor/{node['legacyId']}",
                 'name': rmp_name, 'school': node['school']['name'], 'school_id': node['school']['id'], 'department': node['department'],
                 'full_name_agrees': full, 'department_agrees': same_department, 'shared_courses': shared,
                 'raw_metrics': {key: node.get(key) for key in ('avgRating', 'numRatings', 'avgDifficulty', 'wouldTakeAgainPercent')},
                 'metrics': metrics(node), 'source': node['_source']}
+            if contextual:
+                candidate.update(contextual_name_agrees=True, competing_professor_ids=competing,
+                                 name_match_method='verified_course_anchored_name_variant')
             if matching_name != rmp_name:
                 candidate['matching_name'] = matching_name
             if not official_full and grade_name_support:
@@ -292,8 +316,12 @@ def audit(professors, contexts, nodes, directory, config, reviewed_at):
                     timestamp(source['fetched_at'])
                 candidate['department_alias_review'] = alias_review
             candidates.append(candidate)
-            if full and (same_department or shared):
+            if (node['school']['id'] == SCHOOL_ID and node['school']['name'] == SCHOOL_NAME and
+                    (full and (same_department or shared) or contextual and shared and not competing)):
                 supported.append(candidate)
+        # A weaker spelling/initial candidate cannot displace a supported full
+        # name. Still retain every candidate in the audit for later review.
+        supported = [candidate for candidate in supported if candidate['full_name_agrees']] or supported
         entry = {'professor_id': person['professor_id'], 'display_name': person['display_name'],
                  'checked_at': reviewed_at, 'status': 'lookup_unavailable',
                  'reason': 'incomplete_directory', 'candidates': sorted(candidates, key=lambda c: c['profile_id']),
@@ -321,6 +349,12 @@ def audit(professors, contexts, nodes, directory, config, reviewed_at):
                     f"Reviewed spelling {proof['primary_instructor_name_raw']} from grade {proof['grade_record_id']}; "
                     f"identity review by {proof['reviewed_by']} at {proof['verified_at']}; source {proof['source_url']}."
                     for proof in candidate['reviewed_grade_name_evidence'])
+            if candidate.get('contextual_name_agrees'):
+                entry['reason'] = 'unique_name_variant_school_and_verified_course'
+                entry['rmp']['matching_evidence'] = [
+                    f"Name variant {candidate.get('matching_name', candidate['name'])} has compatible first initials, surname spelling, and supplied middle names; RMP school is {SCHOOL_NAME}.",
+                    'Shared independently verified teaching courses: ' + ', '.join(candidate['shared_courses']),
+                    'No competing established guide identity or supported RMP profile matches this name and context.']
             if candidate.get('matching_name'):
                 entry['rmp']['matching_evidence'].append(
                     f"The RMP field explicitly lists a prefix nickname in parentheses ({candidate['name']}); "
@@ -359,7 +393,10 @@ def validate_audit(ledger, professors):
         claimed.add(rmp['profile_id'])
         require(ledger['directory']['complete'], 'Incomplete lookup cannot establish a unique RMP match')
         candidate = next(c for c in entry['candidates'] if c['profile_id'] == rmp['profile_id'])
-        require(candidate['school_id'] == SCHOOL_ID and candidate['school'] == SCHOOL_NAME and candidate['full_name_agrees'] and
+        contextual = (candidate.get('contextual_name_agrees') is True and candidate['shared_courses'] and
+                      candidate.get('competing_professor_ids') == [] and
+                      candidate.get('name_match_method') == 'verified_course_anchored_name_variant')
+        require(candidate['school_id'] == SCHOOL_ID and candidate['school'] == SCHOOL_NAME and (candidate['full_name_agrees'] or contextual) and
                 (candidate['department_agrees'] or candidate['shared_courses']), 'Missing RMP identity evidence')
         require(entry['official_sources'] and rmp['matching_evidence'], 'RMP match needs official identity provenance')
         require(rmp['retrieved_from']['url'] == API and rmp['retrieved_from']['request_sha256'] and
@@ -392,14 +429,14 @@ def write_reports(ledger):
     lines += ['', '## Metric availability', '', '| Metric | Matched instructors with a value |', '| --- | ---: |']
     lines += [f'| {key} | {value:,} |' for key, value in available.items()]
     lines += ['', '## Method and limits', '',
-        'The audit compares the fixed accepted instructor set with the public RMP school-directory results for University Of Illinois at Urbana - Champaign. A match requires a compatible full first/surname, compatible supplied middle names, the correct school, and official department or verified course context. Initial-only and nickname candidates require further review; multiple supported profiles and shared profile assignments remain ambiguous.',
+        'The audit compares the fixed accepted instructor set with the public RMP school-directory results for University Of Illinois at Urbana - Champaign. Full-name matches require official department or verified course context. Compatible initials and small surname variants additionally require a shared independently verified teaching course and no competing established identity. Conflicting full first/middle names, multiple supported profiles, and shared profile assignments remain ambiguous.',
         '', 'Full source names from individually reviewed GPA bridges can supplement official directory spellings. These require an exact grade-record/name/source reference and prior identity evidence; unreviewed grade names never participate. The accepted rating retains the spelling review and grade-source provenance separately from the RMP metric source.',
         '', 'These are bulk rule-based matches, not individual manual investigations. RMP course codes are supporting profile context; they do not make its aggregate ratings course-specific. The source is an anonymous query to the same public directory endpoint and pagination interface used by the RMP website, requesting its public profile summary/course fields. No individual review text is collected. Profile URLs identify the rated person; retrieval timestamps and query/response hashes identify where each metric was actually fetched.',
         '', 'Missing values and source sentinel values remain null; a genuine zero-percent take-again value is retained. Rating counts are counts of reviews, not graded enrollments. Failure or incomplete pagination is lookup unavailable, never evidence of absence. A no-match outcome means no name candidate was found in the directory results returned during this run; it does not establish that no profile exists. Repeated result IDs can reflect indexing or changing search order, so pagination completeness does not guarantee an exhaustive list of every real RMP profile.',
         '', '## Launch checkpoint', '',
-        ('Launch decision: proceed with available verified ratings. Missing metrics and unmatched profiles display Pending; there is no minimum coverage requirement. Deployment remains paused. Further GPA/archive identity review is tracked separately.'
+        ('Launch decision: proceed with available verified ratings. Missing metrics and unmatched profiles display Pending; there is no minimum coverage requirement. Further GPA/archive identity review is tracked separately.'
          if ledger.get('status') == 'available_ratings_with_pending_missing' else
-         'No minimum ratings coverage is assumed. Stop here to decide launch coverage with the user. Deployment remains paused. Further GPA/archive identity review is tracked separately.'),
+         'No minimum ratings coverage is assumed. Further GPA/archive identity review is tracked separately.'),
         '', 'See the [complete audit queue](../data/mappings/rmp-review.csv) and [evidence ledger](../data/mappings/rmp-identities.json).', '']
     for failure in ledger['directory']['failures']:
         lines += ['Source failure: ' + failure['reason'], '']
@@ -456,7 +493,8 @@ def main():
                    'verified_links_sha256': sha(Path('data/inputs/verified-links.json').read_bytes()),
                    'identity_ledger_sha256': sha(Path('data/mappings/professor-identities.json').read_bytes()),
                    'config_sha256': sha(Path('config/rmp-review.json').read_bytes()),
-                   'script_sha256': sha(Path(__file__).read_bytes())},
+                   'script_sha256': sha(Path(__file__).read_bytes()),
+                   'name_matching_script_sha256': sha(Path('scripts/review_identities.py').read_bytes())},
         'directory': directory, 'records': entries}
     validate_audit(ledger, professors)
     if args.apply:

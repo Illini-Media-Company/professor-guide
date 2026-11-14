@@ -106,7 +106,7 @@ prof_uiuc_rwb,Robert W Barrett,verified_match,unique_full_name_school_and_contex
 prof_uiuc_barros,Ana Barros,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
 prof_uiuc_kbarrow,Kirk S Barrow,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2950228,3.8,5,3.2,60,2026-11-07T08:47:01Z,https://www.ratemyprofessors.com/professor/2950228
 prof_uiuc_abartik,Alexander Wickman Bartik,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2399498,3,1,4,100,2026-11-07T08:47:19Z,https://www.ratemyprofessors.com/professor/2399498
-prof_uiuc_ymb,Yuliy Baryshnikov,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
+prof_uiuc_ymb,Yuliy Baryshnikov,ambiguous_candidates,name_or_context_requires_review,,,,,,,https://www.ratemyprofessors.com/professor/1923073
 prof_uiuc_mnb,Masooda Bashir,ambiguous_candidates,name_or_context_requires_review,,,,,,,https://www.ratemyprofessors.com/professor/1647240
 prof_uiuc_basu1,Anustup Basu,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/812328,3.2,34,2.6,33.3333,2026-11-07T08:46:55Z,https://www.ratemyprofessors.com/professor/812328
 prof_uiuc_mbasu,Manisha Basu,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/1249655,4.3,32,3.8,72.7273,2026-11-07T08:46:58Z,https://www.ratemyprofessors.com/professor/1249655
@@ -307,7 +307,7 @@ prof_uiuc_hdc,Hyuck David Chung,ambiguous_candidates,name_or_context_requires_re
 prof_uiuc_mchung18,Minhey Chung,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/3116031,5,1,3,100,2026-11-07T08:47:00Z,https://www.ratemyprofessors.com/professor/3116031
 prof_uiuc_chuong,Jennifer Chuong,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/5075261,,0,,,2026-11-07T08:50:18Z,https://www.ratemyprofessors.com/professor/5075261
 prof_uiuc_jcidell,Julie L Cidell,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/1687722,4.4,14,3,91.6667,2026-11-07T08:47:09Z,https://www.ratemyprofessors.com/professor/1687722
-prof_uiuc_cintron3,Valerie Cintron,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2386001,3.8,9,3.3,77.7778,2026-11-07T08:47:07Z,https://www.ratemyprofessors.com/professor/2386001
+prof_uiuc_cintron3,Valerie Cintron,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2386001,3.8,9,3.3,77.7778,2026-11-07T08:47:07Z,https://www.ratemyprofessors.com/professor/2386001; https://www.ratemyprofessors.com/professor/2726628
 prof_uiuc_jdcisnrs,Josue David Cisneros,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/1964781,3.4,8,2.5,42.8571,2026-11-07T08:46:54Z,https://www.ratemyprofessors.com/professor/1964781
 prof_uiuc_claborn,John P Claborn,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/799264,4.8,19,1.5,100,2026-11-07T08:47:02Z,https://www.ratemyprofessors.com/professor/799264
 prof_uiuc_bkclark,Bryan K Clark,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
@@ -349,7 +349,7 @@ prof_uiuc_sculpepp,Steven Andrew Culpepper,verified_match,unique_full_name_schoo
 prof_uiuc_marcelom,Marcelo Cunha Medeiros,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/3009284,1.2,9,3.8,0,2026-11-07T08:46:58Z,https://www.ratemyprofessors.com/professor/3009284
 prof_uiuc_bcunning,Brian T Cunningham,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/902943,4.9,4,2,100,2026-11-07T08:47:11Z,https://www.ratemyprofessors.com/professor/902943
 prof_uiuc_leannemc,Leanne Cunningham,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2933655,1,1,3,0,2026-11-07T08:47:08Z,https://www.ratemyprofessors.com/professor/2933655
-prof_uiuc_rcunnin2,Ryan Matthew Cunningham,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/1966577,4.3,12,2.8,75,2026-11-07T08:46:57Z,https://www.ratemyprofessors.com/professor/1966577
+prof_uiuc_rcunnin2,Ryan Matthew Cunningham,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/1966577,4.3,12,2.8,75,2026-11-07T08:46:57Z,https://www.ratemyprofessors.com/professor/1797203; https://www.ratemyprofessors.com/professor/1966577
 prof_uiuc_smcurtis,Susan Curtis,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/24428,2.7,234,3.4,53.3333,2026-11-07T08:46:59Z,https://www.ratemyprofessors.com/professor/24428
 prof_uiuc_lcyliax2,Lucie Cyliax,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
 prof_uiuc_cdangelo,Cynthia D'Angelo,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
@@ -391,7 +391,7 @@ prof_uiuc_adhawan2,Abhishek Dhawan,no_matching_profile_found,no_name_candidate_i
 prof_uiuc_philippe,Philippe Di Francesco,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2049373,4.9,5,3.6,100,2026-11-07T08:47:08Z,https://www.ratemyprofessors.com/professor/2049373
 prof_uiuc_gdi,Larry Di Girolamo,ambiguous_candidates,name_or_context_requires_review,,,,,,,https://www.ratemyprofessors.com/professor/1103688
 prof_uiuc_kdifilip,Kristen DiFilippo,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
-prof_uiuc_idiianni,Isaac DiIanni,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
+prof_uiuc_idiianni,Isaac DiIanni,verified_match,unique_name_variant_school_and_verified_course,https://www.ratemyprofessors.com/professor/1743688,4.4,182,2.5,83.871,2026-11-07T08:46:57Z,https://www.ratemyprofessors.com/professor/1743688
 prof_uiuc_chunyuan,Chunyuan Diao,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
 prof_uiuc_yingdiao,Ying Diao,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2594201,5,2,3.5,100,2026-11-07T08:47:10Z,https://www.ratemyprofessors.com/professor/2594201
 prof_uiuc_crd,Curtis Dickerson,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2768285,5,5,1.8,100,2026-11-07T08:46:57Z,https://www.ratemyprofessors.com/professor/2768285
@@ -415,7 +415,7 @@ prof_uiuc_jdongx,Jiayin Dong,no_matching_profile_found,no_name_candidate_in_comp
 prof_uiuc_roydong,Roy Dong,ambiguous_candidates,name_or_context_requires_review,,,,,,,https://www.ratemyprofessors.com/professor/2602460
 prof_uiuc_yiwen,Yiwen Dong,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
 prof_uiuc_adonley,Adriane Binky Donley,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
-prof_uiuc_mdonohoe,Michael Donohoe,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/1624688,4.8,6,3,100,2026-11-07T08:47:00Z,https://www.ratemyprofessors.com/professor/1624688
+prof_uiuc_mdonohoe,Michael Donohoe,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/1624688,4.8,6,3,100,2026-11-07T08:47:00Z,https://www.ratemyprofessors.com/professor/1624688; https://www.ratemyprofessors.com/professor/2601554
 prof_uiuc_jeffdoug,Jeffrey A Douglas,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/1609736,3.2,27,3,41.1765,2026-11-07T08:46:55Z,https://www.ratemyprofessors.com/professor/1609736
 prof_uiuc_mdouss1,Marc J Doussard,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2486327,3,5,3.8,60,2026-11-07T08:47:15Z,https://www.ratemyprofessors.com/professor/2486327
 prof_uiuc_drackley,James K Drackley,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2958444,5,2,3,100,2026-11-07T08:47:09Z,https://www.ratemyprofessors.com/professor/2958444
@@ -444,7 +444,7 @@ prof_uiuc_pdziuba,Pavlo Dziuba,verified_match,unique_full_name_school_and_contex
 prof_uiuc_tdzyad2,Tetyana Dzyadevych,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
 prof_uiuc_eagen,Megan Kelly Eagen-Jones,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2486339,4.8,17,2.1,94.1176,2026-11-07T08:47:07Z,https://www.ratemyprofessors.com/professor/1510945; https://www.ratemyprofessors.com/professor/2486339
 prof_uiuc_jenniee2,Jennie Eagle,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
-prof_uiuc_telarris,Tara Earls Larrison,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/749005,2.7,24,3.5,33.3333,2026-11-07T08:47:00Z,https://www.ratemyprofessors.com/professor/749005
+prof_uiuc_telarris,Tara Earls Larrison,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/749005,2.7,24,3.5,33.3333,2026-11-07T08:47:00Z,https://www.ratemyprofessors.com/professor/749005; https://www.ratemyprofessors.com/professor/1455655
 prof_uiuc_jebel,Jonathan H Ebel,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/946902,4.3,18,2.8,88.8889,2026-11-07T08:47:12Z,https://www.ratemyprofessors.com/professor/946902
 prof_uiuc_gme2,Grace Maria Eberhardt,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
 prof_uiuc_dje13,Daniel J Eck,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
@@ -469,9 +469,9 @@ prof_uiuc_jemmert,Jason Lee Emmert,verified_match,unique_full_name_school_and_co
 prof_uiuc_rendres,Renata Endres,ambiguous_candidates,name_or_context_requires_review,,,,,,,https://www.ratemyprofessors.com/professor/2662463
 prof_uiuc_engeseth,Nicki Engeseth,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2442141,5,1,3,100,2026-11-07T08:47:20Z,https://www.ratemyprofessors.com/professor/2442141
 prof_uiuc_pfile2,Julene Ensign,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
-prof_uiuc_berdogan,Mehmet Burak Erdogan,ambiguous_candidates,name_or_context_requires_review,,,,,,,https://www.ratemyprofessors.com/professor/577899
+prof_uiuc_berdogan,Mehmet Burak Erdogan,verified_match,unique_name_variant_school_and_verified_course,https://www.ratemyprofessors.com/professor/577899,3.9,13,3.4,57.1429,2026-11-07T08:46:54Z,https://www.ratemyprofessors.com/professor/577899
 prof_uiuc_jeffe,Jeff Erickson,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/180296,4.6,37,4.3,80,2026-11-07T08:47:07Z,https://www.ratemyprofessors.com/professor/180296
-prof_uiuc_vea,Verena Erlenbusch-Anderson,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
+prof_uiuc_vea,Verena Erlenbusch-Anderson,ambiguous_candidates,name_or_context_requires_review,,,,,,,https://www.ratemyprofessors.com/professor/3146501
 prof_uiuc_ertekin,Elif Ertekin,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2411518,5,4,2.8,100,2026-11-07T08:47:02Z,https://www.ratemyprofessors.com/professor/2411518
 prof_uiuc_aespirit,Augusto F Espiritu,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/1509883,3.8,17,1.8,70,2026-11-07T08:47:09Z,https://www.ratemyprofessors.com/professor/1509883
 prof_uiuc_etesami1,Seyed Rasoul Etesami,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2440736,5,1,3,100,2026-11-07T08:47:19Z,https://www.ratemyprofessors.com/professor/2440736
@@ -496,7 +496,7 @@ prof_uiuc_mfarley3,Michelle Farley,verified_match,unique_full_name_school_and_co
 prof_uiuc_majedf,Majed Fataftah,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
 prof_uiuc_uroobaf2,Urooba Fatima,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
 prof_uiuc_tomf,Thomas Faulkner,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2113235,2.4,6,2.8,40,2026-11-07T08:47:08Z,https://www.ratemyprofessors.com/professor/2113235
-prof_uiuc_kfederme,Kara D Federmeier,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/636861,4,44,3.4,83.3333,2026-11-07T08:46:59Z,https://www.ratemyprofessors.com/professor/636861
+prof_uiuc_kfederme,Kara D Federmeier,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/636861,4,44,3.4,83.3333,2026-11-07T08:46:59Z,https://www.ratemyprofessors.com/professor/636861; https://www.ratemyprofessors.com/professor/2218183
 prof_uiuc_fellouri,Georgios Fellouris,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2464210,2.4,5,4.2,50,2026-11-07T08:46:54Z,https://www.ratemyprofessors.com/professor/2464210
 prof_uiuc_haofeng,Hao Feng,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
 prof_uiuc_jiefeng,Jie Feng,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2702534,4.7,7,3.6,100,2026-11-07T08:47:04Z,https://www.ratemyprofessors.com/professor/2702534
@@ -538,7 +538,7 @@ prof_uiuc_scfranks,Suzanne Franks,verified_match,unique_full_name_school_and_con
 prof_uiuc_alfranz,Abby Franz,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
 prof_uiuc_jmf,Jennifer M Fraterrigo,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/1776911,3.8,6,3.5,40,2026-11-07T08:47:05Z,https://www.ratemyprofessors.com/professor/1776911
 prof_uiuc_rfratti,Rutilio Fratti,ambiguous_candidates,name_or_context_requires_review,,,,,,,https://www.ratemyprofessors.com/professor/2537219
-prof_uiuc_jfred,Jacob Fredericks,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2835910,3,7,2.4,42.8571,2026-11-07T08:47:00Z,https://www.ratemyprofessors.com/professor/2835910
+prof_uiuc_jfred,Jacob Fredericks,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2835910,3,7,2.4,42.8571,2026-11-07T08:47:00Z,https://www.ratemyprofessors.com/professor/2818273; https://www.ratemyprofessors.com/professor/2835910
 prof_uiuc_ccf,Christopher Freeburg,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/983361,2.7,38,3,40,2026-11-07T08:47:04Z,https://www.ratemyprofessors.com/professor/983361
 prof_uiuc_anbohm2,Ariel Freehill,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2795245,4.4,5,1.4,83.3333,2026-11-07T08:46:59Z,https://www.ratemyprofessors.com/professor/2795245
 prof_uiuc_kbost,Kelly K Freeman Bost,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/499733,4.8,17,1.6,,2026-11-07T08:47:28Z,https://www.ratemyprofessors.com/professor/499733
@@ -908,7 +908,7 @@ prof_uiuc_mkolak,Marynia Kolak,ambiguous_candidates,name_or_context_requires_rev
 prof_uiuc_kollmer2,Matthew Kollmer,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2973917,,0,,,2026-11-07T08:50:12Z,https://www.ratemyprofessors.com/professor/2973917
 prof_uiuc_ericark2,Erica Kolson,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
 prof_uiuc_mkonar,Megan Konar,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2680148,3.3,3,3.3,66.6667,2026-11-07T08:47:07Z,https://www.ratemyprofessors.com/professor/2680148
-prof_uiuc_hjkong06,Hyun Joon Kong,ambiguous_candidates,name_or_context_requires_review,,,,,,,https://www.ratemyprofessors.com/professor/1064713
+prof_uiuc_hjkong06,Hyun Joon Kong,verified_match,unique_name_variant_school_and_verified_course,https://www.ratemyprofessors.com/professor/1064713,3.7,9,2.8,100,2026-11-07T08:47:13Z,https://www.ratemyprofessors.com/professor/1064713
 prof_uiuc_lylek,Lyle W Konigsberg,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2942787,2.4,7,3.6,37.5,2026-11-07T08:46:56Z,https://www.ratemyprofessors.com/professor/2942787
 prof_uiuc_kontou,Eleftheria Kontou,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/4688752,,0,,,2026-11-07T08:50:16Z,https://www.ratemyprofessors.com/professor/4688752
 prof_uiuc_koslof,Craig M Koslofsky,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/1133633,2.9,18,3.3,30,2026-11-07T08:46:54Z,https://www.ratemyprofessors.com/professor/1133633
@@ -950,7 +950,7 @@ prof_uiuc_kwonc,Chang-kyu Kwon,no_matching_profile_found,no_name_candidate_in_co
 prof_uiuc_dhkwon,Hyok-jon Kwon,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
 prof_uiuc_sakwon,Soo Ah Kwon,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/1255647,3.3,16,2.1,62.5,2026-11-07T08:47:11Z,https://www.ratemyprofessors.com/professor/1255647
 prof_uiuc_klabarre,Kathryn La Barre,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/1861220,3.6,4,2.5,100,2026-11-07T08:47:20Z,https://www.ratemyprofessors.com/professor/1861220
-prof_uiuc_lanave,Gabriele La Nave,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/1712757,1.6,79,3.7,8.2192,2026-11-07T08:46:56Z,https://www.ratemyprofessors.com/professor/1712757
+prof_uiuc_lanave,Gabriele La Nave,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/1712757,1.6,79,3.7,8.2192,2026-11-07T08:46:56Z,https://www.ratemyprofessors.com/professor/1522852; https://www.ratemyprofessors.com/professor/1712757
 prof_uiuc_jlafave,James Michael LaFave,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/199771,3.5,12,2.8,50,2026-11-07T08:47:07Z,https://www.ratemyprofessors.com/professor/199771
 prof_uiuc_rrlapier,Rosalyn Rae LaPier,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
 prof_uiuc_eml17,Elizabeth LaRue,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2774738,1.4,12,3.6,16.6667,2026-11-07T08:47:06Z,https://www.ratemyprofessors.com/professor/2774738
@@ -974,7 +974,7 @@ prof_uiuc_davidl,David Lariviere,verified_match,unique_full_name_school_and_cont
 prof_uiuc_ecl,Eric Larson,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2435720,4,26,2.9,80.7692,2026-11-07T08:47:02Z,https://www.ratemyprofessors.com/professor/2435720; https://www.ratemyprofessors.com/professor/2783719
 prof_uiuc_erlarson,Eric R Larson,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2783719,5,2,4,100,2026-11-07T08:47:13Z,https://www.ratemyprofessors.com/professor/2435720; https://www.ratemyprofessors.com/professor/2783719
 prof_uiuc_lasersoh,Peter Nathan Lasersohn,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/1808061,3,5,3,50,2026-11-07T08:47:11Z,https://www.ratemyprofessors.com/professor/1808061
-prof_uiuc_nilatha,Nancy Latham,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
+prof_uiuc_nilatha,Nancy Latham,ambiguous_candidates,name_or_context_requires_review,,,,,,,https://www.ratemyprofessors.com/professor/2931099
 prof_uiuc_laugesen,Richard S Laugesen,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/577903,4.6,25,3.3,100,2026-11-07T08:47:17Z,https://www.ratemyprofessors.com/professor/577903
 prof_uiuc_blawton2,Bishop Lawton,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
 prof_uiuc_laystrom,Julia Katherine Laystrom-Woodard,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2493256,1.5,39,3.9,12.1951,2026-11-07T08:46:58Z,https://www.ratemyprofessors.com/professor/2493256
@@ -1671,7 +1671,7 @@ prof_uiuc_spence14,Joel William Spencer,no_matching_profile_found,no_name_candid
 prof_uiuc_xxie2,Xiangyi Spencer,ambiguous_candidates,name_or_context_requires_review,,,,,,,https://www.ratemyprofessors.com/professor/2640640
 prof_uiuc_hkolb2,Hannah Spinoza,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2592227,,0,,,2026-11-07T08:50:19Z,https://www.ratemyprofessors.com/professor/2592227
 prof_uiuc_isprandl,Ian Tyson Sprandel,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
-prof_uiuc_rsree,Ramavarapu S Sreenivas,ambiguous_candidates,name_or_context_requires_review,,,,,,,https://www.ratemyprofessors.com/professor/778643
+prof_uiuc_rsree,Ramavarapu S Sreenivas,verified_match,unique_name_variant_school_and_verified_course,https://www.ratemyprofessors.com/professor/778643,4.8,6,3,100,2026-11-07T08:46:57Z,https://www.ratemyprofessors.com/professor/778643
 prof_uiuc_jsrikan2,Jenny Srikant,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2758669,4.3,26,2.9,85.1852,2026-11-07T08:46:58Z,https://www.ratemyprofessors.com/professor/2758669
 prof_uiuc_rsrikant,Rayadurgam Srikant,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2798867,3,2,4,50,2026-11-07T08:47:11Z,https://www.ratemyprofessors.com/professor/2798867
 prof_uiuc_rsriver,Ryan Sriver,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2708833,,0,,,2026-11-07T08:50:18Z,https://www.ratemyprofessors.com/professor/2708833
@@ -1778,7 +1778,7 @@ prof_uiuc_tolman,Susan Tolman,verified_match,unique_full_name_school_and_context
 prof_uiuc_jtoma,Jeremy Toma,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
 prof_uiuc_htong,Hanghang Tong,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2654645,3.3,3,3.3,66.6667,2026-11-07T08:47:01Z,https://www.ratemyprofessors.com/professor/2654645
 prof_uiuc_ctorelli,Carlos Torelli,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
-prof_uiuc_torrella,Josep Torrellas,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
+prof_uiuc_torrella,Josep Torrellas,verified_match,unique_name_variant_school_and_verified_course,https://www.ratemyprofessors.com/professor/188402,3.1,4,3,,2026-11-07T08:50:08Z,https://www.ratemyprofessors.com/professor/188402
 prof_uiuc_ait5095,Anna Torres-Cacoullos,ambiguous_candidates,multiple_supported_profiles,,,,,,,https://www.ratemyprofessors.com/professor/3124673; https://www.ratemyprofessors.com/professor/3124678; https://www.ratemyprofessors.com/professor/3160133
 prof_uiuc_vtorvik,Vetle Torvik,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/1861231,1.3,4,1.8,0,2026-11-07T08:47:05Z,https://www.ratemyprofessors.com/professor/1861231
 prof_uiuc_tosato,Anna Tosato,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2981239,5,1,2,100,2026-11-07T08:47:09Z,https://www.ratemyprofessors.com/professor/2981239
@@ -2027,11 +2027,11 @@ prof_uiuc_glove,E Geoffrey Love,ambiguous_candidates,name_or_context_requires_re
 prof_uiuc_jpmakela,Julia Panke Makela,ambiguous_candidates,name_or_context_requires_review,,,,,,,https://www.ratemyprofessors.com/professor/2751842
 prof_uiuc_raovnv,V.N. Vimal Rao,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2927128,3.9,136,2.9,67.1533,2026-11-07T08:46:54Z,https://www.ratemyprofessors.com/professor/2927128; https://www.ratemyprofessors.com/professor/3013177
 prof_uiuc_murray,Melissa Reedy,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/1686167,,0,,,2026-11-07T08:50:18Z,https://www.ratemyprofessors.com/professor/1686167
-prof_uiuc_dfr1,D Fairchild Ruggles,ambiguous_candidates,name_or_context_requires_review,,,,,,,https://www.ratemyprofessors.com/professor/1246164
-prof_uiuc_bfs,B F Spencer,ambiguous_candidates,name_or_context_requires_review,,,,,,,https://www.ratemyprofessors.com/professor/1882991
+prof_uiuc_dfr1,D Fairchild Ruggles,verified_match,unique_name_variant_school_and_verified_course,https://www.ratemyprofessors.com/professor/1246164,3.3,15,3.9,30,2026-11-07T08:46:57Z,https://www.ratemyprofessors.com/professor/1246164
+prof_uiuc_bfs,B F Spencer,verified_match,unique_name_variant_school_and_verified_course,https://www.ratemyprofessors.com/professor/1882991,3.2,9,3.1,50,2026-11-07T08:47:07Z,https://www.ratemyprofessors.com/professor/1882991
 prof_uiuc_lltravis,Lisa Travis,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/819303,2.8,48,3.3,46.1538,2026-11-07T08:46:58Z,https://www.ratemyprofessors.com/professor/819303; https://www.ratemyprofessors.com/professor/2498658
 prof_uiuc_kvalentn,Kristy Valentin,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
-prof_uiuc_mcwhite7,M Christina White,ambiguous_candidates,name_or_context_requires_review,,,,,,,https://www.ratemyprofessors.com/professor/1845255
+prof_uiuc_mcwhite7,M Christina White,verified_match,unique_name_variant_school_and_verified_course,https://www.ratemyprofessors.com/professor/1845255,2.3,17,3.9,25,2026-11-07T08:46:55Z,https://www.ratemyprofessors.com/professor/1845255
 prof_uiuc_rewicks,Raymona Wicks,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
 prof_uiuc_ralam,Rummana Alam,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
 prof_uiuc_amar,Vikram D. Amar,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2187198,3.5,2,4,50,2026-11-07T08:47:23Z,https://www.ratemyprofessors.com/professor/2083346; https://www.ratemyprofessors.com/professor/2187198
@@ -2493,7 +2493,7 @@ prof_uiuc_cwebste,Charles Robert Webster,verified_match,unique_full_name_school_
 prof_uiuc_cxmcgill,Clancy McGilligan,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
 prof_uiuc_czukoski,Charles F Zukoski,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
 prof_uiuc_d5n,Daniel A Newman,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/1575932,3.8,3,2,,2026-11-07T08:47:30Z,https://www.ratemyprofessors.com/professor/1575932
-prof_uiuc_dabriley,D. A. Briley,ambiguous_candidates,name_or_context_requires_review,,,,,,,https://www.ratemyprofessors.com/professor/2202768
+prof_uiuc_dabriley,D. A. Briley,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2202768,4,2,2,33.3333,2026-11-07T08:46:56Z,https://www.ratemyprofessors.com/professor/2202768
 prof_uiuc_daf,David Forsyth,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/1178741,4.3,10,2.6,80,2026-11-07T08:47:00Z,https://www.ratemyprofessors.com/professor/1178741
 prof_uiuc_dalbarra,Dolores Albarracin,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
 prof_uiuc_daniila,Daniil A. Andrienko,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
@@ -2800,8 +2800,8 @@ prof_uiuc_jvieira,Joaquin Vieira,verified_match,unique_full_name_school_and_cont
 prof_uiuc_jwbaur,Jeff Baur,ambiguous_candidates,name_or_context_requires_review,,,,,,,https://www.ratemyprofessors.com/professor/3154712
 prof_uiuc_jwbowers,Jake Bowers,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/1187123,2.7,20,3.4,18.1818,2026-11-07T08:47:11Z,https://www.ratemyprofessors.com/professor/1187123; https://www.ratemyprofessors.com/professor/1884555
 prof_uiuc_jwenzel,Joseph W Wenzel,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
-prof_uiuc_jwmorris,J.W. Morrissette,ambiguous_candidates,name_or_context_requires_review,,,,,,,https://www.ratemyprofessors.com/professor/1434220
-prof_uiuc_jwp,James W Phillips,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
+prof_uiuc_jwmorris,J.W. Morrissette,verified_match,unique_name_variant_school_and_verified_course,https://www.ratemyprofessors.com/professor/1434220,4.9,45,1.6,100,2026-11-07T08:46:54Z,https://www.ratemyprofessors.com/professor/1434220
+prof_uiuc_jwp,James W Phillips,ambiguous_candidates,name_or_context_requires_review,,,,,,,https://www.ratemyprofessors.com/professor/899935
 prof_uiuc_jyoon,James Yoon,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/1538539,1.7,5,4,50,2026-11-07T08:47:14Z,https://www.ratemyprofessors.com/professor/1538539
 prof_uiuc_k-hess,Karl Hess,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
 prof_uiuc_kag4,Katherine Aplonia Gaffney,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2252926,3.6,7,3.9,57.1429,2026-11-07T08:46:58Z,https://www.ratemyprofessors.com/professor/2252926
@@ -3116,7 +3116,7 @@ prof_uiuc_rbh3,Robert B Haber,ambiguous_candidates,name_or_context_requires_revi
 prof_uiuc_rboileau,Richard A Boileau,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
 prof_uiuc_rbridgew,Ron Bridgewater,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
 prof_uiuc_rburton,Rodney L Burton,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
-prof_uiuc_rcfraley,R Chris Fraley,ambiguous_candidates,name_or_context_requires_review,,,,,,,https://www.ratemyprofessors.com/professor/849543; https://www.ratemyprofessors.com/professor/1068685
+prof_uiuc_rcfraley,R Chris Fraley,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/1068685,2.8,3,2,100,2026-11-07T08:46:55Z,https://www.ratemyprofessors.com/professor/849543; https://www.ratemyprofessors.com/professor/1068685
 prof_uiuc_rcgoebel,Raquel Goebel,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2083829,5,9,2.6,100,2026-11-07T08:46:58Z,https://www.ratemyprofessors.com/professor/2083829
 prof_uiuc_rchambe2,Robert T Chamberlain,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2812767,,0,,,2026-11-07T08:50:19Z,https://www.ratemyprofessors.com/professor/2812767
 prof_uiuc_rcooke,Richard Cooke,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/3154340,5,1,3,100,2026-11-07T08:47:01Z,https://www.ratemyprofessors.com/professor/3154340
@@ -3195,7 +3195,7 @@ prof_uiuc_scottea,Beth Scott,no_matching_profile_found,no_name_candidate_in_comp
 prof_uiuc_scottgm,Scott Metcalf,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
 prof_uiuc_sdonovan,Sharon M Donovan,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
 prof_uiuc_sdownie,Stephen R Downie,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/459555,4.8,43,3.2,87.5,2026-11-07T08:47:15Z,https://www.ratemyprofessors.com/professor/459555
-prof_uiuc_sdr1,Sarah Elizabeth Dean Rasmussen,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/3154945,,0,,,2026-11-07T08:50:14Z,https://www.ratemyprofessors.com/professor/2205311; https://www.ratemyprofessors.com/professor/3154945
+prof_uiuc_sdr1,Sarah Elizabeth Dean Rasmussen,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/3154945,,0,,,2026-11-07T08:50:14Z,https://www.ratemyprofessors.com/professor/898266; https://www.ratemyprofessors.com/professor/2205311; https://www.ratemyprofessors.com/professor/3154945
 prof_uiuc_selevins,Stephen E Levinson,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2449184,,0,,,2026-11-07T08:50:17Z,https://www.ratemyprofessors.com/professor/2449184
 prof_uiuc_seltingk,Kimberly Anne Selting,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
 prof_uiuc_selvin,Paul Selvin,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/1857092,1.8,2,3,0,2026-11-07T08:47:22Z,https://www.ratemyprofessors.com/professor/1857092
@@ -3363,7 +3363,7 @@ prof_uiuc_yangj,Jing Yang,ambiguous_candidates,name_or_context_requires_review,,
 prof_uiuc_yangshao,Victoria Shao,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2769563,4.3,9,3.1,90,2026-11-07T08:46:55Z,https://www.ratemyprofessors.com/professor/2769563
 prof_uiuc_ybresler,Yoram Bresler,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/1269903,4,6,4.2,100,2026-11-07T08:47:22Z,https://www.ratemyprofessors.com/professor/1269903
 prof_uiuc_ychang15,Yia-Chung Chang,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
-prof_uiuc_ychemla,Yann Chemla,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/1914648,3,4,3.7,0,2026-11-07T08:47:24Z,https://www.ratemyprofessors.com/professor/1914648
+prof_uiuc_ychemla,Yann Chemla,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/1914648,3,4,3.7,0,2026-11-07T08:47:24Z,https://www.ratemyprofessors.com/professor/1842325; https://www.ratemyprofessors.com/professor/1914648
 prof_uiuc_yczeng,Yuanchen Zeng,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
 prof_uiuc_ygredman,Yvonne Gonzales Redman,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
 prof_uiuc_yi-lu,Yi Lu,ambiguous_candidates,name_or_context_requires_review,,,,,,,https://www.ratemyprofessors.com/professor/1556848; https://www.ratemyprofessors.com/professor/2349507; https://www.ratemyprofessors.com/professor/3071623
@@ -3392,7 +3392,7 @@ prof_uiuc_zmadake2,Zeynep Madak-Erdogan,no_matching_profile_found,no_name_candid
 prof_uiuc_gerlando,Gerlando Augusto Sampaio Franco de Lima,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2796371,3.2,13,3.9,57.1429,2026-11-07T08:46:55Z,https://www.ratemyprofessors.com/professor/2796371
 prof_uiuc_bclegg,Benjamin Clegg,ambiguous_candidates,name_or_context_requires_review,,,,,,,https://www.ratemyprofessors.com/professor/774129
 prof_uiuc_burkhalt,Toni Marie Gist,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2320708,4.8,194,1.9,93.299,2026-11-07T08:46:55Z,https://www.ratemyprofessors.com/professor/2320708
-prof_uiuc_lcgunder,Lisa Gundersen,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
+prof_uiuc_lcgunder,Lisa Gundersen,verified_match,unique_name_variant_school_and_verified_course,https://www.ratemyprofessors.com/professor/1329191,2.3,49,2.7,27.7778,2026-11-07T08:47:00Z,https://www.ratemyprofessors.com/professor/1329191
 prof_uiuc_powerska,Kimberly Powers,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
 prof_uiuc_msoranso,Murillo Soranso,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
 prof_uiuc_mandialt,Mandi Alt,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2530717,2.6,5,4.2,40,2026-11-07T08:47:00Z,https://www.ratemyprofessors.com/professor/2530717
@@ -3406,3 +3406,12 @@ prof_uiuc_mraycraf,Michael Raycraft,verified_match,unique_full_name_school_and_c
 prof_uiuc_pstoddrd,Paul Stoddard,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/1073083,4.9,29,2.3,100,2026-11-07T08:47:05Z,https://www.ratemyprofessors.com/professor/1073083
 prof_uiuc_profile_2a36c9eb5d2bd5b1ebd433e0,Fataneh Taghaboni-Dutta,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2896790,2.2,14,4.4,33.3333,2026-11-07T08:46:55Z,https://www.ratemyprofessors.com/professor/2896790
 prof_uiuc_masonc,Curtis Mason,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2859515,4.1,9,1.8,88.8889,2026-11-07T08:47:06Z,https://www.ratemyprofessors.com/professor/2859515
+prof_uiuc_chaa,Carlos Araujo de Aguiar,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2724578,4.3,6,3.3,83.3333,2026-11-07T08:47:03Z,https://www.ratemyprofessors.com/professor/2724578
+prof_uiuc_jamaral,Janaynne Carvalho do Amaral,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
+prof_uiuc_irenef,Irene Farah Rivadeneyra,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
+prof_uiuc_dg28,Daniela García Marmolejo,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
+prof_uiuc_bkelley3,Brenna Kelley-Freiburger,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
+prof_uiuc_giselle,Giselle Martinez Negrette,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/3120906,5,1,2,100,2026-11-07T08:47:02Z,https://www.ratemyprofessors.com/professor/3120906
+prof_uiuc_rafaelmt,Rafael Miranda Tassitano,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/3092365,5,1,1,100,2026-11-07T08:47:05Z,https://www.ratemyprofessors.com/professor/3092365
+prof_uiuc_trflores,Thayna Ramos Flores Nunes,no_matching_profile_found,no_name_candidate_in_complete_school_directory,,,,,,,
+prof_uiuc_jsal,Juan Salamanca Garcia,verified_match,unique_full_name_school_and_context,https://www.ratemyprofessors.com/professor/2577492,3,1,3,0,2026-11-07T08:47:08Z,https://www.ratemyprofessors.com/professor/2577492

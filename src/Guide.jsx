@@ -12,7 +12,7 @@ export function DataNotes({ guide }) {
   const downloads = [['schedule', 'Current schedule'], ['history', 'Teaching archive index'], ['gpa', 'Grade records'], ['professors', 'Instructor data']]
   return <details className="data-notes"><summary>About the data <span aria-hidden="true">＋</span></summary>
     <div className="notes-content">
-      <p>Before a text search, instructors with RMP ratings appear first, followed by listings with pending ratings. Each group is alphabetical by last name, including when subject or semester filters are applied. The guide includes all collected UIUC courses, identified instructors, and names recorded in schedules. Schedule-name entries keep their original spelling and initials; they are not verified person profiles. GPA is course-specific; Rate My Professors ratings cover an instructor across courses. <strong>Pending</strong> means verified data is not available in this edition.</p>
+      <p>Before a text search, instructors with RMP ratings appear first, followed by listings with pending ratings. Each group is alphabetical by last name, including when subject or semester filters are applied. The guide includes all collected UIUC courses, identified instructors, and names recorded in schedules. Matching schedule names are grouped across departments using first initials and surname spelling; ambiguous matches remain separate. Name grouping does not verify a teaching or grade attribution. GPA is course-specific; Rate My Professors ratings cover an instructor across courses. <strong>Pending</strong> means verified data is not available in this edition.</p>
       <p>Teaching records include instructors and other listed staff, not necessarily current assignments. GPA is weighted by graded enrollments; counts can include repeat students. Cross-listed courses remain separate.</p>
       <div className="notes-links"><a href="https://courses.illinois.edu/" target="_blank" rel="noopener noreferrer">UIUC Course Explorer <Arrow /></a>
         {index?.gpa_sources.map((source) => <a key={source.url} href={source.url} target="_blank" rel="noopener noreferrer">Grade data source <Arrow /></a>)}</div>
@@ -35,7 +35,8 @@ function Profile({ person, model, courseCode, term, selectCourse }) {
     <div className="profile-heading">{unresolved && <p className="eyebrow muted">Schedule name · identity pending</p>}<h2 tabIndex={-1} id="detail-heading">{person.display_name}</h2>
       <div className="profile-meta"><span>{person.courses.length ? `${number(person.courses.length)} recorded ${person.courses.length === 1 ? 'course' : 'courses'}` : 'Course links pending'}</span>
         {universityLink && <a href={universityLink.url} target="_blank" rel="noopener noreferrer">University listing <Arrow /></a>}</div>
-      {unresolved && <p className="identity-note">This is the name as recorded in {person.subject} schedules. The same abbreviation may refer to different people. Full identity verification is pending.</p>}
+      {unresolved && <p className="identity-note">Names recorded in {person.subjects.join(' · ')} schedules are grouped by spelling and initials. The same abbreviation may refer to different people. Full identity verification is pending.</p>}
+      {person.source_entries.length > 0 && <p className="identity-note">Grouped schedule names: {person.names.filter((name) => unresolved || name !== person.display_name).join(' · ') || person.display_name}. These teaching records include name-based matches; GPA uses verified records only.</p>}
     </div>
     <Ratings rmp={person.rmp} />
     <section className="teaching-section" aria-labelledby="teaching-title">
@@ -135,7 +136,7 @@ export default function Guide({ guide }) {
           <tbody>{pageRows.map((row) => { const id = row.professor_id || row.entry_id || row.course_code; const selected = person && resultId(person) === id || course?.course_code === id; return <tr className={selected ? 'selected' : ''} key={id}>
             <td><button id={`result-${id}`} className="result-link" aria-current={selected ? 'true' : undefined} onClick={() => select(state.view === 'professors' ? { person: id, course: '' } : { person: '', course: id })}>
               <strong>{state.view === 'professors' ? row.display_name : row.course_code}{state.view === 'professors' && hasGpaFor(model, row, subject, term) && <GpaIcon />}</strong>
-              <span>{state.view === 'professors' ? (row.entry_type === 'schedule_name' ? `${row.subject} · Identity pending` : [...new Set(row.courses.map((c) => c.course_code.split(' ')[0]))].slice(0, 4).join(' · ') || 'Course links pending') : row.title || 'Course title pending'}</span>
+              <span>{state.view === 'professors' ? ([...new Set(row.courses.map((c) => c.course_code.split(' ')[0]))].join(' · ') + (row.entry_type === 'schedule_name' ? ' · Identity pending' : '') || 'Course links pending') : row.title || 'Course title pending'}</span>
             </button></td><td className="result-stat">{state.view === 'professors' ? <>{row.rmp?.overall_quality == null ? <Pending /> : <><strong>{row.rmp.overall_quality.toFixed(1)}<small> / 5</small></strong><span>{number(row.rmp.num_ratings)} ratings</span></>}</> : <strong>{number(model.peopleFor(row.course_code, term).length)}</strong>}</td>
           </tr> })}</tbody>
         </table>

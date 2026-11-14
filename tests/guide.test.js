@@ -105,3 +105,82 @@ test('The catalog includes ungraded courses, courses with unnamed teachers, and 
   assert.equal(sourceName.rmp, null)
   assert.equal(model.gradesFor(sourceName.professor_id, 'ECE 374').length, 0)
 })
+
+const sourceEntry = (entry_id, display_name, subject, term = '2026-fall') => ({
+  entry_id, display_name, subject, courses: [{ course_code: `${subject} 101`, term_ids: [term] }],
+})
+
+test('Initial and surname variants produce one profile across departments without changing grade attribution', () => {
+  const data = structuredClone(index)
+  data.schedule_names = [sourceEntry('cs', 'Cafe, A', 'CS'), sourceEntry('math', 'Café, A', 'MATH'),
+    sourceEntry('ece', 'Café, A', 'ECE', '2025-fall')]
+  const before = structuredClone(data)
+  const model = createModel(data)
+  const person = model.peopleById.get('a')
+  assert.equal(model.people.length, 3)
+  assert.equal(model.peopleById.get('math'), person)
+  assert.equal(model.peopleById.get('ece'), person)
+  assert.deepEqual(person.courses.find((c) => c.course_code === 'CS 101').term_ids, ['2025-fall', '2026-fall'])
+  for (const subject of ['CS', 'MATH', 'ECE']) {
+    assert.equal(searchResults(model, { ...state, q: 'Cafe, A', subject }).length, 1)
+  }
+  assert.equal(searchResults(model, { ...state, subject: 'MATH', term: '2025-fall' }).length, 0)
+  assert.equal(model.peopleFor('CS 101', '2026-fall').length, 1)
+  assert.equal(model.gradesFor('a', 'MATH 101').length, 0)
+  assert.equal(model.gradesFor('a', 'CS 101', '2026-fall').length, 0)
+  assert.deepEqual(data, before)
+})
+
+test('Long surname typos and truncations group with a unique compatible professor', () => {
+  const data = { ...index, professors: [{ professor_id: 'p', display_name: 'Peter Abbamonte', courses: [] }],
+    schedule_names: [sourceEntry('one', 'Abbamont, P', 'PHYS'), sourceEntry('two', 'Abbamonte, P', 'ECE'),
+      sourceEntry('three', 'Abbamonte, Q', 'CS')] }
+  const model = createModel(data)
+  assert.equal(model.peopleById.get('one').professor_id, 'p')
+  assert.equal(model.peopleById.get('two').professor_id, 'p')
+  assert.equal(model.peopleById.get('three').professor_id, null)
+})
+
+test('Conflicting full names, middle initials, and competing identities remain separate', () => {
+  const data = { ...index, professors: [
+    { professor_id: 'jane', display_name: 'Jane X Smith', courses: [] },
+    { professor_id: 'john', display_name: 'John Y Smith', courses: [] },
+  ], schedule_names: [sourceEntry('ambiguous', 'Smith, J', 'CS'),
+    sourceEntry('conflict', 'Smith, Jane Z', 'MATH'), sourceEntry('specific', 'Smith, Jane X', 'ECE')] }
+  const model = createModel(data)
+  assert.equal(model.peopleById.get('ambiguous').professor_id, null)
+  assert.equal(model.peopleById.get('conflict').professor_id, null)
+  assert.equal(model.peopleById.get('specific').professor_id, 'jane')
+  assert.notEqual(model.peopleById.get('ambiguous'), model.peopleById.get('conflict'))
+})
+
+test('Unidentified names group across subjects with original links and pending metrics', () => {
+  const data = { ...index, schedule_names: [sourceEntry('one', 'Longsurname, L', 'CS'),
+    sourceEntry('two', 'Longsurname, L', 'ECE'), sourceEntry('typo', 'Longsurnam, L', 'MATH')] }
+  const model = createModel(data)
+  const person = model.peopleById.get('one')
+  assert.equal(model.people.length, 4)
+  assert.equal(model.peopleById.get('two'), person)
+  assert.equal(model.peopleById.get('typo'), person)
+  assert.deepEqual(person.subjects, ['CS', 'ECE', 'MATH'])
+  assert.equal(person.rmp, null)
+  assert.equal(person.professor_id, null)
+  assert.equal(model.peopleFor('ECE 101').length, 1)
+})
+
+test('A shared initial cannot bridge incompatible full names or a chain of surname typos', () => {
+  const data = { ...index, professors: [], schedule_names: [sourceEntry('a', 'Longsurname, Alex', 'CS'),
+    sourceEntry('b', 'Longsurname, A', 'ECE'), sourceEntry('c', 'Longsurname, Amanda', 'MATH'),
+    sourceEntry('d', 'Longsurnamx, A', 'CS'), sourceEntry('e', 'Longsurnaxx, A', 'ECE')] }
+  const model = createModel(data)
+  assert.notEqual(model.peopleById.get('a'), model.peopleById.get('c'))
+  assert.notEqual(model.peopleById.get('d'), model.peopleById.get('e'))
+})
+
+test('Names without given initials only group identical labels', () => {
+  const model = createModel({ ...index, schedule_names: [sourceEntry('one', 'Longsurname', 'CS'),
+    sourceEntry('two', 'Longsurname', 'ECE'), sourceEntry('other', 'Othersurname', 'MATH')] })
+  assert.equal(model.peopleById.get('one'), model.peopleById.get('two'))
+  assert.notEqual(model.peopleById.get('one'), model.peopleById.get('other'))
+  assert.equal(model.peopleById.get('other').display_name, 'Othersurname')
+})

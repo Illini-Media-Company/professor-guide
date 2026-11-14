@@ -120,14 +120,55 @@ class RMPReviewTests(unittest.TestCase):
         with self.assertRaises(DataError):
             audit(professors(), context, [node(department='Engineering')], directory, config, FIXTURE_TIME)
 
-    def test_initial_nickname_and_conflicting_middle_names_are_never_automatic_matches(self):
-        for first in ('A', 'Alex', 'Alexandra R'):
+    def test_nickname_and_conflicting_middle_names_are_never_automatic_matches(self):
+        for first in ('Alex', 'Alexandra R'):
             context = contexts()
             context['synthetic-alex']['names'] = {'Example, Alexandra Q'}
             with self.subTest(first=first):
                 entry = ledger([node(firstName=first)], context=context)['records'][0]
                 self.assertEqual(entry['status'], 'ambiguous_candidates')
                 self.assertIsNone(entry['rmp'])
+
+    def test_initial_rmp_name_needs_a_verified_course_and_unique_identity(self):
+        data = ledger([node(firstName='A')])
+        self.assertEqual(data['records'][0]['status'], 'verified_match')
+        self.assertFalse(data['records'][0]['candidates'][0]['full_name_agrees'])
+        self.assertEqual(data['records'][0]['reason'], 'unique_name_variant_school_and_verified_course')
+        validate_audit(data, professors())
+        data = ledger([node(firstName='A', courseCodes=[])])
+        self.assertEqual(data['records'][0]['status'], 'ambiguous_candidates')
+
+    def test_long_surname_variant_can_use_a_verified_course_across_departments(self):
+        context = contexts()
+        context['synthetic-alex']['names'] = {'Alexandra Longsurname'}
+        data = ledger([node(lastName='Longsurnam', department='History')], context=context)
+        self.assertEqual(data['records'][0]['status'], 'verified_match')
+        self.assertFalse(data['records'][0]['candidates'][0]['department_agrees'])
+        self.assertIn('MATH101', data['records'][0]['rmp']['matching_evidence'][1])
+        validate_audit(data, professors())
+        data = ledger([node(lastName='Longsurnam', courseCodes=[])], context=context)
+        self.assertEqual(data['records'][0]['status'], 'ambiguous_candidates')
+
+    def test_initial_profile_is_ambiguous_when_another_established_identity_fits(self):
+        people, context = professors(), contexts()
+        other = deepcopy(people['records'][0])
+        other.update(professor_id='alice', display_name='Alice Example')
+        people['records'].append(other)
+        context['alice'] = {**deepcopy(context['synthetic-alex']), 'names': {'Alice Example'}, 'courses': set()}
+        data = ledger([node(firstName='A')], people=people, context=context)
+        self.assertTrue(all(e['rmp'] is None for e in data['records']))
+        self.assertEqual(data['records'][0]['candidates'][0]['competing_professor_ids'], ['alice'])
+
+    def test_contextual_rmp_does_not_choose_between_multiple_profiles_or_other_schools(self):
+        data = ledger([node(firstName='A'), node(2, firstName='A')])
+        self.assertEqual(data['records'][0]['reason'], 'multiple_supported_profiles')
+        data = ledger([node(firstName='A', school={'id': 'other', 'name': 'Another university'})])
+        self.assertIsNone(data['records'][0]['rmp'])
+
+    def test_supported_full_name_takes_priority_over_a_weaker_initial_candidate(self):
+        data = ledger([node(), node(2, firstName='A')])
+        self.assertEqual(data['records'][0]['rmp']['profile_id'], 1)
+        self.assertEqual(len(data['records'][0]['candidates']), 2)
 
     def test_explicit_parenthetical_prefix_nickname_does_not_become_a_middle_name(self):
         data = ledger([node(firstName='Alexandra (Alex)')])

@@ -1,7 +1,7 @@
 """Audit every GPA identity against official directories and saved schedules.
 
-Only unique full-name matches with department and course/term evidence can
-be exported. Name variants need explicit, separately sourced review.
+Unique full-name matches use department and course/term evidence. Initials
+and small surname variants additionally require an independent full-name anchor.
 Raw responses are cached outside publication; the ledger records evidence,
 remaining work, and input fingerprints so review is repeatable.
 """
@@ -94,6 +94,61 @@ def schedule_name_agrees(grade_name, schedule_name):
     # A schedule may supply initials or a full first name. A different full
     # first name is not accepted merely because its initial happens to agree.
     return given[0] == other_given[0] or (len(other_given[0]) == 1 and given[0].startswith(other_given[0]))
+
+
+def similar_surname(left, right):
+    """Punctuation-insensitive equality, or a small change in a long surname."""
+    left, right = ''.join(left), ''.join(right)
+    if left == right:
+        return bool(left)
+    if min(len(left), len(right)) < 6:
+        return False
+    if (left.startswith(right) or right.startswith(left)) and min(len(left), len(right)) / max(len(left), len(right)) >= .8:
+        return True
+    if abs(len(left) - len(right)) > 1:
+        return False
+    i = j = edits = 0
+    while i < len(left) and j < len(right):
+        if left[i] == right[j]:
+            i += 1
+            j += 1
+            continue
+        edits += 1
+        if edits > 1:
+            return False
+        if len(left) >= len(right):
+            i += 1
+        if len(right) >= len(left):
+            j += 1
+    return edits + len(left) - i + len(right) - j <= 1
+
+
+@lru_cache(maxsize=65536)
+def contextual_name_agrees(source, official):
+    """Candidate matching only; callers must establish identity using context.
+
+    The source must use surname-comma-given order. Conflicting full first or
+    supplied middle names are never reduced to a shared initial.
+    """
+    last, given = name_parts(source)
+    if not last or not given:
+        return False
+    if ',' in official:
+        options = [name_parts(official)]
+    else:
+        tokens = words(official)
+        options = [(tokens[cut:], tokens[:cut]) for cut in range(1, len(tokens))]
+    def agrees(a, b):
+        return a == b or len(a) == 1 and b.startswith(a) or len(b) == 1 and a.startswith(b)
+    return any(other_given and similar_surname(last, other_last) and
+               all(agrees(a, b) for a, b in zip(given, other_given))
+               for other_last, other_given in options)
+
+
+def exact_official_surname(source, official):
+    last = name_parts(source)[0]
+    other_last, given = name_parts(official, last)
+    return bool(last and given and last == other_last)
 
 
 class DirectoryParser(HTMLParser):
@@ -769,7 +824,116 @@ def review_inventory(grades, people, listings, config, reviewed_at):
             occurrence = min(occurrences, key=lambda p: (p['section_id'], p['meeting_id'], p['instructor_index']))
             entry['matched_grades'].append({'grade_record_id': row['id'], 'occurrence': occurrence})
         identities.append(entry)
+    extend_contextual_reviews(grades, people, listings, config, identities)
     return identities
+
+
+def extend_contextual_reviews(grades, people, listings, config, identities):
+    """Add row-scoped bridges with an independent full-name/course anchor.
+
+    Preserve the exact-name path. A weak grade label needs a full-name schedule
+    occurrence. A full-first-name grade with a surname variant needs the official
+    surname in that course/term's schedule. Neither path pools courses or terms.
+    """
+    directory_by_initial = defaultdict(list)
+    for person in people:
+        given = name_parts(person['name'])[1] if ',' in person['name'] else words(person['name'])
+        if given:
+            directory_by_initial[given[0][0]].append(person)
+    grade_by_id = {grade['id']: grade for grade in grades}
+    labels_by_subject = defaultdict(set)
+    for grade in grades:
+        name = grade.get('primary_instructor_name_raw') or ''
+        given = name_parts(name)[1]
+        if given:
+            labels_by_subject[(grade['course_code'].split()[0], given[0][0])].add(name)
+    candidates_by_name = {}
+    for entry in identities:
+        name = entry['grade_name_raw']
+        given = name_parts(name)[1]
+        candidates_by_name[name] = [person for person in directory_by_initial.get(given[0][0] if given else '', [])
+            if contextual_name_agrees(name, person['name']) and
+            any(unit_agrees(subject, person, config) for subject in entry['subjects'])]
+    for entry in identities:
+        if entry.get('name_variant_review') or entry.get('reason') in (
+                'multiple_official_identities', 'conflicting_names_for_official_identity'):
+            continue
+        name = entry['grade_name_raw']
+        by_id = defaultdict(list)
+        for person in candidates_by_name[name]:
+            by_id[person['netid']].append(person)
+        if len(by_id) != 1:
+            continue
+        netid, evidence = next(iter(by_id.items()))
+        if entry['status'] == 'verified_identity' and entry['netid'] != netid:
+            continue
+        matched = []
+        for unresolved in entry['unresolved_grades']:
+            # Do not bypass previously detected ambiguity or an explicit review.
+            if unresolved['reason'] not in ('no_full_name_and_department_match', 'no_matching_schedule_occurrence'):
+                continue
+            grade = grade_by_id[unresolved['grade_record_id']]
+            if grade['grain'] == 'course_term':
+                continue
+            subject = grade['course_code'].split()[0]
+            scoped = [person for person in evidence if unit_agrees(subject, person, config)]
+            listing_id = f"{grade['term_id']}:{grade['course_code']}"
+            for occurrence in listings.get(listing_id, []):
+                if grade['grain'] == 'section' and occurrence['section_id'] != grade['section_id']:
+                    continue
+                raw = occurrence['name_raw']
+                if not contextual_name_agrees(name, raw):
+                    continue
+                anchors = [person for person in scoped if contextual_name_agrees(raw, person['name']) and
+                    (full_name_agrees(raw, person['name']) or
+                     # Exact full first name in the grade, exact official surname in schedule.
+                     (len(name_parts(name)[1][0]) > 1 and
+                      exact_official_surname(raw, person['name']) and
+                      contextual_name_agrees(name, person['name'])))]
+                if not anchors:
+                    continue
+                raw_given = name_parts(raw)[1]
+                competitors = {person['netid'] for person in directory_by_initial.get(raw_given[0][0], [])
+                    if unit_agrees(subject, person, config) and contextual_name_agrees(raw, person['name'])} - {netid}
+                if competitors:
+                    continue
+                conflict = False
+                for other in labels_by_subject[(subject, raw_given[0][0])]:
+                    if other == name or not contextual_name_agrees(raw, other):
+                        continue
+                    owners = {person['netid'] for person in candidates_by_name.get(other, [])}
+                    # A compatible full grade spelling can corroborate this identity;
+                    # another initial-only or conflicting historical name cannot.
+                    if owners != {netid} or len(name_parts(other)[1][0]) < 2 or not contextual_name_agrees(name, other):
+                        conflict = True
+                        break
+                if conflict:
+                    continue
+                matched.append({'grade_record_id': grade['id'], 'occurrence': occurrence,
+                    'name_match_method': 'course_term_anchored_name_variant',
+                    'identity_anchor': {'official_name': anchors[0]['name'], 'source_url': anchors[0]['source_url'],
+                        'grade_name_raw': name, 'schedule_name_raw': raw,
+                        'listing_id': listing_id}})
+                break
+        if not matched:
+            continue
+        if entry['status'] != 'verified_identity':
+            entry.update(status='verified_identity', netid=netid, reason='course_term_anchored_name_variant')
+            entry['candidates'] = [{'netid': netid,
+                'official_names': sorted({p['name'] for p in evidence}),
+                'units': sorted({p['unit'] for p in evidence}),
+                'source_urls': sorted({url for p in evidence for url in (p['source_url'], p.get('directory_url', p['source_url']))}),
+                'faculty_directory_urls': sorted({url for p in evidence for url in p.get('faculty_directory_urls', [p.get('directory_url', p['source_url'])])}),
+                'profile_urls': sorted({p['profile_url'] for p in evidence if p['profile_url']})}]
+            for subject in entry['subjects']:
+                review = config.get('subject_unit_reviews', {}).get(subject)
+                if review and subject in config.get('_subject_unit_sources', {}) and any(
+                        unit_tokens(p['unit']) == unit_tokens(unit) for p in evidence for unit in review['added_units']):
+                    candidate = entry['candidates'][0]
+                    candidate['source_urls'] = sorted(set(candidate['source_urls']) | set(config['_subject_unit_sources'][subject]))
+        accepted = {row['grade_record_id'] for row in matched}
+        entry['matched_grades'].extend(matched)
+        entry['unresolved_grades'] = [row for row in entry['unresolved_grades'] if row['grade_record_id'] not in accepted]
 
 
 def validate_review_inventory(grades, identities):
@@ -846,7 +1010,7 @@ def write_review_report(ledger):
     reasons = Counter(row['reason'] for entry in ledger['identities'] for row in entry['unresolved_grades'])
     lines = ['# Identity review coverage', '', f"Review run: `{ledger['reviewed_at']}`.",
         '', f"All **{summary['grade_name_labels']:,} GPA source-name labels** and **{summary['gpa_rows']:,} grade rows** were evaluated against the saved official directory sources and the campus archive.",
-        f"**{summary['verified_directory_ids']:,} distinct directory identities** have supporting full-name and department evidence. {summary['reviewed_grade_rows']:,} grade rows have a reviewed course/term occurrence; {summary['unresolved_grade_rows']:,} require further evidence.",
+        f"**{summary['verified_directory_ids']:,} distinct directory identities** have supporting name, department, and course/term evidence. {summary['reviewed_grade_rows']:,} grade rows have a reviewed course/term occurrence; {summary['unresolved_grade_rows']:,} require further evidence.",
         '', 'Names with incomplete, conflicting, or unavailable evidence stay unresolved. Public source access failures are recorded in the ledger. Current rosters may omit former instructors.',
         '', '## GPA outcomes', '', '| Grade-row outcome | Rows |', '| --- | ---: |']
     for reason, count in reasons.most_common():
@@ -941,6 +1105,8 @@ def export_reviews(ledger, gpa, professors, links):
             f"Official Illinois sources identify {official} (review key {netid}) in {', '.join(candidate['units'])}.",
             ("Explicit source-name variant review: " + ' '.join(entry['name_variant_review']['evidence'])
              if entry.get('name_variant_review') else
+             f"Course/term-anchored name review connects {entry['grade_name_raw']} to this official identity; the grade or schedule supplies a full-name anchor."
+             if entry['reason'] == 'course_term_anchored_name_variant' else
              f"Reviewed the GPA name {entry['grade_name_raw']} using full first/surname, compatible supplied middle names, and department evidence; initials alone were not used to establish identity.")]
         if person is None:
             if ',' in official:
@@ -966,6 +1132,12 @@ def export_reviews(ledger, gpa, professors, links):
         for match in entry['matched_grades']:
             grade = grades[match['grade_record_id']]
             occurrence = match['occurrence']
+            contextual = match.get('name_match_method') == 'course_term_anchored_name_variant'
+            match_evidence = (f"Course/term-anchored name review connects {entry['grade_name_raw']} to official Illinois identity {netid}; "
+                              f"schedule spelling {occurrence['name_raw']} in {occurrence['listing_id']}. "
+                              f"Full-name anchor: {match['identity_anchor']['official_name']}; source {match['identity_anchor']['source_url']}."
+                              if contextual else
+                              f"Full-name and department review connects {entry['grade_name_raw']} to official Illinois identity {netid} and this course/term occurrence.")
             key = (occurrence['section_id'], occurrence['meeting_id'], occurrence['instructor_index'], person['professor_id'])
             link = occurrences.get(key)
             if link is not None:
@@ -976,7 +1148,7 @@ def export_reviews(ledger, gpa, professors, links):
                 link.update(id='link_' + digest((':'.join(map(str, key))).encode())[:24],
                             professor_id=person['professor_id'], verified=True, verified_at=ledger['reviewed_at'],
                             review_method=REVIEW_METHOD,
-                            evidence=[f"Reviewed against the official Illinois identity {netid} and the preserved occurrence in {occurrence['listing_id']}; department and full grade-source name agree."],
+                            evidence=[match_evidence if contextual else f"Reviewed against the official Illinois identity {netid} and the preserved occurrence in {occurrence['listing_id']}; department and full grade-source name agree."],
                             is_primary=False, primary_evidence=[], grade_name_matches=[])
                 links['records'].append(link)
                 occurrences[key] = link
@@ -985,7 +1157,7 @@ def export_reviews(ledger, gpa, professors, links):
                     'grade_record_id': grade['id'], 'primary_instructor_name_raw': grade['primary_instructor_name_raw'],
                     'source_url': gpa['sources'][0]['url'], 'reviewed_by': entry['reviewed_by'],
                     'verified_at': ledger['reviewed_at'],
-                    'evidence': [f"Full-name and department review connects {entry['grade_name_raw']} to official Illinois identity {netid} and this course/term occurrence.",
+                    'evidence': [match_evidence,
                                  'Official evidence: ' + ', '.join(candidate['source_urls'])],
                     'primary_evidence': [f"The grade source explicitly names {grade['primary_instructor_name_raw']} in Primary Instructor for {grade['course_code']} ({grade['term_id']}); this review applies only to this source row.",
                                          'The source retains its actual section ID.' if grade['grain'] == 'section' else

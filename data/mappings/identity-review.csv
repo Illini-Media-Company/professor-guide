@@ -123,7 +123,7 @@ grade_name_raw,status,directory_id,grade_rows,matched_grade_rows,unresolved_grad
 "Aprahamian, Serouj",verified_identity,serouj,1,1,0,DANC,unique_official_full_name_and_department,,https://dance.illinois.edu/people/faculty/; https://dance.illinois.edu/people/profiles/serouj-aprahamian/
 "Arai, Yuji",verified_identity,yarai,5,5,0,NRES,unique_official_full_name_and_department,,https://directory.illinois.edu/detail?departmentId=illinois.eduKL875; https://directory.illinois.edu/facultyListing
 "Araiza, Roy M",needs_review,,2,0,2,MATH,no_full_name_and_department_match,no_full_name_and_department_match,
-"Araujo de Aguia, Carlos H",needs_review,,6,0,6,ARTD,no_full_name_and_department_match,no_full_name_and_department_match,
+"Araujo de Aguia, Carlos H",verified_identity,chaa,6,6,0,ARTD,course_term_anchored_name_variant,,https://directory.illinois.edu/detail?departmentId=illinois.eduKR526
 "Aravamudan, Bharathi",verified_identity,ba23,19,19,0,MCB,unique_official_full_name_and_department,,https://directory.illinois.edu/detail?departmentId=illinois.eduKV415; https://mcb.illinois.edu/directory/advising-instruction
 "Arbelaez, Juan D",verified_identity,arbelaez,3,3,0,CPSC,unique_official_full_name_and_department,,https://directory.illinois.edu/detail?departmentId=illinois.eduKL802; https://directory.illinois.edu/facultyListing
 "Arbelo Ramos, Jose P",needs_review,,2,0,2,MATH,no_full_name_and_department_match,no_full_name_and_department_match,
@@ -376,7 +376,7 @@ grade_name_raw,status,directory_id,grade_rows,matched_grade_rows,unresolved_grad
 "Bridges, Matthew M",needs_review,,5,0,5,CI,no_full_name_and_department_match,no_full_name_and_department_match,
 "Briggs, Molly C",verified_identity,mbriggs,2,2,0,ARTD,unique_official_full_name_and_department,,https://art.illinois.edu/about/faculty-directory/; https://art.illinois.edu/people/profiles/molly-briggs/; https://directory.illinois.edu/detail?departmentId=illinois.eduKR526
 "Briggs, Seth",needs_review,,1,0,1,FIN,no_full_name_and_department_match,no_full_name_and_department_match,
-"Briley, Daniel A",needs_review,,4,0,4,PSYC,no_full_name_and_department_match,no_full_name_and_department_match,
+"Briley, Daniel A",verified_identity,dabriley,4,4,0,PSYC,course_term_anchored_name_variant,,https://directory.illinois.edu/detail?departmentId=illinois.eduKV299; https://directory.illinois.edu/facultyListing; https://psychology.illinois.edu/directory; https://psychology.illinois.edu/directory/administration; https://psychology.illinois.edu/directory/faculty
 "Brinberg, Isaac H",needs_review,,1,0,1,MUSC,no_full_name_and_department_match,no_full_name_and_department_match,
 "Brindise, Noel C",needs_review,,1,0,1,AE,no_full_name_and_department_match,no_full_name_and_department_match,
 "Brinkworth, Jessica F",verified_identity,jfbrinkw,1,1,0,ANTH,unique_official_full_name_and_department,,https://anthro.illinois.edu/directory; https://anthro.illinois.edu/directory/faculty; https://directory.illinois.edu/detail?departmentId=illinois.eduKV241; https://directory.illinois.edu/facultyListing
@@ -477,7 +477,7 @@ grade_name_raw,status,directory_id,grade_rows,matched_grade_rows,unresolved_grad
 "Carter, April L",needs_review,,2,0,2,LEAD,no_full_name_and_department_match,no_full_name_and_department_match,
 "Carter, Maya L",needs_review,,2,0,2,HDFS,no_full_name_and_department_match,no_full_name_and_department_match,
 "Carter-Black, Janet D",needs_review,,8,0,8,SOCW,no_full_name_and_department_match,no_full_name_and_department_match,
-"Carvalho do Ama, Janaynne",needs_review,,1,0,1,IS,no_full_name_and_department_match,no_full_name_and_department_match,
+"Carvalho do Ama, Janaynne",verified_identity,jamaral,1,1,0,IS,course_term_anchored_name_variant,,https://ischool.illinois.edu/people/directory
 "Caryl, Zoe N",verified_identity,zoenc2,4,4,0,CMN,unique_official_full_name_and_department,,https://communication.illinois.edu/directory; https://communication.illinois.edu/directory/grad-students
 "Casar, Allison T",needs_review,,1,0,1,LING,no_full_name_and_department_match,no_full_name_and_department_match,
 "Casey, Mary S",needs_review,,1,0,1,CWL,no_full_name_and_department_match,no_full_name_and_department_match,
@@ -966,7 +966,7 @@ grade_name_raw,status,directory_id,grade_rows,matched_grade_rows,unresolved_grad
 "Fang, Shaohua",needs_review,,1,0,1,LING,no_full_name_and_department_match,no_full_name_and_department_match,
 "Fanta Alarcon, Andrea S",needs_review,,1,0,1,HDFS,no_full_name_and_department_match,no_full_name_and_department_match,
 "Fanta Alarcon, Daniela C",needs_review,,1,0,1,SHS,no_full_name_and_department_match,no_full_name_and_department_match,
-"Farah Rivadeney, Irene M",needs_review,,1,0,1,UP,no_full_name_and_department_match,no_full_name_and_department_match,
+"Farah Rivadeney, Irene M",verified_identity,irenef,1,1,0,UP,course_term_anchored_name_variant,,https://directory.illinois.edu/detail?departmentId=illinois.eduKR733
 "Farina, Christian",verified_identity,cfarina,4,4,0,PHYS,unique_official_full_name_and_department,,https://directory.illinois.edu/detail?departmentId=illinois.eduKP244; https://directory.illinois.edu/facultyListing; https://grainger.illinois.edu/about/directory/faculty
 "Farivar, Reza",verified_identity,farivar2,10,10,0,CS,unique_official_full_name_and_department,,https://directory.illinois.edu/detail?departmentId=illinois.eduKP434; https://directory.illinois.edu/facultyListing
 "Farjam, Nazanin",needs_review,,2,0,2,ME,no_full_name_and_department_match,no_full_name_and_department_match,
@@ -1047,7 +1047,7 @@ grade_name_raw,status,directory_id,grade_rows,matched_grade_rows,unresolved_grad
 "Forsyth, David A",needs_review,,3,0,3,ECE,no_full_name_and_department_match,no_full_name_and_department_match,
 "Forsythe, Elizabeth C",verified_identity,eforsyth,3,3,0,LER,unique_official_full_name_and_department,,https://directory.illinois.edu/facultyListing
 "Fowler, Maxwell L",needs_review,,4,0,4,CS,no_full_name_and_department_match,no_full_name_and_department_match,
-"Fraley, Robert C",needs_review,,3,0,3,PSYC,no_full_name_and_department_match,no_full_name_and_department_match,
+"Fraley, Robert C",verified_identity,rcfraley,3,3,0,PSYC,course_term_anchored_name_variant,,https://directory.illinois.edu/detail?departmentId=illinois.eduKV299; https://directory.illinois.edu/facultyListing; https://psychology.illinois.edu/directory; https://psychology.illinois.edu/directory/faculty
 "Frame, Jeffrey",verified_identity,frame,9,9,0,ATMS,unique_official_full_name_and_department,,https://atmos.illinois.edu/directory; https://atmos.illinois.edu/directory/faculty
 "Francelino Viei, Erika",needs_review,,6,0,6,HIST,no_full_name_and_department_match,no_full_name_and_department_match,
 "Francis, Omar L",needs_review,,5,0,5,ARTJ,no_full_name_and_department_match,no_full_name_and_department_match,
@@ -1103,7 +1103,7 @@ grade_name_raw,status,directory_id,grade_rows,matched_grade_rows,unresolved_grad
 "Gao, Xing",verified_identity,hgao12,19,19,0,FIN,unique_official_full_name_and_department,,https://directory.illinois.edu/detail?departmentId=illinois.eduKM260; https://facultysearchapi.itpartners.illinois.edu/api/Search?q=&collegeType=business&departments=&units=&jobtypes=&username=&useFullText=false&skip=0&take=1000; https://giesbusiness.illinois.edu/about/faculty-staff-directory
 "Gao, Yang",verified_identity,ygao1,7,7,0,BADM,unique_official_full_name_and_department,,https://facultysearchapi.itpartners.illinois.edu/api/Search?q=&collegeType=business&departments=&units=&jobtypes=&username=&useFullText=false&skip=0&take=1000; https://giesbusiness.illinois.edu/about/faculty-staff-directory
 "Gao, Yiran",needs_review,,12,0,12,MACS,no_full_name_and_department_match,no_full_name_and_department_match,
-"Garcia Marmolej, Daniela",needs_review,,1,0,1,SPAN,no_full_name_and_department_match,no_full_name_and_department_match,
+"Garcia Marmolej, Daniela",verified_identity,dg28,1,1,0,SPAN,course_term_anchored_name_variant,,https://spanport.illinois.edu/directory; https://spanport.illinois.edu/directory/grad-students
 "Garcia Otero, Maria A",verified_identity,mariaag,1,1,0,NRES,unique_official_full_name_and_department,,https://directory.illinois.edu/detail?departmentId=illinois.eduKL875; https://directory.illinois.edu/facultyListing
 "Garcia Rojas, Margarita",needs_review,,8,0,8,HIST; LLS,no_full_name_and_department_match,no_full_name_and_department_match,
 "Garcia, Angel N",verified_identity,angarcia,2,2,0,LLS,unique_official_full_name_and_department,,https://lls.illinois.edu/directory; https://lls.illinois.edu/directory/faculty
@@ -1703,7 +1703,7 @@ grade_name_raw,status,directory_id,grade_rows,matched_grade_rows,unresolved_grad
 "Keivan Esfahani, Darioush",needs_review,,1,0,1,ME,no_full_name_and_department_match,no_full_name_and_department_match,
 "Kelley, Elizabeth M",needs_review,,2,0,2,MATH,no_full_name_and_department_match,no_full_name_and_department_match,
 "Kelley, Kurtis J",needs_review,,8,0,8,HIST,no_full_name_and_department_match,no_full_name_and_department_match,
-"Kelley-Freiburg, Brenna M",needs_review,,2,0,2,HK,no_full_name_and_department_match,no_full_name_and_department_match,
+"Kelley-Freiburg, Brenna M",verified_identity,bkelley3,2,2,0,HK,course_term_anchored_name_variant,,https://ahs.illinois.edu/directory; https://directoryapi.wigg.illinois.edu/api/Directory/Search/ahs?q=&useFullText=false&offices=&jobTypes=&tags=&skip=0&take=500
 "Kellis, Mariana S",verified_identity,mkellis2,6,6,0,HIST,unique_official_full_name_and_department,,https://history.illinois.edu/directory; https://history.illinois.edu/directory/grad-students
 "Kelpinski, Lindsay F",needs_review,,1,0,1,CMN,no_full_name_and_department_match,no_full_name_and_department_match,
 "Kelsey, Caroline M",verified_identity,cmkelsey,1,1,0,PSYC,unique_official_full_name_and_department,,https://directory.illinois.edu/detail?departmentId=illinois.eduKV299; https://directory.illinois.edu/facultyListing; https://psychology.illinois.edu/directory; https://psychology.illinois.edu/directory/faculty
@@ -1823,7 +1823,7 @@ grade_name_raw,status,directory_id,grade_rows,matched_grade_rows,unresolved_grad
 "Kolar, Alexandra F",needs_review,,1,0,1,ENG,no_full_name_and_department_match,no_full_name_and_department_match,
 "Kolb, Sally K",verified_identity,skkolb,4,4,0,LAW,unique_official_full_name_and_department,,https://law.illinois.edu/faculty-research/faculty-profiles/; https://law.illinois.edu/faculty-research/faculty-profiles/sally-kolb/
 "Kollmer, Matthew J",verified_identity,kollmer2,3,3,0,IS,unique_official_full_name_and_department,,https://ischool.illinois.edu/people/directory
-"Koloutsou-Vakak, Sotiria",needs_review,,3,0,3,CEE,no_full_name_and_department_match,no_full_name_and_department_match,
+"Koloutsou-Vakak, Sotiria",verified_identity,sotiriak,3,3,0,CEE,course_term_anchored_name_variant,,https://directory.illinois.edu/detail?departmentId=illinois.eduKP251; https://grainger.illinois.edu/about/directory/faculty
 "Kolson, Erica R",verified_identity,ericark2,11,11,0,CMN,unique_official_full_name_and_department,,https://communication.illinois.edu/directory; https://communication.illinois.edu/directory/grad-students
 "Konar, Megan",verified_identity,mkonar,3,3,0,CEE,unique_official_full_name_and_department,,https://directory.illinois.edu/detail?departmentId=illinois.eduKP251; https://directory.illinois.edu/facultyListing; https://grainger.illinois.edu/about/directory/faculty
 "Kong, Hyun Joon",verified_identity,hjkong06,8,8,0,CHBE,unique_official_full_name_and_department,,https://directory.illinois.edu/facultyListing
@@ -2226,7 +2226,7 @@ grade_name_raw,status,directory_id,grade_rows,matched_grade_rows,unresolved_grad
 "Martin, Jeffrey T",verified_identity,jmart,4,4,0,ANTH; EALC,unique_official_full_name_and_department,,https://anthro.illinois.edu/directory; https://anthro.illinois.edu/directory/administration; https://anthro.illinois.edu/directory/faculty; https://directory.illinois.edu/detail?departmentId=illinois.eduKV241; https://directory.illinois.edu/facultyListing; https://ealc.illinois.edu/directory; https://ealc.illinois.edu/directory/faculty-by-discipline
 "Martin, Nicolas F",verified_identity,nfmartin,1,1,0,CPSC,unique_official_full_name_and_department,,https://directory.illinois.edu/detail?departmentId=illinois.eduKL802; https://directory.illinois.edu/facultyListing
 "Martinez Garcia, Humberto",needs_review,,2,0,2,ECON,no_full_name_and_department_match,no_full_name_and_department_match,
-"Martinez Negret, Giselle",needs_review,,2,0,2,CI,no_full_name_and_department_match,no_full_name_and_department_match,
+"Martinez Negret, Giselle",verified_identity,giselle,2,2,0,CI,course_term_anchored_name_variant,,https://directoryapi.wigg.illinois.edu/api/Directory/GetFull/education?offices=&jobtypes=; https://education.illinois.edu/about/directory
 "Martinez Vargas, Pamela P",verified_identity,pamelapm,2,2,0,STAT,unique_official_full_name_and_department,,https://directory.illinois.edu/facultyListing
 "Martinez, Candace A",verified_identity,cjmartnz,17,17,0,BADM; BUS,unique_official_full_name_and_department,,https://directory.illinois.edu/detail?departmentId=illinois.eduKM902; https://directory.illinois.edu/facultyListing; https://facultysearchapi.itpartners.illinois.edu/api/Search?q=&collegeType=business&departments=&units=&jobtypes=&username=&useFullText=false&skip=0&take=1000; https://giesbusiness.illinois.edu/about/faculty-staff-directory
 "Martinez, Jeffery D",needs_review,,5,0,5,CLCV,no_full_name_and_department_match,no_full_name_and_department_match,
@@ -2374,7 +2374,7 @@ grade_name_raw,status,directory_id,grade_rows,matched_grade_rows,unresolved_grad
 "Minn, Michael J",verified_identity,minn2,15,15,0,GGIS,unique_official_full_name_and_department,,https://directory.illinois.edu/facultyListing
 "Minniear, Jacob N",needs_review,,1,0,1,CI,no_full_name_and_department_match,no_full_name_and_department_match,
 "Miraftab, Faranak",verified_identity,faranak,1,1,0,UP,unique_official_full_name_and_department,,https://directory.illinois.edu/detail?departmentId=illinois.eduKR733
-"Miranda Tassita, Rafael",needs_review,,3,0,3,HK; KIN,no_full_name_and_department_match,no_full_name_and_department_match,
+"Miranda Tassita, Rafael",verified_identity,rafaelmt,3,3,0,HK; KIN,course_term_anchored_name_variant,,https://ahs.illinois.edu/directory; https://directoryapi.wigg.illinois.edu/api/Directory/Search/ahs?q=&useFullText=false&offices=&jobTypes=&tags=&skip=0&take=500
 "Mironenko, Alexander",needs_review,,3,0,3,CHBE,no_full_name_and_department_match,no_full_name_and_department_match,
 "Mironenko, Olga",verified_identity,olgamiro,15,15,0,ECE,unique_official_full_name_and_department,,https://grainger.illinois.edu/about/directory/faculty
 "Misailovic, Sasa",verified_identity,misailo,3,3,0,CS,unique_official_full_name_and_department,,https://directory.illinois.edu/detail?departmentId=illinois.eduKP434; https://directory.illinois.edu/facultyListing
@@ -2422,7 +2422,7 @@ grade_name_raw,status,directory_id,grade_rows,matched_grade_rows,unresolved_grad
 "Morley, Amanda R",needs_review,,3,0,3,MDIA,no_full_name_and_department_match,no_full_name_and_department_match,
 "Morris, Caitlin M",needs_review,,4,0,4,ANSC,no_full_name_and_department_match,no_full_name_and_department_match,
 "Morris, David",needs_review,,4,0,4,ENGL,no_full_name_and_department_match,no_full_name_and_department_match,
-"Morrissette, Jason W",needs_review,,8,0,8,THEA,no_full_name_and_department_match,no_full_name_and_department_match,
+"Morrissette, Jason W",verified_identity,jwmorris,8,8,0,THEA,course_term_anchored_name_variant,,https://directory.illinois.edu/detail?departmentId=illinois.eduKR883; https://directory.illinois.edu/facultyListing
 "Morrissey, Robert M",verified_identity,rmorriss,1,1,0,HIST,unique_official_full_name_and_department,,https://directory.illinois.edu/facultyListing; https://history.illinois.edu/directory; https://history.illinois.edu/directory/faculty
 "Morrow, Ethan",needs_review,,5,0,5,CMN,no_full_name_and_department_match,no_full_name_and_department_match,
 "Morrow, Meg S",needs_review,,1,0,1,ENGL,no_full_name_and_department_match,no_full_name_and_department_match,
@@ -2789,7 +2789,7 @@ grade_name_raw,status,directory_id,grade_rows,matched_grade_rows,unresolved_grad
 "Ramirez, Carlos R",verified_identity,crr97,3,3,0,MUS,unique_official_full_name_and_department,,https://directory.illinois.edu/detail?departmentId=illinois.eduKR495; https://directory.illinois.edu/facultyListing; https://music.illinois.edu/people/faculty/; https://music.illinois.edu/people/profiles/carlos-roberto-ramirez/
 "Ramirez, Christian V",needs_review,,2,0,2,LLS,no_full_name_and_department_match,no_full_name_and_department_match,
 "Ramirez, Xavier R",verified_identity,xramirez,3,3,0,SOCW,unique_official_full_name_and_department,,https://directoryapi.wigg.illinois.edu/api/Directory/Search/socialwork?q=&useFullText=false&offices=&jobTypes=&tags=&take=1000; https://socialwork.illinois.edu/directory/
-"Ramos Flores Nu, Thayna",needs_review,,2,0,2,HK,no_full_name_and_department_match,no_full_name_and_department_match,
+"Ramos Flores Nu, Thayna",verified_identity,trflores,2,2,0,HK,course_term_anchored_name_variant,,https://ahs.illinois.edu/directory; https://directoryapi.wigg.illinois.edu/api/Directory/Search/ahs?q=&useFullText=false&offices=&jobTypes=&tags=&skip=0&take=500
 "Ramsey, Kimberly J",needs_review,,1,0,1,LER,no_full_name_and_department_match,no_full_name_and_department_match,
 "Rana, Junaid",verified_identity,jrana,1,1,0,AAS,unique_official_full_name_and_department,,https://asianam.illinois.edu/directory; https://asianam.illinois.edu/directory/faculty; https://directory.illinois.edu/detail?departmentId=illinois.eduKV404
 "Rand, Jacki T",verified_identity,jacki,2,1,1,AIS; ANTH,unique_official_full_name_and_department,department_not_verified_for_this_subject,https://directory.illinois.edu/facultyListing
@@ -2975,7 +2975,7 @@ grade_name_raw,status,directory_id,grade_rows,matched_grade_rows,unresolved_grad
 "Sahin, Esra",needs_review,,1,0,1,HDFS,no_full_name_and_department_match,no_full_name_and_department_match,
 "Saif, Md Taher A",verified_identity,saif,3,3,0,ME,unique_official_full_name_and_department,,https://directory.illinois.edu/detail?departmentId=illinois.eduKP917; https://directory.illinois.edu/facultyListing
 "Sakhartov, Arkadiy V",verified_identity,arkadiys,3,3,0,BADM,unique_official_full_name_and_department,,https://facultysearchapi.itpartners.illinois.edu/api/Search?q=&collegeType=business&departments=&units=&jobtypes=&username=&useFullText=false&skip=0&take=1000; https://giesbusiness.illinois.edu/about/faculty-staff-directory
-"Salamanca Garci, Juan M",needs_review,,3,0,3,ARTD,no_full_name_and_department_match,no_full_name_and_department_match,
+"Salamanca Garci, Juan M",verified_identity,jsal,3,3,0,ARTD,course_term_anchored_name_variant,,https://directory.illinois.edu/detail?departmentId=illinois.eduKR526
 "Salapaka, Srinivasa M",verified_identity,salapaka,8,5,3,ECE; ME,unique_official_full_name_and_department,department_not_verified_for_this_subject; no_matching_schedule_occurrence,https://directory.illinois.edu/detail?departmentId=illinois.eduKP917; https://directory.illinois.edu/facultyListing; https://grainger.illinois.edu/about/directory/faculty
 "Salas, Mia J",needs_review,,1,0,1,CMN,no_full_name_and_department_match,no_full_name_and_department_match,
 "Salehi, Mohamadreza",needs_review,,3,0,3,ECON,no_full_name_and_department_match,no_full_name_and_department_match,
@@ -2998,7 +2998,7 @@ grade_name_raw,status,directory_id,grade_rows,matched_grade_rows,unresolved_grad
 "Sanfilippo, Madelyn R",verified_identity,madelyns,4,4,0,IS,unique_official_full_name_and_department,,https://directory.illinois.edu/facultyListing; https://ischool.illinois.edu/people/directory
 "Sang, I-Chen",needs_review,,1,0,1,IE,no_full_name_and_department_match,no_full_name_and_department_match,
 "Sani, Jalal",verified_identity,jsani,14,14,0,ACCY,unique_official_full_name_and_department,,https://facultysearchapi.itpartners.illinois.edu/api/Search?q=&collegeType=business&departments=&units=&jobtypes=&username=&useFullText=false&skip=0&take=1000; https://giesbusiness.illinois.edu/about/faculty-staff-directory
-"Sankaran, Ramanathan",needs_review,,2,0,2,NPRE,no_full_name_and_department_match,no_full_name_and_department_match,
+"Sankaran, Ramanathan",verified_identity,rmohan,2,2,0,NPRE,course_term_anchored_name_variant,,https://grainger.illinois.edu/about/directory/faculty
 "Sannes, Nina",needs_review,,1,0,1,CW,no_full_name_and_department_match,no_full_name_and_department_match,
 "Santos, Carla A",verified_identity,csantos,12,12,0,RST,unique_official_full_name_and_department,,https://ahs.illinois.edu/directory; https://directoryapi.wigg.illinois.edu/api/Directory/Search/ahs?q=&useFullText=false&offices=&jobTypes=&tags=&skip=0&take=500
 "Sar, Sela",verified_identity,selasar,9,9,0,ADV,unique_official_full_name_and_department,,https://www.media.illinois.edu/advertising-faculty/; https://www.media.illinois.edu/sar-sela/
@@ -3859,7 +3859,7 @@ grade_name_raw,status,directory_id,grade_rows,matched_grade_rows,unresolved_grad
 "Zhang, Kailin",verified_identity,kailin6,2,2,0,CMN,unique_official_full_name_and_department,,https://communication.illinois.edu/directory; https://communication.illinois.edu/directory/grad-students
 "Zhang, Li",verified_identity,lzhang70,16,0,16,ACCY,unique_official_full_name_and_department,ambiguous_schedule_initials,https://facultysearchapi.itpartners.illinois.edu/api/Search?q=&collegeType=business&departments=&units=&jobtypes=&username=&useFullText=false&skip=0&take=1000; https://giesbusiness.illinois.edu/about/faculty-staff-directory
 "Zhang, Lingming",verified_identity,lingming,8,8,0,CS,unique_official_full_name_and_department,,https://directory.illinois.edu/detail?departmentId=illinois.eduKP434; https://directory.illinois.edu/facultyListing
-"Zhang, Lizheng W",needs_review,,2,0,2,ME,no_full_name_and_department_match,no_full_name_and_department_match,
+"Zhang, Lizheng W",verified_identity,lwzhang5,2,2,0,ME,course_term_anchored_name_variant,,https://directory.illinois.edu/detail?departmentId=illinois.eduKP917; https://grainger.illinois.edu/about/directory/faculty
 "Zhang, Minjia",verified_identity,minjiaz,3,3,0,CS,unique_official_full_name_and_department,,https://directory.illinois.edu/detail?departmentId=illinois.eduKP434; https://directory.illinois.edu/facultyListing
 "Zhang, Qiusi",verified_identity,qiusiz,1,1,0,LING,unique_official_full_name_and_department,,https://directory.illinois.edu/facultyListing; https://linguistics.illinois.edu/directory/admin-staff; https://linguistics.illinois.edu/directory/esl-faculty; https://linguistics.illinois.edu/directory/faculty
 "Zhang, Richard Y",verified_identity,ryz,5,5,0,ECE,unique_official_full_name_and_department,,https://grainger.illinois.edu/about/directory/faculty
