@@ -1,9 +1,9 @@
 # Current campus coverage
 
-Term: **Fall 2026**. Latest source fetch: `2026-10-19T10:37:35Z`.
+Term: **Fall 2026**. Latest source fetch: `2026-11-16T10:35:21Z`.
 
-186 requested of 186 discovered departments; 4452 course listings; 12836 registration sections; 13637 meetings.
-Meetings with missing instructors: 534. Multiple instructors: 3907. Unresolved listed instructor occurrences: 18592.
+186 requested of 186 discovered departments; 4450 course listings; 12835 registration sections; 13636 meetings.
+Meetings with missing instructors: 521. Multiple instructors: 4050. Unresolved listed instructor occurrences: 18749.
 
 Counts retain separate registration records and are not unique teaching groups or professors. Missing source labels and empty schedules are explicitly marked, never invented.
 
@@ -15,7 +15,7 @@ Counts retain separate registration records and are not unique teaching groups o
 | ACE | collected | 55 | 116 | 118 | 5 |
 | ACES | collected | 12 | 16 | 16 | 2 |
 | ADV | collected | 47 | 99 | 99 | 4 |
-| AE | collected | 37 | 120 | 125 | 6 |
+| AE | collected | 37 | 119 | 124 | 6 |
 | AFAS | collected | 6 | 11 | 13 | 0 |
 | AFRO | collected | 24 | 51 | 51 | 0 |
 | AFST | collected | 17 | 21 | 26 | 3 |
@@ -25,9 +25,9 @@ Counts retain separate registration records and are not unique teaching groups o
 | AIS | collected | 8 | 16 | 16 | 0 |
 | ALEC | collected | 9 | 15 | 15 | 0 |
 | ANSC | collected | 43 | 119 | 129 | 4 |
-| ANTH | collected | 49 | 72 | 74 | 14 |
+| ANTH | collected | 48 | 71 | 73 | 13 |
 | ARAB | collected | 6 | 8 | 16 | 0 |
-| ARCH | collected | 50 | 124 | 130 | 8 |
+| ARCH | collected | 50 | 125 | 131 | 8 |
 | ART | collected | 8 | 15 | 15 | 1 |
 | ARTD | collected | 22 | 51 | 51 | 3 |
 | ARTE | collected | 11 | 15 | 15 | 2 |
@@ -53,7 +53,7 @@ Counts retain separate registration records and are not unique teaching groups o
 | BUS | collected | 11 | 77 | 77 | 0 |
 | CB | collected | 8 | 10 | 11 | 4 |
 | CDB | collected | 3 | 21 | 21 | 1 |
-| CEE | collected | 58 | 186 | 200 | 11 |
+| CEE | collected | 58 | 186 | 200 | 2 |
 | CGGE | collected | 1 | 1 | 1 | 0 |
 | CHBE | collected | 33 | 55 | 56 | 8 |
 | CHEM | collected | 57 | 561 | 605 | 7 |
@@ -74,7 +74,7 @@ Counts retain separate registration records and are not unique teaching groups o
 | DTX | collected | 3 | 7 | 10 | 0 |
 | EALC | collected | 27 | 66 | 66 | 5 |
 | ECE | collected | 109 | 367 | 378 | 6 |
-| ECON | collected | 44 | 210 | 216 | 3 |
+| ECON | collected | 44 | 211 | 217 | 3 |
 | EDPR | collected | 8 | 31 | 38 | 0 |
 | EDUC | collected | 8 | 47 | 49 | 0 |
 | EIL | collected | 9 | 14 | 14 | 2 |
@@ -91,10 +91,10 @@ Counts retain separate registration records and are not unique teaching groups o
 | ETMA | collected | 22 | 37 | 38 | 8 |
 | EURO | collected | 7 | 8 | 8 | 2 |
 | EXP | collected | 2 | 26 | 26 | 1 |
-| FAA | collected | 14 | 38 | 38 | 1 |
+| FAA | collected | 14 | 38 | 38 | 0 |
 | FIN | collected | 66 | 121 | 122 | 4 |
 | FR | collected | 25 | 45 | 46 | 3 |
-| FSHN | collected | 56 | 91 | 103 | 7 |
+| FSHN | collected | 55 | 90 | 102 | 7 |
 | GC | collected | 2 | 2 | 2 | 0 |
 | GEOL | collected | 32 | 76 | 77 | 12 |
 | GER | collected | 24 | 40 | 40 | 6 |
@@ -172,7 +172,7 @@ Counts retain separate registration records and are not unique teaching groups o
 | SAME | collected | 7 | 7 | 9 | 1 |
 | SBC | collected | 7 | 7 | 7 | 0 |
 | SCAN | collected | 8 | 14 | 14 | 2 |
-| SE | collected | 24 | 59 | 77 | 7 |
+| SE | collected | 24 | 59 | 77 | 6 |
 | SHS | collected | 42 | 83 | 98 | 11 |
 | SLAV | collected | 6 | 8 | 8 | 2 |
 | SLCL | collected | 1 | 1 | 1 | 1 |
@@ -184,7 +184,7 @@ Counts retain separate registration records and are not unique teaching groups o
 | SWAH | collected | 4 | 5 | 9 | 0 |
 | TAM | collected | 29 | 152 | 152 | 20 |
 | TE | collected | 20 | 46 | 46 | 0 |
-| THEA | collected | 83 | 299 | 303 | 9 |
+| THEA | collected | 83 | 299 | 303 | 8 |
 | TMGT | collected | 2 | 3 | 3 | 0 |
 | TRST | collected | 9 | 18 | 18 | 0 |
 | TURK | collected | 4 | 4 | 6 | 0 |
