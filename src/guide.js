@@ -40,10 +40,13 @@ export function semesterHistory(records) {
 export function createModel(index) {
   const courses = new Map(index.courses.map((course) => [course.course_code, course]))
   const grades = new Map()
+  const courseGrades = new Map()
   for (const row of index.grade_records) {
     const key = `${row.professor_id}|${row.course_code}`
     if (!grades.has(key)) grades.set(key, [])
     grades.get(key).push(row)
+    if (!courseGrades.has(row.course_code)) courseGrades.set(row.course_code, [])
+    courseGrades.get(row.course_code).push(row)
   }
   const entries = groupPeople(index)
   const people = entries.map((person) => ({ ...person,
@@ -57,6 +60,7 @@ export function createModel(index) {
   return { people, peopleById: new Map(people.flatMap((p) => [resultId(p), ...p.alias_ids].map((id) => [id, p]))), courses,
     subjects: [...new Set(index.courses.map((c) => c.course_code.split(' ')[0]))].sort(),
     terms: [...index.terms].sort((a, b) => termOrder(b.id) - termOrder(a.id)),
+    courseGpa: (code, term = '') => summarizeGrades((courseGrades.get(code) || []).filter((row) => !term || row.term_id === term)).gpa,
     gradesFor: (personId, code, term = '') => (personId == null ? [] : grades.get(`${personId}|${code}`) || []).filter((row) => !term || row.term_id === term),
     peopleFor: (code, term = '') => [...(peopleByCourse.get(code) || [])].filter((p) => !term || p.courses.some((c) => c.course_code === code && c.term_ids.includes(term))),
   }

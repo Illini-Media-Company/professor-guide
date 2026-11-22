@@ -72,6 +72,15 @@ function Course({ course, model, term, selectPerson }) {
   </>
 }
 
+function CourseStat({ model, code, term }) {
+  const gpa = model.courseGpa(code, term)
+  const names = model.peopleFor(code, term).length
+  return <>
+    {gpa == null ? <Pending /> : <strong>{gpa.toFixed(2)}<small> / 4</small></strong>}
+    <span>{number(names)} {names === 1 ? 'name' : 'names'} listed</span>
+  </>
+}
+
 export default function Guide({ guide }) {
   const model = useMemo(() => createModel(guide.index), [guide.index])
   const [state, setState] = useState(readState)
@@ -132,12 +141,12 @@ export default function Guide({ guide }) {
         </div>
         <table className="results-table"><caption className="sr-only">{state.view === 'professors' ? 'Professor' : 'Course'} search results</caption>
           <thead><tr><th scope="col" aria-sort={state.sort === 'name' || state.view === 'courses' ? 'ascending' : 'none'}><button className="sort-button" onClick={() => filter({ sort: 'name' })}>{state.view === 'professors' ? 'Name' : 'Course'} <span aria-hidden="true">↓</span></button></th>
-            <th scope="col" aria-sort={state.view === 'professors' && state.sort === 'rating' ? 'descending' : 'none'}>{state.view === 'professors' ? <button className="sort-button" onClick={() => filter({ sort: 'rating' })}>RMP <span aria-hidden="true">↓</span></button> : 'Names listed'}</th></tr></thead>
+            <th scope="col" aria-sort={state.view === 'professors' && state.sort === 'rating' ? 'descending' : 'none'}>{state.view === 'professors' ? <button className="sort-button" onClick={() => filter({ sort: 'rating' })}>RMP <span aria-hidden="true">↓</span></button> : <abbr title="Enrollment-weighted GPA from verified grade records">GPA</abbr>}</th></tr></thead>
           <tbody>{pageRows.map((row) => { const id = row.professor_id || row.entry_id || row.course_code; const selected = person && resultId(person) === id || course?.course_code === id; return <tr className={selected ? 'selected' : ''} key={id}>
             <td><button id={`result-${id}`} className="result-link" aria-current={selected ? 'true' : undefined} onClick={() => select(state.view === 'professors' ? { person: id, course: '' } : { person: '', course: id })}>
               <strong>{state.view === 'professors' ? row.display_name : row.course_code}{state.view === 'professors' && hasGpaFor(model, row, subject, term) && <GpaIcon />}</strong>
               <span>{state.view === 'professors' ? ([...new Set(row.courses.map((c) => c.course_code.split(' ')[0]))].join(' · ') + (row.entry_type === 'schedule_name' ? ' · Identity pending' : '') || 'Course links pending') : row.title || 'Course title pending'}</span>
-            </button></td><td className="result-stat">{state.view === 'professors' ? <>{row.rmp?.overall_quality == null ? <Pending /> : <><strong>{row.rmp.overall_quality.toFixed(1)}<small> / 5</small></strong><span>{number(row.rmp.num_ratings)} ratings</span></>}</> : <strong>{number(model.peopleFor(row.course_code, term).length)}</strong>}</td>
+            </button></td><td className="result-stat">{state.view === 'professors' ? <>{row.rmp?.overall_quality == null ? <Pending /> : <><strong>{row.rmp.overall_quality.toFixed(1)}<small> / 5</small></strong><span>{number(row.rmp.num_ratings)} ratings</span></>}</> : <CourseStat model={model} code={row.course_code} term={term} />}</td>
           </tr> })}</tbody>
         </table>
         {!pageRows.length && <div className="no-results"><h4>No results found</h4><p>Try another name or course, or clear your filters.</p><button className="secondary-button" onClick={() => filter({ q: '', subject: '', term: '' })}>Clear filters</button></div>}
