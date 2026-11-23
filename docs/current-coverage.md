@@ -1,6 +1,6 @@
 # Current campus coverage
 
-Term: **Fall 2026**. Latest source fetch: `2026-11-16T10:35:21Z`.
+Term: **Fall 2026**. Latest source fetch: `2026-11-23T10:31:25Z`.
 
 186 requested of 186 discovered departments; 4450 course listings; 12835 registration sections; 13636 meetings.
 Meetings with missing instructors: 521. Multiple instructors: 4050. Unresolved listed instructor occurrences: 18749.

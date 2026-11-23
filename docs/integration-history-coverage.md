@@ -1,7 +1,7 @@
 # Teaching-history coverage
 
 Campus-wide archive: **2023 through 2026-fall**. Data kind: `live`.
-Latest successful source/discovery fetch: `2026-11-16T10:35:21Z`.
+Latest successful source/discovery fetch: `2026-11-23T10:31:33Z`.
 
 16 requested terms; 16 collected; 0 confirmed unavailable.
 40,697 course/term listings; 103,264 registration sections; 109,371 meetings.
@@ -29,21 +29,21 @@ Every collected term covers all departments listed by its official index. Sectio
 
 ## Availability and provenance
 
-- `2023-winter`: collected (term_listed); [official index](https://courses.illinois.edu/cisapp/explorer/schedule/2023.xml), fetched `2026-10-19T10:37:39Z`.
-- `2023-spring`: collected (term_listed); [official index](https://courses.illinois.edu/cisapp/explorer/schedule/2023.xml), fetched `2026-10-19T10:37:39Z`.
-- `2023-summer`: collected (term_listed); [official index](https://courses.illinois.edu/cisapp/explorer/schedule/2023.xml), fetched `2026-10-19T10:37:39Z`.
-- `2023-fall`: collected (term_listed); [official index](https://courses.illinois.edu/cisapp/explorer/schedule/2023.xml), fetched `2026-10-19T10:37:39Z`.
-- `2024-winter`: collected (term_listed); [official index](https://courses.illinois.edu/cisapp/explorer/schedule/2024.xml), fetched `2026-10-19T10:37:40Z`.
-- `2024-spring`: collected (term_listed); [official index](https://courses.illinois.edu/cisapp/explorer/schedule/2024.xml), fetched `2026-10-19T10:37:40Z`.
-- `2024-summer`: collected (term_listed); [official index](https://courses.illinois.edu/cisapp/explorer/schedule/2024.xml), fetched `2026-10-19T10:37:40Z`.
-- `2024-fall`: collected (term_listed); [official index](https://courses.illinois.edu/cisapp/explorer/schedule/2024.xml), fetched `2026-10-19T10:37:40Z`.
-- `2025-winter`: collected (term_listed); [official index](https://courses.illinois.edu/cisapp/explorer/schedule/2025.xml), fetched `2026-10-19T10:37:40Z`.
-- `2025-spring`: collected (term_listed); [official index](https://courses.illinois.edu/cisapp/explorer/schedule/2025.xml), fetched `2026-10-19T10:37:40Z`.
-- `2025-summer`: collected (term_listed); [official index](https://courses.illinois.edu/cisapp/explorer/schedule/2025.xml), fetched `2026-10-19T10:37:40Z`.
-- `2025-fall`: collected (term_listed); [official index](https://courses.illinois.edu/cisapp/explorer/schedule/2025.xml), fetched `2026-10-19T10:37:40Z`.
-- `2026-winter`: collected (term_listed); [official index](https://courses.illinois.edu/cisapp/explorer/schedule/2026.xml), fetched `2026-11-16T10:29:08Z`.
-- `2026-spring`: collected (term_listed); [official index](https://courses.illinois.edu/cisapp/explorer/schedule/2026.xml), fetched `2026-11-16T10:29:08Z`.
-- `2026-summer`: collected (term_listed); [official index](https://courses.illinois.edu/cisapp/explorer/schedule/2026.xml), fetched `2026-11-16T10:29:08Z`.
-- `2026-fall`: collected (term_listed); [official index](https://courses.illinois.edu/cisapp/explorer/schedule/2026.xml), fetched `2026-11-16T10:29:08Z`.
+- `2023-winter`: collected (term_listed); [official index](https://courses.illinois.edu/cisapp/explorer/schedule/2023.xml), fetched `2026-11-23T10:31:31Z`.
+- `2023-spring`: collected (term_listed); [official index](https://courses.illinois.edu/cisapp/explorer/schedule/2023.xml), fetched `2026-11-23T10:31:31Z`.
+- `2023-summer`: collected (term_listed); [official index](https://courses.illinois.edu/cisapp/explorer/schedule/2023.xml), fetched `2026-11-23T10:31:31Z`.
+- `2023-fall`: collected (term_listed); [official index](https://courses.illinois.edu/cisapp/explorer/schedule/2023.xml), fetched `2026-11-23T10:31:31Z`.
+- `2024-winter`: collected (term_listed); [official index](https://courses.illinois.edu/cisapp/explorer/schedule/2024.xml), fetched `2026-11-23T10:31:32Z`.
+- `2024-spring`: collected (term_listed); [official index](https://courses.illinois.edu/cisapp/explorer/schedule/2024.xml), fetched `2026-11-23T10:31:32Z`.
+- `2024-summer`: collected (term_listed); [official index](https://courses.illinois.edu/cisapp/explorer/schedule/2024.xml), fetched `2026-11-23T10:31:32Z`.
+- `2024-fall`: collected (term_listed); [official index](https://courses.illinois.edu/cisapp/explorer/schedule/2024.xml), fetched `2026-11-23T10:31:32Z`.
+- `2025-winter`: collected (term_listed); [official index](https://courses.illinois.edu/cisapp/explorer/schedule/2025.xml), fetched `2026-11-23T10:31:33Z`.
+- `2025-spring`: collected (term_listed); [official index](https://courses.illinois.edu/cisapp/explorer/schedule/2025.xml), fetched `2026-11-23T10:31:33Z`.
+- `2025-summer`: collected (term_listed); [official index](https://courses.illinois.edu/cisapp/explorer/schedule/2025.xml), fetched `2026-11-23T10:31:33Z`.
+- `2025-fall`: collected (term_listed); [official index](https://courses.illinois.edu/cisapp/explorer/schedule/2025.xml), fetched `2026-11-23T10:31:33Z`.
+- `2026-winter`: collected (term_listed); [official index](https://courses.illinois.edu/cisapp/explorer/schedule/2026.xml), fetched `2026-11-23T10:25:12Z`.
+- `2026-spring`: collected (term_listed); [official index](https://courses.illinois.edu/cisapp/explorer/schedule/2026.xml), fetched `2026-11-23T10:25:12Z`.
+- `2026-summer`: collected (term_listed); [official index](https://courses.illinois.edu/cisapp/explorer/schedule/2026.xml), fetched `2026-11-23T10:25:12Z`.
+- `2026-fall`: collected (term_listed); [official index](https://courses.illinois.edu/cisapp/explorer/schedule/2026.xml), fetched `2026-11-23T10:25:12Z`.
 
 The public history index links each term’s complete schedule and department coverage with SHA-256, byte size, and original source timestamp. Original instructor names and meeting roles remain on the term snapshots. Identities are unresolved until separately verified.
